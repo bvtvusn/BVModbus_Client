@@ -47,7 +47,7 @@ namespace BV_Modbus_Client.DataAccessLayer
                     Properties.Settings.Default.Save();
 
                     Console.WriteLine("Modbus configuration file saved successfully.");
-                    MessageBox.Show("Modbus configuration file saved successfully.", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Modbus configuration file saved successfully.", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -55,6 +55,48 @@ namespace BV_Modbus_Client.DataAccessLayer
                     MessageBox.Show("Failed to save Modbus configuration file. Error: " + ex.Message, "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        internal UserConfiguration LoadFromFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML Files|*.xml";
+            openFileDialog.FileName = "ModbusConfig.xml"; // Default file name
+
+            // Retrieve the last used folder path from application settings
+            string lastUsedFolder = Properties.Settings.Default.SaveFolder;
+            if (!string.IsNullOrEmpty(lastUsedFolder))
+            {
+                openFileDialog.InitialDirectory = lastUsedFolder;
+            }
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string openFilePath = openFileDialog.FileName;
+
+                try
+                {
+                    var serializer = new DataContractSerializer(typeof(UserConfiguration));
+
+                    using (var fileStream = new FileStream(openFilePath, FileMode.Open))
+                    {
+                        using (var xmlReader = XmlReader.Create(fileStream))
+                        {
+                            var objects = (UserConfiguration)serializer.ReadObject(xmlReader);
+                            Console.WriteLine("Modbus configuration file opened successfully.");
+                            //MessageBox.Show("Modbus configuration file opened successfully.", "Open Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return objects;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Failed to open Modbus configuration file. Error: " + ex.Message);
+                    MessageBox.Show("Failed to open Modbus configuration file. Error: " + ex.Message, "Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return null; // Return null if the open operation is canceled or encounters an error
         }
 
 
@@ -78,24 +120,24 @@ namespace BV_Modbus_Client.DataAccessLayer
         //    }
         //}
 
-        internal UserConfiguration LoadFromFile()
-        {
-            string filePath = @"C:/testing/file.xml";
-            var serializer = new DataContractSerializer(typeof(UserConfiguration));
-            using (var fileStream = new FileStream(filePath, FileMode.Open))
-            {
-                using (var xmlReader = XmlReader.Create(fileStream))
-                {
-                    UserConfiguration deserializedObjects = (UserConfiguration)serializer.ReadObject(xmlReader);
+        //internal UserConfiguration LoadFromFile()
+        //{
+        //    string filePath = @"C:/testing/file.xml";
+        //    var serializer = new DataContractSerializer(typeof(UserConfiguration));
+        //    using (var fileStream = new FileStream(filePath, FileMode.Open))
+        //    {
+        //        using (var xmlReader = XmlReader.Create(fileStream))
+        //        {
+        //            UserConfiguration deserializedObjects = (UserConfiguration)serializer.ReadObject(xmlReader);
 
-                    return deserializedObjects;
-                    // Access the objects and perform operations
-                    //foreach (var obj in deserializedObjects)
-                    //{
-                    //    // ...
-                    //}
-                }
-            }
-        }
+        //            return deserializedObjects;
+        //            // Access the objects and perform operations
+        //            //foreach (var obj in deserializedObjects)
+        //            //{
+        //            //    // ...
+        //            //}
+        //        }
+        //    }
+        //}
     }
 }

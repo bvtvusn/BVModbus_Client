@@ -18,7 +18,7 @@ namespace BV_Modbus_Client.BusinessLayer
         //private List<FcWrapperBase> parent;
         private ushort startAddress;
         private bool isSelected1;
-        //[DataMember]         
+        [DataMember]         
         public FormatConverter.FormatName DisplayType { get; set; }
         [DataMember]
         public bool SwapBytes { get; set; }

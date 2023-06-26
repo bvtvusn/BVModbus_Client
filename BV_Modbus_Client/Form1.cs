@@ -244,5 +244,57 @@ namespace BV_Modbus_Client
         {
 
         }
+
+        private void btnPaste_Click(object sender, EventArgs e)
+        {
+            PasteExcelDataToDataGridView(dataGridView1);
+        }
+        private void PasteExcelDataToDataGridView(DataGridView dataGridView)
+        {
+            try
+            {
+                // Get the text from the clipboard
+                string clipboardText = Clipboard.GetText();
+
+                // Split the text into rows based on newline characters
+                string[] rows = clipboardText.Split('\n');
+
+                // Get the starting row and column index of the selected cells in the DataGridView
+                int startRowIndex = dataGridView.SelectedCells[0].RowIndex;
+                int startColumnIndex = dataGridView.SelectedCells[0].ColumnIndex;
+
+                // Loop through the rows
+                for (int i = 0; i < rows.Length; i++)
+                {
+                    // Skip empty rows
+                    if (string.IsNullOrWhiteSpace(rows[i]))
+                        continue;
+
+                    // Split the row text into cells based on tab characters
+                    string[] cells = rows[i].Split('\t');
+
+                    // Loop through the cells
+                    for (int j = 0; j < cells.Length; j++)
+                    {
+                        // Skip cells that exceed the column count of the DataGridView
+                        if (startColumnIndex + j >= dataGridView.ColumnCount)
+                            continue;
+
+                        // Get the cell at the current row and column index
+                        DataGridViewCell cell = dataGridView.Rows[startRowIndex + i].Cells[startColumnIndex + j];
+
+                        // Set the value of the cell to the corresponding Excel data
+                        cell.Value = cells[j].Trim();
+                    }
+                }
+
+                Console.WriteLine("Data pasted successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to paste data. Error: " + ex.Message);
+            }
+        }
+
     }
 }

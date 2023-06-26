@@ -41,6 +41,7 @@
             this.btnViewTable = new System.Windows.Forms.Button();
             this.addFcButton2 = new BV_Modbus_Client.AddFcButton();
             this.addFcButton1 = new BV_Modbus_Client.AddFcButton();
+            this.btnPaste = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -98,6 +99,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.btnPaste);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -115,6 +117,7 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(31, 51);
@@ -194,6 +197,16 @@
             this.addFcButton1.ButtonClicked += new System.EventHandler(this.addFcButton1_ButtonClicked);
             this.addFcButton1.Load += new System.EventHandler(this.addFcButton1_Load);
             // 
+            // btnPaste
+            // 
+            this.btnPaste.Location = new System.Drawing.Point(31, 22);
+            this.btnPaste.Name = "btnPaste";
+            this.btnPaste.Size = new System.Drawing.Size(75, 23);
+            this.btnPaste.TabIndex = 15;
+            this.btnPaste.Text = "PasteData";
+            this.btnPaste.UseVisualStyleBackColor = true;
+            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -231,5 +244,6 @@
         private AddFcButton addFcButton2;
         private Button btnViewTable;
         private DataGridView dataGridView1;
+        private Button btnPaste;
     }
 }

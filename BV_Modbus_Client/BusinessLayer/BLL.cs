@@ -1,0 +1,150 @@
+﻿using BV_Modbus_Client.DataAccessLayer;
+
+
+namespace BV_Modbus_Client.BusinessLayer
+{
+
+    internal class BLL
+    {
+        MbConnection mbCon;
+        UserConfiguration userConfig;
+        Dal dal;
+        internal FormatConverter formatConverter;
+        internal UserConfiguration UserConfig { get => userConfig; set => userConfig = value; }
+        public bool Modbus_IsConnected { get { return (mbCon.Master != null); } }
+        
+        
+        
+        public event EventHandler FcListChangedEvent;
+
+        public BLL()
+        {
+            UserConfig = new UserConfiguration();
+            dal = new Dal();
+            mbCon = new MbConnection(true);
+            formatConverter = new FormatConverter();
+            //FcWrappers = new List<FcWrapperBase>();
+        }
+
+
+        #region SelectedFc
+        public event Action SelectedDataRecevivedEvent;
+        public event Action<string[]> SelectedFormatValidStateEvent;
+        private FcWrapperBase selectedFcRequest;
+        private void SelectedFcRequest_ResponseReceived()
+        {
+            SelectedDataRecevivedEvent?.Invoke(); // Resending the data received event.
+        }
+        private void SelectedFcRequest_FormatValidStateEvent(string[] errors)
+        {
+            SelectedFormatValidStateEvent?.Invoke(errors);
+        }
+        internal void SetSelectedCard(FcWrapperBase fcCommand)
+        {
+            this.SelectedFcRequest = fcCommand;
+            foreach (FcWrapperBase item in userConfig.FcWrappers)
+            {
+                item.isSelected = Object.ReferenceEquals(item, fcCommand); // Only the correct object is set to true
+            }
+
+        }
+        public FcWrapperBase SelectedFcRequest
+        {
+            get => selectedFcRequest;
+            private set
+            {
+                if (selectedFcRequest != null)
+                {
+                    selectedFcRequest.ResponseReceived -= SelectedFcRequest_ResponseReceived;
+                    selectedFcRequest.FormatValidStateEvent -= SelectedFcRequest_FormatValidStateEvent;
+                }
+                selectedFcRequest = value;
+                if (selectedFcRequest != null)
+                {
+                    selectedFcRequest.ResponseReceived += SelectedFcRequest_ResponseReceived;
+                    selectedFcRequest.FormatValidStateEvent += SelectedFcRequest_FormatValidStateEvent;
+
+                    SelectedDataRecevivedEvent?.Invoke();  //mAKING fAKE dete received event to opdate the new table.
+                }
+
+
+            }
+        }
+        #endregion
+        #region FcRelated
+        internal void AddFC3()
+        {
+
+            FcWrapperFc3 fcobj = new FcWrapperFc3(mbCon);
+            fcobj.Format = this.formatConverter;  // Set the format converter object
+            UserConfig.FcWrappers.Add(fcobj);
+            //protected virtual void FcObjectAdded
+            //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
+            UpdateFCList();
+        }
+
+        internal void AddFc15()
+        {
+            FcWrapperFc15 fcobj = new FcWrapperFc15(mbCon);
+            fcobj.Format = this.formatConverter;  // Set the format converter object
+            UserConfig.FcWrappers.Add(fcobj);
+            //protected virtual void FcObjectAdded
+            //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
+            UpdateFCList();
+        }
+        internal void RemoveFC(FcWrapperBase fcCommand)
+        {
+            if (Object.ReferenceEquals(fcCommand, SelectedFcRequest)) // If removing the selected, also reomove the object from "Selected object"
+            {
+                selectedFcRequest.ResponseReceived -= SelectedFcRequest_ResponseReceived;
+                selectedFcRequest.FormatValidStateEvent -= SelectedFcRequest_FormatValidStateEvent;
+                this.SelectedFcRequest = null;
+            }
+
+            UserConfig.FcWrappers.Remove(fcCommand);
+            UpdateFCList();
+        }
+        internal void UpdateFCList()
+        {
+            FcListChangedEvent?.Invoke(this, new EventArgs());
+        }
+        #endregion
+
+
+
+        public void ConnectServer()
+        {
+            mbCon.Hostname = UserConfig.Network_RemoteHostname;
+            mbCon.Port = UserConfig.Network_RemotePort;
+            mbCon.ConnectToSlave();
+
+        }
+
+        
+        //internal void AddFc(FcWrapperBase fc)
+        //{
+
+        //    fcWrappers.Add(fc);
+        //    //fc.Parent = fcWrappers; // Must be set here because it is not known after importing from file.
+        //    //protected virtual void FcObjectAdded
+        //    //OnFcObjectAdded?.Invoke(fc, new EventArgs());
+        //    UpdateFCList();
+        //}
+
+        internal void LoadConfig()
+        {
+            UserConfig = dal.LoadFromFile();
+            foreach (FcWrapperBase item in UserConfig.FcWrappers)
+            {
+                item.Format = this.formatConverter;
+            }
+            UpdateFCList();
+        }
+        internal void Save()
+        {
+            dal.SaveToFile(UserConfig);
+        }
+
+
+    }
+}

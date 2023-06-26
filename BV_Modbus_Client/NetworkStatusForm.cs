@@ -15,12 +15,13 @@ namespace BV_Modbus_Client
     {
         private BLL bll;
 
-        public NetworkStatusForm()
-        {
-            InitializeComponent();
+        //public NetworkStatusForm()
+        //{
+        //    InitializeComponent();
 
+        //    lblConnectionStatus.Text = bll.mbCon.GetConnectionStatus();
             
-        }
+        //}
 
         internal NetworkStatusForm(BLL bll)
         {
@@ -28,6 +29,8 @@ namespace BV_Modbus_Client
             this.bll = bll;
             txtHostname.Text = bll.UserConfig.Network_RemoteHostname;
             numPort.Value = Convert.ToDecimal(bll.UserConfig.Network_RemotePort);
+            lblConnectionStatus.Text = bll.mbCon.GetConnectionStatus();
+
         }
 
         private void numPort_ValueChanged(object sender, EventArgs e)
@@ -42,12 +45,25 @@ namespace BV_Modbus_Client
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            bll.ConnectServer();
+            //bll.ConnectServer();
+
+            bll.mbCon.Hostname = bll.UserConfig.Network_RemoteHostname;
+            bll.mbCon.Port = bll.UserConfig.Network_RemotePort;
+            bll.mbCon.ConnectToSlave();
+
+            lblConnectionStatus.Text = bll.mbCon.GetConnectionStatus();
         }
 
         private void btvClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            bll.mbCon.DisconnectToSlave();
+
+            lblConnectionStatus.Text = bll.mbCon.GetConnectionStatus();
         }
     }
 }

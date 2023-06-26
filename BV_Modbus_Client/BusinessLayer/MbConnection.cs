@@ -58,5 +58,53 @@ namespace BV_Modbus_Client.BusinessLayer
             }
             
         }
+
+        internal void DisconnectToSlave()
+        {
+
+            master1.Dispose();
+            cli.Close();
+            cli.Dispose();
+        }
+
+        public string GetConnectionStatus()
+        {
+            if (cli != null)
+            {
+            if (cli.Connected)
+                {
+                    if (IsSocketConnected(cli.Client))
+                    {
+                        return "Connected";
+                    }
+                    else
+                    {
+                        return "Disconnected";
+                    }
+                }
+                else
+                {
+                    return "Not connected";
+                }
+            }
+            else
+            {
+                return "Not connected";
+            }
+            
+        }
+        private bool IsSocketConnected(Socket socket)
+        {
+            try
+            {
+                // Check if the socket is connected by sending a test message
+                bool isSocketConnected = !(socket.Poll(1, SelectMode.SelectRead) && socket.Available == 0);
+                return isSocketConnected;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

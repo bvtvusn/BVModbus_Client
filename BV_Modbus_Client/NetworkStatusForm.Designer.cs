@@ -33,6 +33,7 @@
             this.txtHostname = new System.Windows.Forms.TextBox();
             this.btvClose = new System.Windows.Forms.Button();
             this.btnDisconnect = new System.Windows.Forms.Button();
+            this.lblConnectionStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(204, 13);
+            this.btnConnect.Location = new System.Drawing.Point(34, 41);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 9;
@@ -75,7 +76,7 @@
             // 
             // btvClose
             // 
-            this.btvClose.Location = new System.Drawing.Point(204, 74);
+            this.btvClose.Location = new System.Drawing.Point(249, 74);
             this.btvClose.Name = "btvClose";
             this.btvClose.Size = new System.Drawing.Size(75, 23);
             this.btvClose.TabIndex = 9;
@@ -85,19 +86,29 @@
             // 
             // btnDisconnect
             // 
-            this.btnDisconnect.Location = new System.Drawing.Point(204, 42);
+            this.btnDisconnect.Location = new System.Drawing.Point(123, 41);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(75, 23);
             this.btnDisconnect.TabIndex = 9;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
-            this.btnDisconnect.Click += new System.EventHandler(this.btnConnect_Click);
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
+            // 
+            // lblConnectionStatus
+            // 
+            this.lblConnectionStatus.AutoSize = true;
+            this.lblConnectionStatus.Location = new System.Drawing.Point(204, 17);
+            this.lblConnectionStatus.Name = "lblConnectionStatus";
+            this.lblConnectionStatus.Size = new System.Drawing.Size(101, 15);
+            this.lblConnectionStatus.TabIndex = 12;
+            this.lblConnectionStatus.Text = "ConnectionStatus";
             // 
             // NetworkStatusForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 109);
+            this.ClientSize = new System.Drawing.Size(327, 95);
+            this.Controls.Add(this.lblConnectionStatus);
             this.Controls.Add(this.numPort);
             this.Controls.Add(this.btvClose);
             this.Controls.Add(this.btnDisconnect);
@@ -118,5 +129,6 @@
         private TextBox txtHostname;
         private Button btvClose;
         private Button btnDisconnect;
+        private Label lblConnectionStatus;
     }
 }

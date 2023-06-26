@@ -14,7 +14,8 @@ namespace BV_Modbus_Client.BusinessLayer
             Uint16,
             Int16,
             Float,
-            Hex
+            Hex,
+            Binary
         }
         public bool ByteSwap { get; set; }
         public FormatName CurrentFormat { get; set; } = FormatName.Uint16;
@@ -49,6 +50,10 @@ namespace BV_Modbus_Client.BusinessLayer
             else if (format == FormatName.Hex)
             {
                 return rawdata.Select(x => x.ToString("X")).ToArray();
+            }
+            else if (format == FormatName.Binary)
+            {
+                return rawdata.Select(x => ConvertToBinaryString( x)).ToArray();
             }
             else
             {
@@ -98,6 +103,10 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 return rawdata.ToString("X");
             }
+            else if (format == FormatName.Binary)
+            {
+                return ConvertToBinaryString( rawdata);
+            }
             else
             {
                 return ((ushort)rawdata).ToString();
@@ -124,10 +133,15 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 result = Convert.ToUInt16(rawdata, 16);
             }
+            else if (format == FormatName.Binary)
+            {
+                result = ConvertFromBinaryString(rawdata);
+            }
             else
             {
                 result = Convert.ToUInt16(rawdata);
             }
+
             if (swapBytes)
             {
                 result = SwapBytes(result);
@@ -200,6 +214,16 @@ namespace BV_Modbus_Client.BusinessLayer
 
         }
 
+        public static string ConvertToBinaryString(ushort value)
+        {
+            string binaryString = Convert.ToString(value, 2).PadLeft(16, '0');
+            return binaryString;
+        }
+        public static ushort ConvertFromBinaryString(string binaryString)
+        {
+            ushort value = Convert.ToUInt16(binaryString, 2);
+            return value;
+        }
         public static ushort SwapBytes(ushort value)
         {
             return (ushort)((value << 8) | (value >> 8));

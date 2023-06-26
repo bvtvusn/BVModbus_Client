@@ -6,7 +6,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
     internal class BLL
     {
-        MbConnection mbCon;
+        internal MbConnection mbCon;
         UserConfiguration userConfig;
         Dal dal;
         //internal FormatConverter formatConverter;
@@ -48,6 +48,9 @@ namespace BV_Modbus_Client.BusinessLayer
             }
 
         }
+
+        
+
         public FcWrapperBase SelectedFcRequest
         {
             get => selectedFcRequest;
@@ -112,15 +115,16 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
 
-        public void ConnectServer()
-        {
-            mbCon.Hostname = UserConfig.Network_RemoteHostname;
-            mbCon.Port = UserConfig.Network_RemotePort;
-            mbCon.ConnectToSlave();
+        //public void ConnectServer()
+        //{
+        //    mbCon.Hostname = UserConfig.Network_RemoteHostname;
+        //    mbCon.Port = UserConfig.Network_RemotePort;
+        //    mbCon.ConnectToSlave();
 
-        }
-
+        //}
         
+
+
         //internal void AddFc(FcWrapperBase fc)
         //{
 

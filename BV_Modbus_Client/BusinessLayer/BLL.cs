@@ -9,7 +9,7 @@ namespace BV_Modbus_Client.BusinessLayer
         MbConnection mbCon;
         UserConfiguration userConfig;
         Dal dal;
-        internal FormatConverter formatConverter;
+        //internal FormatConverter formatConverter;
         internal UserConfiguration UserConfig { get => userConfig; set => userConfig = value; }
         public bool Modbus_IsConnected { get { return (mbCon.Master != null); } }
         
@@ -22,7 +22,7 @@ namespace BV_Modbus_Client.BusinessLayer
             UserConfig = new UserConfiguration();
             dal = new Dal();
             mbCon = new MbConnection(true);
-            formatConverter = new FormatConverter();
+            //formatConverter = new FormatConverter();
             //FcWrappers = new List<FcWrapperBase>();
         }
 
@@ -76,7 +76,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
 
             FcWrapperFc3 fcobj = new FcWrapperFc3(mbCon);
-            fcobj.Format = this.formatConverter;  // Set the format converter object
+            //fcobj.Format = this.formatConverter;  // Set the format converter object
             UserConfig.FcWrappers.Add(fcobj);
             //protected virtual void FcObjectAdded
             //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
@@ -86,7 +86,7 @@ namespace BV_Modbus_Client.BusinessLayer
         internal void AddFc15()
         {
             FcWrapperFc15 fcobj = new FcWrapperFc15(mbCon);
-            fcobj.Format = this.formatConverter;  // Set the format converter object
+            //fcobj.Format = this.formatConverter;  // Set the format converter object
             UserConfig.FcWrappers.Add(fcobj);
             //protected virtual void FcObjectAdded
             //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
@@ -134,10 +134,10 @@ namespace BV_Modbus_Client.BusinessLayer
         internal void LoadConfig()
         {
             UserConfig = dal.LoadFromFile();
-            foreach (FcWrapperBase item in UserConfig.FcWrappers)
-            {
-                item.Format = this.formatConverter;
-            }
+            //foreach (FcWrapperBase item in UserConfig.FcWrappers)
+            //{
+            //    item.Format = this.formatConverter;
+            //}
             UpdateFCList();
         }
         internal void Save()

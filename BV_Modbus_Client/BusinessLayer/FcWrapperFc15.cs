@@ -45,7 +45,12 @@ namespace BV_Modbus_Client.BusinessLayer
         internal override void Execute()
         {
 
-            base.mbCon.Master.WriteMultipleRegisters(base.Slaveaddress, StartAddress, data);            
+            ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfPoints);
+
+
+
+
+            base.mbCon.Master.WriteMultipleRegisters(base.Slaveaddress, StartAddress, sendData);            
         }
 
         //internal override void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer

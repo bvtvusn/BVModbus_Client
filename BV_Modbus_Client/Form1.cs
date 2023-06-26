@@ -124,7 +124,7 @@ namespace BV_Modbus_Client
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bll.formatConverter.CurrentFormat = (FormatName)comboBox1.SelectedItem;
+            //bll.formatConverter.CurrentFormat = (FormatName)comboBox1.SelectedItem;
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)

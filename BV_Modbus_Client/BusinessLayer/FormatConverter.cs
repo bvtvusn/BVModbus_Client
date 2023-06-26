@@ -18,17 +18,21 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         public bool ByteSwap { get; set; }
         public FormatName CurrentFormat { get; set; } = FormatName.Uint16;
-        internal string[] GetStringRepresentation(ushort[] rawdata)
+        internal static string[] GetStringRepresentation(ushort[] rawdata, FormatName format, bool swapBytes = false)
         {
-            if (CurrentFormat == FormatName.Uint16)
+            if (swapBytes)
+            {
+                rawdata = rawdata.Select(x => SwapBytes(x)).ToArray(); // Swap bytes if requested
+            }
+            if (format == FormatName.Uint16)
             {
                 return rawdata.Cast<ushort>().Select(x => x.ToString()).ToArray();
             }
-            else if (CurrentFormat == FormatName.Int16)
+            else if (format == FormatName.Int16)
             {
                 return rawdata.Cast<short>().Select(x => x.ToString()).ToArray();
             }
-            else if (CurrentFormat == FormatName.Float)
+            else if (format == FormatName.Float)
             {
                 //Half[] formatted = new Half[rawdata.Length];
                 //Half.
@@ -42,7 +46,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 //return rawdata.Select(x => x.ToString()).ToArray();
                 return rawdata.Select(x => FormatConverter.HalfToFloat(x).ToString()).ToArray();
             }
-            else if (CurrentFormat == FormatName.Hex)
+            else if (format == FormatName.Hex)
             {
                 return rawdata.Select(x => x.ToString("X")).ToArray();
             }
@@ -71,21 +75,26 @@ namespace BV_Modbus_Client.BusinessLayer
             //return formatted;
         }
 
-        internal string GetStringRepresentation(ushort rawdata)
+        internal static string GetStringRepresentation(ushort rawdata, FormatName format , bool swapBytes = false)
         {
-            if (CurrentFormat == FormatName.Uint16)
+            if (swapBytes)
+            {
+                rawdata = SwapBytes(rawdata);
+            }
+            
+            if (format == FormatName.Uint16)
             {
                 return ((ushort)rawdata).ToString();
             }
-            else if (CurrentFormat == FormatName.Int16)
+            else if (format == FormatName.Int16)
             {
                 return ((short)rawdata).ToString();
             }
-            else if (CurrentFormat == FormatName.Float)
+            else if (format == FormatName.Float)
             {
                 return FormatConverter.HalfToFloat(rawdata).ToString();
             }
-            else if (CurrentFormat == FormatName.Hex)
+            else if (format == FormatName.Hex)
             {
                 return rawdata.ToString("X");
             }
@@ -96,29 +105,34 @@ namespace BV_Modbus_Client.BusinessLayer
 
            
         }
-        internal ushort GetBinaryRepresentation(string rawdata)
+        internal static ushort GetBinaryRepresentation(string rawdata, FormatName format , bool swapBytes = false)
         {
-            if (CurrentFormat == FormatName.Uint16)
+            ushort result;
+            if (format == FormatName.Uint16)
             {
-                return Convert.ToUInt16(rawdata);
+                result =  Convert.ToUInt16(rawdata);
             }
-            else if (CurrentFormat == FormatName.Int16)
+            else if (format == FormatName.Int16)
             {
-                return (ushort)Convert.ToInt16(rawdata);
+                result = (ushort)Convert.ToInt16(rawdata);
             }
-            else if (CurrentFormat == FormatName.Float)
+            else if (format == FormatName.Float)
             {
-                return FormatConverter.FloatToHalf(Convert.ToSingle(rawdata));
+                result = FormatConverter.FloatToHalf(Convert.ToSingle(rawdata));
             }
-            else if (CurrentFormat == FormatName.Hex)
+            else if (format == FormatName.Hex)
             {
-                return Convert.ToUInt16(rawdata, 16);
+                result = Convert.ToUInt16(rawdata, 16);
             }
             else
             {
-                return Convert.ToUInt16(rawdata);
+                result = Convert.ToUInt16(rawdata);
             }
-
+            if (swapBytes)
+            {
+                result = SwapBytes(result);
+            }
+            return result;
 
         }
 
@@ -186,6 +200,10 @@ namespace BV_Modbus_Client.BusinessLayer
 
         }
 
+        public static ushort SwapBytes(ushort value)
+        {
+            return (ushort)((value << 8) | (value >> 8));
+        }
         //internal ushort[] GetBinaryRepresentation(string[] formattedText)
         //{
         //    ushort[] binaryData = new ushort[formattedText.Length];

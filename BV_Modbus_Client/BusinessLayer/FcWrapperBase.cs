@@ -18,8 +18,12 @@ namespace BV_Modbus_Client.BusinessLayer
         //private List<FcWrapperBase> parent;
         private ushort startAddress;
         private bool isSelected1;
+        //[DataMember]         
+        public FormatConverter.FormatName DisplayType { get; set; }
+        [DataMember]
+        public bool SwapBytes { get; set; }
         [Browsable(false)]
-        public FormatConverter Format { get; set; }
+        //public FormatConverter Format { get; set; }
 
         internal MbConnection mbCon { get; set; }
         [DataMember]
@@ -45,6 +49,15 @@ namespace BV_Modbus_Client.BusinessLayer
         [Browsable(false)]
         [DataMember]
         public Dictionary<ushort, string> AddressDescription { get; set; } // Databuffer contains the address read, the value and a description.
+
+        
+
+        public string Type
+        {
+            get { return this.GetType().Name; }
+            
+        }
+
 
         public event Action ResponseReceived;
         public event Action<string[]> FormatValidStateEvent;
@@ -73,7 +86,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
                 bool dscrFound = AddressDescription.TryGetValue(address, out dataDescription); // Description
 
-                if (valueFound) strData[i].Item1 = Format.GetStringRepresentation(datavalue); // Value
+                if (valueFound) strData[i].Item1 = FormatConverter.GetStringRepresentation(datavalue,DisplayType,SwapBytes); // Value
                 else strData[i].Item1 = "";
 
                 if (dscrFound) strData[i].Item2 = dataDescription;
@@ -101,7 +114,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 ushort address = (ushort)(StartAddress + i);
                 try
                 {
-                    bool shouldDelete = (strings[i].Length > 0);
+                    bool shouldDelete = (strings[i].Length < 1);
                     //ushort datapoint = Format.GetBinaryRepresentation(strings[i]);
                     bool keyExist = DataBuffer.ContainsKey(address);
                     if (keyExist)
@@ -112,12 +125,12 @@ namespace BV_Modbus_Client.BusinessLayer
                         }
                         else
                         {
-                            DataBuffer[address] = Format.GetBinaryRepresentation(strings[i]);
+                            DataBuffer[address] = FormatConverter.GetBinaryRepresentation(strings[i],DisplayType,SwapBytes);
                         }
                     }
                     else
                     {
-                        DataBuffer.Add(address, Format.GetBinaryRepresentation(strings[i]));
+                        DataBuffer.Add(address, FormatConverter.GetBinaryRepresentation(strings[i],DisplayType,SwapBytes));
                     }
                 }
                 catch (Exception err)
@@ -159,6 +172,24 @@ namespace BV_Modbus_Client.BusinessLayer
                     AddressDescription.Add(address, strings[i]);
                 }               
             }
+        }
+
+        internal ushort[] ReadFromBuffer(int startaddress, int length)
+        {
+            ushort[] datapoints = new ushort[length]; //base.mbCon.Master.ReadHoldingRegisters(base.Slaveaddress, StartAddress, NumberOfPoints);
+            for (int i = 0; i < datapoints.Length; i++)
+            {
+                ushort address = (ushort)(i + startaddress);
+                ushort datavalue;
+                //string dataDescription;
+                bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
+                //bool dscrFound = AddressDescription.TryGetValue(address, out dataDescription); // Description
+
+                if (valueFound) datapoints[i] = datavalue; // Value
+                
+                else datapoints[i] = 0; //Default value is 0 if nothing is stored.
+            }
+            return datapoints;
         }
     }
 }

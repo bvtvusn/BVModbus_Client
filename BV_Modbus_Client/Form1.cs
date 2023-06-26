@@ -42,7 +42,7 @@ namespace BV_Modbus_Client
 
 
             
-            comboBox1.DataSource = System.Enum.GetValues(typeof(FormatName));
+            //comboBox1.DataSource = System.Enum.GetValues(typeof(FormatName));
             RefreshGUI();
 
         }
@@ -148,11 +148,11 @@ namespace BV_Modbus_Client
         
         private string[] ReadDescriptionsFromDGV(DataGridView dataGridView1)
         {
-            string[] values = new string[bll.SelectedFcRequest.NumberOfPoints];
+            string[] values = new string[bll.SelectedFcRequest.NumberOfRegisters];
             int nrows = dataGridView1.RowCount;
             int ncols = dataGridView1.ColumnCount / 2;
 
-            for (int i = 0; i < bll.SelectedFcRequest.NumberOfPoints; i++)
+            for (int i = 0; i < bll.SelectedFcRequest.NumberOfRegisters; i++)
             {
                 int colindex = i / nrows;
                 int rowindex = i % nrows;
@@ -164,11 +164,11 @@ namespace BV_Modbus_Client
 
         private string[] ReadValuesFromDGV(DataGridView dataGridView)
         {
-            string[] values = new string[bll.SelectedFcRequest.NumberOfPoints];
+            string[] values = new string[bll.SelectedFcRequest.NumberOfRegisters];
             int nrows = dataGridView1.RowCount;
             int ncols = dataGridView1.ColumnCount / 2;
 
-            for (int i = 0; i < bll.SelectedFcRequest.NumberOfPoints; i++)
+            for (int i = 0; i < bll.SelectedFcRequest.NumberOfRegisters; i++)
             {
                 int colindex = i / nrows;
                 int rowindex = i % nrows;

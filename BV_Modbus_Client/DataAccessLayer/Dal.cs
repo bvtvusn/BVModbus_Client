@@ -11,42 +11,52 @@ namespace BV_Modbus_Client.DataAccessLayer
 {
     internal class Dal
     {
-        //public void SaveToFile(FcWrapperBase[] objects)
-        //{
-            
-
-        //}
-
-        //internal void SaveToFile(List<FcWrapperBase> fcWrappers)
-        //{
-        //    FcWrapperBase[] objects = fcWrappers.ToArray();
-
-        //    var serializer = new DataContractSerializer(typeof(FcWrapperBase[]));
-        //    string filePath = @"C:/testing/file.xml";
-
-        //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //    {
-        //        using (var xmlWriter = XmlWriter.Create(fileStream))
-        //        {
-        //            serializer.WriteObject(xmlWriter, objects);
-        //        }
-        //    }
-        //}
+       
         internal void SaveToFile(UserConfiguration objects)
         {
-            //FcWrapperBase[] objects = fcWrappers.ToArray();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML Files|*.xml";
+            saveFileDialog.FileName = "ModbusConfig.xml"; // Default file name
 
-            var serializer = new DataContractSerializer(typeof(UserConfiguration));
-            string filePath = @"C:/testing/file.xml";
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            // Retrieve the last used folder path from application settings
+            string lastUsedFolder = Properties.Settings.Default.SaveFolder;
+            if (!string.IsNullOrEmpty(lastUsedFolder))
             {
-                using (var xmlWriter = XmlWriter.Create(fileStream))
+                saveFileDialog.InitialDirectory = lastUsedFolder;
+            }
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string savefilePath = saveFileDialog.FileName;
+
+                try
                 {
-                    serializer.WriteObject(xmlWriter, objects);
+                    var serializer = new DataContractSerializer(typeof(UserConfiguration));
+
+                    using (var fileStream = new FileStream(savefilePath, FileMode.Create))
+                    {
+                        using (var xmlWriter = XmlWriter.Create(fileStream))
+                        {
+                            serializer.WriteObject(xmlWriter, objects);
+                        }
+                    }
+
+                    // Store the current selected folder path in application settings
+                    string selectedFolderPath = Path.GetDirectoryName(savefilePath);
+                    Properties.Settings.Default.SaveFolder = selectedFolderPath;
+                    Properties.Settings.Default.Save();
+
+                    Console.WriteLine("Modbus configuration file saved successfully.");
+                    MessageBox.Show("Modbus configuration file saved successfully.", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Failed to save Modbus configuration file. Error: " + ex.Message);
+                    MessageBox.Show("Failed to save Modbus configuration file. Error: " + ex.Message, "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
 
         //internal List<FcWrapperBase> LoadFromFile()
         //{

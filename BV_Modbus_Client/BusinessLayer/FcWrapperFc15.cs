@@ -20,9 +20,9 @@ namespace BV_Modbus_Client.BusinessLayer
             Description = "FC 15 - Write multiple Coils";
 
             //Initialization
-            base.Slaveaddress = 1;
+            base.SlaveAddress = 1;
             StartAddress = 0;
-            NumberOfPoints = 4;
+            NumberOfRegisters = 4;
 
             AddressDescription = new Dictionary<ushort, string>();
             DataBuffer = new Dictionary<ushort, ushort>();
@@ -34,7 +34,7 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
         [DataMember]
-        public override ushort NumberOfPoints { get; set; }
+        public override ushort NumberOfRegisters { get; set; }
         //public ushort StartAddress { get; set; }
 
         //internal override void DeleteThis()
@@ -45,12 +45,12 @@ namespace BV_Modbus_Client.BusinessLayer
         internal override void Execute()
         {
 
-            ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfPoints);
+            ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
 
 
 
 
-            base.mbCon.Master.WriteMultipleRegisters(base.Slaveaddress, StartAddress, sendData);            
+            base.mbCon.Master.WriteMultipleRegisters(base.SlaveAddress, StartAddress, sendData);            
         }
 
         //internal override void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer

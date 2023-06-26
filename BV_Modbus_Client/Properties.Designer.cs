@@ -39,13 +39,13 @@
             this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
-            this.propertyGrid1.Size = new System.Drawing.Size(350, 166);
+            this.propertyGrid1.Size = new System.Drawing.Size(350, 236);
             this.propertyGrid1.TabIndex = 0;
             // 
             // btnOK
             // 
             this.btnOK.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnOK.Location = new System.Drawing.Point(0, 166);
+            this.btnOK.Location = new System.Drawing.Point(0, 236);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(350, 23);
             this.btnOK.TabIndex = 1;
@@ -58,7 +58,7 @@
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 189);
+            this.ClientSize = new System.Drawing.Size(350, 259);
             this.Controls.Add(this.propertyGrid1);
             this.Controls.Add(this.btnOK);
             this.Name = "PropertiesWindow";

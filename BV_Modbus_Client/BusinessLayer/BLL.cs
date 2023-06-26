@@ -21,7 +21,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             UserConfig = new UserConfiguration();
             dal = new Dal();
-            mbCon = new MbConnection(true);
+            mbCon = new MbConnection(false);
             //formatConverter = new FormatConverter();
             //FcWrappers = new List<FcWrapperBase>();
         }

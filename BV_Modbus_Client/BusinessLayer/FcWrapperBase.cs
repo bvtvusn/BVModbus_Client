@@ -29,13 +29,13 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public string Description { get { return description; } set { description = value; FcSettingsChangedEvent?.Invoke(); } }
         [DataMember]
-        public byte Slaveaddress { get => slaveaddress; set { slaveaddress = value; FcSettingsChangedEvent?.Invoke(); } }
+        public byte SlaveAddress { get => slaveaddress; set { slaveaddress = value; FcSettingsChangedEvent?.Invoke(); } }
         [DataMember]
         public ushort StartAddress { get => startAddress; set { startAddress = value; FcSettingsChangedEvent?.Invoke(); } }
         [DataMember]
         public bool FcTypeWrite { get; internal set; }
         [DataMember]
-        public virtual ushort NumberOfPoints
+        public virtual ushort NumberOfRegisters
         {
             get { return 1; }
             set { }
@@ -77,8 +77,8 @@ namespace BV_Modbus_Client.BusinessLayer
         public virtual (string, string)[] GetDataAsString()
         {
             // Function translates Databuffer into a string array
-            (string, string)[] strData = new (string, string)[NumberOfPoints];
-            for (int i = 0; i < NumberOfPoints; i++)
+            (string, string)[] strData = new (string, string)[NumberOfRegisters];
+            for (int i = 0; i < NumberOfRegisters; i++)
             {
                 ushort address = (ushort)(i + StartAddress);
                 ushort datavalue;

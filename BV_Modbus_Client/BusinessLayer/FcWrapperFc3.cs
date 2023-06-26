@@ -21,8 +21,8 @@ namespace BV_Modbus_Client.BusinessLayer
 
             //Testing
             StartAddress = 0;
-            base.Slaveaddress = 1;
-            NumberOfPoints = 4;
+            base.SlaveAddress = 1;
+            NumberOfRegisters = 4;
 
             AddressDescription = new Dictionary<ushort, string>();
             DataBuffer = new Dictionary<ushort, ushort>();
@@ -32,13 +32,13 @@ namespace BV_Modbus_Client.BusinessLayer
             //DataBuffer.Add(3, 0);
         }
         [DataMember]
-        public override ushort NumberOfPoints { get;  set; }
+        public override ushort NumberOfRegisters { get;  set; }
         //[DataMember]
         //public ushort StartAddress { get;  set; }
         
         internal override void Execute()
         {
-            ushort[] rawData = base.mbCon.Master.ReadHoldingRegisters(base.Slaveaddress, StartAddress, NumberOfPoints);
+            ushort[] rawData = base.mbCon.Master.ReadHoldingRegisters(base.SlaveAddress, StartAddress, NumberOfRegisters);
             DataBuffer.Clear();
             for (ushort i = 0; i < rawData.Length; i++)
             {

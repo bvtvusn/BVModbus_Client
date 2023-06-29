@@ -19,7 +19,11 @@ namespace BV_Modbus_Client
         // To do
         // Timer function to activate FCs
         // Async FCs
-
+        
+        // Dropdown to change FC type. 
+        // Duplicate FC option
+        // Context menu on FC?
+        // Store to file functionality? CSV file Using address names as header. Can combine multiple FCs and save to file.
 
         // View as hex, float int and uint (and bool)
         // Add Grid for viewing lots of data.

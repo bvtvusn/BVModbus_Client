@@ -34,6 +34,7 @@
             this.saveConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnPaste = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -42,7 +43,6 @@
             this.btnViewTable = new System.Windows.Forms.Button();
             this.addFcButton2 = new BV_Modbus_Client.AddFcButton();
             this.addFcButton1 = new BV_Modbus_Client.AddFcButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -109,6 +109,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(395, 460);
             this.panel1.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(238, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "teste_02";
             // 
             // btnPaste
             // 
@@ -208,15 +217,6 @@
             this.addFcButton1.TabIndex = 15;
             this.addFcButton1.ButtonClicked += new System.EventHandler(this.addFcButton1_ButtonClicked);
             this.addFcButton1.Load += new System.EventHandler(this.addFcButton1_Load);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(238, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 15);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "teste_01";
             // 
             // Form1
             // 

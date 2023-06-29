@@ -43,8 +43,8 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  env: 
-    PUBLISH_PATH: '.'
+env: 
+  PUBLISH_PATH: '.'
 jobs:
 
   build:

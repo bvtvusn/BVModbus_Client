@@ -117,7 +117,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 15);
             this.label1.TabIndex = 16;
-            this.label1.Text = "teste_02";
+            this.label1.Text = "teste_03";
             // 
             // btnPaste
             // 

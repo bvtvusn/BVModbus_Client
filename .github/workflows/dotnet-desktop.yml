@@ -66,12 +66,21 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-
+    - name: Resore dependencies
+      run: dotnet restore
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
 #    - name: Setup MSBuild.exe
 #      uses: microsoft/setup-msbuild@v1.0.2
     - name: Build
+      run: dotnet build --configuration Release
+      #run: dotnet publish -c Release -r win10-x64 -o ${{env.PUBLISH_PATH}}/publish
+    - name: Publish
       #run: dotnet build --configuration Release --no-restore
-      run: dotnet publish -c Release -r win10-x64 -o '${{env.PUBLISH_PATH}}/publish'
+      run: dotnet publish -c Release -o ${{env.PUBLISH_PATH}}/publish
+    - name: upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: .net-app-BVTV
+        path: ${{env.PUBLISH_PATH}}/publish
     
 

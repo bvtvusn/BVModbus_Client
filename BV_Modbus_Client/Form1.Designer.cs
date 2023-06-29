@@ -34,6 +34,7 @@
             this.saveConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPaste = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -41,7 +42,7 @@
             this.btnViewTable = new System.Windows.Forms.Button();
             this.addFcButton2 = new BV_Modbus_Client.AddFcButton();
             this.addFcButton1 = new BV_Modbus_Client.AddFcButton();
-            this.btnPaste = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -99,6 +100,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnPaste);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.panel4);
@@ -107,6 +109,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(395, 460);
             this.panel1.TabIndex = 13;
+            // 
+            // btnPaste
+            // 
+            this.btnPaste.Location = new System.Drawing.Point(31, 22);
+            this.btnPaste.Name = "btnPaste";
+            this.btnPaste.Size = new System.Drawing.Size(75, 23);
+            this.btnPaste.TabIndex = 15;
+            this.btnPaste.Text = "PasteData";
+            this.btnPaste.UseVisualStyleBackColor = true;
+            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
             // 
             // dataGridView1
             // 
@@ -197,15 +209,14 @@
             this.addFcButton1.ButtonClicked += new System.EventHandler(this.addFcButton1_ButtonClicked);
             this.addFcButton1.Load += new System.EventHandler(this.addFcButton1_Load);
             // 
-            // btnPaste
+            // label1
             // 
-            this.btnPaste.Location = new System.Drawing.Point(31, 22);
-            this.btnPaste.Name = "btnPaste";
-            this.btnPaste.Size = new System.Drawing.Size(75, 23);
-            this.btnPaste.TabIndex = 15;
-            this.btnPaste.Text = "PasteData";
-            this.btnPaste.UseVisualStyleBackColor = true;
-            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(238, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "teste_01";
             // 
             // Form1
             // 
@@ -221,6 +232,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -245,5 +257,6 @@
         private Button btnViewTable;
         private DataGridView dataGridView1;
         private Button btnPaste;
+        private Label label1;
     }
 }

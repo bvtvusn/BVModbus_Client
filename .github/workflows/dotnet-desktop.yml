@@ -43,7 +43,8 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
+  env: 
+    PUBLISH_PATH: '.'
 jobs:
 
   build:
@@ -71,6 +72,6 @@ jobs:
 #      uses: microsoft/setup-msbuild@v1.0.2
     - name: Build
       #run: dotnet build --configuration Release --no-restore
-      run: dotnet publish -c Release -r win10-x64
+      run: dotnet publish -c Release -r win10-x64 -o '${{env.PUBLISH_PATH}}/publish'
     
 

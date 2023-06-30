@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblHeader = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnRemoveFc = new System.Windows.Forms.Button();
@@ -36,7 +37,9 @@
             this.btnSettings2 = new System.Windows.Forms.Button();
             this.lblAddress = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnExecuteRead = new System.Windows.Forms.Button();
             this.btnViewTable = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -88,7 +91,7 @@
             // 
             // btnRunFc2
             // 
-            this.btnRunFc2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.PlayTriangle1;
+            this.btnRunFc2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.SendData;
             this.btnRunFc2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRunFc2.FlatAppearance.BorderSize = 0;
             this.btnRunFc2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -130,11 +133,11 @@
             this.lblAddress.Size = new System.Drawing.Size(14, 15);
             this.lblAddress.TabIndex = 11;
             this.lblAddress.Text = "1";
-            this.lblAddress.Click += new System.EventHandler(this.lblAddress_Click);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.btnExecuteRead);
             this.panel2.Controls.Add(this.btnViewTable);
             this.panel2.Controls.Add(this.lblHeader);
             this.panel2.Controls.Add(this.lblAddress);
@@ -148,13 +151,26 @@
             this.panel2.Size = new System.Drawing.Size(204, 100);
             this.panel2.TabIndex = 13;
             // 
+            // btnExecuteRead
+            // 
+            this.btnExecuteRead.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.ReadData;
+            this.btnExecuteRead.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExecuteRead.FlatAppearance.BorderSize = 0;
+            this.btnExecuteRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExecuteRead.Location = new System.Drawing.Point(94, 4);
+            this.btnExecuteRead.Name = "btnExecuteRead";
+            this.btnExecuteRead.Size = new System.Drawing.Size(17, 17);
+            this.btnExecuteRead.TabIndex = 14;
+            this.btnExecuteRead.UseVisualStyleBackColor = true;
+            this.btnExecuteRead.Click += new System.EventHandler(this.btnExecuteRead_Click);
+            // 
             // btnViewTable
             // 
             this.btnViewTable.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.Table;
             this.btnViewTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnViewTable.FlatAppearance.BorderSize = 0;
             this.btnViewTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewTable.Location = new System.Drawing.Point(77, -2);
+            this.btnViewTable.Location = new System.Drawing.Point(55, -2);
             this.btnViewTable.Name = "btnViewTable";
             this.btnViewTable.Size = new System.Drawing.Size(29, 30);
             this.btnViewTable.TabIndex = 13;
@@ -187,5 +203,7 @@
         private Label lblAddress;
         private Panel panel2;
         private Button btnViewTable;
+        private Button btnExecuteRead;
+        private ToolTip toolTip1;
     }
 }

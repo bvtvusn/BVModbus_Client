@@ -68,7 +68,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox2);
             this.Name = "AddFcButton";
-            this.Size = new System.Drawing.Size(60, 20);
+            this.Size = new System.Drawing.Size(80, 20);
             this.toolTip1.SetToolTip(this, "text");
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

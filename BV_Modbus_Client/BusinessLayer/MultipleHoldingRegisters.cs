@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace BV_Modbus_Client.BusinessLayer
 {
-    [DataContract]
-    internal class FcWrapperFc3 : FcWrapperBase
+    internal class MultipleHoldingRegisters : FcWrapperBase
     {
+
         private ushort[] data;
 
-        public FcWrapperFc3(MbConnection mbCon) // Read multiple coils
+        public MultipleHoldingRegisters(MbConnection mbCon) // Read multiple coils
         {
             //base.Parent = parent;
-            
+
             base.mbCon = mbCon;
-            Description = "FC 3 - Read multiple Coils";
+            Description = "Multiple Holding RegistersCoils";
 
             //Testing
             StartAddress = 0;
@@ -31,18 +31,10 @@ namespace BV_Modbus_Client.BusinessLayer
             //DataBuffer.Add(2, 0);
             //DataBuffer.Add(3, 0);
         }
+        public override string OperationReadDescription { get { return "FC3: Read Multiple Coils"; } }
+        public override string OperationWriteDescription { get { return "FC15: Write Multiple Coils"; } }
         [DataMember]
-        public override ushort NumberOfRegisters { get;  set; }
-
-        internal override void ExecuteRead()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal override void ExecuteWrite()
-        {
-            throw new NotImplementedException();
-        }
+        public override ushort NumberOfRegisters { get; set; }
         //[DataMember]
         //public ushort StartAddress { get;  set; }
 
@@ -62,14 +54,26 @@ namespace BV_Modbus_Client.BusinessLayer
         //    base.OnResponseReceived();
 
         //}
-        //internal override void SetFcData(string[] strings)
-        //{
-        //    data = new ushort[strings.Length];
-        //    for (int i = 0; i < strings.Length; i++)
-        //    {
-        //        data[i] = Convert.ToUInt16(strings[i]);
-        //    }
-        //}
+
+        internal override void ExecuteRead()
+        {
+            ushort[] rawData = base.mbCon.Master.ReadHoldingRegisters(base.SlaveAddress, StartAddress, NumberOfRegisters);
+            DataBuffer.Clear();
+            for (ushort i = 0; i < rawData.Length; i++)
+            {
+                ushort address = (ushort)(i + StartAddress);
+                DataBuffer.Add(address, (rawData[i]));
+
+            }            
+            base.OnResponseReceived();
+        }
+
+        internal override void ExecuteWrite()
+        {
+            ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
+            base.mbCon.Master.WriteMultipleRegisters(base.SlaveAddress, StartAddress, sendData);
+        }
+        
 
     }
 }

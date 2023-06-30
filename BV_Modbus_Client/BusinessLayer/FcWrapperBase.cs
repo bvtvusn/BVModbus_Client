@@ -33,8 +33,8 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public ushort StartAddress { get => startAddress; set { startAddress = value; FcSettingsChangedEvent?.Invoke(); } }
         [DataMember]
-        public bool FcTypeWrite { get; internal set; }
-        [DataMember]
+        //public bool FcTypeWrite { get; internal set; }
+        //[DataMember]
         public virtual ushort NumberOfRegisters
         {
             get { return 1; }
@@ -50,7 +50,8 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public Dictionary<ushort, string> AddressDescription { get; set; } // Databuffer contains the address read, the value and a description.
 
-        
+        public virtual string OperationReadDescription { get { return "Read"; } }
+        public virtual string OperationWriteDescription { get { return "Write"; } }
 
         public string Type
         {
@@ -74,7 +75,7 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
 
-        public virtual (string, string)[] GetDataAsString()
+        public virtual (string, string)[] GetDataAsString() // Gui uses this to display the data.
         {
             // Function translates Databuffer into a string array
             (string, string)[] strData = new (string, string)[NumberOfRegisters];
@@ -97,10 +98,12 @@ namespace BV_Modbus_Client.BusinessLayer
 
             return strData;
         }
-        
 
 
-        internal abstract void Execute();
+
+        //internal abstract void Execute();
+        internal abstract void ExecuteWrite();
+        internal abstract void ExecuteRead();
         //internal abstract void SetFcData(string[] strings);
         internal virtual void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer
         {

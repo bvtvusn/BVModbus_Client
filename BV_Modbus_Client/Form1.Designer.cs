@@ -55,9 +55,9 @@
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(71, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(73, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(441, 460);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(439, 460);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
             // menuStrip1
@@ -69,7 +69,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(71, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(73, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -179,7 +179,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(71, 460);
+            this.panel3.Size = new System.Drawing.Size(73, 460);
             this.panel3.TabIndex = 10;
             // 
             // btnViewTable
@@ -200,7 +200,7 @@
             this.addFcButton2.BackColor = System.Drawing.Color.Transparent;
             this.addFcButton2.FcDescription = "Write Holding Registers";
             this.addFcButton2.FcName = "FC15";
-            this.addFcButton2.Location = new System.Drawing.Point(5, 151);
+            this.addFcButton2.Location = new System.Drawing.Point(5, 357);
             this.addFcButton2.Name = "addFcButton2";
             this.addFcButton2.Size = new System.Drawing.Size(60, 20);
             this.addFcButton2.TabIndex = 15;
@@ -209,14 +209,13 @@
             // addFcButton1
             // 
             this.addFcButton1.BackColor = System.Drawing.Color.Transparent;
-            this.addFcButton1.FcDescription = "Read Holding Registers";
-            this.addFcButton1.FcName = "FC3";
+            this.addFcButton1.FcDescription = "Multiple Holding Registers";
+            this.addFcButton1.FcName = "HR[]";
             this.addFcButton1.Location = new System.Drawing.Point(5, 125);
             this.addFcButton1.Name = "addFcButton1";
             this.addFcButton1.Size = new System.Drawing.Size(60, 20);
             this.addFcButton1.TabIndex = 15;
             this.addFcButton1.ButtonClicked += new System.EventHandler(this.addFcButton1_ButtonClicked);
-            this.addFcButton1.Load += new System.EventHandler(this.addFcButton1_Load);
             // 
             // Form1
             // 

@@ -112,7 +112,7 @@ namespace BV_Modbus_Client
 
         private void addFcButton1_ButtonClicked(object sender, EventArgs e)
         {
-            bll.AddFC3();
+            bll.AddMultiHR_FC();
         }
 
         private void addFcButton2_ButtonClicked(object sender, EventArgs e)
@@ -241,11 +241,6 @@ namespace BV_Modbus_Client
 
             }
 
-
-        }
-        
-        private void addFcButton1_Load(object sender, EventArgs e)
-        {
 
         }
 

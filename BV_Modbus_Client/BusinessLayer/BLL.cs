@@ -75,10 +75,10 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         #endregion
         #region FcRelated
-        internal void AddFC3()
+        internal void AddMultiHR_FC()
         {
 
-            FcWrapperFc3 fcobj = new FcWrapperFc3(mbCon);
+            MultipleHoldingRegisters fcobj = new MultipleHoldingRegisters(mbCon);
             //fcobj.Format = this.formatConverter;  // Set the format converter object
             UserConfig.FcWrappers.Add(fcobj);
             //protected virtual void FcObjectAdded

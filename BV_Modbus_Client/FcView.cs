@@ -41,16 +41,18 @@ namespace BV_Modbus_Client
             InitializeComponent();
             this.fcCommand = fcWrapperBase;
             UpdateFcInfo();
-            dataGridView1.ReadOnly = !fcCommand.FcTypeWrite;
-            if (fcCommand.FcTypeWrite)
-            {
-                btnRunFc2.Text = "Write";
-            }
-            else
-            {
-                btnRunFc2.Text = "Read";
-            }
-                
+            toolTip1.SetToolTip(btnExecuteRead, fcCommand.OperationReadDescription);
+            toolTip1.SetToolTip(btnRunFc2, fcCommand.OperationWriteDescription);
+            //dataGridView1.ReadOnly = !fcCommand.FcTypeWrite;
+            //if (fcCommand.FcTypeWrite)
+            //{
+            //    btnRunFc2.Text = "Write";
+            //}
+            //else
+            //{
+            //    btnRunFc2.Text = "Read";
+            //}
+
             //DrawSelection(fcWrapperBase.isSelected);
             dataGridView1.ClearSelection();
             dataGridView1.CurrentCell = null;
@@ -130,13 +132,24 @@ namespace BV_Modbus_Client
         {
             if (bll.Modbus_IsConnected)
             {
-                fcCommand.Execute();
+                fcCommand.ExecuteWrite();
             }
             else
             {
                 MessageBox.Show("Please connect to a Modbus slave");
             }
 
+        }
+        private void btnExecuteRead_Click(object sender, EventArgs e)
+        {
+            if (bll.Modbus_IsConnected)
+            {
+                fcCommand.ExecuteRead();
+            }
+            else
+            {
+                MessageBox.Show("Please connect to a Modbus slave");
+            }
         }
 
         private void btnSettings2_Click(object sender, EventArgs e)
@@ -214,16 +227,6 @@ namespace BV_Modbus_Client
             return null; // Return null if the DataGridView is empty
         }
 
-       
-
-
-
-        
-
-        private void lblAddress_Click(object sender, EventArgs e)
-        {
-
-        }
 
         
     }

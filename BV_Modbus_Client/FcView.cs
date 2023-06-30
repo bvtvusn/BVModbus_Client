@@ -191,7 +191,15 @@ namespace BV_Modbus_Client
         private void UpdateFcInfo()
         {
             lblHeader.Text = fcCommand.Description;
-            lblAddress.Text = "" + fcCommand.StartAddress;
+            if (fcCommand.NumberOfRegisters > 1)
+            {
+                lblAddress.Text = "" + fcCommand.StartAddress + " - " + (fcCommand.StartAddress+fcCommand.NumberOfRegisters-1);
+
+            }
+            else
+            {
+                lblAddress.Text = "" + fcCommand.StartAddress;
+            }
         }
         private void FillPreviewTable()
         {

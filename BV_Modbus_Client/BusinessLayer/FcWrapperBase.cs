@@ -11,11 +11,13 @@ namespace BV_Modbus_Client.BusinessLayer
     [DataContract]
     [KnownType(typeof(FcWrapperFc3))] // Example: FcWrapperFc3
     [KnownType(typeof(FcWrapperFc15))] // Example: FcWrapperFc3
+    [KnownType(typeof(MultipleHoldingRegisters))] // Example: FcWrapperFc3
     internal abstract class FcWrapperBase
     {
         private string description;
         private byte slaveaddress;
         //private List<FcWrapperBase> parent;
+        [DataMember]
         private ushort startAddress;
         private bool isSelected1;
         [DataMember]         
@@ -30,7 +32,7 @@ namespace BV_Modbus_Client.BusinessLayer
         public string Description { get { return description; } set { description = value; FcSettingsChangedEvent?.Invoke(); } }
         [DataMember]
         public byte SlaveAddress { get => slaveaddress; set { slaveaddress = value; FcSettingsChangedEvent?.Invoke(); } }
-        [DataMember]
+        
         public ushort StartAddress {
             get {
                 int indexAdjustment = GlobFcData.ZeroBasedAdresses ? 0 : 1;
@@ -73,6 +75,10 @@ namespace BV_Modbus_Client.BusinessLayer
         public event Action FcSettingsChangedEvent;
         public event Action<FcWrapperBase, bool> SelectedChanged;
 
+        public void UpdateFcSettings()
+        {
+            FcSettingsChangedEvent?.Invoke();
+        }
         protected virtual void UpdateFormatValidState(string[] errors)
         {
             FormatValidStateEvent?.Invoke(errors);

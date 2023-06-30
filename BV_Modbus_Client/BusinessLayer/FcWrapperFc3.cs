@@ -20,7 +20,7 @@ namespace BV_Modbus_Client.BusinessLayer
             Description = "FC 3 - Read multiple Coils";
 
             //Testing
-            StartAddress = 0;
+            //StartAddress = 0;
             base.SlaveAddress = 1;
             NumberOfRegisters = 4;
 

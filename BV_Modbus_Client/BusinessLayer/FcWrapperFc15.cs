@@ -20,9 +20,9 @@ namespace BV_Modbus_Client.BusinessLayer
             Description = "FC 15 - Write multiple Coils";
 
             //Initialization
-            base.SlaveAddress = 1;
-            StartAddress = 0;
-            NumberOfRegisters = 4;
+            //base.SlaveAddress = 1;
+            //StartAddress = 0;
+            //NumberOfRegisters = 4;
 
             //AddressDescription = new Dictionary<ushort, string>();
             DataBuffer = new Dictionary<ushort, ushort>();
@@ -34,7 +34,7 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
         [DataMember]
-        public override ushort NumberOfRegisters { get; set; }
+        public override ushort NumberOfRegisters { get; set; } = 4;
 
         internal override void ExecuteRead()
         {

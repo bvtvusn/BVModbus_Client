@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace BV_Modbus_Client.BusinessLayer
 {
+    [DataContract]
     internal class MultipleHoldingRegisters : FcWrapperBase
     {
 
         private ushort[] data;
+        private ushort numberOfRegisters;
 
         public MultipleHoldingRegisters(MbConnection mbCon) // Read multiple coils
         {
@@ -21,7 +23,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             //Testing
             //startAddress = 0;
-            base.SlaveAddress = 1;
+            //base.SlaveAddress = 1;
             NumberOfRegisters = 4;
 
             //AddressDescription = new Dictionary<ushort, string>();
@@ -34,7 +36,7 @@ namespace BV_Modbus_Client.BusinessLayer
         public override string OperationReadDescription { get { return "FC3: Read Multiple Coils"; } }
         public override string OperationWriteDescription { get { return "FC15: Write Multiple Coils"; } }
         [DataMember]
-        public override ushort NumberOfRegisters { get; set; }
+        public override ushort NumberOfRegisters { get {   return numberOfRegisters;  } set {  numberOfRegisters = value; UpdateFcSettings(); } } 
         //[DataMember]
         //public ushort StartAddress { get;  set; }
 
@@ -64,7 +66,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 ushort address = (ushort)(i + StartAddress);
                 DataBuffer.Add(address, (rawData[i]));
 
-            }            
+            }
             base.OnResponseReceived();
         }
 
@@ -73,7 +75,7 @@ namespace BV_Modbus_Client.BusinessLayer
             ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
             base.mbCon.Master.WriteMultipleRegisters(base.SlaveAddress, StartAddress, sendData);
         }
-        
+
 
     }
 }

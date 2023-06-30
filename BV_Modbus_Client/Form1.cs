@@ -295,5 +295,12 @@ namespace BV_Modbus_Client
             }
         }
 
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProjectSettings form = new ProjectSettings(bll);
+            form.ShowDialog();
+            bll.UpdateFCList();
+            //bll.UserConfig.GlobFcData.
+        }
     }
 }

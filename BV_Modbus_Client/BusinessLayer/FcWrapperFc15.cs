@@ -24,7 +24,7 @@ namespace BV_Modbus_Client.BusinessLayer
             StartAddress = 0;
             NumberOfRegisters = 4;
 
-            AddressDescription = new Dictionary<ushort, string>();
+            //AddressDescription = new Dictionary<ushort, string>();
             DataBuffer = new Dictionary<ushort, ushort>();
             //DataBuffer.Add(0, 0);
             //DataBuffer.Add(1, 0);

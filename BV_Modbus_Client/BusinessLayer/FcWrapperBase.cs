@@ -31,7 +31,15 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public byte SlaveAddress { get => slaveaddress; set { slaveaddress = value; FcSettingsChangedEvent?.Invoke(); } }
         [DataMember]
-        public ushort StartAddress { get => startAddress; set { startAddress = value; FcSettingsChangedEvent?.Invoke(); } }
+        public ushort StartAddress {
+            get {
+                int indexAdjustment = GlobFcData.ZeroBasedAdresses ? 0 : 1;
+                return (ushort)(startAddress + indexAdjustment); } 
+            set {
+                int indexAdjustment = GlobFcData.ZeroBasedAdresses ? 0 : 1;
+                startAddress = (ushort)(value - indexAdjustment); 
+                FcSettingsChangedEvent?.Invoke();
+            } }
         [DataMember]
         //public bool FcTypeWrite { get; internal set; }
         //[DataMember]
@@ -46,13 +54,13 @@ namespace BV_Modbus_Client.BusinessLayer
         [Browsable(false)]
         [DataMember]
         public Dictionary< ushort,ushort> DataBuffer{ get; set; } // Databuffer contains the address read, the value and a description.
-        [Browsable(false)]
-        [DataMember]
-        public Dictionary<ushort, string> AddressDescription { get; set; } // Databuffer contains the address read, the value and a description.
+        //[Browsable(false)]
+        //[DataMember]
+        //public Dictionary<ushort, string> AddressDescription { get; set; } // Databuffer contains the address read, the value and a description.
 
         public virtual string OperationReadDescription { get { return "Read"; } }
         public virtual string OperationWriteDescription { get { return "Write"; } }
-
+        public GlobalFCdata GlobFcData { get; set; }
         public string Type
         {
             get { return this.GetType().Name; }
@@ -85,7 +93,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 ushort datavalue;
                 string dataDescription;
                 bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
-                bool dscrFound = AddressDescription.TryGetValue(address, out dataDescription); // Description
+                bool dscrFound =GlobFcData.AddressDescription.TryGetValue(address, out dataDescription); // Description
 
                 if (valueFound) strData[i].Item1 = FormatConverter.GetStringRepresentation(datavalue,DisplayType,SwapBytes); // Value
                 else strData[i].Item1 = "";
@@ -124,7 +132,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     {
                         if (shouldDelete)
                         {
-                            AddressDescription.Remove(address);
+                            GlobFcData.AddressDescription.Remove(address);
                         }
                         else
                         {
@@ -156,23 +164,23 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 ushort address = (ushort)(StartAddress + i);
 
-                bool shouldDelete = (strings[i].Length > 0);
-                bool keyExist = AddressDescription.ContainsKey(address);
+                bool shouldDelete = (strings[i].Length < 1);
+                bool keyExist = GlobFcData.AddressDescription.ContainsKey(address);
                 if (keyExist)
                 {
                     if (shouldDelete)
                     {
-                        AddressDescription.Remove(address);
+                        GlobFcData.AddressDescription.Remove(address);
                     }
                     else
                     {
-                        
-                    AddressDescription[address] = strings[i];
+
+                        GlobFcData.AddressDescription[address] = strings[i];
                     }
                 }
                 else
                 {
-                    AddressDescription.Add(address, strings[i]);
+                    GlobFcData.AddressDescription.Add(address, strings[i]);
                 }               
             }
         }

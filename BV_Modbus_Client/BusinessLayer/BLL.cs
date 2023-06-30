@@ -109,6 +109,10 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         internal void UpdateFCList()
         {
+            foreach (FcWrapperBase item in UserConfig.FcWrappers)
+            {
+                item.GlobFcData = UserConfig.GlobFcData;
+            }
             FcListChangedEvent?.Invoke(this, new EventArgs());
         }
         #endregion

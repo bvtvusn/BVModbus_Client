@@ -39,7 +39,17 @@ namespace BV_Modbus_Client.BusinessLayer
             throw new NotImplementedException();
         }
 
+        internal override Task ExecuteReadAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         internal override void ExecuteWrite()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal override Task ExecuteWriteAsync()
         {
             throw new NotImplementedException();
         }

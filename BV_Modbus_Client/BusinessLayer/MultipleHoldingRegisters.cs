@@ -60,6 +60,7 @@ namespace BV_Modbus_Client.BusinessLayer
         internal override void ExecuteRead()
         {
             ushort[] rawData = base.mbCon.Master.ReadHoldingRegisters(base.SlaveAddress, StartAddress, NumberOfRegisters);
+            
             DataBuffer.Clear();
             for (ushort i = 0; i < rawData.Length; i++)
             {
@@ -67,9 +68,46 @@ namespace BV_Modbus_Client.BusinessLayer
                 DataBuffer.Add(address, (rawData[i]));
 
             }
-            base.OnResponseReceived();
+            base.ForceDataRefresh("");
         }
+        internal override async Task ExecuteReadAsync()
+        {
+            try
+            {
+                ushort[] rawData = await base.mbCon.Master.ReadHoldingRegistersAsync(base.SlaveAddress, StartAddress, NumberOfRegisters);
+                DataBuffer.Clear();
+                for (ushort i = 0; i < rawData.Length; i++)
+                {
+                    ushort address = (ushort)(i + StartAddress);
+                    DataBuffer.Add(address, (rawData[i]));
 
+                }
+                base.ForceFcActivatedEvent();
+                base.ForceDataRefresh("");
+            }
+            catch (Exception e)
+            {
+                base.ForceDataRefresh(e.Message);
+                
+            }
+        }
+        internal override async Task ExecuteWriteAsync()
+        {
+            try
+            {
+
+                ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
+                await base.mbCon.Master.WriteMultipleRegistersAsync(base.SlaveAddress, StartAddress, sendData);
+
+                base.ForceFcActivatedEvent();                
+                base.ForceDataRefresh("");
+            }
+            catch (Exception e)
+            {
+                base.ForceDataRefresh(e.Message);
+
+            }
+        }
         internal override void ExecuteWrite()
         {
             ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);

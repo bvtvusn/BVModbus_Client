@@ -70,10 +70,11 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
 
-        public event Action ResponseReceived;
+        public event Action<string> RefreshDataEvent;
         public event Action<string[]> FormatValidStateEvent;
         public event Action FcSettingsChangedEvent;
         public event Action<FcWrapperBase, bool> SelectedChanged;
+        public event Action FcActivatedEvent;
 
         public void UpdateFcSettings()
         {
@@ -83,9 +84,9 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             FormatValidStateEvent?.Invoke(errors);
         }
-        public virtual void OnResponseReceived()
+        public virtual void ForceDataRefresh(string errormsg)
         {
-            ResponseReceived?.Invoke();
+            RefreshDataEvent?.Invoke(errormsg);
         }
 
 
@@ -113,11 +114,18 @@ namespace BV_Modbus_Client.BusinessLayer
             return strData;
         }
 
+        internal void ForceFcActivatedEvent()
+        {
+            FcActivatedEvent?.Invoke();
+        }
+
 
 
         //internal abstract void Execute();
         internal abstract void ExecuteWrite();
         internal abstract void ExecuteRead();
+        internal abstract Task ExecuteReadAsync();
+        internal abstract Task ExecuteWriteAsync();
         //internal abstract void SetFcData(string[] strings);
         internal virtual void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer
         {
@@ -159,7 +167,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
 
-            OnResponseReceived();
+            ForceDataRefresh("");
             UpdateFormatValidState(formatErrorMessages);
         }
 
@@ -208,5 +216,6 @@ namespace BV_Modbus_Client.BusinessLayer
             }
             return datapoints;
         }
+       
     }
 }

@@ -28,12 +28,12 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
         #region SelectedFc
-        public event Action SelectedDataRecevivedEvent;
+        public event Action<string> SelectedDataRecevivedEvent;
         public event Action<string[]> SelectedFormatValidStateEvent;
         private FcWrapperBase selectedFcRequest;
-        private void SelectedFcRequest_ResponseReceived()
+        private void SelectedFcRequest_ResponseReceived(string errorMsg)
         {
-            SelectedDataRecevivedEvent?.Invoke(); // Resending the data received event.
+            SelectedDataRecevivedEvent?.Invoke(errorMsg); // Resending the data received event.
         }
         private void SelectedFcRequest_FormatValidStateEvent(string[] errors)
         {
@@ -58,16 +58,16 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 if (selectedFcRequest != null)
                 {
-                    selectedFcRequest.ResponseReceived -= SelectedFcRequest_ResponseReceived;
+                    selectedFcRequest.RefreshDataEvent -= SelectedFcRequest_ResponseReceived;
                     selectedFcRequest.FormatValidStateEvent -= SelectedFcRequest_FormatValidStateEvent;
                 }
                 selectedFcRequest = value;
                 if (selectedFcRequest != null)
                 {
-                    selectedFcRequest.ResponseReceived += SelectedFcRequest_ResponseReceived;
+                    selectedFcRequest.RefreshDataEvent += SelectedFcRequest_ResponseReceived;
                     selectedFcRequest.FormatValidStateEvent += SelectedFcRequest_FormatValidStateEvent;
 
-                    SelectedDataRecevivedEvent?.Invoke();  //mAKING fAKE dete received event to opdate the new table.
+                    SelectedDataRecevivedEvent?.Invoke("");  //mAKING fAKE dete received event to opdate the new table.
                 }
 
 
@@ -99,7 +99,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             if (Object.ReferenceEquals(fcCommand, SelectedFcRequest)) // If removing the selected, also reomove the object from "Selected object"
             {
-                selectedFcRequest.ResponseReceived -= SelectedFcRequest_ResponseReceived;
+                selectedFcRequest.RefreshDataEvent -= SelectedFcRequest_ResponseReceived;
                 selectedFcRequest.FormatValidStateEvent -= SelectedFcRequest_FormatValidStateEvent;
                 this.SelectedFcRequest = null;
             }

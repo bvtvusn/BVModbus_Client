@@ -49,7 +49,16 @@ namespace BV_Modbus_Client
 
             bll.mbCon.Hostname = bll.UserConfig.Network_RemoteHostname;
             bll.mbCon.Port = bll.UserConfig.Network_RemotePort;
+            try
+            {
             bll.mbCon.ConnectToSlave();
+
+            }
+            catch (Exception err)
+            {
+
+                MessageBox.Show("Connection error: \r\n" + err.Message);
+            }
 
             lblConnectionStatus.Text = bll.mbCon.GetConnectionStatus();
         }

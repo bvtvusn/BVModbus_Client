@@ -55,7 +55,7 @@ namespace BV_Modbus_Client
         {
             RefreshGUI();
         }
-        private void Bll_SelectedDataRecevivedEvent()
+        private void Bll_SelectedDataRecevivedEvent(string errorMsg)
         {
             if (userEditActiveFlag == false)
             {

@@ -62,11 +62,16 @@ namespace BV_Modbus_Client
             fcCommand.FcSettingsChangedEvent += FcCommand_FcSettingsChangedEvent;
             fcCommand.SelectedChanged += FcCommand_SelectedChanged;
             dataGridView1.CellValueChanged += DataGridView1_CellValueChanged; // Sends data to FC object
-            fcCommand.ResponseReceived += FcWrapperBase_ResponseReceived; // Receives data from FC object. ( Do not receive updates to gui if we are sending data)
-
+            fcCommand.RefreshDataEvent += FcWrapperBase_ResponseReceived; // Receives data from FC object. ( Do not receive updates to gui if we are sending data)
+            fcCommand.FcActivatedEvent += FcCommand_FcActivatedEvent;
             FillPreviewTable();
-            fcCommand.OnResponseReceived(); // Makes fake event to force update
+            fcCommand.ForceDataRefresh(""); // Makes fake event to force update
 
+        }
+
+        private async void FcCommand_FcActivatedEvent()
+        {
+            await FcView.BlinkPanelAsync(panel1, Color.FromArgb(255,177,0), TimeSpan.FromSeconds(0.15));
         }
 
         #region Events
@@ -117,14 +122,25 @@ namespace BV_Modbus_Client
             }
             userEditActiveFlag = false;
         }
-        private void FcWrapperBase_ResponseReceived()
+        private void FcWrapperBase_ResponseReceived(string errormsg)
         {
-            if (userEditActiveFlag == false)
+            if (errormsg.Length == 0)
             {
 
-                refreshActiveFlag = true;
-                FillPreviewTable();
-                refreshActiveFlag = false;
+                if (userEditActiveFlag == false)  // Prevents writing if event was triggered by user.
+                {
+
+                    refreshActiveFlag = true;
+                    FillPreviewTable();
+                    refreshActiveFlag = false;
+                }
+
+                picError.Visible = false;
+            }
+            else
+            {
+                picError.Visible = true;
+                toolTip1.SetToolTip(picError, errormsg);
             }
 
         }
@@ -132,7 +148,7 @@ namespace BV_Modbus_Client
         {
             if (bll.Modbus_IsConnected)
             {
-                fcCommand.ExecuteWrite();
+                fcCommand.ExecuteWriteAsync();
             }
             else
             {
@@ -144,7 +160,7 @@ namespace BV_Modbus_Client
         {
             if (bll.Modbus_IsConnected)
             {
-                fcCommand.ExecuteRead();
+                fcCommand.ExecuteReadAsync();
             }
             else
             {
@@ -158,7 +174,7 @@ namespace BV_Modbus_Client
             {
                 frm.ShowDialog();
             }
-            fcCommand.OnResponseReceived(); // Generating fake respopnse recevide event to forace an update.
+            fcCommand.ForceDataRefresh(""); // Generating fake respopnse recevide event to forace an update.
         }
         private void btnRemoveFc_Click(object sender, EventArgs e)
         {
@@ -246,6 +262,20 @@ namespace BV_Modbus_Client
         private void aToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bll.RemoveFC(fcCommand);
+        }
+        public static async Task BlinkPanelAsync(Panel panel, Color color, TimeSpan duration)
+        {
+            // Store the original color
+            Color originalColor = panel.BackColor;
+
+            // Change the panel color
+            panel.BackColor = color;
+
+            // Wait for the specified duration
+            await Task.Delay(duration);
+
+            // Restore the original color
+            panel.BackColor = originalColor;
         }
     }
 }

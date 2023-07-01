@@ -44,9 +44,13 @@ namespace BV_Modbus_Client.BusinessLayer
 
         internal async void PollAll()
         {
+            await Task.WhenAll(FcPollOrder.Select(x => x.ExecuteReadAsync()));
+
             foreach (FcWrapperBase item in FcPollOrder)
             {
-                await item.ExecuteReadAsync();
+                // REad out the data
+
+                //await item.ExecuteReadAsync();
                 //item.DataBuffer
             }
             PollFinishedEvent?.Invoke();

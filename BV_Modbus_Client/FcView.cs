@@ -74,7 +74,7 @@ namespace BV_Modbus_Client
 
         private async void FcCommand_FcActivatedEvent()
         {
-            await FcView.BlinkPanelAsync(panel1, Color.FromArgb(255,177,0), TimeSpan.FromSeconds(0.15));
+            await this.BlinkPanelAsync(panel1, ColorPalette.Action, TimeSpan.FromSeconds(0.15));
         }
 
         #region Events
@@ -228,13 +228,13 @@ namespace BV_Modbus_Client
             if (isSelected)
             {
                 //this.BackColor = Color.FromArgb(27, 188, 155);
-                panel1.BackColor = Color.FromArgb(27, 188, 155);
+                panel1.BackColor = ColorPalette.Detail; // Color.FromArgb(27, 188, 155);
                 //this.BackColor = Color.FromArgb(35, 172, 227);
             }
             else
             {
                 //this.BackColor = Color.FromArgb(240, 240, 240);
-                panel1.BackColor = Color.FromArgb(44, 54, 79);
+                panel1.BackColor = ColorPalette.Header;
             }
         }
         private void UpdateFcInfo()
@@ -317,21 +317,31 @@ namespace BV_Modbus_Client
         {
             bll.RemoveFC(fcCommand);
         }
-        public static async Task BlinkPanelAsync(Panel panel, Color color, TimeSpan duration)
+        public async Task BlinkPanelAsync(Panel panel, Color color, TimeSpan duration)
         {
-            // Store the original color
-            Color originalColor = panel.BackColor;
-
-            // Change the panel color
-            panel.BackColor = color;
-
+            UpdateIndicatorStripColor(true);
             // Wait for the specified duration
             await Task.Delay(duration);
-
-            // Restore the original color
-            panel.BackColor = originalColor;
+            UpdateIndicatorStripColor(false);
         }
-
+        void UpdateIndicatorStripColor(bool blinkOn)
+        {
+            if (blinkOn)
+            {
+                panel1.BackColor = ColorPalette.Action;
+            }
+            else
+            {
+                if (fcCommand.isSelected)
+                {
+                    panel1.BackColor = ColorPalette.Detail;
+                }
+                else
+                {
+                    panel1.BackColor= ColorPalette.Header;
+                }
+            }
+        }
         private void bToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             fcCommand.TriggerPollChangedEvent((sender as ToolStripMenuItem).Checked);

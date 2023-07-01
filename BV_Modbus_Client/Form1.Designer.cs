@@ -229,6 +229,7 @@
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.SystemColors.Control;
             this.panel5.Controls.Add(this.btnTestPoll);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(0, 360);
@@ -238,11 +239,11 @@
             // 
             // btnTestPoll
             // 
-            this.btnTestPoll.Location = new System.Drawing.Point(32, 29);
+            this.btnTestPoll.Location = new System.Drawing.Point(12, 6);
             this.btnTestPoll.Name = "btnTestPoll";
-            this.btnTestPoll.Size = new System.Drawing.Size(75, 23);
+            this.btnTestPoll.Size = new System.Drawing.Size(100, 23);
             this.btnTestPoll.TabIndex = 0;
-            this.btnTestPoll.Text = "button1";
+            this.btnTestPoll.Text = "Manual poll";
             this.btnTestPoll.UseVisualStyleBackColor = true;
             this.btnTestPoll.Click += new System.EventHandler(this.btnTestPoll_Click);
             // 

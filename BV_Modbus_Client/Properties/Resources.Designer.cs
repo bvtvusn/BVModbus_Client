@@ -83,9 +83,29 @@ namespace BV_Modbus_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ErrorTriangle {
+            get {
+                object obj = ResourceManager.GetObject("ErrorTriangle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GreenPlus {
             get {
                 object obj = ResourceManager.GetObject("GreenPlus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MenuIcon {
+            get {
+                object obj = ResourceManager.GetObject("MenuIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

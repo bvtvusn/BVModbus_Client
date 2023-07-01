@@ -162,7 +162,7 @@ namespace BV_Modbus_Client
         }
         private void btnRemoveFc_Click(object sender, EventArgs e)
         {
-            bll.RemoveFC(fcCommand);
+            //bll.RemoveFC(fcCommand);
             
         }
 
@@ -235,7 +235,17 @@ namespace BV_Modbus_Client
             return null; // Return null if the DataGridView is empty
         }
 
+        private void btnContextMenu_Click(object sender, EventArgs e)
+        {
+            Button btnSender = (Button)sender;
+            Point ptLowerLeft = new Point(0, btnSender.Height);
+            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+            contextMenuStrip1.Show(ptLowerLeft);
+        }
 
-        
+        private void aToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bll.RemoveFC(fcCommand);
+        }
     }
 }

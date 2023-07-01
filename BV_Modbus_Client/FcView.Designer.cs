@@ -31,17 +31,23 @@
             this.components = new System.ComponentModel.Container();
             this.lblHeader = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnRemoveFc = new System.Windows.Forms.Button();
             this.btnRunFc2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSettings2 = new System.Windows.Forms.Button();
             this.lblAddress = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.picError = new System.Windows.Forms.PictureBox();
             this.btnExecuteRead = new System.Windows.Forms.Button();
             this.btnViewTable = new System.Windows.Forms.Button();
+            this.btnContextMenu = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblHeader
@@ -75,27 +81,13 @@
             this.dataGridView1.Size = new System.Drawing.Size(186, 23);
             this.dataGridView1.TabIndex = 3;
             // 
-            // btnRemoveFc
-            // 
-            this.btnRemoveFc.BackColor = System.Drawing.Color.Transparent;
-            this.btnRemoveFc.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.CloseX;
-            this.btnRemoveFc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRemoveFc.FlatAppearance.BorderSize = 0;
-            this.btnRemoveFc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRemoveFc.Location = new System.Drawing.Point(177, 4);
-            this.btnRemoveFc.Name = "btnRemoveFc";
-            this.btnRemoveFc.Size = new System.Drawing.Size(15, 15);
-            this.btnRemoveFc.TabIndex = 7;
-            this.btnRemoveFc.UseVisualStyleBackColor = false;
-            this.btnRemoveFc.Click += new System.EventHandler(this.btnRemoveFc_Click);
-            // 
             // btnRunFc2
             // 
             this.btnRunFc2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.SendData;
             this.btnRunFc2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRunFc2.FlatAppearance.BorderSize = 0;
             this.btnRunFc2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRunFc2.Location = new System.Drawing.Point(117, 4);
+            this.btnRunFc2.Location = new System.Drawing.Point(126, 4);
             this.btnRunFc2.Name = "btnRunFc2";
             this.btnRunFc2.Size = new System.Drawing.Size(17, 17);
             this.btnRunFc2.TabIndex = 8;
@@ -117,7 +109,7 @@
             this.btnSettings2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSettings2.FlatAppearance.BorderSize = 0;
             this.btnSettings2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings2.Location = new System.Drawing.Point(146, 4);
+            this.btnSettings2.Location = new System.Drawing.Point(152, 4);
             this.btnSettings2.Name = "btnSettings2";
             this.btnSettings2.Size = new System.Drawing.Size(17, 17);
             this.btnSettings2.TabIndex = 10;
@@ -138,13 +130,14 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.picError);
             this.panel2.Controls.Add(this.btnExecuteRead);
             this.panel2.Controls.Add(this.btnViewTable);
             this.panel2.Controls.Add(this.lblHeader);
             this.panel2.Controls.Add(this.lblAddress);
             this.panel2.Controls.Add(this.dataGridView1);
+            this.panel2.Controls.Add(this.btnContextMenu);
             this.panel2.Controls.Add(this.btnSettings2);
-            this.panel2.Controls.Add(this.btnRemoveFc);
             this.panel2.Controls.Add(this.btnRunFc2);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Location = new System.Drawing.Point(5, 5);
@@ -152,13 +145,23 @@
             this.panel2.Size = new System.Drawing.Size(204, 100);
             this.panel2.TabIndex = 13;
             // 
+            // picError
+            // 
+            this.picError.Image = global::BV_Modbus_Client.Properties.Resources.ErrorTriangle;
+            this.picError.Location = new System.Drawing.Point(176, 28);
+            this.picError.Name = "picError";
+            this.picError.Size = new System.Drawing.Size(22, 20);
+            this.picError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picError.TabIndex = 15;
+            this.picError.TabStop = false;
+            // 
             // btnExecuteRead
             // 
             this.btnExecuteRead.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.ReadData;
             this.btnExecuteRead.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExecuteRead.FlatAppearance.BorderSize = 0;
             this.btnExecuteRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExecuteRead.Location = new System.Drawing.Point(94, 4);
+            this.btnExecuteRead.Location = new System.Drawing.Point(71, 4);
             this.btnExecuteRead.Name = "btnExecuteRead";
             this.btnExecuteRead.Size = new System.Drawing.Size(17, 17);
             this.btnExecuteRead.TabIndex = 14;
@@ -171,12 +174,47 @@
             this.btnViewTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnViewTable.FlatAppearance.BorderSize = 0;
             this.btnViewTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewTable.Location = new System.Drawing.Point(55, -2);
+            this.btnViewTable.Location = new System.Drawing.Point(92, -2);
             this.btnViewTable.Name = "btnViewTable";
             this.btnViewTable.Size = new System.Drawing.Size(29, 30);
             this.btnViewTable.TabIndex = 13;
             this.btnViewTable.UseVisualStyleBackColor = true;
             this.btnViewTable.Click += new System.EventHandler(this.btnViewTable_Click);
+            // 
+            // btnContextMenu
+            // 
+            this.btnContextMenu.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.MenuIcon;
+            this.btnContextMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnContextMenu.FlatAppearance.BorderSize = 0;
+            this.btnContextMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContextMenu.Location = new System.Drawing.Point(177, 3);
+            this.btnContextMenu.Name = "btnContextMenu";
+            this.btnContextMenu.Size = new System.Drawing.Size(20, 20);
+            this.btnContextMenu.TabIndex = 10;
+            this.btnContextMenu.UseVisualStyleBackColor = true;
+            this.btnContextMenu.Click += new System.EventHandler(this.btnContextMenu_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aToolStripMenuItem,
+            this.bToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 48);
+            // 
+            // aToolStripMenuItem
+            // 
+            this.aToolStripMenuItem.Name = "aToolStripMenuItem";
+            this.aToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.aToolStripMenuItem.Text = "Remove";
+            this.aToolStripMenuItem.Click += new System.EventHandler(this.aToolStripMenuItem_Click);
+            // 
+            // bToolStripMenuItem
+            // 
+            this.bToolStripMenuItem.CheckOnClick = true;
+            this.bToolStripMenuItem.Name = "bToolStripMenuItem";
+            this.bToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.bToolStripMenuItem.Text = "Polling";
             // 
             // FcView
             // 
@@ -189,6 +227,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picError)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -197,7 +237,6 @@
 
         private Label lblHeader;
         private DataGridView dataGridView1;
-        private Button btnRemoveFc;
         private Button btnRunFc2;
         private Panel panel1;
         private Button btnSettings2;
@@ -206,5 +245,10 @@
         private Button btnViewTable;
         private Button btnExecuteRead;
         private ToolTip toolTip1;
+        private PictureBox picError;
+        private Button btnContextMenu;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem aToolStripMenuItem;
+        private ToolStripMenuItem bToolStripMenuItem;
     }
 }

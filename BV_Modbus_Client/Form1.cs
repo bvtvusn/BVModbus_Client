@@ -101,7 +101,7 @@ namespace BV_Modbus_Client
         #region UserActions
         private void saveConfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bll.Save();
+            bll.SaveAs();
         }
 
         private void loadConfigToolStripMenuItem_Click(object sender, EventArgs e)
@@ -301,6 +301,11 @@ namespace BV_Modbus_Client
             form.ShowDialog();
             bll.UpdateFCList();
             //bll.UserConfig.GlobFcData.
+        }
+
+        private void saveConfigAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bll.Save();
         }
     }
 }

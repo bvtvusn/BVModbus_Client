@@ -148,11 +148,14 @@ namespace BV_Modbus_Client.BusinessLayer
             //}
             UpdateFCList();
         }
-        internal void Save()
+        internal void SaveAs()
         {
-            dal.SaveToFile(UserConfig);
+            dal.SaveAs_ToFile(UserConfig);
         }
 
-
+        internal void Save()
+        {
+            dal.OnSaveButton(UserConfig);
+        }
     }
 }

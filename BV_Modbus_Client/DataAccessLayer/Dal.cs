@@ -11,8 +11,9 @@ namespace BV_Modbus_Client.DataAccessLayer
 {
     internal class Dal
     {
-       
-        internal void SaveToFile(UserConfiguration objects)
+        bool isSaved;
+        string currentFilePath = "";
+        internal void SaveAs_ToFile(UserConfiguration objects)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "XML Files|*.xml";
@@ -27,36 +28,60 @@ namespace BV_Modbus_Client.DataAccessLayer
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string savefilePath = saveFileDialog.FileName;
+                currentFilePath = saveFileDialog.FileName;
+                //Properties.Settings.Default.Save();
+                isSaved = true;
+                //savefilePath = saveFileDialog.FileName;
 
-                try
-                {
-                    var serializer = new DataContractSerializer(typeof(UserConfiguration));
+                Save(objects);
 
-                    using (var fileStream = new FileStream(savefilePath, FileMode.Create))
-                    {
-                        using (var xmlWriter = XmlWriter.Create(fileStream))
-                        {
-                            serializer.WriteObject(xmlWriter, objects);
-                        }
-                    }
-
-                    // Store the current selected folder path in application settings
-                    string selectedFolderPath = Path.GetDirectoryName(savefilePath);
-                    Properties.Settings.Default.SaveFolder = selectedFolderPath;
-                    Properties.Settings.Default.Save();
-
-                    Console.WriteLine("Modbus configuration file saved successfully.");
-                    //MessageBox.Show("Modbus configuration file saved successfully.", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Failed to save Modbus configuration file. Error: " + ex.Message);
-                    MessageBox.Show("Failed to save Modbus configuration file. Error: " + ex.Message, "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                
             }
         }
 
+        void Save(UserConfiguration objects)
+        {
+
+            string savefilePath = currentFilePath;
+
+            try
+            {
+                var serializer = new DataContractSerializer(typeof(UserConfiguration));
+
+                using (var fileStream = new FileStream(savefilePath, FileMode.Create))
+                {
+                    using (var xmlWriter = XmlWriter.Create(fileStream))
+                    {
+                        serializer.WriteObject(xmlWriter, objects);
+                    }
+                }
+
+                // Store the current selected folder path in application settings
+                string selectedFolderPath = Path.GetDirectoryName(savefilePath);
+                Properties.Settings.Default.SaveFolder = selectedFolderPath;
+                Properties.Settings.Default.Save();
+                isSaved = true;
+
+                Console.WriteLine("Modbus configuration file saved successfully.");
+                //MessageBox.Show("Modbus configuration file saved successfully.", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to save Modbus configuration file. Error: " + ex.Message);
+                MessageBox.Show("Failed to save Modbus configuration file. Error: " + ex.Message, "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public void OnSaveButton(UserConfiguration objects)
+        {
+            if (isSaved)
+            {
+                Save(objects);
+            }
+            else
+            {
+                SaveAs_ToFile(objects);
+            }
+        }
         internal UserConfiguration LoadFromFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -80,6 +105,11 @@ namespace BV_Modbus_Client.DataAccessLayer
 
                     using (var fileStream = new FileStream(openFilePath, FileMode.Open))
                     {
+                        currentFilePath = openFilePath;
+                        Properties.Settings.Default.SaveFolder = Path.GetDirectoryName(openFilePath);
+                        isSaved = true;
+
+
                         using (var xmlReader = XmlReader.Create(fileStream))
                         {
                             var objects = (UserConfiguration)serializer.ReadObject(xmlReader);

@@ -34,6 +34,7 @@
             this.saveConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveConfigAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnPaste = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -79,7 +80,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveConfigToolStripMenuItem,
             this.loadConfigToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.saveConfigAsToolStripMenuItem});
             this.fileToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -88,23 +90,30 @@
             // saveConfigToolStripMenuItem
             // 
             this.saveConfigToolStripMenuItem.Name = "saveConfigToolStripMenuItem";
-            this.saveConfigToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.saveConfigToolStripMenuItem.Text = "Save Config";
+            this.saveConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveConfigToolStripMenuItem.Text = "Save Config As";
             this.saveConfigToolStripMenuItem.Click += new System.EventHandler(this.saveConfigToolStripMenuItem_Click);
             // 
             // loadConfigToolStripMenuItem
             // 
             this.loadConfigToolStripMenuItem.Name = "loadConfigToolStripMenuItem";
-            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadConfigToolStripMenuItem.Text = "Load Config";
             this.loadConfigToolStripMenuItem.Click += new System.EventHandler(this.loadConfigToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // saveConfigAsToolStripMenuItem
+            // 
+            this.saveConfigAsToolStripMenuItem.Name = "saveConfigAsToolStripMenuItem";
+            this.saveConfigAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveConfigAsToolStripMenuItem.Text = "Save Config";
+            this.saveConfigAsToolStripMenuItem.Click += new System.EventHandler(this.saveConfigAsToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -265,5 +274,6 @@
         private Button btnPaste;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private Panel panel5;
+        private ToolStripMenuItem saveConfigAsToolStripMenuItem;
     }
 }

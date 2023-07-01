@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BV_Modbus_Client.BusinessLayer
+{
+    internal class PollTimer
+    {
+        List<FcWrapperBase> FcPollOrder;
+        System.Timers.Timer timer_pollTimer;
+        public event Action PollFinishedEvent;
+        public PollTimer()
+        {
+            FcPollOrder = new List<FcWrapperBase>();
+            timer_pollTimer = new System.Timers.Timer(1000);
+            timer_pollTimer.Enabled = true;
+            timer_pollTimer.AutoReset = true;
+            
+            timer_pollTimer.Elapsed += Timer_pollTimer_Elapsed;
+        }
+
+        private void Timer_pollTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            PollAll();
+        }
+
+        internal void UpdatePollList(FcWrapperBase fc, bool pollingEnabled)
+        {
+            if (pollingEnabled)
+            {
+                if (!FcPollOrder.Contains(fc))
+                {
+                    FcPollOrder.Add(fc);
+                }
+
+            }
+            else
+            {
+                FcPollOrder.RemoveAll(s => Object.ReferenceEquals(s,fc));
+            }
+        }
+
+        internal async void PollAll()
+        {
+            foreach (FcWrapperBase item in FcPollOrder)
+            {
+                await item.ExecuteReadAsync();
+                //item.DataBuffer
+            }
+            PollFinishedEvent?.Invoke();
+        }
+    }
+}

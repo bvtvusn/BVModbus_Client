@@ -1,4 +1,5 @@
 ﻿using BV_Modbus_Client.BusinessLayer;
+using BV_Modbus_Client.GUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,8 @@ namespace BV_Modbus_Client
         private BLL bll;
         private bool refreshActiveFlag;
         private bool userEditActiveFlag;
+
+        
 
         //private FcWrapperBase? fcWrapperBase;
 
@@ -131,19 +134,49 @@ namespace BV_Modbus_Client
                 {
 
                     refreshActiveFlag = true;
-                    FillPreviewTable();
+
+                    //if (this.InvokeRequired)
+                    //{
+                    //    this.Invoke(FillPreviewTable());
+                    //}
+                    ControlExtensions.UIThreadInvoke(this, delegate {
+                        FillPreviewTable();
+                    });
+                    //FillPreviewTable();
                     refreshActiveFlag = false;
                 }
-
-                picError.Visible = false;
+                ControlExtensions.UIThreadInvoke(this, delegate {
+                    picError.Visible = false;
+                });
+                //if (this.IsHandleCreated)
+                //{
+                //    picError.Invoke((MethodInvoker)(() => {
+                //        picError.Visible = false;
+                //    }));
+                //}
+                
+                
+                //picError.Visible = false;
             }
             else
             {
-                picError.Visible = true;
-                toolTip1.SetToolTip(picError, errormsg);
+                if (this.IsHandleCreated)
+                {
+                    //picError.Invoke((MethodInvoker)(() => {
+                    //    picError.Visible = true;
+                    //}));
+                    ControlExtensions.UIThreadInvoke(this, delegate {
+                        picError.Visible = true;
+                        toolTip1.SetToolTip(picError, errormsg);
+                    });
+                }
+                
             }
 
         }
+
+        
+
         private void btnExecute_Click(object sender, EventArgs e)
         {
             if (bll.Modbus_IsConnected)
@@ -219,6 +252,9 @@ namespace BV_Modbus_Client
         }
         private void FillPreviewTable()
         {
+            
+
+
             (string, string)[] data = fcCommand.GetDataAsString();
             if (data.Length > 4)
             {
@@ -230,7 +266,25 @@ namespace BV_Modbus_Client
         #endregion
 
 
-       
+        //private void InvokeControlSafely(Control control, Action action)
+        //{
+        //    if (control.IsHandleCreated)
+        //    {
+        //        if (control.InvokeRequired)
+        //        {
+        //            control.Invoke((MethodInvoker)action);
+        //        }
+        //        else
+        //        {
+        //            action.Invoke();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // Handle not created yet, handle the case accordingly
+        //    }
+        //}
+
         private string[] ReadFirstRowFromDataGridView(DataGridView dataGridView)
         {
             if (dataGridView.Rows.Count > 0)
@@ -277,5 +331,32 @@ namespace BV_Modbus_Client
             // Restore the original color
             panel.BackColor = originalColor;
         }
+
+        private void bToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            fcCommand.TriggerPollChangedEvent((sender as ToolStripMenuItem).Checked);
+        }
+
+        //static public void UIThread(this Control control, Action code)
+        //{
+        //    if (control.InvokeRequired)
+        //    {
+        //        control.BeginInvoke(code);
+        //        return;
+        //    }
+        //    code.Invoke();
+        //}
+
+        //static public void UIThreadInvoke(this Control control, Action code)
+        //{
+        //    if (control.InvokeRequired)
+        //    {
+        //        control.Invoke(code);
+        //        return;
+        //    }
+        //    code.Invoke();
+        //}
+        
+
     }
 }

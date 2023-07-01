@@ -1,5 +1,6 @@
 using BV_Modbus_Client.BusinessLayer;
 using BV_Modbus_Client.DataAccessLayer;
+using BV_Modbus_Client.GUI;
 using NModbus;
 using System.ComponentModel;
 using System.Data;
@@ -43,12 +44,17 @@ namespace BV_Modbus_Client
             bll.FcListChangedEvent += Bll_FcListChangedEvent;
             bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
             bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
-
+            bll.UserConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
 
             
             //comboBox1.DataSource = System.Enum.GetValues(typeof(FormatName));
             RefreshGUI();
 
+        }
+
+        private void PollTimer_PollFinishedEvent()
+        {
+            //throw new NotImplementedException();
         }
         #region EventsFromApplication
         private void Bll_FcListChangedEvent(object? sender, EventArgs e) // Updates the list of FCs.
@@ -57,6 +63,9 @@ namespace BV_Modbus_Client
         }
         private void Bll_SelectedDataRecevivedEvent(string errorMsg)
         {
+            ControlExtensions.UIThreadInvoke(this, delegate {
+                
+
             if (userEditActiveFlag == false)
             {
                 refreshActiveFlag = true;
@@ -66,6 +75,7 @@ namespace BV_Modbus_Client
 
                 refreshActiveFlag = false;
             }
+            });
 
         }
         private void Bll_SelectedFormatValidStateEvent(string[] errors)
@@ -306,6 +316,11 @@ namespace BV_Modbus_Client
         private void saveConfigAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bll.Save();
+        }
+
+        private void btnTestPoll_Click(object sender, EventArgs e)
+        {
+            bll.UserConfig.pollTimer.PollAll();
         }
     }
 }

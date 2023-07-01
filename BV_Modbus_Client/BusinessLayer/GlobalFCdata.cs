@@ -15,9 +15,17 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             AddressDescription = new Dictionary<ushort, string>();
         }
+        public event Action<FcWrapperBase, bool> ActivePollingChangedEvent;
         [DataMember]
         public bool ZeroBasedAdresses { get; set; } = true;
         [DataMember]
         public Dictionary<ushort, string> AddressDescription { get; set; } // Databuffer contains the address read, the value and a description.
+
+        internal void ReportActivePollingChanged(FcWrapperBase fcWrapperBase, bool pollEnabled)
+        {
+            ActivePollingChangedEvent?.Invoke(fcWrapperBase, pollEnabled);
+        }
+
+        
     }
 }

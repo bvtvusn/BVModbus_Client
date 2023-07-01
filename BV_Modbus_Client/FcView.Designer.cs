@@ -35,7 +35,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSettings2 = new System.Windows.Forms.Button();
             this.lblAddress = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel2b = new System.Windows.Forms.Panel();
             this.picError = new System.Windows.Forms.PictureBox();
             this.btnExecuteRead = new System.Windows.Forms.Button();
             this.btnViewTable = new System.Windows.Forms.Button();
@@ -45,7 +45,7 @@
             this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.panel2b.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -127,23 +127,23 @@
             this.lblAddress.TabIndex = 11;
             this.lblAddress.Text = "1";
             // 
-            // panel2
+            // panel2b
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.picError);
-            this.panel2.Controls.Add(this.btnExecuteRead);
-            this.panel2.Controls.Add(this.btnViewTable);
-            this.panel2.Controls.Add(this.lblHeader);
-            this.panel2.Controls.Add(this.lblAddress);
-            this.panel2.Controls.Add(this.dataGridView1);
-            this.panel2.Controls.Add(this.btnContextMenu);
-            this.panel2.Controls.Add(this.btnSettings2);
-            this.panel2.Controls.Add(this.btnRunFc2);
-            this.panel2.Controls.Add(this.panel1);
-            this.panel2.Location = new System.Drawing.Point(5, 5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(204, 100);
-            this.panel2.TabIndex = 13;
+            this.panel2b.BackColor = System.Drawing.Color.White;
+            this.panel2b.Controls.Add(this.picError);
+            this.panel2b.Controls.Add(this.btnExecuteRead);
+            this.panel2b.Controls.Add(this.btnViewTable);
+            this.panel2b.Controls.Add(this.lblHeader);
+            this.panel2b.Controls.Add(this.lblAddress);
+            this.panel2b.Controls.Add(this.dataGridView1);
+            this.panel2b.Controls.Add(this.btnContextMenu);
+            this.panel2b.Controls.Add(this.btnSettings2);
+            this.panel2b.Controls.Add(this.btnRunFc2);
+            this.panel2b.Controls.Add(this.panel1);
+            this.panel2b.Location = new System.Drawing.Point(5, 5);
+            this.panel2b.Name = "panel2b";
+            this.panel2b.Size = new System.Drawing.Size(204, 100);
+            this.panel2b.TabIndex = 13;
             // 
             // picError
             // 
@@ -215,18 +215,19 @@
             this.bToolStripMenuItem.Name = "bToolStripMenuItem";
             this.bToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.bToolStripMenuItem.Text = "Polling";
+            this.bToolStripMenuItem.CheckedChanged += new System.EventHandler(this.bToolStripMenuItem_CheckedChanged);
             // 
             // FcView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel2b);
             this.Name = "FcView";
             this.Size = new System.Drawing.Size(214, 110);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panel2b.ResumeLayout(false);
+            this.panel2b.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picError)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -241,7 +242,7 @@
         private Panel panel1;
         private Button btnSettings2;
         private Label lblAddress;
-        private Panel panel2;
+        private Panel panel2b;
         private Button btnViewTable;
         private Button btnExecuteRead;
         private ToolTip toolTip1;

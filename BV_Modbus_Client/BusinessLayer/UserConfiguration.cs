@@ -15,12 +15,13 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             FcWrappers = new List<FcWrapperBase>();
             GlobFcData = new GlobalFCdata();
+            pollTimer = new PollTimer();
             Network_RemotePort = 502;
             Network_RemoteHostname = "127.0.0.1";
         }
         [DataMember]
         public List<FcWrapperBase> FcWrappers { get; set; }
-
+        public PollTimer pollTimer;
 
         [DataMember]
         public int Network_RemotePort { get; set; }

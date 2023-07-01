@@ -22,8 +22,15 @@ namespace BV_Modbus_Client.BusinessLayer
             UserConfig = new UserConfiguration();
             dal = new Dal();
             mbCon = new MbConnection(false);
+
+            UserConfig.GlobFcData.ActivePollingChangedEvent += GlobFcData_ActivePollingChangedEvent;
             //formatConverter = new FormatConverter();
             //FcWrappers = new List<FcWrapperBase>();
+        }
+
+        private void GlobFcData_ActivePollingChangedEvent(FcWrapperBase fc, bool pollingEnabled)
+        {
+            UserConfig.pollTimer.UpdatePollList(fc, pollingEnabled);
         }
 
 
@@ -97,6 +104,8 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         internal void RemoveFC(FcWrapperBase fcCommand)
         {
+            UserConfig.pollTimer.UpdatePollList(fcCommand, false); // Removing the item from the list.
+
             if (Object.ReferenceEquals(fcCommand, SelectedFcRequest)) // If removing the selected, also reomove the object from "Selected object"
             {
                 selectedFcRequest.RefreshDataEvent -= SelectedFcRequest_ResponseReceived;

@@ -39,17 +39,19 @@
             this.btnPaste = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel2a = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnViewTable = new System.Windows.Forms.Button();
             this.addFcButton2 = new BV_Modbus_Client.AddFcButton();
             this.addFcButton1 = new BV_Modbus_Client.AddFcButton();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnTestPoll = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.panel2a.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -90,28 +92,28 @@
             // saveConfigToolStripMenuItem
             // 
             this.saveConfigToolStripMenuItem.Name = "saveConfigToolStripMenuItem";
-            this.saveConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveConfigToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.saveConfigToolStripMenuItem.Text = "Save Config As";
             this.saveConfigToolStripMenuItem.Click += new System.EventHandler(this.saveConfigToolStripMenuItem_Click);
             // 
             // loadConfigToolStripMenuItem
             // 
             this.loadConfigToolStripMenuItem.Name = "loadConfigToolStripMenuItem";
-            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.loadConfigToolStripMenuItem.Text = "Load Config";
             this.loadConfigToolStripMenuItem.Click += new System.EventHandler(this.loadConfigToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // saveConfigAsToolStripMenuItem
             // 
             this.saveConfigAsToolStripMenuItem.Name = "saveConfigAsToolStripMenuItem";
-            this.saveConfigAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveConfigAsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.saveConfigAsToolStripMenuItem.Text = "Save Config";
             this.saveConfigAsToolStripMenuItem.Click += new System.EventHandler(this.saveConfigAsToolStripMenuItem_Click);
             // 
@@ -167,15 +169,15 @@
             this.panel4.Size = new System.Drawing.Size(5, 360);
             this.panel4.TabIndex = 13;
             // 
-            // panel2
+            // panel2a
             // 
-            this.panel2.Controls.Add(this.flowLayoutPanel1);
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(537, 360);
-            this.panel2.TabIndex = 12;
+            this.panel2a.Controls.Add(this.flowLayoutPanel1);
+            this.panel2a.Controls.Add(this.panel3);
+            this.panel2a.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2a.Location = new System.Drawing.Point(0, 0);
+            this.panel2a.Name = "panel2a";
+            this.panel2a.Size = new System.Drawing.Size(537, 360);
+            this.panel2a.TabIndex = 12;
             // 
             // panel3
             // 
@@ -227,11 +229,22 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnTestPoll);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(0, 360);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(907, 100);
             this.panel5.TabIndex = 16;
+            // 
+            // btnTestPoll
+            // 
+            this.btnTestPoll.Location = new System.Drawing.Point(32, 29);
+            this.btnTestPoll.Name = "btnTestPoll";
+            this.btnTestPoll.Size = new System.Drawing.Size(75, 23);
+            this.btnTestPoll.TabIndex = 0;
+            this.btnTestPoll.Text = "button1";
+            this.btnTestPoll.UseVisualStyleBackColor = true;
+            this.btnTestPoll.Click += new System.EventHandler(this.btnTestPoll_Click);
             // 
             // Form1
             // 
@@ -240,7 +253,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(148)))), ((int)(((byte)(153)))));
             this.ClientSize = new System.Drawing.Size(907, 460);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel2a);
             this.Controls.Add(this.panel5);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -249,9 +262,10 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.panel2a.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -264,7 +278,7 @@
         private ToolStripMenuItem saveConfigToolStripMenuItem;
         private ToolStripMenuItem loadConfigToolStripMenuItem;
         private Panel panel1;
-        private Panel panel2;
+        private Panel panel2a;
         private Panel panel3;
         private Panel panel4;
         private AddFcButton addFcButton1;
@@ -275,5 +289,6 @@
         private ToolStripMenuItem settingsToolStripMenuItem;
         private Panel panel5;
         private ToolStripMenuItem saveConfigAsToolStripMenuItem;
+        private Button btnTestPoll;
     }
 }

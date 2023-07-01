@@ -75,6 +75,7 @@ namespace BV_Modbus_Client.BusinessLayer
         public event Action FcSettingsChangedEvent;
         public event Action<FcWrapperBase, bool> SelectedChanged;
         public event Action FcActivatedEvent;
+        public event Action<bool> ActivePollingChangedEvent;
 
         public void UpdateFcSettings()
         {
@@ -216,6 +217,11 @@ namespace BV_Modbus_Client.BusinessLayer
             }
             return datapoints;
         }
-       
+
+        internal void TriggerPollChangedEvent(bool pollEnabled)
+        {
+            GlobFcData.ReportActivePollingChanged(this, pollEnabled);
+            //ActivePollingChangedEvent?.Invoke(pollEnabled);
+        }
     }
 }

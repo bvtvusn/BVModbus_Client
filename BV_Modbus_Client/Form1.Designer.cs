@@ -61,7 +61,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(73, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(464, 360);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(464, 460);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
             // menuStrip1
@@ -176,7 +176,7 @@
             this.panel2a.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2a.Location = new System.Drawing.Point(0, 0);
             this.panel2a.Name = "panel2a";
-            this.panel2a.Size = new System.Drawing.Size(537, 360);
+            this.panel2a.Size = new System.Drawing.Size(537, 460);
             this.panel2a.TabIndex = 12;
             // 
             // panel3
@@ -189,7 +189,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(73, 360);
+            this.panel3.Size = new System.Drawing.Size(73, 460);
             this.panel3.TabIndex = 10;
             // 
             // btnViewTable
@@ -232,9 +232,9 @@
             this.panel5.BackColor = System.Drawing.SystemColors.Control;
             this.panel5.Controls.Add(this.btnTestPoll);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 360);
+            this.panel5.Location = new System.Drawing.Point(537, 360);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(907, 100);
+            this.panel5.Size = new System.Drawing.Size(370, 100);
             this.panel5.TabIndex = 16;
             // 
             // btnTestPoll
@@ -254,8 +254,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(148)))), ((int)(((byte)(153)))));
             this.ClientSize = new System.Drawing.Size(907, 460);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2a);
             this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel2a);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";

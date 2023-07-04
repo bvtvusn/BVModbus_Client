@@ -323,5 +323,19 @@ namespace BV_Modbus_Client
         {
             bll.UserConfig.pollTimer.PollAll();
         }
+
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            int[] originalArray = { 1, 2, 3, 4, 5 };
+
+            Tuple<int, int>[] tupleArray = originalArray
+                .Zip(originalArray.Skip(1), (a, b) => Tuple.Create(a, b))
+                .ToArray();
+
+            foreach (var tuple in tupleArray)
+            {
+                Console.WriteLine(tuple);
+            }
+        }
     }
 }

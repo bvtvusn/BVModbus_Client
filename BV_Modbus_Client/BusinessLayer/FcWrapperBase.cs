@@ -24,6 +24,8 @@ namespace BV_Modbus_Client.BusinessLayer
         public FormatConverter.FormatName DisplayType { get; set; }
         [DataMember]
         public bool SwapBytes { get; set; }
+        [DataMember]
+        public bool SwapRegisters { get; set; }
         [Browsable(false)]
         //public FormatConverter Format { get; set; }
 
@@ -93,18 +95,21 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public virtual (string, string)[] GetDataAsString() // Gui uses this to display the data.
         {
+            ushort[] databuffer = ReadFromBuffer(StartAddress,NumberOfRegisters);
+            string[] strvalues = FormatConverter.GetStringRepresentation(databuffer,DisplayType,SwapBytes, SwapRegisters);
             // Function translates Databuffer into a string array
             (string, string)[] strData = new (string, string)[NumberOfRegisters];
             for (int i = 0; i < NumberOfRegisters; i++)
             {
                 ushort address = (ushort)(i + StartAddress);
-                ushort datavalue;
+                //ushort datavalue;
                 string dataDescription;
-                bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
+                //bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
                 bool dscrFound =GlobFcData.AddressDescription.TryGetValue(address, out dataDescription); // Description
 
-                if (valueFound) strData[i].Item1 = FormatConverter.GetStringRepresentation(datavalue,DisplayType,SwapBytes); // Value
-                else strData[i].Item1 = "";
+                /*if (valueFound) */
+                strData[i].Item1 = strvalues[i];
+                //else strData[i].Item1 = "";
 
                 if (dscrFound) strData[i].Item2 = dataDescription;
                 else strData[i].Item2 = "";
@@ -131,16 +136,18 @@ namespace BV_Modbus_Client.BusinessLayer
         internal virtual void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer
         {
 
-
+            ushort[] setData; // = new ushort[strings.Length];
+            string[] errors;// = new string[strings.Length];
+            setData = FormatConverter.GetBinaryRepresentation(strings,DisplayType, out errors, SwapBytes, SwapRegisters);
             // Store the valid numerical values.
-            string[] formatErrorMessages = new string[strings.Length];
-            bool formatValid = true;
+            //string[] formatErrorMessages = new string[strings.Length];
+            //bool formatValid = true;
             for (int i = 0; i < strings.Length; i++)
             {
                 ushort address = (ushort)(StartAddress + i);
-                try
-                {
-                    bool shouldDelete = (strings[i].Length < 1);
+                //try
+                //{
+                    bool shouldDelete = (errors[i]!=null);
                     //ushort datapoint = Format.GetBinaryRepresentation(strings[i]);
                     bool keyExist = DataBuffer.ContainsKey(address);
                     if (keyExist)
@@ -151,26 +158,45 @@ namespace BV_Modbus_Client.BusinessLayer
                         }
                         else
                         {
-                            DataBuffer[address] = FormatConverter.GetBinaryRepresentation(strings[i],DisplayType,SwapBytes);
+                            DataBuffer[address] = setData[i];
                         }
                     }
                     else
                     {
-                        DataBuffer.Add(address, FormatConverter.GetBinaryRepresentation(strings[i],DisplayType,SwapBytes));
+                        DataBuffer.Add(address, setData[i]);
                     }
-                }
-                catch (Exception err)
-                {
-                    formatErrorMessages[i] = err.Message;
-                }
+                //}
+                //catch (Exception err)
+                //{
+                //    formatErrorMessages[i] = err.Message;
+                //}
             }
 
 
 
 
             ForceDataRefresh("");
-            UpdateFormatValidState(formatErrorMessages);
+            UpdateFormatValidState(errors);
         }
+        //internal virtual string[] GetFcData(int numberOfRegisters, int startRegister)
+        //{
+        //    List<string> strings = new List<string>();
+
+        //    for (int i = 0; i < numberOfRegisters; i++)
+        //    {
+        //        ushort address = (ushort)(startRegister + i);
+        //        if (DataBuffer.ContainsKey(address))
+        //        {
+        //            strings.Add(FormatConverter.GetStringRepresentation(DataBuffer[address], DisplayType, SwapBytes));
+        //        }
+        //        else
+        //        {
+        //            strings.Add(""); // Empty string if address not found in DataBuffer
+        //        }
+        //    }
+
+        //    return strings.ToArray();
+        //}
 
         internal void SetFcDescription(string[] strings)
         {

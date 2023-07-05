@@ -20,8 +20,9 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         private ushort startAddress;
         private bool isSelected1;
+        private FormatConverter.FormatName displayType;
         [DataMember]         
-        public FormatConverter.FormatName DisplayType { get; set; }
+        public FormatConverter.FormatName DisplayType { get => displayType; set { displayType = value; ForceDataRefresh(""); } }
         [DataMember]
         public bool SwapBytes { get; set; }
         [DataMember]
@@ -61,15 +62,17 @@ namespace BV_Modbus_Client.BusinessLayer
         //[Browsable(false)]
         //[DataMember]
         //public Dictionary<ushort, string> AddressDescription { get; set; } // Databuffer contains the address read, the value and a description.
-
+        [Browsable(false)]
         public virtual string OperationReadDescription { get { return "Read"; } }
+        [Browsable(false)]
         public virtual string OperationWriteDescription { get { return "Write"; } }
+        [Browsable(false)]
         public GlobalFCdata GlobFcData { get; set; }
-        public string Type
-        {
-            get { return this.GetType().Name; }
+        //public string Type
+        //{
+        //    get { return this.GetType().Name; }
             
-        }
+        //}
 
 
         public event Action<string> RefreshDataEvent;

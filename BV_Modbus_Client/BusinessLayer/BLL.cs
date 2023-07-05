@@ -12,9 +12,9 @@ namespace BV_Modbus_Client.BusinessLayer
         //internal FormatConverter formatConverter;
         internal UserConfiguration UserConfig { get => userConfig; set => userConfig = value; }
         public bool Modbus_IsConnected { get { return (mbCon.Master != null); } }
-        
-        
-        
+        public event Action FcSettingsChangedEvent;
+
+
         public event EventHandler FcListChangedEvent;
 
         public BLL()
@@ -53,7 +53,7 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 item.isSelected = Object.ReferenceEquals(item, fcCommand); // Only the correct object is set to true
             }
-
+            FcSettingsChangedEvent?.Invoke();
         }
 
         

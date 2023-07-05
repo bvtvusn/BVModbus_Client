@@ -347,6 +347,11 @@ namespace BV_Modbus_Client
             fcCommand.TriggerPollChangedEvent((sender as ToolStripMenuItem).Checked);
         }
 
+        private void duplicateFCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //static public void UIThread(this Control control, Action code)
         //{
         //    if (control.InvokeRequired)
@@ -366,7 +371,7 @@ namespace BV_Modbus_Client
         //    }
         //    code.Invoke();
         //}
-        
+
 
     }
 }

@@ -33,8 +33,8 @@ namespace BV_Modbus_Client.BusinessLayer
             //DataBuffer.Add(2, 0);
             //DataBuffer.Add(3, 0);
         }
-        public override string OperationReadDescription { get { return "FC3: Read Multiple Coils"; } }
-        public override string OperationWriteDescription { get { return "FC15: Write Multiple Coils"; } }
+        public override string OperationReadDescription { get { return "FC3: Read Multiple Holding Registers"; } }
+        public override string OperationWriteDescription { get { return "FC15: Write Multiple Holding Registers"; } }
         [DataMember]
         public override ushort NumberOfRegisters { get {   return numberOfRegisters;  } set {  numberOfRegisters = value; UpdateFcSettings(); } } 
         //[DataMember]

@@ -46,11 +46,16 @@ namespace BV_Modbus_Client
             bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
             bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
             bll.UserConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
-
+            bll.FcSettingsChangedEvent += Bll_FcSettingsChangedEvent;
             
             //comboBox1.DataSource = System.Enum.GetValues(typeof(FormatName));
             RefreshGUI();
 
+        }
+
+        private void Bll_FcSettingsChangedEvent()
+        {
+            propGridFc.SelectedObject = bll.SelectedFcRequest;
         }
 
         private void PollTimer_PollFinishedEvent()
@@ -336,6 +341,11 @@ namespace BV_Modbus_Client
             {
                 Console.WriteLine(tuple);
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

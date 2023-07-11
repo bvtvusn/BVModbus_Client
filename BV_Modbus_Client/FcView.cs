@@ -19,6 +19,8 @@ namespace BV_Modbus_Client
         private bool refreshActiveFlag;
         private bool userEditActiveFlag;
 
+        Color DefaultBackcolor = Color.White;
+        Color HighlightedBackcolor = Color.FromArgb(246,246,246);
         
 
         //private FcWrapperBase? fcWrapperBase;
@@ -46,7 +48,7 @@ namespace BV_Modbus_Client
             UpdateFcInfo();
             toolTip1.SetToolTip(btnExecuteRead, fcCommand.OperationReadDescription);
             toolTip1.SetToolTip(btnRunFc2, fcCommand.OperationWriteDescription);
-            //dataGridView1.ReadOnly = !fcCommand.FcTypeWrite;
+            //dataGridView2.ReadOnly = !fcCommand.FcTypeWrite;
             //if (fcCommand.FcTypeWrite)
             //{
             //    btnRunFc2.Text = "Write";
@@ -57,14 +59,14 @@ namespace BV_Modbus_Client
             //}
 
             //DrawSelection(fcWrapperBase.isSelected);
-            dataGridView1.ClearSelection();
-            dataGridView1.CurrentCell = null;
+            dataGridView2.ClearSelection();
+            dataGridView2.CurrentCell = null;
             
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(44,54,79);
+            //dataGridView2.DefaultCellStyle.SelectionBackColor = Color.FromArgb(44,54,79);
             fcCommand.FormatValidStateEvent += FcCommand_FormatValidStateEvent;
             fcCommand.FcSettingsChangedEvent += FcCommand_FcSettingsChangedEvent;
             fcCommand.SelectedChanged += FcCommand_SelectedChanged;
-            dataGridView1.CellValueChanged += DataGridView1_CellValueChanged; // Sends data to FC object
+            dataGridView2.CellValueChanged += dataGridView2_CellValueChanged; // Sends data to FC object
             fcCommand.RefreshDataEvent += FcWrapperBase_ResponseReceived; // Receives data from FC object. ( Do not receive updates to gui if we are sending data)
             fcCommand.FcActivatedEvent += FcCommand_FcActivatedEvent;
             FillPreviewTable();
@@ -95,12 +97,12 @@ namespace BV_Modbus_Client
 
                 if (isError)
                 {
-                    dataGridView1.Rows[0].Cells[i].Style.BackColor = Color.Red;
+                    dataGridView2.Rows[0].Cells[i].Style.BackColor = Color.Red;
 
                 }
                 else
                 {
-                    dataGridView1.Rows[0].Cells[i].Style.BackColor = Color.White;
+                    dataGridView2.Rows[0].Cells[i].Style.BackColor = Color.White;
                 }
             }
 
@@ -113,13 +115,13 @@ namespace BV_Modbus_Client
         {
             DrawSelection(isSelected);
         }
-        private void DataGridView1_CellValueChanged(object? sender, DataGridViewCellEventArgs e)
+        private void dataGridView2_CellValueChanged(object? sender, DataGridViewCellEventArgs e)
         {
             userEditActiveFlag = true;
-            //string[] frmDgv = (string[])(dataGridView1.DataSource as DataTable).Rows[0].ItemArray;
+            //string[] frmDgv = (string[])(dataGridView2.DataSource as DataTable).Rows[0].ItemArray;
             if (refreshActiveFlag == false)
             {
-                string[] tableData = ReadFirstRowFromDataGridView(dataGridView1);
+                string[] tableData = ReadFirstRowFromDataGridView(dataGridView2);
                 fcCommand.SetFcData(tableData);
 
             }
@@ -261,7 +263,7 @@ namespace BV_Modbus_Client
                 data = ((string, string)[])data.Take(4).ToArray();
             }
             string[] viewData = data.Select(x => x.Item1).ToArray();
-            dataGridView1.DataSource = FormatConverter.ArrayToDatatableRow(viewData);
+            dataGridView2.DataSource = FormatConverter.ArrayToDatatableRow(viewData);
         }
         #endregion
 
@@ -348,6 +350,21 @@ namespace BV_Modbus_Client
         }
 
         private void duplicateFCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FcView_MouseEnter(object sender, EventArgs e)
+        {
+            this.BackColor = HighlightedBackcolor;
+        }
+
+        private void FcView_MouseLeave(object sender, EventArgs e)
+        {
+            this.BackColor = DefaultBackcolor;
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

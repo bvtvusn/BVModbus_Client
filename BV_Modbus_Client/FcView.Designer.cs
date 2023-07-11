@@ -29,154 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lblHeader = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnRunFc2 = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2b = new System.Windows.Forms.Panel();
-            this.btnExecuteRead = new System.Windows.Forms.Button();
-            this.btnViewTable = new System.Windows.Forms.Button();
-            this.btnContextMenu = new System.Windows.Forms.Button();
-            this.lblAddress = new System.Windows.Forms.Label();
-            this.picError = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeFCTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateFCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel2b.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
+            this.btnExecuteRead = new System.Windows.Forms.Button();
+            this.btnViewTable = new System.Windows.Forms.Button();
+            this.picError = new System.Windows.Forms.PictureBox();
+            this.lblAddress = new System.Windows.Forms.Label();
+            this.btnContextMenu = new System.Windows.Forms.Button();
+            this.btnRunFc2 = new System.Windows.Forms.Button();
+            this.lblHeader = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblHeader
-            // 
-            this.lblHeader.Location = new System.Drawing.Point(7, 4);
-            this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(238, 20);
-            this.lblHeader.TabIndex = 0;
-            this.lblHeader.Text = "My FC label - writing multiple registers";
-            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.ColumnHeadersVisible = false;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(30, 23);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView1.Size = new System.Drawing.Size(186, 23);
-            this.dataGridView1.TabIndex = 3;
-            // 
-            // btnRunFc2
-            // 
-            this.btnRunFc2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.SendData;
-            this.btnRunFc2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRunFc2.FlatAppearance.BorderSize = 0;
-            this.btnRunFc2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRunFc2.Location = new System.Drawing.Point(219, 26);
-            this.btnRunFc2.Name = "btnRunFc2";
-            this.btnRunFc2.Size = new System.Drawing.Size(17, 17);
-            this.btnRunFc2.TabIndex = 8;
-            this.btnRunFc2.UseVisualStyleBackColor = true;
-            this.btnRunFc2.Click += new System.EventHandler(this.btnExecute_Click);
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(54)))), ((int)(((byte)(79)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(165)))), ((int)(((byte)(255)))));
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(4, 50);
+            this.panel1.Size = new System.Drawing.Size(4, 67);
             this.panel1.TabIndex = 9;
-            // 
-            // panel2b
-            // 
-            this.panel2b.BackColor = System.Drawing.Color.White;
-            this.panel2b.Controls.Add(this.btnExecuteRead);
-            this.panel2b.Controls.Add(this.btnViewTable);
-            this.panel2b.Controls.Add(this.btnContextMenu);
-            this.panel2b.Controls.Add(this.dataGridView1);
-            this.panel2b.Controls.Add(this.btnRunFc2);
-            this.panel2b.Controls.Add(this.panel1);
-            this.panel2b.Controls.Add(this.lblHeader);
-            this.panel2b.Location = new System.Drawing.Point(3, 9);
-            this.panel2b.Name = "panel2b";
-            this.panel2b.Size = new System.Drawing.Size(278, 50);
-            this.panel2b.TabIndex = 13;
-            // 
-            // btnExecuteRead
-            // 
-            this.btnExecuteRead.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.ReadData;
-            this.btnExecuteRead.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnExecuteRead.FlatAppearance.BorderSize = 0;
-            this.btnExecuteRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExecuteRead.Location = new System.Drawing.Point(9, 26);
-            this.btnExecuteRead.Name = "btnExecuteRead";
-            this.btnExecuteRead.Size = new System.Drawing.Size(17, 17);
-            this.btnExecuteRead.TabIndex = 14;
-            this.btnExecuteRead.UseVisualStyleBackColor = true;
-            this.btnExecuteRead.Click += new System.EventHandler(this.btnExecuteRead_Click);
-            // 
-            // btnViewTable
-            // 
-            this.btnViewTable.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.Table;
-            this.btnViewTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnViewTable.FlatAppearance.BorderSize = 0;
-            this.btnViewTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewTable.Location = new System.Drawing.Point(246, 19);
-            this.btnViewTable.Name = "btnViewTable";
-            this.btnViewTable.Size = new System.Drawing.Size(29, 30);
-            this.btnViewTable.TabIndex = 13;
-            this.btnViewTable.UseVisualStyleBackColor = true;
-            this.btnViewTable.Click += new System.EventHandler(this.btnViewTable_Click);
-            // 
-            // btnContextMenu
-            // 
-            this.btnContextMenu.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.MenuIcon;
-            this.btnContextMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnContextMenu.FlatAppearance.BorderSize = 0;
-            this.btnContextMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnContextMenu.Location = new System.Drawing.Point(251, 1);
-            this.btnContextMenu.Name = "btnContextMenu";
-            this.btnContextMenu.Size = new System.Drawing.Size(20, 20);
-            this.btnContextMenu.TabIndex = 10;
-            this.btnContextMenu.UseVisualStyleBackColor = true;
-            this.btnContextMenu.Click += new System.EventHandler(this.btnContextMenu_Click);
-            // 
-            // lblAddress
-            // 
-            this.lblAddress.AutoSize = true;
-            this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAddress.Location = new System.Drawing.Point(6, -2);
-            this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(33, 12);
-            this.lblAddress.TabIndex = 15;
-            this.lblAddress.Text = "label1";
-            // 
-            // picError
-            // 
-            this.picError.Image = global::BV_Modbus_Client.Properties.Resources.ErrorTriangle;
-            this.picError.Location = new System.Drawing.Point(282, 23);
-            this.picError.Name = "picError";
-            this.picError.Size = new System.Drawing.Size(22, 20);
-            this.picError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picError.TabIndex = 15;
-            this.picError.TabStop = false;
             // 
             // contextMenuStrip1
             // 
@@ -217,42 +99,174 @@
             this.duplicateFCToolStripMenuItem.Text = "Duplicate";
             this.duplicateFCToolStripMenuItem.Click += new System.EventHandler(this.duplicateFCToolStripMenuItem_Click);
             // 
+            // btnExecuteRead
+            // 
+            this.btnExecuteRead.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.ReadData;
+            this.btnExecuteRead.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExecuteRead.FlatAppearance.BorderSize = 0;
+            this.btnExecuteRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExecuteRead.Location = new System.Drawing.Point(38, 38);
+            this.btnExecuteRead.Name = "btnExecuteRead";
+            this.btnExecuteRead.Size = new System.Drawing.Size(17, 17);
+            this.btnExecuteRead.TabIndex = 21;
+            this.btnExecuteRead.UseVisualStyleBackColor = true;
+            this.btnExecuteRead.Click += new System.EventHandler(this.btnExecuteRead_Click);
+            // 
+            // btnViewTable
+            // 
+            this.btnViewTable.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.Table;
+            this.btnViewTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnViewTable.FlatAppearance.BorderSize = 0;
+            this.btnViewTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewTable.Location = new System.Drawing.Point(339, 45);
+            this.btnViewTable.Name = "btnViewTable";
+            this.btnViewTable.Size = new System.Drawing.Size(29, 30);
+            this.btnViewTable.TabIndex = 20;
+            this.btnViewTable.UseVisualStyleBackColor = true;
+            this.btnViewTable.Click += new System.EventHandler(this.btnViewTable_Click);
+            // 
+            // picError
+            // 
+            this.picError.Image = global::BV_Modbus_Client.Properties.Resources.ErrorTriangle;
+            this.picError.Location = new System.Drawing.Point(272, 22);
+            this.picError.Name = "picError";
+            this.picError.Size = new System.Drawing.Size(22, 20);
+            this.picError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picError.TabIndex = 22;
+            this.picError.TabStop = false;
+            // 
+            // lblAddress
+            // 
+            this.lblAddress.AutoSize = true;
+            this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(103)))), ((int)(((byte)(103)))), ((int)(((byte)(103)))));
+            this.lblAddress.Location = new System.Drawing.Point(35, 5);
+            this.lblAddress.MinimumSize = new System.Drawing.Size(100, 0);
+            this.lblAddress.Name = "lblAddress";
+            this.lblAddress.Size = new System.Drawing.Size(100, 12);
+            this.lblAddress.TabIndex = 23;
+            this.lblAddress.Text = "label1";
+            this.lblAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnContextMenu
+            // 
+            this.btnContextMenu.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.MenuIcon;
+            this.btnContextMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnContextMenu.FlatAppearance.BorderSize = 0;
+            this.btnContextMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContextMenu.Location = new System.Drawing.Point(244, 12);
+            this.btnContextMenu.Name = "btnContextMenu";
+            this.btnContextMenu.Size = new System.Drawing.Size(20, 20);
+            this.btnContextMenu.TabIndex = 19;
+            this.btnContextMenu.UseVisualStyleBackColor = true;
+            // 
+            // btnRunFc2
+            // 
+            this.btnRunFc2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.SendData;
+            this.btnRunFc2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRunFc2.FlatAppearance.BorderSize = 0;
+            this.btnRunFc2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRunFc2.Location = new System.Drawing.Point(248, 38);
+            this.btnRunFc2.Name = "btnRunFc2";
+            this.btnRunFc2.Size = new System.Drawing.Size(17, 17);
+            this.btnRunFc2.TabIndex = 18;
+            this.btnRunFc2.UseVisualStyleBackColor = true;
+            this.btnRunFc2.Click += new System.EventHandler(this.btnExecute_Click);
+            // 
+            // lblHeader
+            // 
+            this.lblHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(103)))), ((int)(((byte)(103)))), ((int)(((byte)(103)))));
+            this.lblHeader.Location = new System.Drawing.Point(34, 11);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(238, 20);
+            this.lblHeader.TabIndex = 16;
+            this.lblHeader.Text = "My FC label - writing multiple registers";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Gray;
+            this.panel2.Location = new System.Drawing.Point(36, 31);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(230, 2);
+            this.panel2.TabIndex = 24;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToResizeColumns = false;
+            this.dataGridView2.AllowUserToResizeRows = false;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.ColumnHeadersVisible = false;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView2.EnableHeadersVisualStyles = false;
+            this.dataGridView2.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.dataGridView2.Location = new System.Drawing.Point(59, 36);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView2.RowTemplate.Height = 25;
+            this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridView2.Size = new System.Drawing.Size(186, 23);
+            this.dataGridView2.TabIndex = 25;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            // 
             // FcView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.lblAddress);
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btnExecuteRead);
+            this.Controls.Add(this.btnViewTable);
             this.Controls.Add(this.picError);
-            this.Controls.Add(this.panel2b);
+            this.Controls.Add(this.lblAddress);
+            this.Controls.Add(this.btnContextMenu);
+            this.Controls.Add(this.btnRunFc2);
+            this.Controls.Add(this.lblHeader);
+            this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "FcView";
-            this.Size = new System.Drawing.Size(314, 58);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel2b.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picError)).EndInit();
+            this.Size = new System.Drawing.Size(357, 67);
+            this.MouseEnter += new System.EventHandler(this.FcView_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.FcView_MouseLeave);
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private Label lblHeader;
-        private DataGridView dataGridView1;
-        private Button btnRunFc2;
         private Panel panel1;
-        private Panel panel2b;
-        private Button btnViewTable;
-        private Button btnExecuteRead;
         private ToolTip toolTip1;
-        private PictureBox picError;
-        private Button btnContextMenu;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem aToolStripMenuItem;
         private ToolStripMenuItem bToolStripMenuItem;
         private ToolStripMenuItem changeFCTypeToolStripMenuItem;
         private ToolStripMenuItem duplicateFCToolStripMenuItem;
+        private Button btnExecuteRead;
+        private Button btnViewTable;
+        private PictureBox picError;
         private Label lblAddress;
+        private Button btnContextMenu;
+        private Button btnRunFc2;
+        private Label lblHeader;
+        private Panel panel2;
+        private DataGridView dataGridView2;
     }
 }

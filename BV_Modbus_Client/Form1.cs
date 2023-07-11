@@ -347,5 +347,11 @@ namespace BV_Modbus_Client
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            MainForm form = new MainForm();
+            form.Show();
+        }
     }
 }

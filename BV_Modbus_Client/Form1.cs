@@ -138,8 +138,8 @@ namespace BV_Modbus_Client
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            NetworkStatusForm fom = new NetworkStatusForm(bll);
-            fom.ShowDialog();
+            //NetworkStatusForm fom = new NetworkStatusForm(bll);
+            //fom.ShowDialog();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -352,6 +352,12 @@ namespace BV_Modbus_Client
         {
             MainForm form = new MainForm();
             form.Show();
+        }
+
+        private void configureConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NetworkStatusForm fom = new NetworkStatusForm(bll);
+            fom.ShowDialog();
         }
     }
 }

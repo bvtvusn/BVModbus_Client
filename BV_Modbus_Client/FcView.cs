@@ -72,11 +72,13 @@ namespace BV_Modbus_Client
             FillPreviewTable();
             fcCommand.ForceDataRefresh(""); // Makes fake event to force update
 
+            DrawSelection(fcCommand.isSelected);
+
         }
 
         private async void FcCommand_FcActivatedEvent()
         {
-            await this.BlinkPanelAsync(panel1, ColorPalette.Action, TimeSpan.FromSeconds(0.15));
+            await this.BlinkPanelAsync(dataGridView2, ColorPalette.Action, TimeSpan.FromSeconds(0.15));
         }
 
         #region Events
@@ -205,11 +207,7 @@ namespace BV_Modbus_Client
 
         private void btnSettings2_Click(object sender, EventArgs e)
         {
-            using (Form frm = new PropertiesWindow(fcCommand))
-            {
-                frm.ShowDialog();
-            }
-            fcCommand.ForceDataRefresh(""); // Generating fake respopnse recevide event to forace an update.
+
         }
         private void btnRemoveFc_Click(object sender, EventArgs e)
         {
@@ -230,13 +228,15 @@ namespace BV_Modbus_Client
             if (isSelected)
             {
                 //this.BackColor = Color.FromArgb(27, 188, 155);
-                panel1.BackColor = ColorPalette.Detail; // Color.FromArgb(27, 188, 155);
+                //panel1.BackColor = ColorPalette.Detail; // Color.FromArgb(27, 188, 155);
                 //this.BackColor = Color.FromArgb(35, 172, 227);
+                SelectedIndicatorPanel.BackColor = ColorPalette.Detail;
             }
             else
             {
+                SelectedIndicatorPanel.BackColor = ColorPalette.Control;
                 //this.BackColor = Color.FromArgb(240, 240, 240);
-                panel1.BackColor = ColorPalette.Header;
+                //panel1.BackColor = ColorPalette.Header;
             }
         }
         private void UpdateFcInfo()
@@ -319,7 +319,7 @@ namespace BV_Modbus_Client
         {
             bll.RemoveFC(fcCommand);
         }
-        public async Task BlinkPanelAsync(Panel panel, Color color, TimeSpan duration)
+        public async Task BlinkPanelAsync(DataGridView panel, Color color, TimeSpan duration)
         {
             UpdateIndicatorStripColor(true);
             // Wait for the specified duration
@@ -330,18 +330,21 @@ namespace BV_Modbus_Client
         {
             if (blinkOn)
             {
-                panel1.BackColor = ColorPalette.Action;
+                //panel1.BackColor = ColorPalette.Action;
+                dataGridView2.GridColor = ColorPalette.Action;
             }
             else
             {
-                if (fcCommand.isSelected)
-                {
-                    panel1.BackColor = ColorPalette.Detail;
-                }
-                else
-                {
-                    panel1.BackColor= ColorPalette.Header;
-                }
+                //if (fcCommand.isSelected)
+                //{
+                //    panel1.BackColor = ColorPalette.Detail;
+                //}
+                //else
+                //{
+                //    panel1.BackColor= ColorPalette.Header;
+                //}
+                //panel1.BackColor = this.BackColor;
+                dataGridView2.GridColor = ColorPalette.Text;
             }
         }
         private void bToolStripMenuItem_CheckedChanged(object sender, EventArgs e)

@@ -35,6 +35,7 @@
             this.loadConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configureConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPaste = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TopContainer = new System.Windows.Forms.Panel();
@@ -44,18 +45,18 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnTestPoll = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.MainTopPanel = new System.Windows.Forms.Panel();
             this.StatisticsPanel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.propGridFc = new System.Windows.Forms.PropertyGrid();
             this.mainHeader = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnViewTable = new System.Windows.Forms.Button();
-            this.addFcButton2 = new BV_Modbus_Client.AddFcButton();
             this.addFcButton1 = new BV_Modbus_Client.AddFcButton();
             this.leftPanel = new System.Windows.Forms.Panel();
+            this.scrollPanel = new System.Windows.Forms.Panel();
             this.FCHeader = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.leftHeader = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -69,18 +70,19 @@
             this.StatisticsPanel.SuspendLayout();
             this.SettingsPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
+            this.scrollPanel.SuspendLayout();
             this.FCHeader.SuspendLayout();
             this.leftHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 113);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(378, 372);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(340, 610);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
             // menuStrip1
@@ -94,7 +96,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(378, 32);
+            this.menuStrip1.Size = new System.Drawing.Size(357, 32);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -104,7 +106,8 @@
             this.saveConfigToolStripMenuItem,
             this.loadConfigToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.saveConfigAsToolStripMenuItem});
+            this.saveConfigAsToolStripMenuItem,
+            this.configureConnectionToolStripMenuItem});
             this.fileToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 28);
@@ -113,30 +116,37 @@
             // saveConfigToolStripMenuItem
             // 
             this.saveConfigToolStripMenuItem.Name = "saveConfigToolStripMenuItem";
-            this.saveConfigToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.saveConfigToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.saveConfigToolStripMenuItem.Text = "Save Config As";
             this.saveConfigToolStripMenuItem.Click += new System.EventHandler(this.saveConfigToolStripMenuItem_Click);
             // 
             // loadConfigToolStripMenuItem
             // 
             this.loadConfigToolStripMenuItem.Name = "loadConfigToolStripMenuItem";
-            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.loadConfigToolStripMenuItem.Text = "Load Config";
             this.loadConfigToolStripMenuItem.Click += new System.EventHandler(this.loadConfigToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // saveConfigAsToolStripMenuItem
             // 
             this.saveConfigAsToolStripMenuItem.Name = "saveConfigAsToolStripMenuItem";
-            this.saveConfigAsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.saveConfigAsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.saveConfigAsToolStripMenuItem.Text = "Save Config";
             this.saveConfigAsToolStripMenuItem.Click += new System.EventHandler(this.saveConfigAsToolStripMenuItem_Click);
+            // 
+            // configureConnectionToolStripMenuItem
+            // 
+            this.configureConnectionToolStripMenuItem.Name = "configureConnectionToolStripMenuItem";
+            this.configureConnectionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.configureConnectionToolStripMenuItem.Text = "Configure Connection";
+            this.configureConnectionToolStripMenuItem.Click += new System.EventHandler(this.configureConnectionToolStripMenuItem_Click);
             // 
             // btnPaste
             // 
@@ -167,7 +177,7 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView1.Size = new System.Drawing.Size(636, 90);
+            this.dataGridView1.Size = new System.Drawing.Size(657, 161);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
@@ -179,9 +189,9 @@
             this.TopContainer.Controls.Add(this.MainTopPanel);
             this.TopContainer.Controls.Add(this.mainHeader);
             this.TopContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TopContainer.Location = new System.Drawing.Point(378, 0);
+            this.TopContainer.Location = new System.Drawing.Point(357, 0);
             this.TopContainer.Name = "TopContainer";
-            this.TopContainer.Size = new System.Drawing.Size(704, 485);
+            this.TopContainer.Size = new System.Drawing.Size(725, 556);
             this.TopContainer.TabIndex = 12;
             // 
             // mainBottomPanel
@@ -192,7 +202,7 @@
             this.mainBottomPanel.Location = new System.Drawing.Point(0, 297);
             this.mainBottomPanel.Name = "mainBottomPanel";
             this.mainBottomPanel.Padding = new System.Windows.Forms.Padding(30, 0, 30, 30);
-            this.mainBottomPanel.Size = new System.Drawing.Size(704, 188);
+            this.mainBottomPanel.Size = new System.Drawing.Size(725, 259);
             this.mainBottomPanel.TabIndex = 19;
             // 
             // tabControl1
@@ -204,7 +214,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(644, 158);
+            this.tabControl1.Size = new System.Drawing.Size(665, 229);
             this.tabControl1.TabIndex = 17;
             // 
             // tabPage1
@@ -216,7 +226,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(636, 130);
+            this.tabPage1.Size = new System.Drawing.Size(657, 201);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Selected request";
             // 
@@ -226,18 +236,19 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(636, 40);
+            this.panel1.Size = new System.Drawing.Size(657, 40);
             this.panel1.TabIndex = 16;
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
             this.tabPage2.Controls.Add(this.btnTestPoll);
+            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(636, 103);
+            this.tabPage2.Size = new System.Drawing.Size(657, 201);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Polling settings";
             // 
@@ -251,6 +262,16 @@
             this.btnTestPoll.UseVisualStyleBackColor = true;
             this.btnTestPoll.Click += new System.EventHandler(this.btnTestPoll_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(148, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // MainTopPanel
             // 
             this.MainTopPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
@@ -260,33 +281,33 @@
             this.MainTopPanel.Location = new System.Drawing.Point(0, 30);
             this.MainTopPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MainTopPanel.Name = "MainTopPanel";
-            this.MainTopPanel.Size = new System.Drawing.Size(704, 267);
+            this.MainTopPanel.Size = new System.Drawing.Size(725, 267);
             this.MainTopPanel.TabIndex = 10;
             // 
             // StatisticsPanel
             // 
-            this.StatisticsPanel.Controls.Add(this.textBox1);
+            this.StatisticsPanel.Controls.Add(this.panel2);
             this.StatisticsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StatisticsPanel.Location = new System.Drawing.Point(0, 0);
             this.StatisticsPanel.Name = "StatisticsPanel";
             this.StatisticsPanel.Padding = new System.Windows.Forms.Padding(30, 30, 0, 30);
-            this.StatisticsPanel.Size = new System.Drawing.Size(358, 267);
+            this.StatisticsPanel.Size = new System.Drawing.Size(379, 267);
             this.StatisticsPanel.TabIndex = 3;
             // 
-            // textBox1
+            // panel2
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(30, 30);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(328, 207);
-            this.textBox1.TabIndex = 0;
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(30, 30);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(349, 207);
+            this.panel2.TabIndex = 0;
             // 
             // SettingsPanel
             // 
             this.SettingsPanel.Controls.Add(this.propGridFc);
             this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.SettingsPanel.Location = new System.Drawing.Point(358, 0);
+            this.SettingsPanel.Location = new System.Drawing.Point(379, 0);
             this.SettingsPanel.Name = "SettingsPanel";
             this.SettingsPanel.Padding = new System.Windows.Forms.Padding(30);
             this.SettingsPanel.Size = new System.Drawing.Size(346, 267);
@@ -308,50 +329,15 @@
             this.mainHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainHeader.Location = new System.Drawing.Point(0, 0);
             this.mainHeader.Name = "mainHeader";
-            this.mainHeader.Size = new System.Drawing.Size(704, 30);
+            this.mainHeader.Size = new System.Drawing.Size(725, 30);
             this.mainHeader.TabIndex = 18;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(285, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // btnViewTable
-            // 
-            this.btnViewTable.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.ConnectGreen;
-            this.btnViewTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnViewTable.FlatAppearance.BorderSize = 0;
-            this.btnViewTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewTable.Location = new System.Drawing.Point(12, 17);
-            this.btnViewTable.Name = "btnViewTable";
-            this.btnViewTable.Size = new System.Drawing.Size(50, 50);
-            this.btnViewTable.TabIndex = 18;
-            this.btnViewTable.UseVisualStyleBackColor = true;
-            this.btnViewTable.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // addFcButton2
-            // 
-            this.addFcButton2.BackColor = System.Drawing.Color.Transparent;
-            this.addFcButton2.FcDescription = "Write Holding Registers";
-            this.addFcButton2.FcName = "FC15";
-            this.addFcButton2.Location = new System.Drawing.Point(119, 47);
-            this.addFcButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.addFcButton2.Name = "addFcButton2";
-            this.addFcButton2.Size = new System.Drawing.Size(60, 20);
-            this.addFcButton2.TabIndex = 15;
-            this.addFcButton2.ButtonClicked += new System.EventHandler(this.addFcButton2_ButtonClicked);
             // 
             // addFcButton1
             // 
             this.addFcButton1.BackColor = System.Drawing.Color.Transparent;
             this.addFcButton1.FcDescription = "Multiple Holding Registers";
             this.addFcButton1.FcName = "HR[]";
-            this.addFcButton1.Location = new System.Drawing.Point(119, 17);
+            this.addFcButton1.Location = new System.Drawing.Point(294, 3);
             this.addFcButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addFcButton1.Name = "addFcButton1";
             this.addFcButton1.Size = new System.Drawing.Size(60, 20);
@@ -361,26 +347,45 @@
             // leftPanel
             // 
             this.leftPanel.BackColor = System.Drawing.Color.White;
-            this.leftPanel.Controls.Add(this.flowLayoutPanel1);
+            this.leftPanel.Controls.Add(this.scrollPanel);
             this.leftPanel.Controls.Add(this.FCHeader);
             this.leftPanel.Controls.Add(this.leftHeader);
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 0);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(378, 485);
+            this.leftPanel.Size = new System.Drawing.Size(357, 556);
             this.leftPanel.TabIndex = 13;
+            // 
+            // scrollPanel
+            // 
+            this.scrollPanel.AutoScroll = true;
+            this.scrollPanel.BackColor = System.Drawing.Color.White;
+            this.scrollPanel.Controls.Add(this.flowLayoutPanel1);
+            this.scrollPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scrollPanel.Location = new System.Drawing.Point(0, 59);
+            this.scrollPanel.Name = "scrollPanel";
+            this.scrollPanel.Size = new System.Drawing.Size(357, 497);
+            this.scrollPanel.TabIndex = 10;
             // 
             // FCHeader
             // 
-            this.FCHeader.Controls.Add(this.addFcButton2);
-            this.FCHeader.Controls.Add(this.button1);
-            this.FCHeader.Controls.Add(this.btnViewTable);
+            this.FCHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
+            this.FCHeader.Controls.Add(this.label1);
             this.FCHeader.Controls.Add(this.addFcButton1);
             this.FCHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.FCHeader.Location = new System.Drawing.Point(0, 32);
             this.FCHeader.Name = "FCHeader";
-            this.FCHeader.Size = new System.Drawing.Size(378, 81);
+            this.FCHeader.Size = new System.Drawing.Size(357, 27);
             this.FCHeader.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(107, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(140, 15);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Modbus Function Codes:";
             // 
             // leftHeader
             // 
@@ -389,7 +394,7 @@
             this.leftHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.leftHeader.Location = new System.Drawing.Point(0, 0);
             this.leftHeader.Name = "leftHeader";
-            this.leftHeader.Size = new System.Drawing.Size(378, 32);
+            this.leftHeader.Size = new System.Drawing.Size(357, 32);
             this.leftHeader.TabIndex = 0;
             // 
             // Form1
@@ -397,7 +402,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(148)))), ((int)(((byte)(153)))));
-            this.ClientSize = new System.Drawing.Size(1082, 485);
+            this.ClientSize = new System.Drawing.Size(1082, 556);
             this.Controls.Add(this.TopContainer);
             this.Controls.Add(this.leftPanel);
             this.MainMenuStrip = this.menuStrip1;
@@ -414,10 +419,12 @@
             this.tabPage2.ResumeLayout(false);
             this.MainTopPanel.ResumeLayout(false);
             this.StatisticsPanel.ResumeLayout(false);
-            this.StatisticsPanel.PerformLayout();
             this.SettingsPanel.ResumeLayout(false);
             this.leftPanel.ResumeLayout(false);
+            this.scrollPanel.ResumeLayout(false);
+            this.scrollPanel.PerformLayout();
             this.FCHeader.ResumeLayout(false);
+            this.FCHeader.PerformLayout();
             this.leftHeader.ResumeLayout(false);
             this.leftHeader.PerformLayout();
             this.ResumeLayout(false);
@@ -433,8 +440,6 @@
         private ToolStripMenuItem loadConfigToolStripMenuItem;
         private Panel TopContainer;
         private AddFcButton addFcButton1;
-        private AddFcButton addFcButton2;
-        private Button btnViewTable;
         private DataGridView dataGridView1;
         private Button btnPaste;
         private ToolStripMenuItem settingsToolStripMenuItem;
@@ -453,7 +458,10 @@
         private Panel leftHeader;
         private Panel mainBottomPanel;
         private Panel StatisticsPanel;
-        private TextBox textBox1;
         private Panel SettingsPanel;
+        private ToolStripMenuItem configureConnectionToolStripMenuItem;
+        private Panel scrollPanel;
+        private Label label1;
+        private Panel panel2;
     }
 }

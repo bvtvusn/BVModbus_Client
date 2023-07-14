@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,6 +94,7 @@
             // 
             // btnExecuteRead
             // 
+            this.btnExecuteRead.BackColor = System.Drawing.Color.Transparent;
             this.btnExecuteRead.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.receive_gray;
             this.btnExecuteRead.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExecuteRead.FlatAppearance.BorderSize = 0;
@@ -184,14 +185,14 @@
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.EnableHeadersVisualStyles = false;
             this.dataGridView2.GridColor = System.Drawing.Color.Gainsboro;
             this.dataGridView2.Location = new System.Drawing.Point(82, 45);
@@ -216,7 +217,7 @@
             // panelActionIndicator
             // 
             this.panelActionIndicator.BackColor = System.Drawing.Color.Gold;
-            this.panelActionIndicator.Location = new System.Drawing.Point(27, 34);
+            this.panelActionIndicator.Location = new System.Drawing.Point(43, 49);
             this.panelActionIndicator.Name = "panelActionIndicator";
             this.panelActionIndicator.Size = new System.Drawing.Size(15, 15);
             this.panelActionIndicator.TabIndex = 27;
@@ -227,7 +228,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.panelActionIndicator);
             this.Controls.Add(this.SelectedIndicatorPanel);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.panel2);
@@ -237,6 +237,7 @@
             this.Controls.Add(this.btnContextMenu);
             this.Controls.Add(this.btnRunFc2);
             this.Controls.Add(this.lblHeader);
+            this.Controls.Add(this.panelActionIndicator);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "FcView";
             this.Size = new System.Drawing.Size(340, 80);

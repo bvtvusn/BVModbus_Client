@@ -19,7 +19,7 @@ namespace BV_Modbus_Client.BusinessLayer
             //base.Parent = parent;
 
             base.mbCon = mbCon;
-            Description = "Multiple Holding RegistersCoils";
+            Description = "Multiple Holding Registers";
 
             //Testing
             //startAddress = 0;

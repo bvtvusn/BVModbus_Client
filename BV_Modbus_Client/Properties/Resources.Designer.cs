@@ -63,6 +63,16 @@ namespace BV_Modbus_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Add {
+            get {
+                object obj = ResourceManager.GetObject("Add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CloseX {
             get {
                 object obj = ResourceManager.GetObject("CloseX", resourceCulture);
@@ -153,6 +163,26 @@ namespace BV_Modbus_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap receive_gray {
+            get {
+                object obj = ResourceManager.GetObject("receive_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap send_gray {
+            get {
+                object obj = ResourceManager.GetObject("send_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SendData {
             get {
                 object obj = ResourceManager.GetObject("SendData", resourceCulture);
@@ -166,6 +196,16 @@ namespace BV_Modbus_Client.Properties {
         internal static System.Drawing.Bitmap Settings {
             get {
                 object obj = ResourceManager.GetObject("Settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Settings_gray {
+            get {
+                object obj = ResourceManager.GetObject("Settings_gray", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

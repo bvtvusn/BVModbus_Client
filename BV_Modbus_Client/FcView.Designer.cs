@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +45,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.SelectedIndicatorPanel = new System.Windows.Forms.Panel();
+            this.panelActionIndicator = new System.Windows.Forms.Panel();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -60,6 +61,7 @@
             this.duplicateFCToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(160, 92);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // aToolStripMenuItem
             // 
@@ -75,6 +77,7 @@
             this.bToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.bToolStripMenuItem.Text = "Polling";
             this.bToolStripMenuItem.CheckedChanged += new System.EventHandler(this.bToolStripMenuItem_CheckedChanged);
+            this.bToolStripMenuItem.Click += new System.EventHandler(this.bToolStripMenuItem_Click);
             // 
             // changeFCTypeToolStripMenuItem
             // 
@@ -91,7 +94,7 @@
             // 
             // btnExecuteRead
             // 
-            this.btnExecuteRead.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.ReadData;
+            this.btnExecuteRead.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.receive_gray;
             this.btnExecuteRead.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnExecuteRead.FlatAppearance.BorderSize = 0;
             this.btnExecuteRead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -116,7 +119,7 @@
             // 
             this.lblAddress.AutoSize = true;
             this.lblAddress.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(103)))), ((int)(((byte)(103)))), ((int)(((byte)(103)))));
+            this.lblAddress.ForeColor = System.Drawing.Color.DarkGray;
             this.lblAddress.Location = new System.Drawing.Point(60, 15);
             this.lblAddress.MinimumSize = new System.Drawing.Size(100, 0);
             this.lblAddress.Name = "lblAddress";
@@ -127,7 +130,7 @@
             // 
             // btnContextMenu
             // 
-            this.btnContextMenu.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.MenuIcon;
+            this.btnContextMenu.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.Settings_gray;
             this.btnContextMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnContextMenu.FlatAppearance.BorderSize = 0;
             this.btnContextMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -140,7 +143,7 @@
             // 
             // btnRunFc2
             // 
-            this.btnRunFc2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.SendData;
+            this.btnRunFc2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.send_gray;
             this.btnRunFc2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRunFc2.FlatAppearance.BorderSize = 0;
             this.btnRunFc2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -163,7 +166,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Gray;
+            this.panel2.BackColor = System.Drawing.Color.Silver;
             this.panel2.Location = new System.Drawing.Point(60, 41);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(230, 2);
@@ -181,14 +184,14 @@
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.ColumnHeadersVisible = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.EnableHeadersVisualStyles = false;
             this.dataGridView2.GridColor = System.Drawing.Color.Gainsboro;
             this.dataGridView2.Location = new System.Drawing.Point(82, 45);
@@ -210,11 +213,21 @@
             this.SelectedIndicatorPanel.TabIndex = 26;
             this.SelectedIndicatorPanel.Click += new System.EventHandler(this.btnViewTable_Click);
             // 
+            // panelActionIndicator
+            // 
+            this.panelActionIndicator.BackColor = System.Drawing.Color.Gold;
+            this.panelActionIndicator.Location = new System.Drawing.Point(27, 34);
+            this.panelActionIndicator.Name = "panelActionIndicator";
+            this.panelActionIndicator.Size = new System.Drawing.Size(15, 15);
+            this.panelActionIndicator.TabIndex = 27;
+            this.panelActionIndicator.Visible = false;
+            // 
             // FcView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.panelActionIndicator);
             this.Controls.Add(this.SelectedIndicatorPanel);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.panel2);
@@ -254,5 +267,6 @@
         private Panel panel2;
         private DataGridView dataGridView2;
         private Panel SelectedIndicatorPanel;
+        private Panel panelActionIndicator;
     }
 }

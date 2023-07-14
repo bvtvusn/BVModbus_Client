@@ -41,7 +41,10 @@ namespace BV_Modbus_Client.BusinessLayer
                 FcPollOrder.RemoveAll(s => Object.ReferenceEquals(s,fc));
             }
         }
-
+        public bool CheckPollingEnabled(FcWrapperBase obj)
+        {
+            return FcPollOrder.Contains(obj);
+        }
         internal async void PollAll()
         {
             await Task.WhenAll(FcPollOrder.Select(x => x.ExecuteReadAsync()));

@@ -74,8 +74,35 @@ namespace BV_Modbus_Client
 
             DrawSelection(fcCommand.isSelected);
 
-        }
+            WireMouseEvents(this);
 
+        }
+        void WireMouseEvents(Control container) // Attaches events to all children of the main control.
+        {
+            foreach (Control c in container.Controls)
+            {
+                c.Click += (s, e) => OnClick(e);
+                c.DoubleClick += (s, e) => OnDoubleClick(e);
+                c.MouseHover += (s, e) => OnMouseHover(e);
+                c.MouseEnter += (s,e)=> OnMouseEnter(e);
+                c.MouseLeave += (s, e) => OnMouseLeave(e);
+
+                c.MouseClick += (s, e) => {
+                    var p = PointToThis((Control)s, e.Location);
+                    OnMouseClick(new MouseEventArgs(e.Button, e.Clicks, p.X, p.Y, e.Delta));
+                };
+                c.MouseDoubleClick += (s, e) => {
+                    var p = PointToThis((Control)s, e.Location);
+                    OnMouseDoubleClick(new MouseEventArgs(e.Button, e.Clicks, p.X, p.Y, e.Delta));
+                };
+
+                WireMouseEvents(c);
+            };
+        }
+        Point PointToThis(Control c, Point p)
+        {
+            return PointToClient(c.PointToScreen(p));
+        }
         private async void FcCommand_FcActivatedEvent()
         {
             await this.BlinkPanelAsync(dataGridView2, ColorPalette.Action, TimeSpan.FromSeconds(0.15));
@@ -231,16 +258,20 @@ namespace BV_Modbus_Client
                 //panel1.BackColor = ColorPalette.Detail; // Color.FromArgb(27, 188, 155);
                 //this.BackColor = Color.FromArgb(35, 172, 227);
                 SelectedIndicatorPanel.BackColor = ColorPalette.Detail;
+                this.BackColor = HighlightedBackcolor;
             }
             else
             {
                 SelectedIndicatorPanel.BackColor = ColorPalette.Control;
                 //this.BackColor = Color.FromArgb(240, 240, 240);
                 //panel1.BackColor = ColorPalette.Header;
+                this.BackColor = DefaultBackcolor;
             }
         }
         private void UpdateFcInfo()
         {
+            bool onPoll = bll.UserConfig.pollTimer.CheckPollingEnabled(fcCommand);
+            this.bToolStripMenuItem.Checked = onPoll; // Update the visible polling status in the menu
             lblHeader.Text = fcCommand.Description;
             if (fcCommand.NumberOfRegisters > 1)
             {
@@ -331,7 +362,11 @@ namespace BV_Modbus_Client
             if (blinkOn)
             {
                 //panel1.BackColor = ColorPalette.Action;
+
                 dataGridView2.GridColor = ColorPalette.Action;
+                ControlExtensions.UIThreadInvoke(this, delegate {
+                panelActionIndicator.Visible = true;
+                });
             }
             else
             {
@@ -344,6 +379,11 @@ namespace BV_Modbus_Client
                 //    panel1.BackColor= ColorPalette.Header;
                 //}
                 //panel1.BackColor = this.BackColor;
+                    //picError.Visible = false;
+
+                ControlExtensions.UIThreadInvoke(this, delegate {
+                    panelActionIndicator.Visible = false;
+                });
                 dataGridView2.GridColor = ColorPalette.Text;
             }
         }
@@ -364,10 +404,28 @@ namespace BV_Modbus_Client
 
         private void FcView_MouseLeave(object sender, EventArgs e)
         {
+            if (fcCommand.isSelected)
+            {
+                this.BackColor = HighlightedBackcolor;
+            }
+            else
+            {
             this.BackColor = DefaultBackcolor;
+
+            }
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void bToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

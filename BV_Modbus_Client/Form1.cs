@@ -128,7 +128,13 @@ namespace BV_Modbus_Client
 
         private void addFcButton1_ButtonClicked(object sender, EventArgs e)
         {
-            bll.AddMultiHR_FC();
+            Button btnSender = (Button)sender;
+            Point ptLowerLeft = new Point(0, btnSender.Height);
+            ptLowerLeft = btnSender.PointToScreen(ptLowerLeft);
+            contextMenuAddFC.Show(ptLowerLeft);
+
+
+            //bll.AddMultiHR_FC();
         }
 
         private void addFcButton2_ButtonClicked(object sender, EventArgs e)
@@ -358,6 +364,11 @@ namespace BV_Modbus_Client
         {
             NetworkStatusForm fom = new NetworkStatusForm(bll);
             fom.ShowDialog();
+        }
+
+        private void multipleHoldingRegistersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bll.AddMultiHR_FC();
         }
     }
 }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,12 +54,15 @@
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.propGridFc = new System.Windows.Forms.PropertyGrid();
             this.mainHeader = new System.Windows.Forms.Panel();
-            this.addFcButton1 = new BV_Modbus_Client.AddFcButton();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.scrollPanel = new System.Windows.Forms.Panel();
             this.FCHeader = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.leftHeader = new System.Windows.Forms.Panel();
+            this.contextMenuAddFC = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.multipleHoldingRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.singleHoldingRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.TopContainer.SuspendLayout();
@@ -73,6 +78,7 @@
             this.scrollPanel.SuspendLayout();
             this.FCHeader.SuspendLayout();
             this.leftHeader.SuspendLayout();
+            this.contextMenuAddFC.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -169,6 +175,14 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(0, 40);
@@ -228,7 +242,7 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(657, 201);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Selected request";
+            this.tabPage1.Text = "View Request Data";
             // 
             // panel1
             // 
@@ -290,7 +304,7 @@
             this.StatisticsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StatisticsPanel.Location = new System.Drawing.Point(0, 0);
             this.StatisticsPanel.Name = "StatisticsPanel";
-            this.StatisticsPanel.Padding = new System.Windows.Forms.Padding(30, 30, 0, 30);
+            this.StatisticsPanel.Padding = new System.Windows.Forms.Padding(30, 30, 0, 15);
             this.StatisticsPanel.Size = new System.Drawing.Size(379, 267);
             this.StatisticsPanel.TabIndex = 3;
             // 
@@ -300,7 +314,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(30, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(349, 207);
+            this.panel2.Size = new System.Drawing.Size(349, 222);
             this.panel2.TabIndex = 0;
             // 
             // SettingsPanel
@@ -309,19 +323,21 @@
             this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.SettingsPanel.Location = new System.Drawing.Point(379, 0);
             this.SettingsPanel.Name = "SettingsPanel";
-            this.SettingsPanel.Padding = new System.Windows.Forms.Padding(30);
+            this.SettingsPanel.Padding = new System.Windows.Forms.Padding(30, 30, 30, 15);
             this.SettingsPanel.Size = new System.Drawing.Size(346, 267);
             this.SettingsPanel.TabIndex = 2;
             // 
             // propGridFc
             // 
+            this.propGridFc.AccessibleDescription = "Settings on request";
             this.propGridFc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propGridFc.HelpVisible = false;
             this.propGridFc.Location = new System.Drawing.Point(30, 30);
             this.propGridFc.Margin = new System.Windows.Forms.Padding(20);
             this.propGridFc.Name = "propGridFc";
-            this.propGridFc.Size = new System.Drawing.Size(286, 207);
+            this.propGridFc.Size = new System.Drawing.Size(286, 222);
             this.propGridFc.TabIndex = 0;
+            this.propGridFc.Tag = "s";
             // 
             // mainHeader
             // 
@@ -331,18 +347,6 @@
             this.mainHeader.Name = "mainHeader";
             this.mainHeader.Size = new System.Drawing.Size(725, 30);
             this.mainHeader.TabIndex = 18;
-            // 
-            // addFcButton1
-            // 
-            this.addFcButton1.BackColor = System.Drawing.Color.Transparent;
-            this.addFcButton1.FcDescription = "Multiple Holding Registers";
-            this.addFcButton1.FcName = "HR[]";
-            this.addFcButton1.Location = new System.Drawing.Point(294, 3);
-            this.addFcButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.addFcButton1.Name = "addFcButton1";
-            this.addFcButton1.Size = new System.Drawing.Size(60, 20);
-            this.addFcButton1.TabIndex = 15;
-            this.addFcButton1.ButtonClicked += new System.EventHandler(this.addFcButton1_ButtonClicked);
             // 
             // leftPanel
             // 
@@ -370,13 +374,26 @@
             // FCHeader
             // 
             this.FCHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
+            this.FCHeader.Controls.Add(this.button2);
             this.FCHeader.Controls.Add(this.label1);
-            this.FCHeader.Controls.Add(this.addFcButton1);
             this.FCHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.FCHeader.Location = new System.Drawing.Point(0, 32);
             this.FCHeader.Name = "FCHeader";
             this.FCHeader.Size = new System.Drawing.Size(357, 27);
             this.FCHeader.TabIndex = 1;
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.Add;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(312, -1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(28, 28);
+            this.button2.TabIndex = 1;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.addFcButton1_ButtonClicked);
             // 
             // label1
             // 
@@ -396,6 +413,27 @@
             this.leftHeader.Name = "leftHeader";
             this.leftHeader.Size = new System.Drawing.Size(357, 32);
             this.leftHeader.TabIndex = 0;
+            // 
+            // contextMenuAddFC
+            // 
+            this.contextMenuAddFC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.multipleHoldingRegistersToolStripMenuItem,
+            this.singleHoldingRegisterToolStripMenuItem});
+            this.contextMenuAddFC.Name = "contextMenuStrip1";
+            this.contextMenuAddFC.Size = new System.Drawing.Size(215, 48);
+            // 
+            // multipleHoldingRegistersToolStripMenuItem
+            // 
+            this.multipleHoldingRegistersToolStripMenuItem.Name = "multipleHoldingRegistersToolStripMenuItem";
+            this.multipleHoldingRegistersToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.multipleHoldingRegistersToolStripMenuItem.Text = "Multiple Holding Registers";
+            this.multipleHoldingRegistersToolStripMenuItem.Click += new System.EventHandler(this.multipleHoldingRegistersToolStripMenuItem_Click);
+            // 
+            // singleHoldingRegisterToolStripMenuItem
+            // 
+            this.singleHoldingRegisterToolStripMenuItem.Name = "singleHoldingRegisterToolStripMenuItem";
+            this.singleHoldingRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.singleHoldingRegisterToolStripMenuItem.Text = "Single Holding Register";
             // 
             // Form1
             // 
@@ -427,6 +465,7 @@
             this.FCHeader.PerformLayout();
             this.leftHeader.ResumeLayout(false);
             this.leftHeader.PerformLayout();
+            this.contextMenuAddFC.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -439,7 +478,6 @@
         private ToolStripMenuItem saveConfigToolStripMenuItem;
         private ToolStripMenuItem loadConfigToolStripMenuItem;
         private Panel TopContainer;
-        private AddFcButton addFcButton1;
         private DataGridView dataGridView1;
         private Button btnPaste;
         private ToolStripMenuItem settingsToolStripMenuItem;
@@ -463,5 +501,9 @@
         private Panel scrollPanel;
         private Label label1;
         private Panel panel2;
+        private ContextMenuStrip contextMenuAddFC;
+        private ToolStripMenuItem multipleHoldingRegistersToolStripMenuItem;
+        private ToolStripMenuItem singleHoldingRegisterToolStripMenuItem;
+        private Button button2;
     }
 }

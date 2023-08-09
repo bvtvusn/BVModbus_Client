@@ -21,6 +21,7 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         [DataMember]
         public List<FcWrapperBase> FcWrappers { get; set; }
+        
         public PollTimer pollTimer;
 
         [DataMember]

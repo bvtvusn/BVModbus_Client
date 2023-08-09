@@ -37,6 +37,7 @@ namespace BV_Modbus_Client.BusinessLayer
         #region SelectedFc
         public event Action<string> SelectedDataRecevivedEvent;
         public event Action<string[]> SelectedFormatValidStateEvent;
+        public event Action SelectedFcSettingsChangedEvent;
         private FcWrapperBase selectedFcRequest;
         private void SelectedFcRequest_ResponseReceived(string errorMsg)
         {
@@ -45,6 +46,10 @@ namespace BV_Modbus_Client.BusinessLayer
         private void SelectedFcRequest_FormatValidStateEvent(string[] errors)
         {
             SelectedFormatValidStateEvent?.Invoke(errors);
+        }
+        private void SelectedFcRequest_FcSettingsChangedEvent()
+        {
+            SelectedFcSettingsChangedEvent?.Invoke();
         }
         internal void SetSelectedCard(FcWrapperBase fcCommand)
         {
@@ -67,12 +72,14 @@ namespace BV_Modbus_Client.BusinessLayer
                 {
                     selectedFcRequest.RefreshDataEvent -= SelectedFcRequest_ResponseReceived;
                     selectedFcRequest.FormatValidStateEvent -= SelectedFcRequest_FormatValidStateEvent;
+                    selectedFcRequest.FcSettingsChangedEvent -= SelectedFcRequest_FcSettingsChangedEvent;
                 }
                 selectedFcRequest = value;
                 if (selectedFcRequest != null)
                 {
                     selectedFcRequest.RefreshDataEvent += SelectedFcRequest_ResponseReceived;
                     selectedFcRequest.FormatValidStateEvent += SelectedFcRequest_FormatValidStateEvent;
+                    selectedFcRequest.FcSettingsChangedEvent += SelectedFcRequest_FcSettingsChangedEvent;
 
                     SelectedDataRecevivedEvent?.Invoke("");  //mAKING fAKE dete received event to opdate the new table.
                 }
@@ -151,6 +158,7 @@ namespace BV_Modbus_Client.BusinessLayer
         internal void LoadConfig()
         {
             UserConfig = dal.LoadFromFile();
+            UserConfig.pollTimer = new PollTimer();
             //foreach (FcWrapperBase item in UserConfig.FcWrappers)
             //{
             //    item.Format = this.formatConverter;

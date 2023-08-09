@@ -373,7 +373,7 @@
             // 
             // FCHeader
             // 
-            this.FCHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
+            this.FCHeader.BackColor = System.Drawing.Color.LightSkyBlue;
             this.FCHeader.Controls.Add(this.button2);
             this.FCHeader.Controls.Add(this.label1);
             this.FCHeader.Dock = System.Windows.Forms.DockStyle.Top;

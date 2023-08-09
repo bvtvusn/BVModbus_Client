@@ -45,12 +45,19 @@ namespace BV_Modbus_Client
             bll.FcListChangedEvent += Bll_FcListChangedEvent;
             bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
             bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
+            bll.SelectedFcSettingsChangedEvent += Bll_SelectedFcSettingsChangedEvent;
             bll.UserConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
             bll.FcSettingsChangedEvent += Bll_FcSettingsChangedEvent;
             
             //comboBox1.DataSource = System.Enum.GetValues(typeof(FormatName));
             RefreshGUI();
 
+        }
+
+        private void Bll_SelectedFcSettingsChangedEvent()
+        {
+            // Update the register tables after for example change of start address.
+            Bll_SelectedDataRecevivedEvent("");
         }
 
         private void Bll_FcSettingsChangedEvent()

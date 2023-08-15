@@ -18,7 +18,8 @@ namespace BV_Modbus_Client.BusinessLayer
             Binary,
             Uint32,
             Int32,
-            Double
+            Double,
+            Ascii
         }
         public bool ByteSwap { get; set; }
         public FormatName CurrentFormat { get; set; } = FormatName.Uint16;
@@ -28,7 +29,8 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 rawdata = rawdata.Zip(
                     rawdata.Skip(1), 
-                    (a, b) => new[] { b, a }).SelectMany(pair => pair).ToArray();
+                    (a, b) => new[] { b, a }).
+                    SelectMany(pair => pair).ToArray();
 
             }
             if (swapBytes)
@@ -110,6 +112,19 @@ namespace BV_Modbus_Client.BusinessLayer
                     }
                 }
                 return result;
+            }
+            else if (format == FormatName.Ascii)
+            {
+                byte[] bytesdd = rawdata.SelectMany(BitConverter.GetBytes).ToArray();
+                string data = System.Text.Encoding.ASCII.GetString(bytesdd);
+
+                string[] result = new string[rawdata.Length];
+                for (int i = 0; i < result.Length; i++)
+                {
+                    result[i] = data.Substring(i * 2, 2);
+                }
+                return result;
+                 //BitConverter.GetBytes(rawdata);
             }
             else
             {
@@ -209,11 +224,20 @@ namespace BV_Modbus_Client.BusinessLayer
                         }
                         else
                         {
-                            float fval = Convert.ToSingle(rawString[i-1]);
+                            float fval = Convert.ToSingle(rawString[i - 1]);
                             uint rawbits = BitConverter.SingleToUInt32Bits(fval);
                             ushort temp = (ushort)(rawbits & 0x0000FFFF);
                             result[i] = temp;
                         }
+                    }
+                    else if (format == FormatName.Ascii) 
+                    {
+                        //for (int i = 0; i < rawString.Length; i++)
+                        
+                            byte[] b = System.Text.Encoding.ASCII.GetBytes(rawString[i]);
+                            result[i] = (ushort)BitConverter.ToInt16(b, 0);
+                        
+                        //result[i] = ConvertFromBinaryString(rawString[i]);
                     }
                     else
                     {

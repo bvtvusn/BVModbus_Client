@@ -508,20 +508,27 @@ namespace BV_Modbus_Client.BusinessLayer
             return dt;
         }
 
-        public static DataTable ArrayToDatatableColumn((string,string)[] mydata)
+        public static DataTable ArrayToDatatableColumn((string,string)[] mydata, int maxrows = 10)
         {
-            int maxrows = 10;
+            //(string, string)[] empty = new (string, string)[emptyRows];
+            //(string, string)[] mydata = empty.Concat(CommentAndAddr).ToArray();
+            //int maxrows = 10;
             int nCols = ( (mydata.Length + maxrows - 1) / maxrows );
 
             DataTable dt = new DataTable();
             for (int i = 0; i < nCols; i++)
             {
-                dt.Columns.Add("Notes" + (i * maxrows));
+                //dt.Columns.Add("Notes" + (i * maxrows));
+                dt.Columns.Add();
                 dt.Columns.Add("" + (i * maxrows));
+
+                //dt.Columns[i*2]. = "Notes";
             }
+            
             for (int i = 0; i < maxrows; i++)
             {
                 DataRow dr = dt.NewRow();
+                
                 for (int j = 0; j < nCols; j++)
                 {
                     int index = j * maxrows + i;

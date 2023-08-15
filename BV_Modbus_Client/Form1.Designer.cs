@@ -191,7 +191,7 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView1.Size = new System.Drawing.Size(657, 161);
+            this.dataGridView1.Size = new System.Drawing.Size(657, 259);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
@@ -205,7 +205,7 @@
             this.TopContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TopContainer.Location = new System.Drawing.Point(357, 0);
             this.TopContainer.Name = "TopContainer";
-            this.TopContainer.Size = new System.Drawing.Size(725, 556);
+            this.TopContainer.Size = new System.Drawing.Size(725, 654);
             this.TopContainer.TabIndex = 12;
             // 
             // mainBottomPanel
@@ -216,7 +216,7 @@
             this.mainBottomPanel.Location = new System.Drawing.Point(0, 297);
             this.mainBottomPanel.Name = "mainBottomPanel";
             this.mainBottomPanel.Padding = new System.Windows.Forms.Padding(30, 0, 30, 30);
-            this.mainBottomPanel.Size = new System.Drawing.Size(725, 259);
+            this.mainBottomPanel.Size = new System.Drawing.Size(725, 357);
             this.mainBottomPanel.TabIndex = 19;
             // 
             // tabControl1
@@ -228,7 +228,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(665, 229);
+            this.tabControl1.Size = new System.Drawing.Size(665, 327);
             this.tabControl1.TabIndex = 17;
             // 
             // tabPage1
@@ -240,7 +240,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(657, 201);
+            this.tabPage1.Size = new System.Drawing.Size(657, 299);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "View Request Data";
             // 
@@ -357,7 +357,7 @@
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 0);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(357, 556);
+            this.leftPanel.Size = new System.Drawing.Size(357, 654);
             this.leftPanel.TabIndex = 13;
             // 
             // scrollPanel
@@ -368,7 +368,7 @@
             this.scrollPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scrollPanel.Location = new System.Drawing.Point(0, 59);
             this.scrollPanel.Name = "scrollPanel";
-            this.scrollPanel.Size = new System.Drawing.Size(357, 497);
+            this.scrollPanel.Size = new System.Drawing.Size(357, 595);
             this.scrollPanel.TabIndex = 10;
             // 
             // FCHeader
@@ -440,7 +440,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(148)))), ((int)(((byte)(153)))));
-            this.ClientSize = new System.Drawing.Size(1082, 556);
+            this.ClientSize = new System.Drawing.Size(1082, 654);
             this.Controls.Add(this.TopContainer);
             this.Controls.Add(this.leftPanel);
             this.MainMenuStrip = this.menuStrip1;

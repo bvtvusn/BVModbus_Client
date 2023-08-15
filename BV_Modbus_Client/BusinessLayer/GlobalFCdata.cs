@@ -18,6 +18,10 @@ namespace BV_Modbus_Client.BusinessLayer
         public event Action<FcWrapperBase, bool> ActivePollingChangedEvent;
         [DataMember]
         public bool ZeroBasedAdresses { get; set; } = true;
+        
+        [DataMember]
+        public int MaxTableRows { get; set; } = 10;
+
         //[DataMember]
         /*public Dictionary<ushort, string> AddressDescription { get; set; }*/ // Databuffer contains the address read, the value and a description.
 

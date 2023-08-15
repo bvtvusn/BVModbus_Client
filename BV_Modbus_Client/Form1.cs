@@ -83,10 +83,39 @@ namespace BV_Modbus_Client
             {
                 refreshActiveFlag = true;
 
-                (string, string)[] receiveddata = bll.SelectedFcRequest.GetDataAsString();
-                dataGridView1.DataSource = FormatConverter.ArrayToDatatableColumn(receiveddata);
+                    (string, string)[] receiveddata = bll.SelectedFcRequest.GetDataAsString();
+                    int maxtableRows = bll.UserConfig.GlobFcData.MaxTableRows;
 
-                refreshActiveFlag = false;
+                    int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
+                    int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
+
+
+
+                    (string, string)[] empty = new (string, string)[emptyStartRows];
+                    (string, string)[] dispdata = empty.Concat(receiveddata).ToArray();
+
+                    dataGridView1.DataSource = FormatConverter.ArrayToDatatableColumn(dispdata, maxtableRows);
+                    
+                    
+                    // Add numbers to each row:
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        dataGridView1.Rows[i].HeaderCell.Value = i.ToString();
+                    }
+
+                    // Change text on column headers
+                    for (int i = 0; i < dataGridView1.Columns.Count; i+=2)
+                    {
+                        dataGridView1.Columns[i].HeaderText = "Notes";
+                    }
+                    // Change text on column headers
+                    for (int i = 1; i < dataGridView1.Columns.Count; i += 2)
+                    {
+                        dataGridView1.Columns[i].HeaderText = (StartdisplayingRegister + maxtableRows * (i-1)/2).ToString();
+                    }
+
+
+                    refreshActiveFlag = false;
             }
             });
 
@@ -167,6 +196,14 @@ namespace BV_Modbus_Client
             if (refreshActiveFlag == false)
             {
                 string[] tableData = ReadValuesFromDGV(dataGridView1);
+
+                // Remove empty start rows:
+                //int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
+                //int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
+                //string[] trimmedData = new string[tableData.Length-emptyStartRows];
+                //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
+
+
                 bll.SelectedFcRequest.SetFcData(tableData);
 
                 string[] addressDescriptions = ReadDescriptionsFromDGV(dataGridView1);
@@ -197,14 +234,22 @@ namespace BV_Modbus_Client
 
         private string[] ReadValuesFromDGV(DataGridView dataGridView)
         {
+            // Remove empty start rows:
+            int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
+            int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
+            //string[] trimmedData = new string[tableData.Length-emptyStartRows];
+            //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
+
+
+
             string[] values = new string[bll.SelectedFcRequest.NumberOfRegisters];
             int nrows = dataGridView1.RowCount;
             int ncols = dataGridView1.ColumnCount / 2;
 
             for (int i = 0; i < bll.SelectedFcRequest.NumberOfRegisters; i++)
             {
-                int colindex = i / nrows;
-                int rowindex = i % nrows;
+                int colindex = (i+ emptyStartRows) / nrows;
+                int rowindex = (i + emptyStartRows) % nrows;
 
                 values[i] = dataGridView1.Rows[rowindex].Cells[1 + colindex * 2].Value.ToString();
             }

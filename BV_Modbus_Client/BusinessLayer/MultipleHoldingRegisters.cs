@@ -60,7 +60,7 @@ namespace BV_Modbus_Client.BusinessLayer
         internal override void ExecuteRead()
         {
             ushort[] rawData = base.mbCon.Master.ReadHoldingRegisters(base.SlaveAddress, startAddress, NumberOfRegisters);
-            
+            ReadCount++;
             DataBuffer.Clear();
             for (ushort i = 0; i < rawData.Length; i++)
             {
@@ -79,6 +79,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     throw new NullReferenceException("Not connected to server");
                 }
                 ushort[] rawData = await base.mbCon.Master.ReadHoldingRegistersAsync(base.SlaveAddress, startAddress, NumberOfRegisters);
+                ReadCount++;
                 DataBuffer.Clear();
                 for (ushort i = 0; i < rawData.Length; i++)
                 {
@@ -102,7 +103,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
                 ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
                 await base.mbCon.Master.WriteMultipleRegistersAsync(base.SlaveAddress, StartAddress, sendData);
-
+                WriteCount++;
                 base.ForceFcActivatedEvent();                
                 base.ForceDataRefresh("");
             }
@@ -116,6 +117,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
             base.mbCon.Master.WriteMultipleRegisters(base.SlaveAddress, StartAddress, sendData);
+            WriteCount++;
         }
 
 

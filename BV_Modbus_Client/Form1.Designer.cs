@@ -64,6 +64,10 @@
             this.contextMenuAddFC = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.multipleHoldingRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singleHoldingRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.TopContainer.SuspendLayout();
@@ -74,6 +78,7 @@
             this.tabPage2.SuspendLayout();
             this.MainTopPanel.SuspendLayout();
             this.StatisticsPanel.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SettingsPanel.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.scrollPanel.SuspendLayout();
@@ -312,6 +317,10 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.textBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(30, 30);
             this.panel2.Name = "panel2";
@@ -449,6 +458,40 @@
             this.singleHoldingRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.singleHoldingRegisterToolStripMenuItem.Text = "Single Holding Register";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(108, 6);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(95, 15);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Read operations:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(108, 35);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(100, 23);
+            this.textBox2.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 39);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 15);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Write operations:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -471,6 +514,8 @@
             this.tabPage2.ResumeLayout(false);
             this.MainTopPanel.ResumeLayout(false);
             this.StatisticsPanel.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
             this.leftPanel.ResumeLayout(false);
@@ -521,5 +566,9 @@
         private ToolStripMenuItem singleHoldingRegisterToolStripMenuItem;
         private Button button2;
         private Label label2;
+        private Label label4;
+        private Label label3;
+        private TextBox textBox2;
+        private TextBox textBox1;
     }
 }

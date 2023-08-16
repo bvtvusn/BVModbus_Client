@@ -83,6 +83,10 @@ namespace BV_Modbus_Client.BusinessLayer
         public virtual string OperationWriteDescription { get { return "Write"; } }
         [Browsable(false)]
         public GlobalFCdata GlobFcData { get; set; }
+        [Browsable(false)]
+        public int ReadCount { get; set; }
+        [Browsable(false)]
+        public int WriteCount { get; set; }
         //public string Type
         //{
         //    get { return this.GetType().Name; }

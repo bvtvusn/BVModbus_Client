@@ -52,6 +52,7 @@
             this.StatisticsPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.SettingsPanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.propGridFc = new System.Windows.Forms.PropertyGrid();
             this.mainHeader = new System.Windows.Forms.Panel();
             this.leftPanel = new System.Windows.Forms.Panel();
@@ -319,6 +320,7 @@
             // 
             // SettingsPanel
             // 
+            this.SettingsPanel.Controls.Add(this.label2);
             this.SettingsPanel.Controls.Add(this.propGridFc);
             this.SettingsPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.SettingsPanel.Location = new System.Drawing.Point(379, 0);
@@ -326,6 +328,16 @@
             this.SettingsPanel.Padding = new System.Windows.Forms.Padding(30, 30, 30, 15);
             this.SettingsPanel.Size = new System.Drawing.Size(346, 267);
             this.SettingsPanel.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Location = new System.Drawing.Point(114, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Request settings";
             // 
             // propGridFc
             // 
@@ -460,6 +472,7 @@
             this.MainTopPanel.ResumeLayout(false);
             this.StatisticsPanel.ResumeLayout(false);
             this.SettingsPanel.ResumeLayout(false);
+            this.SettingsPanel.PerformLayout();
             this.leftPanel.ResumeLayout(false);
             this.scrollPanel.ResumeLayout(false);
             this.scrollPanel.PerformLayout();
@@ -507,5 +520,6 @@
         private ToolStripMenuItem multipleHoldingRegistersToolStripMenuItem;
         private ToolStripMenuItem singleHoldingRegisterToolStripMenuItem;
         private Button button2;
+        private Label label2;
     }
 }

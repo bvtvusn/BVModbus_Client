@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -18,7 +19,7 @@ namespace BV_Modbus_Client.BusinessLayer
         private byte slaveaddress;
         //private List<FcWrapperBase> parent;
         [DataMember]
-        private ushort startAddress;
+        public ushort startAddress;
         private bool isSelected1;
         private FormatConverter.FormatName displayType;
         private string[] fcAddressDescription;
@@ -36,8 +37,11 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public string Description { get { return description; } set { description = value; FcSettingsChangedEvent?.Invoke(); } }
         [DataMember]
+        //[Display(Order = 1)]
+        //[DisplayName("SlaveAddress"), Display(Order = 1)]
+        [Category("Modbus")]
         public byte SlaveAddress { get => slaveaddress; set { slaveaddress = value; FcSettingsChangedEvent?.Invoke(); } }
-
+        [Category("Modbus")]
         public ushort StartAddress
         {
             get
@@ -55,6 +59,7 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         //public bool FcTypeWrite { get; internal set; }
         //[DataMember]
+        [Category("Modbus")]
         public virtual ushort NumberOfRegisters
         {
             get { return 1; }
@@ -118,13 +123,13 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public virtual (string, string)[] GetDataAsString() // Gui uses this to display the data.
         {
-            ushort[] databuffer = ReadFromBuffer(StartAddress, NumberOfRegisters);
+            ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
             string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
             // Function translates Databuffer into a string array
             (string, string)[] strData = new (string, string)[NumberOfRegisters];
             for (int i = 0; i < NumberOfRegisters; i++)
             {
-                ushort address = (ushort)(i + StartAddress);
+                ushort address = (ushort)(i + startAddress);
                 //ushort datavalue;
                 string dataDescription;
                 //bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
@@ -167,7 +172,7 @@ namespace BV_Modbus_Client.BusinessLayer
             //bool formatValid = true;
             for (int i = 0; i < strings.Length; i++)
             {
-                ushort address = (ushort)(StartAddress + i);
+                ushort address = (ushort)(startAddress + i);
                 //try
                 //{
                 bool shouldDelete = (errors[i] != null);

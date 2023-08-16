@@ -139,6 +139,8 @@ namespace BV_Modbus_Client
         private void FcCommand_FcSettingsChangedEvent()
         {
             UpdateFcInfo();
+
+            FillPreviewTable(); // Updates the values in case the start addr was changed.
         }
         private void FcCommand_SelectedChanged(FcWrapperBase arg1, bool isSelected)
         {

@@ -74,6 +74,10 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             try
             {
+                if (base.mbCon.Master == null)
+                {
+                    throw new NullReferenceException("Not connected to server");
+                }
                 ushort[] rawData = await base.mbCon.Master.ReadHoldingRegistersAsync(base.SlaveAddress, StartAddress, NumberOfRegisters);
                 DataBuffer.Clear();
                 for (ushort i = 0; i < rawData.Length; i++)

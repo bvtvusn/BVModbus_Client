@@ -262,7 +262,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(657, 201);
+            this.tabPage2.Size = new System.Drawing.Size(657, 299);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Polling settings";
             // 
@@ -373,7 +373,7 @@
             // 
             // FCHeader
             // 
-            this.FCHeader.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.FCHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(197)))), ((int)(((byte)(158)))));
             this.FCHeader.Controls.Add(this.button2);
             this.FCHeader.Controls.Add(this.label1);
             this.FCHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -384,7 +384,7 @@
             // 
             // button2
             // 
-            this.button2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.Add;
+            this.button2.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.add_white;
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -398,9 +398,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(107, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 15);
+            this.label1.Size = new System.Drawing.Size(141, 15);
             this.label1.TabIndex = 16;
             this.label1.Text = "Modbus Function Codes:";
             // 

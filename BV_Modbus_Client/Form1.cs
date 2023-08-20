@@ -58,13 +58,22 @@ namespace BV_Modbus_Client
 
         private void Bll_SelectedFcActivatedEvent()
         {
+            
+            DisplayAllFCInfo();
+        }
+
+        private void DisplayAllFCInfo()
+        {
             lblWriteCounter.Invoke(delegate {
                 lblWriteCounter.Text = bll.SelectedFcRequest.WriteCount.ToString();
             });
-            lblReadCounter.Invoke(delegate { 
+            lblReadCounter.Invoke(delegate {
                 lblReadCounter.Text = bll.SelectedFcRequest.ReadCount.ToString();
             });
-            
+            lblResponseTime.Invoke(delegate {
+                lblResponseTime.Text = bll.SelectedFcRequest.ResponseTimeMs.ToString("0.0") +" ms";
+            });
+
         }
 
         private void Bll_SelectedFcSettingsChangedEvent()
@@ -333,7 +342,7 @@ namespace BV_Modbus_Client
 
         private void btnPaste_Click(object sender, EventArgs e)
         {
-            PasteExcelDataToDataGridView(dataGridView1);
+            //PasteExcelDataToDataGridView(dataGridView1);
         }
         private void PasteExcelDataToDataGridView(DataGridView dataGridView)
         {
@@ -434,6 +443,11 @@ namespace BV_Modbus_Client
         private void multipleHoldingRegistersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bll.AddMultiHR_FC();
+        }
+
+        private void miPasteData_Click(object sender, EventArgs e)
+        {
+            PasteExcelDataToDataGridView(dataGridView1);
         }
     }
 }

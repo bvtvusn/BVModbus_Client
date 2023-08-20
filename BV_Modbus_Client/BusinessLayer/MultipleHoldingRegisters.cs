@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -78,7 +79,14 @@ namespace BV_Modbus_Client.BusinessLayer
                 {
                     throw new NullReferenceException("Not connected to server");
                 }
+
+                var stopwatch = Stopwatch.StartNew();
                 ushort[] rawData = await base.mbCon.Master.ReadHoldingRegistersAsync(base.SlaveAddress, startAddress, NumberOfRegisters);
+                stopwatch.Stop();
+                ResponseTimeMs = stopwatch.Elapsed.TotalMilliseconds;
+
+
+
                 ReadCount++;
                 DataBuffer.Clear();
                 for (ushort i = 0; i < rawData.Length; i++)
@@ -102,7 +110,15 @@ namespace BV_Modbus_Client.BusinessLayer
             {
 
                 ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
+
+
+
+                var stopwatch = Stopwatch.StartNew();
                 await base.mbCon.Master.WriteMultipleRegistersAsync(base.SlaveAddress, StartAddress, sendData);
+                stopwatch.Stop();
+                ResponseTimeMs = stopwatch.Elapsed.TotalMilliseconds;
+
+
                 WriteCount++;
                 base.ForceFcActivatedEvent();                
                 base.ForceDataRefresh("");

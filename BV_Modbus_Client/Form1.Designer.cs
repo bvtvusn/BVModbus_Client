@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +51,10 @@
             this.MainTopPanel = new System.Windows.Forms.Panel();
             this.StatisticsPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblWriteCounter = new System.Windows.Forms.Label();
+            this.lblReadCounter = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.propGridFc = new System.Windows.Forms.PropertyGrid();
@@ -64,10 +68,9 @@
             this.contextMenuAddFC = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.multipleHoldingRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singleHoldingRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.TopContainer.SuspendLayout();
@@ -181,14 +184,14 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(0, 40);
@@ -317,15 +320,54 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.lblWriteCounter);
+            this.panel2.Controls.Add(this.lblReadCounter);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.textBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(30, 30);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(349, 222);
             this.panel2.TabIndex = 0;
+            // 
+            // lblWriteCounter
+            // 
+            this.lblWriteCounter.AutoSize = true;
+            this.lblWriteCounter.Location = new System.Drawing.Point(125, 79);
+            this.lblWriteCounter.Name = "lblWriteCounter";
+            this.lblWriteCounter.Size = new System.Drawing.Size(38, 15);
+            this.lblWriteCounter.TabIndex = 2;
+            this.lblWriteCounter.Text = "label5";
+            // 
+            // lblReadCounter
+            // 
+            this.lblReadCounter.AutoSize = true;
+            this.lblReadCounter.Location = new System.Drawing.Point(125, 55);
+            this.lblReadCounter.Name = "lblReadCounter";
+            this.lblReadCounter.Size = new System.Drawing.Size(38, 15);
+            this.lblReadCounter.TabIndex = 2;
+            this.lblReadCounter.Text = "label5";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 79);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 15);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Write operations:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(95, 15);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Read operations:";
             // 
             // SettingsPanel
             // 
@@ -439,6 +481,7 @@
             // 
             // contextMenuAddFC
             // 
+            this.contextMenuAddFC.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuAddFC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.multipleHoldingRegistersToolStripMenuItem,
             this.singleHoldingRegisterToolStripMenuItem});
@@ -458,39 +501,33 @@
             this.singleHoldingRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.singleHoldingRegisterToolStripMenuItem.Text = "Single Holding Register";
             // 
-            // textBox1
+            // label5
             // 
-            this.textBox1.Location = new System.Drawing.Point(108, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 0;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(22, 18);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 28);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Statistics:";
             // 
-            // label3
+            // label6
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Read operations:";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(24, 105);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 15);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Error count:";
             // 
-            // textBox2
+            // label7
             // 
-            this.textBox2.Location = new System.Drawing.Point(108, 35);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 39);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Write operations:";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(24, 132);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(87, 15);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Response time:";
             // 
             // Form1
             // 
@@ -568,7 +605,10 @@
         private Label label2;
         private Label label4;
         private Label label3;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private Label lblWriteCounter;
+        private Label lblReadCounter;
+        private Label label5;
+        private Label label7;
+        private Label label6;
     }
 }

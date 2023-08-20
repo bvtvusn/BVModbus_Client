@@ -38,6 +38,7 @@ namespace BV_Modbus_Client.BusinessLayer
         public event Action<string> SelectedDataRecevivedEvent;
         public event Action<string[]> SelectedFormatValidStateEvent;
         public event Action SelectedFcSettingsChangedEvent;
+        public event Action SelectedFcActivatedEvent;
         private FcWrapperBase selectedFcRequest;
         private void SelectedFcRequest_ResponseReceived(string errorMsg)
         {
@@ -46,6 +47,10 @@ namespace BV_Modbus_Client.BusinessLayer
         private void SelectedFcRequest_FormatValidStateEvent(string[] errors)
         {
             SelectedFormatValidStateEvent?.Invoke(errors);
+        }
+        private void SelectedFcRequest_FcActivatedEvent()
+        {
+            SelectedFcActivatedEvent?.Invoke();
         }
         private void SelectedFcRequest_FcSettingsChangedEvent()
         {
@@ -73,6 +78,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     selectedFcRequest.RefreshDataEvent -= SelectedFcRequest_ResponseReceived;
                     selectedFcRequest.FormatValidStateEvent -= SelectedFcRequest_FormatValidStateEvent;
                     selectedFcRequest.FcSettingsChangedEvent -= SelectedFcRequest_FcSettingsChangedEvent;
+                    selectedFcRequest.FcActivatedEvent -= SelectedFcRequest_FcActivatedEvent; //                   SelectedFcRequest_FcActivatedEvent
                 }
                 selectedFcRequest = value;
                 if (selectedFcRequest != null)
@@ -80,6 +86,8 @@ namespace BV_Modbus_Client.BusinessLayer
                     selectedFcRequest.RefreshDataEvent += SelectedFcRequest_ResponseReceived;
                     selectedFcRequest.FormatValidStateEvent += SelectedFcRequest_FormatValidStateEvent;
                     selectedFcRequest.FcSettingsChangedEvent += SelectedFcRequest_FcSettingsChangedEvent;
+                    selectedFcRequest.FcActivatedEvent += SelectedFcActivatedEvent;
+                    //SelectedFcRequest_FcActivatedEvent
 
                     SelectedDataRecevivedEvent?.Invoke("");  //mAKING fAKE dete received event to opdate the new table.
                 }

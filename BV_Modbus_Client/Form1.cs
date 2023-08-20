@@ -48,10 +48,23 @@ namespace BV_Modbus_Client
             bll.SelectedFcSettingsChangedEvent += Bll_SelectedFcSettingsChangedEvent;
             bll.UserConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
             bll.FcSettingsChangedEvent += Bll_FcSettingsChangedEvent;
+
+            bll.SelectedFcActivatedEvent += Bll_SelectedFcActivatedEvent; // Read or write operation was performed
             
             //comboBox1.DataSource = System.Enum.GetValues(typeof(FormatName));
             RefreshGUI();
 
+        }
+
+        private void Bll_SelectedFcActivatedEvent()
+        {
+            lblWriteCounter.Invoke(delegate {
+                lblWriteCounter.Text = bll.SelectedFcRequest.WriteCount.ToString();
+            });
+            lblReadCounter.Invoke(delegate { 
+                lblReadCounter.Text = bll.SelectedFcRequest.ReadCount.ToString();
+            });
+            
         }
 
         private void Bll_SelectedFcSettingsChangedEvent()

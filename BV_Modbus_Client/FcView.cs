@@ -68,7 +68,7 @@ namespace BV_Modbus_Client
             fcCommand.SelectedChanged += FcCommand_SelectedChanged;
             dataGridView2.CellValueChanged += dataGridView2_CellValueChanged; // Sends data to FC object
             fcCommand.RefreshDataEvent += FcWrapperBase_ResponseReceived; // Receives data from FC object. ( Do not receive updates to gui if we are sending data)
-            fcCommand.FcActivatedEvent += FcCommand_FcActivatedEvent;
+            fcCommand.FcActivatedEvent += FcCommand_FcActivatedEvent;  // Activated on FC read and write
             FillPreviewTable();
             fcCommand.ForceDataRefresh(""); // Makes fake event to force update
 

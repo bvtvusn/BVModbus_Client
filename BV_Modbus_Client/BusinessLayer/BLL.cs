@@ -13,6 +13,7 @@ namespace BV_Modbus_Client.BusinessLayer
         internal UserConfiguration UserConfig { get => userConfig; set => userConfig = value; }
         public bool Modbus_IsConnected { get { return (mbCon.Master != null); } }
         public event Action FcSettingsChangedEvent;
+        public event Action UserConfigLoadedEvent;
 
 
         public event EventHandler FcListChangedEvent;
@@ -166,12 +167,16 @@ namespace BV_Modbus_Client.BusinessLayer
         internal void LoadConfig()
         {
             UserConfig = dal.LoadFromFile();
-            UserConfig.pollTimer = new PollTimer();
-            //foreach (FcWrapperBase item in UserConfig.FcWrappers)
-            //{
-            //    item.Format = this.formatConverter;
-            //}
+
+            UserConfig.GlobFcData.ActivePollingChangedEvent += GlobFcData_ActivePollingChangedEvent; // used for starting and stopping polling
+            UserConfig.pollTimer = new PollTimer(UserConfig.Timer_PollInterval);
+            //UserConfig.FcWrappers[0].m
+            foreach (FcWrapperBase item in UserConfig.FcWrappers)
+            {
+                item.mbCon = this.mbCon; // All share the same instance of the connection
+            }
             UpdateFCList();
+            UserConfigLoadedEvent?.Invoke();
         }
         internal void SaveAs()
         {

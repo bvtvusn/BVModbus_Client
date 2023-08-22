@@ -11,10 +11,10 @@ namespace BV_Modbus_Client.BusinessLayer
         List<FcWrapperBase> FcPollOrder;
         System.Timers.Timer timer_pollTimer;
         public event Action PollFinishedEvent;
-        public PollTimer()
+        public PollTimer(double interval)
         {
             FcPollOrder = new List<FcWrapperBase>();
-            timer_pollTimer = new System.Timers.Timer(1000);
+            timer_pollTimer = new System.Timers.Timer(interval * 1000);
             timer_pollTimer.Enabled = true;
             timer_pollTimer.AutoReset = true;
             
@@ -57,6 +57,11 @@ namespace BV_Modbus_Client.BusinessLayer
                 //item.DataBuffer
             }
             PollFinishedEvent?.Invoke();
+        }
+
+        internal void SetInterval(double timer_PollInterval)
+        {
+            timer_pollTimer.Interval = timer_PollInterval * 1000;
         }
     }
 }

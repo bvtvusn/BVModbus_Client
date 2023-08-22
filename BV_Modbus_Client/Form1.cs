@@ -50,10 +50,17 @@ namespace BV_Modbus_Client
             bll.FcSettingsChangedEvent += Bll_FcSettingsChangedEvent;
 
             bll.SelectedFcActivatedEvent += Bll_SelectedFcActivatedEvent; // Read or write operation was performed
+
+            bll.UserConfigLoadedEvent += Bll_UserConfigLoadedEvent;
             
             //comboBox1.DataSource = System.Enum.GetValues(typeof(FormatName));
             RefreshGUI();
+            numPollInterval.Value = Convert.ToDecimal(bll.UserConfig.Timer_PollInterval);
+        }
 
+        private void Bll_UserConfigLoadedEvent()
+        {
+            numPollInterval.Value = Convert.ToDecimal(bll.UserConfig.Timer_PollInterval);
         }
 
         private void Bll_SelectedFcActivatedEvent()
@@ -448,6 +455,12 @@ namespace BV_Modbus_Client
         private void miPasteData_Click(object sender, EventArgs e)
         {
             PasteExcelDataToDataGridView(dataGridView1);
+        }
+
+        private void numPollInterval_ValueChanged(object sender, EventArgs e)
+        {
+            bll.UserConfig.Timer_PollInterval = Convert.ToDouble(numPollInterval.Value);
+            bll.UserConfig.pollTimer.SetInterval(bll.UserConfig.Timer_PollInterval);
         }
     }
 }

@@ -38,9 +38,18 @@ namespace BV_Modbus_Client.DataAccessLayer
                 
             }
         }
-
+        void PrepareSave(UserConfiguration objects)
+        {
+            foreach (var item in objects.FcWrappers)
+            {
+                item.SavedPollOrder = -1; // First reset all numers on all
+            }
+            
+            objects.pollTimer.EnumerateCommands(); // Give numbers to commands placed on polling
+        }
         void Save(UserConfiguration objects)
         {
+            PrepareSave(objects);
 
             string savefilePath = currentFilePath;
 
@@ -115,6 +124,8 @@ namespace BV_Modbus_Client.DataAccessLayer
                             var objects = (UserConfiguration)serializer.ReadObject(xmlReader);
                             Console.WriteLine("Modbus configuration file opened successfully.");
                             //MessageBox.Show("Modbus configuration file opened successfully.", "Open Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            ActivatePolling(objects);
                             return objects;
                         }
                     }
@@ -127,6 +138,31 @@ namespace BV_Modbus_Client.DataAccessLayer
             }
 
             return null; // Return null if the open operation is canceled or encounters an error
+        }
+
+        private void ActivatePolling(UserConfiguration? UserConfig)
+        {
+            UserConfig.pollTimer = new PollTimer(UserConfig.Timer_PollInterval);
+            UserConfig.pollTimer.TimerEnabled = false; // Disable timer while we are adding to list
+
+            int searchIndex = 0;
+            bool polledFcFound = true;
+            while (polledFcFound)
+            {
+                polledFcFound = false;
+                foreach (var item in UserConfig.FcWrappers)
+                {
+                    if (item.SavedPollOrder == searchIndex)
+                    {
+                        UserConfig.pollTimer.UpdatePollList(item, true);
+                        polledFcFound = true;
+                    }
+                }
+                searchIndex++;
+            }
+
+
+            UserConfig.pollTimer.TimerEnabled = true;
         }
 
 

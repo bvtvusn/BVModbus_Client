@@ -21,11 +21,12 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         [DataMember]
         public List<FcWrapperBase> FcWrappers { get; set; }
-        
-        public PollTimer pollTimer;
-        [DataMember]
-        public double Timer_PollInterval { get; set; } = 1000.0;
 
+        public PollTimer pollTimer;
+        private double timer_PollInterval = 1.0;
+
+        [DataMember]
+        public double Timer_PollInterval { get => timer_PollInterval; set { timer_PollInterval = Math.Max(value,0.001); } }
         [DataMember]
         public int Network_RemotePort { get; set; }
         [DataMember]

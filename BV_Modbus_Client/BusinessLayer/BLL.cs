@@ -169,7 +169,7 @@ namespace BV_Modbus_Client.BusinessLayer
             UserConfig = dal.LoadFromFile();
 
             UserConfig.GlobFcData.ActivePollingChangedEvent += GlobFcData_ActivePollingChangedEvent; // used for starting and stopping polling
-            UserConfig.pollTimer = new PollTimer(UserConfig.Timer_PollInterval);
+            
             //UserConfig.FcWrappers[0].m
             foreach (FcWrapperBase item in UserConfig.FcWrappers)
             {

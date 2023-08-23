@@ -10,7 +10,7 @@ namespace BV_Modbus_Client.BusinessLayer
     {
         List<FcWrapperBase> FcPollOrder;
         System.Timers.Timer timer_pollTimer;
-        public event Action PollFinishedEvent;
+        public event Action<string[]> PollFinishedEvent;
         public PollTimer(double interval)
         {
             FcPollOrder = new List<FcWrapperBase>();
@@ -19,6 +19,13 @@ namespace BV_Modbus_Client.BusinessLayer
             timer_pollTimer.AutoReset = true;
             
             timer_pollTimer.Elapsed += Timer_pollTimer_Elapsed;
+        }
+        
+
+        public bool TimerEnabled
+        {
+            
+            set { timer_pollTimer.Enabled = value; }
         }
 
         private void Timer_pollTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
@@ -49,19 +56,31 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             await Task.WhenAll(FcPollOrder.Select(x => x.ExecuteReadAsync()));
 
+            List<string> strdata = new List<string>();
             foreach (FcWrapperBase item in FcPollOrder)
             {
                 // REad out the data
-
+                (string, string)[] data = item.GetDataAsString();
+               
+                string[] viewData = data.Select(x => x.Item1).ToArray();
+               strdata.AddRange(viewData);
                 //await item.ExecuteReadAsync();
                 //item.DataBuffer
             }
-            PollFinishedEvent?.Invoke();
+            PollFinishedEvent?.Invoke(strdata.ToArray());
         }
 
         internal void SetInterval(double timer_PollInterval)
         {
             timer_pollTimer.Interval = timer_PollInterval * 1000;
+        }
+
+        internal void EnumerateCommands()
+        {
+            for (int i = 0; i < FcPollOrder.Count; i++)
+            {
+                FcPollOrder[i].SavedPollOrder = i;
+            }            
         }
     }
 }

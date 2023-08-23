@@ -89,6 +89,10 @@ namespace BV_Modbus_Client.BusinessLayer
         public int WriteCount { get; set; }
         [Browsable(false)]
         public double ResponseTimeMs { get; set; }
+
+        [Browsable(false)]
+        [DataMember]
+        public int SavedPollOrder { get; set; } = -1; // -1 means not polled. Only used for saving and restoring applionstate. Not kept up to date during program execution.
         //public string Type
         //{
         //    get { return this.GetType().Name; }

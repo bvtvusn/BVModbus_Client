@@ -94,8 +94,20 @@ namespace BV_Modbus_Client
             propGridFc.SelectedObject = bll.SelectedFcRequest;
         }
 
-        private void PollTimer_PollFinishedEvent()
+        private void PollTimer_PollFinishedEvent(string[] data)
         {
+            string view = "";
+            foreach (string item in data)
+            {
+                view += item + ", ";
+
+            }
+            view = view.Remove(Math.Max(0,view.Length - 2));
+
+            txtPolledData.Invoke(delegate { 
+                txtPolledData.Text = view;  
+            });
+           
             //throw new NotImplementedException();
         }
         #region EventsFromApplication

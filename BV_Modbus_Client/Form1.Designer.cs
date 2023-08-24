@@ -77,6 +77,13 @@
             this.contextMenuAddFC = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.multipleHoldingRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singleHoldingRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkLogToFile = new System.Windows.Forms.CheckBox();
+            this.txtLogPath = new System.Windows.Forms.TextBox();
+            this.btnLogPath = new System.Windows.Forms.Button();
+            this.txtSeparator = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.dgvContext.SuspendLayout();
@@ -95,6 +102,7 @@
             this.FCHeader.SuspendLayout();
             this.leftHeader.SuspendLayout();
             this.contextMenuAddFC.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -287,8 +295,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.txtPolledData);
-            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.numPollInterval);
             this.tabPage2.Controls.Add(this.btnTestPoll);
@@ -302,16 +309,16 @@
             // 
             // txtPolledData
             // 
-            this.txtPolledData.Location = new System.Drawing.Point(14, 68);
+            this.txtPolledData.Location = new System.Drawing.Point(16, 41);
             this.txtPolledData.Multiline = true;
             this.txtPolledData.Name = "txtPolledData";
-            this.txtPolledData.Size = new System.Drawing.Size(532, 74);
+            this.txtPolledData.Size = new System.Drawing.Size(476, 24);
             this.txtPolledData.TabIndex = 5;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 50);
+            this.label8.Location = new System.Drawing.Point(15, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 15);
             this.label8.TabIndex = 4;
@@ -320,7 +327,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 16);
+            this.label5.Location = new System.Drawing.Point(16, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(148, 15);
             this.label5.TabIndex = 3;
@@ -608,6 +615,76 @@
             this.singleHoldingRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.singleHoldingRegisterToolStripMenuItem.Text = "Single Holding Register";
             // 
+            // chkLogToFile
+            // 
+            this.chkLogToFile.AutoSize = true;
+            this.chkLogToFile.Location = new System.Drawing.Point(17, 72);
+            this.chkLogToFile.Name = "chkLogToFile";
+            this.chkLogToFile.Size = new System.Drawing.Size(101, 19);
+            this.chkLogToFile.TabIndex = 6;
+            this.chkLogToFile.Text = "Append to file";
+            this.chkLogToFile.UseVisualStyleBackColor = true;
+            // 
+            // txtLogPath
+            // 
+            this.txtLogPath.Location = new System.Drawing.Point(91, 92);
+            this.txtLogPath.Name = "txtLogPath";
+            this.txtLogPath.ReadOnly = true;
+            this.txtLogPath.Size = new System.Drawing.Size(371, 23);
+            this.txtLogPath.TabIndex = 7;
+            // 
+            // btnLogPath
+            // 
+            this.btnLogPath.Location = new System.Drawing.Point(468, 92);
+            this.btnLogPath.Name = "btnLogPath";
+            this.btnLogPath.Size = new System.Drawing.Size(24, 23);
+            this.btnLogPath.TabIndex = 8;
+            this.btnLogPath.Text = "...";
+            this.btnLogPath.UseVisualStyleBackColor = true;
+            // 
+            // txtSeparator
+            // 
+            this.txtSeparator.Location = new System.Drawing.Point(461, 16);
+            this.txtSeparator.Name = "txtSeparator";
+            this.txtSeparator.Size = new System.Drawing.Size(31, 23);
+            this.txtSeparator.TabIndex = 9;
+            this.txtSeparator.Text = "\\t";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(347, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(112, 15);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Separator character:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.btnLogPath);
+            this.groupBox1.Controls.Add(this.txtPolledData);
+            this.groupBox1.Controls.Add(this.txtLogPath);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.txtSeparator);
+            this.groupBox1.Controls.Add(this.chkLogToFile);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Location = new System.Drawing.Point(17, 42);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(502, 128);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Log to File";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(15, 95);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 15);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Log file path:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -644,6 +721,8 @@
             this.leftHeader.ResumeLayout(false);
             this.leftHeader.PerformLayout();
             this.contextMenuAddFC.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -695,5 +774,12 @@
         private NumericUpDown numPollInterval;
         private Label label8;
         private TextBox txtPolledData;
+        private GroupBox groupBox1;
+        private Label label10;
+        private Button btnLogPath;
+        private TextBox txtLogPath;
+        private Label label9;
+        private TextBox txtSeparator;
+        private CheckBox chkLogToFile;
     }
 }

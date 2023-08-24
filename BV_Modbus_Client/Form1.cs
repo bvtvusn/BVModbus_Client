@@ -51,16 +51,21 @@ namespace BV_Modbus_Client
 
             bll.SelectedFcActivatedEvent += Bll_SelectedFcActivatedEvent; // Read or write operation was performed
 
-            bll.UserConfigLoadedEvent += Bll_UserConfigLoadedEvent;
+            bll.UserConfigLoadedEvent += DisplayValFromConfig;
             
             //comboBox1.DataSource = System.Enum.GetValues(typeof(FormatName));
             RefreshGUI();
-            numPollInterval.Value = Convert.ToDecimal(bll.UserConfig.Timer_PollInterval);
+            //numPollInterval.Value = Convert.ToDecimal(bll.UserConfig.Timer_PollInterval);
+            DisplayValFromConfig();
         }
 
-        private void Bll_UserConfigLoadedEvent()
+        private void DisplayValFromConfig()
         {
             numPollInterval.Value = Convert.ToDecimal(bll.UserConfig.Timer_PollInterval);
+
+            chkLogToFile.Checked = bll.UserConfig.pollLoggerSettings.LoggingEnabled;
+            txtLogPath.Text = bll.UserConfig.pollLoggerSettings.LogFilePath;
+            txtSeparator.Text = bll.UserConfig.pollLoggerSettings.SeparatorCharacter;
         }
 
         private void Bll_SelectedFcActivatedEvent()
@@ -96,16 +101,19 @@ namespace BV_Modbus_Client
 
         private void PollTimer_PollFinishedEvent(string[] data)
         {
-            string view = "";
-            foreach (string item in data)
-            {
-                view += item + ", ";
+            string line = bll.UserConfig.pollLoggerSettings.GenerateLine(data);
 
-            }
-            view = view.Remove(Math.Max(0,view.Length - 2));
+
+            //string view = "";
+            //foreach (string item in data)
+            //{
+            //    view += item + ", ";
+
+            //}
+            //view = view.Remove(Math.Max(0,view.Length - 2));
 
             txtPolledData.Invoke(delegate { 
-                txtPolledData.Text = view;  
+                txtPolledData.Text = line;  
             });
            
             //throw new NotImplementedException();
@@ -473,6 +481,48 @@ namespace BV_Modbus_Client
         {
             bll.UserConfig.Timer_PollInterval = Convert.ToDouble(numPollInterval.Value);
             bll.UserConfig.pollTimer.SetInterval(bll.UserConfig.Timer_PollInterval);
+        }
+
+        private void txtSeparator_TextChanged(object sender, EventArgs e)
+        {
+            bll.UserConfig.pollLoggerSettings.SeparatorCharacter = (sender as TextBox).Text;
+        }
+
+        private void chkLogToFile_CheckedChanged(object sender, EventArgs e)
+        {
+            bll.UserConfig.pollLoggerSettings.LoggingEnabled = chkLogToFile.Checked;
+        }
+
+        private void txtLogPath_TextChanged(object sender, EventArgs e)
+        {
+            bll.UserConfig.pollLoggerSettings.LogFilePath = txtLogPath.Text;
+
+            //bll.UserConfig.pollLogger.SeparatorCharacter = (sender as TextBox).Text;
+            //bll.UserConfig.pollLogger.LoggingEnabled = chkLogToFile.Checked;
+        }
+
+        private void btnLogPath_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
+                saveFileDialog.DefaultExt = "txt";
+                saveFileDialog.AddExtension = true;
+                saveFileDialog.Title = "Select File Path";
+
+                DialogResult result = saveFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    bll.UserConfig.pollLoggerSettings.LogFilePath = saveFileDialog.FileName;
+                    txtLogPath.Text = saveFileDialog.FileName;
+                }
+            }
+        }
+
+        private void chkQuote_CheckedChanged(object sender, EventArgs e)
+        {
+            bll.UserConfig.pollLoggerSettings.QuoteEnabled = chkQuote.Checked;
         }
     }
 }

@@ -48,7 +48,15 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkQuote = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnLogPath = new System.Windows.Forms.Button();
             this.txtPolledData = new System.Windows.Forms.TextBox();
+            this.txtLogPath = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtSeparator = new System.Windows.Forms.TextBox();
+            this.chkLogToFile = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.numPollInterval = new System.Windows.Forms.NumericUpDown();
@@ -85,6 +93,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPollInterval)).BeginInit();
             this.MainTopPanel.SuspendLayout();
             this.StatisticsPanel.SuspendLayout();
@@ -287,8 +296,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.txtPolledData);
-            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.numPollInterval);
             this.tabPage2.Controls.Add(this.btnTestPoll);
@@ -300,18 +308,104 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Polling settings";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chkQuote);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.btnLogPath);
+            this.groupBox1.Controls.Add(this.txtPolledData);
+            this.groupBox1.Controls.Add(this.txtLogPath);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.txtSeparator);
+            this.groupBox1.Controls.Add(this.chkLogToFile);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Location = new System.Drawing.Point(25, 44);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(502, 128);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Log to File";
+            // 
+            // chkQuote
+            // 
+            this.chkQuote.AutoSize = true;
+            this.chkQuote.Location = new System.Drawing.Point(219, 18);
+            this.chkQuote.Name = "chkQuote";
+            this.chkQuote.Size = new System.Drawing.Size(95, 19);
+            this.chkQuote.TabIndex = 12;
+            this.chkQuote.Text = "Quote values";
+            this.chkQuote.UseVisualStyleBackColor = true;
+            this.chkQuote.CheckedChanged += new System.EventHandler(this.chkQuote_CheckedChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(15, 95);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 15);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Log file path:";
+            // 
+            // btnLogPath
+            // 
+            this.btnLogPath.Location = new System.Drawing.Point(468, 92);
+            this.btnLogPath.Name = "btnLogPath";
+            this.btnLogPath.Size = new System.Drawing.Size(24, 23);
+            this.btnLogPath.TabIndex = 8;
+            this.btnLogPath.Text = "...";
+            this.btnLogPath.UseVisualStyleBackColor = true;
+            this.btnLogPath.Click += new System.EventHandler(this.btnLogPath_Click);
+            // 
             // txtPolledData
             // 
-            this.txtPolledData.Location = new System.Drawing.Point(14, 68);
+            this.txtPolledData.Location = new System.Drawing.Point(16, 41);
             this.txtPolledData.Multiline = true;
             this.txtPolledData.Name = "txtPolledData";
-            this.txtPolledData.Size = new System.Drawing.Size(532, 74);
+            this.txtPolledData.Size = new System.Drawing.Size(476, 24);
             this.txtPolledData.TabIndex = 5;
+            // 
+            // txtLogPath
+            // 
+            this.txtLogPath.Location = new System.Drawing.Point(91, 92);
+            this.txtLogPath.Name = "txtLogPath";
+            this.txtLogPath.ReadOnly = true;
+            this.txtLogPath.Size = new System.Drawing.Size(371, 23);
+            this.txtLogPath.TabIndex = 7;
+            this.txtLogPath.TextChanged += new System.EventHandler(this.txtLogPath_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(347, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(112, 15);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Separator character:";
+            // 
+            // txtSeparator
+            // 
+            this.txtSeparator.Location = new System.Drawing.Point(461, 16);
+            this.txtSeparator.Name = "txtSeparator";
+            this.txtSeparator.Size = new System.Drawing.Size(31, 23);
+            this.txtSeparator.TabIndex = 9;
+            this.txtSeparator.Text = "\\t";
+            this.txtSeparator.TextChanged += new System.EventHandler(this.txtSeparator_TextChanged);
+            // 
+            // chkLogToFile
+            // 
+            this.chkLogToFile.AutoSize = true;
+            this.chkLogToFile.Location = new System.Drawing.Point(17, 72);
+            this.chkLogToFile.Name = "chkLogToFile";
+            this.chkLogToFile.Size = new System.Drawing.Size(101, 19);
+            this.chkLogToFile.TabIndex = 6;
+            this.chkLogToFile.Text = "Append to file";
+            this.chkLogToFile.UseVisualStyleBackColor = true;
+            this.chkLogToFile.CheckedChanged += new System.EventHandler(this.chkLogToFile_CheckedChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 50);
+            this.label8.Location = new System.Drawing.Point(15, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 15);
             this.label8.TabIndex = 4;
@@ -320,7 +414,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 16);
+            this.label5.Location = new System.Drawing.Point(24, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(148, 15);
             this.label5.TabIndex = 3;
@@ -329,7 +423,7 @@
             // numPollInterval
             // 
             this.numPollInterval.DecimalPlaces = 3;
-            this.numPollInterval.Location = new System.Drawing.Point(169, 13);
+            this.numPollInterval.Location = new System.Drawing.Point(177, 15);
             this.numPollInterval.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -352,7 +446,7 @@
             // 
             // btnTestPoll
             // 
-            this.btnTestPoll.Location = new System.Drawing.Point(261, 13);
+            this.btnTestPoll.Location = new System.Drawing.Point(269, 15);
             this.btnTestPoll.Name = "btnTestPoll";
             this.btnTestPoll.Size = new System.Drawing.Size(100, 23);
             this.btnTestPoll.TabIndex = 0;
@@ -629,6 +723,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPollInterval)).EndInit();
             this.MainTopPanel.ResumeLayout(false);
             this.StatisticsPanel.ResumeLayout(false);
@@ -695,5 +791,13 @@
         private NumericUpDown numPollInterval;
         private Label label8;
         private TextBox txtPolledData;
+        private GroupBox groupBox1;
+        private Label label10;
+        private Button btnLogPath;
+        private TextBox txtLogPath;
+        private Label label9;
+        private TextBox txtSeparator;
+        private CheckBox chkLogToFile;
+        private CheckBox chkQuote;
     }
 }

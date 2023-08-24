@@ -18,7 +18,13 @@ namespace BV_Modbus_Client.BusinessLayer
             pollTimer = new PollTimer(Timer_PollInterval);
             Network_RemotePort = 502;
             Network_RemoteHostname = "127.0.0.1";
+
+            pollLoggerSettings = new PollLogger();
+            //pollTimer.PollFinishedEvent += pollLogger.PollTimer_PollFinishedEvent;
         }
+
+        
+
         [DataMember]
         public List<FcWrapperBase> FcWrappers { get; set; }
 
@@ -33,5 +39,7 @@ namespace BV_Modbus_Client.BusinessLayer
         public string Network_RemoteHostname { get; set; }
         [DataMember]
         public GlobalFCdata GlobFcData { get; internal set; }
+        [DataMember]
+        public PollLogger pollLoggerSettings { get; internal set; }
     }
 }

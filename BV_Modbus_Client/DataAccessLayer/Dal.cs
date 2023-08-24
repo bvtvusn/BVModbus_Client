@@ -38,6 +38,13 @@ namespace BV_Modbus_Client.DataAccessLayer
                 
             }
         }
+
+        internal void AppendToFile(string line, string filePath)
+        {
+            File.AppendAllText(filePath, line + Environment.NewLine );
+            
+        }
+
         void PrepareSave(UserConfiguration objects)
         {
             foreach (var item in objects.FcWrappers)

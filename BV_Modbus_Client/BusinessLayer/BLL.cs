@@ -9,6 +9,7 @@ namespace BV_Modbus_Client.BusinessLayer
         internal MbConnection mbCon;
         UserConfiguration userConfig;
         Dal dal;
+        
         //internal FormatConverter formatConverter;
         internal UserConfiguration UserConfig { get => userConfig; set => userConfig = value; }
         public bool Modbus_IsConnected { get { return (mbCon.Master != null); } }
@@ -27,6 +28,18 @@ namespace BV_Modbus_Client.BusinessLayer
             UserConfig.GlobFcData.ActivePollingChangedEvent += GlobFcData_ActivePollingChangedEvent;
             //formatConverter = new FormatConverter();
             //FcWrappers = new List<FcWrapperBase>();
+            userConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
+        }
+
+        private void PollTimer_PollFinishedEvent(string[] obj)
+        {
+            string line = UserConfig.pollLoggerSettings.GenerateLine(obj);
+
+            if (UserConfig.pollLoggerSettings.LoggingEnabled)
+            {
+                dal.AppendToFile(line, UserConfig.pollLoggerSettings.LogFilePath);
+
+            }
         }
 
         private void GlobFcData_ActivePollingChangedEvent(FcWrapperBase fc, bool pollingEnabled)

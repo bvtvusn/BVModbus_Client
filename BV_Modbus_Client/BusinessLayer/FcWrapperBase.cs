@@ -131,7 +131,7 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
 
-        public virtual (string, string)[] GetDataAsString() // Gui uses this to display the data.
+        public virtual (string, string)[] GetDataAsString(bool UseRegOnMissingDescription=false) // Gui uses this to display the data.
         {
             ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
             string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
@@ -149,7 +149,23 @@ namespace BV_Modbus_Client.BusinessLayer
                 strData[i].Item1 = strvalues[i];
                 //else strData[i].Item1 = "";
 
-                strData[i].Item2 = FcAddressDescription[i];
+                if (UseRegOnMissingDescription)
+                {
+                    if (FcAddressDescription[i] == null)
+                    {
+                        strData[i].Item2 = "Reg" + address;
+                    }
+                    else
+                    {
+                        strData[i].Item2 = FcAddressDescription[i];
+                    }
+                }
+                else
+                {
+                    strData[i].Item2 = FcAddressDescription[i];
+                }
+                
+                
                 //else strData[i].Item2 = "";
 
             }

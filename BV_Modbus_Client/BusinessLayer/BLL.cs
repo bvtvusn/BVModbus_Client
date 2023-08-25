@@ -31,15 +31,47 @@ namespace BV_Modbus_Client.BusinessLayer
             userConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
         }
 
-        private void PollTimer_PollFinishedEvent(string[] obj)
+        private void PollTimer_PollFinishedEvent((string, string)[] data, bool PollitemsChanged)
         {
-            string line = UserConfig.pollLoggerSettings.GenerateLine(obj);
+            var flags = UserConfig.pollLoggerSettings.CheckLoggingNeeded(data, PollitemsChanged);
+            bool linelogNeeded = flags.Item1;
+            bool headerNeeded = flags.Item2;
 
-            if (UserConfig.pollLoggerSettings.LoggingEnabled)
+            if (linelogNeeded)
             {
-                dal.AppendToFile(line, UserConfig.pollLoggerSettings.LogFilePath);
-
+                if (!dal.FileExists(UserConfig.pollLoggerSettings.LogFilePath))
+                {
+                    headerNeeded = true; // Header must be made if the file does not exist yet.
+                }
             }
+            
+            if (headerNeeded)
+            {
+                string[] HeaderData = data.Select(x => x.Item2).ToArray();
+                string header = UserConfig.pollLoggerSettings.GenerateHeaderLine(HeaderData);
+
+                dal.AppendToFile(header, UserConfig.pollLoggerSettings.LogFilePath);
+            }
+            if (linelogNeeded)
+            {
+                string[] viewData = data.Select(x => x.Item1).ToArray();
+                string line = UserConfig.pollLoggerSettings.GenerateDataLine(viewData);
+                dal.AppendToFile(line, UserConfig.pollLoggerSettings.LogFilePath);
+            }
+            
+
+            
+
+            //if (UserConfig.pollLoggerSettings.LoggingEnabled)
+            //{
+            //    if (PollitemsChanged)
+            //    {
+                    
+                     
+            //    }
+                
+
+            //}
         }
 
         private void GlobFcData_ActivePollingChangedEvent(FcWrapperBase fc, bool pollingEnabled)

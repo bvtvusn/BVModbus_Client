@@ -99,9 +99,10 @@ namespace BV_Modbus_Client
             propGridFc.SelectedObject = bll.SelectedFcRequest;
         }
 
-        private void PollTimer_PollFinishedEvent(string[] data)
+        private void PollTimer_PollFinishedEvent((string, string)[] data, bool PollItemsChanged)
         {
-            string line = bll.UserConfig.pollLoggerSettings.GenerateLine(data);
+            string[] viewData = data.Select(x => x.Item1).ToArray();
+            string line = bll.UserConfig.pollLoggerSettings.GenerateDataLine(viewData);
 
 
             //string view = "";

@@ -46,7 +46,7 @@ namespace BV_Modbus_Client
             bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
             bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
             bll.SelectedFcSettingsChangedEvent += Bll_SelectedFcSettingsChangedEvent;
-            bll.UserConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
+            //bll.UserConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
             bll.FcSettingsChangedEvent += Bll_FcSettingsChangedEvent;
 
             bll.SelectedFcActivatedEvent += Bll_SelectedFcActivatedEvent; // Read or write operation was performed
@@ -61,11 +61,15 @@ namespace BV_Modbus_Client
 
         private void DisplayValFromConfig()
         {
+            bll.UserConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
+
+
             numPollInterval.Value = Convert.ToDecimal(bll.UserConfig.Timer_PollInterval);
 
             chkLogToFile.Checked = bll.UserConfig.pollLoggerSettings.LoggingEnabled;
             txtLogPath.Text = bll.UserConfig.pollLoggerSettings.LogFilePath;
             txtSeparator.Text = bll.UserConfig.pollLoggerSettings.SeparatorCharacter;
+            chkQuote.Checked = bll.UserConfig.pollLoggerSettings.QuoteEnabled;
         }
 
         private void Bll_SelectedFcActivatedEvent()
@@ -102,7 +106,7 @@ namespace BV_Modbus_Client
         private void PollTimer_PollFinishedEvent((string, string)[] data, bool PollItemsChanged)
         {
             string[] viewData = data.Select(x => x.Item1).ToArray();
-            string line = bll.UserConfig.pollLoggerSettings.GenerateDataLine(viewData);
+            string line = bll.UserConfig.pollLoggerSettings.GenerateDataLine(viewData,false);
 
 
             //string view = "";

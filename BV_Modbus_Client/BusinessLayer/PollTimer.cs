@@ -41,14 +41,15 @@ namespace BV_Modbus_Client.BusinessLayer
                 if (!FcPollOrder.Contains(fc))
                 {
                     FcPollOrder.Add(fc);
+                    changedFlag = true;
                 }
 
             }
             else
             {
                 FcPollOrder.RemoveAll(s => Object.ReferenceEquals(s,fc));
+                changedFlag = true;
             }
-            changedFlag = true;
         }
         public bool CheckPollingEnabled(FcWrapperBase obj)
         {

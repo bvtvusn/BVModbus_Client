@@ -33,6 +33,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         private void PollTimer_PollFinishedEvent((string, string)[] data, bool PollitemsChanged)
         {
+            if (UserConfig == null) { return; }
             var flags = UserConfig.pollLoggerSettings.CheckLoggingNeeded(data, PollitemsChanged);
             bool linelogNeeded = flags.Item1;
             bool headerNeeded = flags.Item2;
@@ -211,6 +212,16 @@ namespace BV_Modbus_Client.BusinessLayer
 
         internal void LoadConfig()
         {
+            UserConfig.pollTimer.TimerEnabled = false;
+            UserConfig.pollTimer = null;
+            UserConfig.FcWrappers.Clear();
+            UserConfig.FcWrappers = null;
+            UserConfig.pollLoggerSettings = null;
+            UserConfig.GlobFcData = null;
+            UserConfig = null;
+           
+
+
             UserConfig = dal.LoadFromFile();
 
             UserConfig.GlobFcData.ActivePollingChangedEvent += GlobFcData_ActivePollingChangedEvent; // used for starting and stopping polling
@@ -222,6 +233,7 @@ namespace BV_Modbus_Client.BusinessLayer
             }
             UpdateFCList();
             UserConfigLoadedEvent?.Invoke();
+            userConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent; // Reattach eventhandler to the polltimer after it is swithched out. 
         }
         internal void SaveAs()
         {

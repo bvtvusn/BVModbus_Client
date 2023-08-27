@@ -53,11 +53,21 @@ namespace BV_Modbus_Client.BusinessLayer
             return result;
         }
 
-        public string GenerateDataLine(string[] data)
+        public string GenerateDataLine(string[] data, bool includeTime = true)
         {
-            string[] lineElements = new string[data.Length + 1];
-            lineElements[0] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");                                // Add time
-            Array.Copy(data, 0, lineElements, 1, data.Length);
+            string[] lineElements;
+            if (includeTime)
+            {
+                // Add time to the log
+                lineElements = new string[data.Length + 1];
+                lineElements[0] = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");                                // Add time
+                Array.Copy(data, 0, lineElements, 1, data.Length);
+            }
+            else
+            {
+                lineElements = data;
+            }
+            
             return GenerateLine(lineElements);
         }
         public string GenerateHeaderLine(string[] data)

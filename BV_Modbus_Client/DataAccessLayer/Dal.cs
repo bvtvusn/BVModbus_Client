@@ -171,7 +171,10 @@ namespace BV_Modbus_Client.DataAccessLayer
 
             UserConfig.pollTimer.TimerEnabled = true;
         }
-
+        public bool FileExists(string path)
+        {
+            return File.Exists(path);
+        }
 
         //internal List<FcWrapperBase> LoadFromFile()
         //{

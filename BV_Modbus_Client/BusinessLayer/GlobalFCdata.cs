@@ -16,6 +16,7 @@ namespace BV_Modbus_Client.BusinessLayer
             //AddressDescription = new Dictionary<ushort, string>();
         }
         public event Action<FcWrapperBase, bool> ActivePollingChangedEvent;
+        //public event Action<FcWrapperBase> DuplicateFcEvent;
         [DataMember]
         public bool ZeroBasedAdresses { get; set; } = true;
         
@@ -30,6 +31,9 @@ namespace BV_Modbus_Client.BusinessLayer
             ActivePollingChangedEvent?.Invoke(fcWrapperBase, pollEnabled);
         }
 
-        
+        //internal void Duplicate(FcWrapperBase fcView)
+        //{
+        //    DuplicateFcEvent?.Invoke(fcView);
+        //}
     }
 }

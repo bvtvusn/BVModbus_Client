@@ -13,7 +13,7 @@ namespace BV_Modbus_Client.BusinessLayer
     [KnownType(typeof(FcWrapperFc3))] // Example: FcWrapperFc3
     [KnownType(typeof(FcWrapperFc15))] // Example: FcWrapperFc3
     [KnownType(typeof(MultipleHoldingRegisters))] // Example: FcWrapperFc3
-    internal abstract class FcWrapperBase
+    internal abstract class FcWrapperBase :ICloneable
     {
         private string description;
         private byte slaveaddress;
@@ -306,5 +306,31 @@ namespace BV_Modbus_Client.BusinessLayer
             GlobFcData.ReportActivePollingChanged(this, pollEnabled);
             //ActivePollingChangedEvent?.Invoke(pollEnabled);
         }
+
+        public abstract object Clone();
+
+        public FcWrapperBase CopyAllBaseProperties(FcWrapperBase next)
+        {
+            next.description = description;
+            next.slaveaddress = slaveaddress;
+            next.startAddress = startAddress;
+            next.displayType = displayType;
+            next.fcAddressDescription = fcAddressDescription;
+            next.SwapBytes = SwapBytes;
+            next.SwapRegisters = SwapRegisters;
+            next.NumberOfRegisters = NumberOfRegisters;
+            next.DataBuffer = DataBuffer;
+            next.GlobFcData = GlobFcData;
+            //next.isSelected = isSelected;
+            //next.OperationReadDescription = OperationReadDescription;
+            //next.OperationWriteDescription = OperationWriteDescription;
+
+            return next;
+        }
+
+        //public object Clone()
+        //{
+        //    FcWrapperBase next = new FcWrapperBase();
+        //}
     }
 }

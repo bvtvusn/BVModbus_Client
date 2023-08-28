@@ -136,6 +136,11 @@ namespace BV_Modbus_Client.BusinessLayer
             WriteCount++;
         }
 
-
+        public override object Clone()
+        {
+            MultipleHoldingRegisters next = new MultipleHoldingRegisters(mbCon);
+            
+            return this.CopyAllBaseProperties(next); //new NotImplementedException();
+        }
     }
 }

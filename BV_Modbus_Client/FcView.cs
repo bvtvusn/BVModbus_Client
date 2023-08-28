@@ -396,7 +396,8 @@ namespace BV_Modbus_Client
 
         private void duplicateFCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //fcCommand.GlobFcData.Duplicate(fcCommand);
+            bll.DuplicateFc(fcCommand);
         }
 
         private void FcView_MouseEnter(object sender, EventArgs e)

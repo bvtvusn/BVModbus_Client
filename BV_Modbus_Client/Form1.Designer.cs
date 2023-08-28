@@ -423,7 +423,7 @@
             // numPollInterval
             // 
             this.numPollInterval.DecimalPlaces = 3;
-            this.numPollInterval.Location = new System.Drawing.Point(177, 15);
+            this.numPollInterval.Location = new System.Drawing.Point(187, 15);
             this.numPollInterval.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -446,7 +446,7 @@
             // 
             // btnTestPoll
             // 
-            this.btnTestPoll.Location = new System.Drawing.Point(269, 15);
+            this.btnTestPoll.Location = new System.Drawing.Point(290, 15);
             this.btnTestPoll.Name = "btnTestPoll";
             this.btnTestPoll.Size = new System.Drawing.Size(100, 23);
             this.btnTestPoll.TabIndex = 0;

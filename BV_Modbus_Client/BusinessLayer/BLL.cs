@@ -244,5 +244,14 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             dal.OnSaveButton(UserConfig);
         }
+
+        internal void DuplicateFc(FcWrapperBase fcCommand)
+        {
+            //fcCommand.
+            //var next = new FcWrapperBase(fcCommand);
+
+            UserConfig.FcWrappers.Add((FcWrapperBase)fcCommand.Clone());
+            UpdateFCList();
+        }
     }
 }

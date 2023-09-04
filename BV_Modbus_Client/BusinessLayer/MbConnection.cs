@@ -1,20 +1,30 @@
 ﻿using NModbus;
 using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using NModbus.IO;
 
 namespace BV_Modbus_Client.BusinessLayer
 {
     internal class MbConnection
     {
         TcpClient cli;
-        private int port;
+        private int TCP_port;
         private bool isFake;
         
         private IModbusMaster master1;
+
+        private bool isTCP = false;
+
+        public bool IsTcp
+        {
+            get { return isTCP; }
+            set { isTCP = value; }
+        }
 
         public IModbusMaster Master
         {
@@ -22,18 +32,18 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
 
-        public int Port
+        public int TCP_Port
         {
-            get { return port; }
-            set { port = value; }
+            get { return TCP_port; }
+            set { TCP_port = value; }
         }
 
-        private string hostname;
+        private string TCP_hostname;
 
-        public string Hostname
+        public string TCP_Hostname
         {
-            get { return hostname; }
-            set { hostname = value; }
+            get { return TCP_hostname; }
+            set { TCP_hostname = value; }
         }
 
         public MbConnection()
@@ -50,11 +60,39 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 master1 = new DummyModbus();
             }
+            else if (IsTcp)
+            {
+                cli = new TcpClient(TCP_Hostname, TCP_port);
+                var factory = new ModbusFactory();
+                //factory.CreateMaster()
+                master1 = factory.CreateMaster(cli);
+            }
             else
             {
-                cli = new TcpClient(Hostname, port);
-                var factory = new ModbusFactory();
-                master1 = factory.CreateMaster(cli);
+                // RTU
+                try
+                {
+                    SerialPort port = new SerialPort("COM8");
+
+                    // configure serial port
+                    port.BaudRate = 9600;
+                    port.DataBits = 8;
+                    port.Parity = Parity.Even;
+                    port.StopBits = StopBits.One;
+                    port.Open();
+
+                    // create modbus master
+
+
+                    var factory = new ModbusFactory();
+                    master1 = factory.CreateRtuMaster(new RtuPortAdapterBv(port));
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                
             }
             
         }

@@ -47,8 +47,8 @@ namespace BV_Modbus_Client
         {
             //bll.ConnectServer();
 
-            bll.mbCon.Hostname = bll.UserConfig.Network_RemoteHostname;
-            bll.mbCon.Port = bll.UserConfig.Network_RemotePort;
+            bll.mbCon.TCP_Hostname = bll.UserConfig.Network_RemoteHostname;
+            bll.mbCon.TCP_Port = bll.UserConfig.Network_RemotePort;
             try
             {
             bll.mbCon.ConnectToSlave();

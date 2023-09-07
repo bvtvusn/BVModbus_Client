@@ -4,6 +4,7 @@ using BV_Modbus_Client.GUI;
 using NModbus;
 using System.ComponentModel;
 using System.Data;
+using System.IO.Ports;
 using System.Net;
 using System.Net.Sockets;
 using static BV_Modbus_Client.BusinessLayer.FormatConverter;
@@ -57,6 +58,36 @@ namespace BV_Modbus_Client
             RefreshGUI();
             //numPollInterval.Value = Convert.ToDecimal(bll.UserConfig.Timer_PollInterval);
             DisplayValFromConfig();
+            //TestSerial();
+        }
+        public static byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
+        private void TestSerial()
+        {
+            SerialPort port = new SerialPort("COM8");
+
+            // configure serial port
+            port.BaudRate = 115200;
+            port.DataBits = 8;
+            port.Parity = Parity.None;
+            port.StopBits = StopBits.One;
+            port.Open();
+
+            // create modbus master
+            byte[] outbytes = StringToByteArray("010300000002C40B");
+            port.Write(outbytes, 0, outbytes.Length);
+
+            byte[] recv = new byte[100];
+            port.Read(recv,0,port.BytesToRead);
+            MessageBox.Show(recv.ToString());
+
+            //var factory = new ModbusFactory();
+            //master1 = factory.CreateRtuMaster(new RtuPortAdapterBv(port));
         }
 
         private void DisplayValFromConfig()
@@ -528,6 +559,34 @@ namespace BV_Modbus_Client
         private void chkQuote_CheckedChanged(object sender, EventArgs e)
         {
             bll.UserConfig.pollLoggerSettings.QuoteEnabled = chkQuote.Checked;
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            bll.SelectedFcRequest.mbCon.Master.Transport.ReadTimeout = 1000;
+            bll.SelectedFcRequest.ExecuteRead();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //RtuPortAdapterBv myPort = new RtuPortAdapterBv(bll.mbCon.port);
+
+            //var factory = new ModbusFactory();
+            //IModbusSerialMaster master = factory.CreateRtuMaster(myPort);
+
+            //bll.mbCon.Master
+
+            //ushort[] registers = bll.mbCon.Master.ReadHoldingRegisters(1, 1, 1);
+            //ushort[] registers = bll.SelectedFcRequest.mbCon.Master.ReadHoldingRegisters(1, 1, 1);
+            bll.SelectedFcRequest.ExecuteRead(); // mbCon.Master.ReadHoldingRegisters(1, 1, 1);
+
+
+            //string str = "";
+            //for (int i = 0; i < registers.Length; i++)
+            //{
+            //    str += registers[i].ToString() + ", ";
+            //}
+            //MessageBox.Show(str);
         }
     }
 }

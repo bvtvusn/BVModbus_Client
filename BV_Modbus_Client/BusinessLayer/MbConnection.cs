@@ -12,14 +12,19 @@ namespace BV_Modbus_Client.BusinessLayer
 {
     internal class MbConnection
     {
+        public SerialPort port;
         TcpClient cli;
         private int TCP_port;
         private bool isFake;
-        
+
         private IModbusMaster master1;
 
         private bool isTCP = false;
-
+        public string RTU_SerialPortName { get; set; }
+        public Parity RTU_Parity { get; set; } = Parity.None;
+        public StopBits RTU_StopBits { get; set; } = StopBits.One;
+        public int RTU_DataBits { get; set; } = 8;
+        public int RTU_BaudRate { get; set; } = 115200;
         public bool IsTcp
         {
             get { return isTCP; }
@@ -48,7 +53,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public MbConnection()
         {
-            
+
         }
         public MbConnection(bool fakeConnection)
         {
@@ -70,31 +75,38 @@ namespace BV_Modbus_Client.BusinessLayer
             else
             {
                 // RTU
-                try
+                if (port != null)
                 {
-                    SerialPort port = new SerialPort("COM8");
-
-                    // configure serial port
-                    port.BaudRate = 9600;
-                    port.DataBits = 8;
-                    port.Parity = Parity.Even;
-                    port.StopBits = StopBits.One;
-                    port.Open();
-
-                    // create modbus master
-
-
-                    var factory = new ModbusFactory();
-                    master1 = factory.CreateRtuMaster(new RtuPortAdapterBv(port));
+                    port.Close();
+                    port.Dispose();
                 }
-                catch (Exception)
-                {
+                port = new SerialPort(RTU_SerialPortName, RTU_BaudRate, RTU_Parity, RTU_DataBits, RTU_StopBits);
+                //port = new SerialPort("COM8");
 
-                    throw;
-                }
-                
+                // configure serial port
+                //port.BaudRate = 115200;
+                //port.DataBits = 8;
+                //port.Parity = Parity.None;
+                //port.StopBits = StopBits.One;
+                port.ReadTimeout = 1000;
+                port.DtrEnable = true;
+
+                port.Open();
+                port.BaseStream.ReadTimeout = 1000;
+                port.BaseStream.WriteTimeout = 1000;
+
+                //port.BaseStream. = 1000;
+
+                // create modbus master
+
+
+                var factory = new ModbusFactory();
+                master1 = factory.CreateRtuMaster(new RtuPortAdapterBv(port));
+                master1.Transport.ReadTimeout = 1000;
+
+
             }
-            
+
         }
 
         internal void DisconnectToSlave()
@@ -107,9 +119,24 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public string GetConnectionStatus()
         {
+            if (isFake)
+            {
+                return "Dummy connection";
+            }
+            else if (IsTcp)
+            {
+                return GetStatusTcp();
+            }
+            else
+            {
+                return GetStatusRtu();
+            }
+        }
+        string GetStatusTcp()
+        {
             if (cli != null)
             {
-            if (cli.Connected)
+                if (cli.Connected)
                 {
                     if (IsSocketConnected(cli.Client))
                     {
@@ -129,7 +156,6 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 return "Not connected";
             }
-            
         }
         private bool IsSocketConnected(Socket socket)
         {
@@ -143,6 +169,24 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 return false;
             }
+        }
+
+
+        private string GetStatusRtu()
+        {
+            if (port == null)
+            {
+                return "Serial closed";
+            }
+            else if (port.IsOpen)
+            {
+                return "Port open";
+            }
+            else
+            {
+                return "Port Closed";
+            }
+
         }
     }
 }

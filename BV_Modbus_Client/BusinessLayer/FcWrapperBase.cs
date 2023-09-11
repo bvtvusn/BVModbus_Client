@@ -16,7 +16,7 @@ namespace BV_Modbus_Client.BusinessLayer
     internal abstract class FcWrapperBase :ICloneable
     {
         private string description;
-        private byte slaveaddress;
+        private byte slaveaddress = 1;
         //private List<FcWrapperBase> parent;
         [DataMember]
         public ushort startAddress;

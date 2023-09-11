@@ -44,7 +44,8 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
 
                 var stopwatch = Stopwatch.StartNew();
-                ushort[] rawData = await base.mbCon.Master.ReadHoldingRegistersAsync(base.SlaveAddress, startAddress, NumberOfRegisters);
+                   Memory<ushort> memData = await base.mbCon.Master.ReadHoldingRegistersAsync<ushort>(base.SlaveAddress, startAddress, NumberOfRegisters);
+                ushort[] rawData = memData.ToArray();
                 stopwatch.Stop();
                 ResponseTimeMs = stopwatch.Elapsed.TotalMilliseconds;
 

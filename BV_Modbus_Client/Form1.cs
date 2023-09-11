@@ -1,7 +1,7 @@
 using BV_Modbus_Client.BusinessLayer;
 using BV_Modbus_Client.DataAccessLayer;
 using BV_Modbus_Client.GUI;
-using NModbus;
+//using NModbus;
 using System.ComponentModel;
 using System.Data;
 using System.IO.Ports;
@@ -380,25 +380,25 @@ namespace BV_Modbus_Client
         {
 
 
-            using (TcpClient client = new TcpClient("127.0.0.1", 502))
-            {
-                var factory = new ModbusFactory();
-                IModbusMaster master = factory.CreateMaster(client);
+            //using (TcpClient client = new TcpClient("127.0.0.1", 502))
+            //{
+            //    var factory = new ModbusFactory();
+            //    IModbusMaster master = factory.CreateMaster(client);
 
 
-                byte slaveId = 1;
-                ushort startAddress = 100;
+            //    byte slaveId = 1;
+            //    ushort startAddress = 100;
 
-                master.WriteSingleRegister(slaveId, startAddress, 22);
-                ushort[] registers = master.ReadHoldingRegisters(slaveId, startAddress, 3);
-                for (int i = 0; i < 3; i++)
-                {
-                    //Console.WriteLine($"Input {(startAddress + i)}={registers[i]}");
-                    //txtShow.AppendText( $"Input {(startAddress + i)}={registers[i]}");
-                }
+            //    master.WriteSingleRegister(slaveId, startAddress, 22);
+            //    ushort[] registers = master.ReadHoldingRegisters(slaveId, startAddress, 3);
+            //    for (int i = 0; i < 3; i++)
+            //    {
+            //        //Console.WriteLine($"Input {(startAddress + i)}={registers[i]}");
+            //        //txtShow.AppendText( $"Input {(startAddress + i)}={registers[i]}");
+            //    }
 
 
-            }
+            //}
 
 
         }
@@ -563,8 +563,8 @@ namespace BV_Modbus_Client
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            bll.SelectedFcRequest.mbCon.Master.Transport.ReadTimeout = 1000;
-            bll.SelectedFcRequest.ExecuteRead();
+            //bll.SelectedFcRequest.mbCon.Master.Transport.ReadTimeout = 1000;
+            //bll.SelectedFcRequest.ExecuteRead();
         }
 
         private void button3_Click(object sender, EventArgs e)

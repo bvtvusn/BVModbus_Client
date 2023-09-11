@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BV_Modbus_Client.BusinessLayer
 {
-    internal class RtuPortAdapterBv : NModbus.IO.IStreamResource
+    internal class RtuPortAdapterBv //: NModbus.IO.IStreamResource
     {
         SerialPort port; // = new SerialPort("COM3")
         public RtuPortAdapterBv(SerialPort port)

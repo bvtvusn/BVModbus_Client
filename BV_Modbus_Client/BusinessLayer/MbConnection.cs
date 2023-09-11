@@ -100,10 +100,22 @@ namespace BV_Modbus_Client.BusinessLayer
                 // create modbus master
 
 
-                var factory = new ModbusFactory();
-                master1 = factory.CreateRtuMaster(new RtuPortAdapterBv(port));
-                master1.Transport.ReadTimeout = 1000;
+                //var factory = new ModbusFactory();
+                //master1 = factory.CreateRtuMaster(new RtuPortAdapterBv(port));
+                //master1.Transport.ReadTimeout = 500;
+                //master1.Transport.Retries = 1;
+                
 
+
+
+                //var factory = new ModbusFactory();
+                //IModbusRtuTransport tr = factory.CreateRtuTransport(new RtuPortAdapterBv(port));
+                //master1 =  factory.CreateRtuMaster(tr.StreamResource);
+                //master1.Transport.ReadTimeout = 500;
+                //master1.Transport.Retries = 1;
+                //tr.IgnoreResponse();
+                //master1.Transport.
+                // master1. = 0;
 
             }
 

@@ -31,13 +31,37 @@ namespace BV_Modbus_Client.BusinessLayer
             port.Dispose();
         }
 
+         async Task<int> Readerd(byte[] buffer, int offset, int count)
+        {
+            Task<int> readtask = port.BaseStream.ReadAsync(buffer, offset, count);
+           Task winner = await Task.WhenAny(readtask, Task.Delay(TimeSpan.FromSeconds(1)));
+            if (winner == readtask)
+            {
+                return ((Task<int>)winner).Result;
+            }
+            return 0;
+
+        }
         public int Read(byte[] buffer, int offset, int count)
         {
 
             //Task<int> mytask = Task.Run(() => port.BaseStream.ReadAsync(buffer, offset, count));
             //return mytask.Result;
+                //return port.BaseStream.Read(buffer, offset, count);
+            //return Task.Run(() => port.BaseStream.ReadAsync(buffer, offset, count)).Result;
 
-            return port.BaseStream.Read(buffer, offset, count);
+            //var winner = await Task.WhenAny(port.BaseStream.ReadAsync(buffer, offset, count),    Task.Delay(TimeSpan.FromSeconds(1)));
+            return Readerd(buffer, offset, count).Result;
+
+            //try
+            //{
+            //}
+            //catch (Exception)
+            //{
+            //    return -1;
+            //    //throw;
+            //}
+            
 
 
 

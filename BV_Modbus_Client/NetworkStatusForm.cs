@@ -34,7 +34,7 @@ namespace BV_Modbus_Client
             else cmbConType.SelectedIndex = 1;
 
             cmbSerialPorts.DataSource = SerialPort.GetPortNames();
-            cmbSerialPorts.SelectedIndex = cmbSerialPorts.Items.IndexOf(bll.mbCon.RTU_SerialPortName);
+            cmbSerialPorts.SelectedIndex = Math.Min(0, cmbSerialPorts.Items.IndexOf(bll.mbCon.RTU_SerialPortName));
 
             //cmbDataBits.DataSource = Enum.GetValues(typeof( Parity));
             cmbStopBits.DataSource = Enum.GetValues(typeof(StopBits));

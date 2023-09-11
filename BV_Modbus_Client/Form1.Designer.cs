@@ -76,6 +76,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.propGridFc = new System.Windows.Forms.PropertyGrid();
             this.mainHeader = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblConnectionStatus = new System.Windows.Forms.Label();
+            this.panelConnectionIndicator = new System.Windows.Forms.Panel();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.scrollPanel = new System.Windows.Forms.Panel();
             this.FCHeader = new System.Windows.Forms.Panel();
@@ -99,6 +102,8 @@
             this.StatisticsPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SettingsPanel.SuspendLayout();
+            this.mainHeader.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.scrollPanel.SuspendLayout();
             this.FCHeader.SuspendLayout();
@@ -423,7 +428,7 @@
             // numPollInterval
             // 
             this.numPollInterval.DecimalPlaces = 3;
-            this.numPollInterval.Location = new System.Drawing.Point(177, 15);
+            this.numPollInterval.Location = new System.Drawing.Point(187, 15);
             this.numPollInterval.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -446,7 +451,7 @@
             // 
             // btnTestPoll
             // 
-            this.btnTestPoll.Location = new System.Drawing.Point(269, 15);
+            this.btnTestPoll.Location = new System.Drawing.Point(290, 15);
             this.btnTestPoll.Name = "btnTestPoll";
             this.btnTestPoll.Size = new System.Drawing.Size(100, 23);
             this.btnTestPoll.TabIndex = 0;
@@ -606,11 +611,42 @@
             // mainHeader
             // 
             this.mainHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(165)))), ((int)(((byte)(255)))));
+            this.mainHeader.Controls.Add(this.panel3);
             this.mainHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainHeader.Location = new System.Drawing.Point(0, 0);
             this.mainHeader.Name = "mainHeader";
             this.mainHeader.Size = new System.Drawing.Size(620, 30);
             this.mainHeader.TabIndex = 18;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblConnectionStatus);
+            this.panel3.Controls.Add(this.panelConnectionIndicator);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(381, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(239, 30);
+            this.panel3.TabIndex = 2;
+            // 
+            // lblConnectionStatus
+            // 
+            this.lblConnectionStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblConnectionStatus.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblConnectionStatus.Location = new System.Drawing.Point(30, 5);
+            this.lblConnectionStatus.Name = "lblConnectionStatus";
+            this.lblConnectionStatus.Size = new System.Drawing.Size(178, 20);
+            this.lblConnectionStatus.TabIndex = 0;
+            this.lblConnectionStatus.Text = "label11sss";
+            this.lblConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblConnectionStatus.Click += new System.EventHandler(this.lblConnectionStatus_Click);
+            // 
+            // panelConnectionIndicator
+            // 
+            this.panelConnectionIndicator.BackColor = System.Drawing.Color.LimeGreen;
+            this.panelConnectionIndicator.Location = new System.Drawing.Point(220, 10);
+            this.panelConnectionIndicator.Name = "panelConnectionIndicator";
+            this.panelConnectionIndicator.Size = new System.Drawing.Size(10, 10);
+            this.panelConnectionIndicator.TabIndex = 1;
             // 
             // leftPanel
             // 
@@ -732,6 +768,8 @@
             this.panel2.PerformLayout();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
+            this.mainHeader.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.leftPanel.ResumeLayout(false);
             this.scrollPanel.ResumeLayout(false);
             this.scrollPanel.PerformLayout();
@@ -799,5 +837,8 @@
         private TextBox txtSeparator;
         private CheckBox chkLogToFile;
         private CheckBox chkQuote;
+        private Panel panelConnectionIndicator;
+        private Label lblConnectionStatus;
+        private Panel panel3;
     }
 }

@@ -60,7 +60,9 @@ namespace BV_Modbus_Client.BusinessLayer
 
         internal override void ExecuteRead()
         {
-            ushort[] rawData = base.mbCon.Master.ReadHoldingRegisters(base.SlaveAddress, startAddress, NumberOfRegisters);
+            //base.mbCon.Master.ReadHoldingRegisters()
+            Span<ushort> spandata   = base.mbCon.Master.ReadHoldingRegisters<ushort>(base.SlaveAddress, startAddress, NumberOfRegisters);
+            ushort[] rawData = spandata.ToArray();
             ReadCount++;
             DataBuffer.Clear();
             for (ushort i = 0; i < rawData.Length; i++)
@@ -81,7 +83,9 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
 
                 var stopwatch = Stopwatch.StartNew();
-                ushort[] rawData = await base.mbCon.Master.ReadHoldingRegistersAsync(base.SlaveAddress, startAddress, NumberOfRegisters);
+                Memory<ushort> memData= await base.mbCon.Master.ReadHoldingRegistersAsync<ushort>(base.SlaveAddress, startAddress, NumberOfRegisters);
+                ushort[] rawData = memData.ToArray();
+
                 stopwatch.Stop();
                 ResponseTimeMs = stopwatch.Elapsed.TotalMilliseconds;
 
@@ -136,6 +140,11 @@ namespace BV_Modbus_Client.BusinessLayer
             WriteCount++;
         }
 
-
+        public override object Clone()
+        {
+            MultipleHoldingRegisters next = new MultipleHoldingRegisters(mbCon);
+            
+            return this.CopyAllBaseProperties(next); //new NotImplementedException();
+        }
     }
 }

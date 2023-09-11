@@ -36,6 +36,11 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public override ushort NumberOfRegisters { get; set; } = 4;
 
+        public override object Clone()
+        {
+            throw new NotImplementedException();
+        }
+
         internal override void ExecuteRead()
         {
             throw new NotImplementedException();

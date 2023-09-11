@@ -64,7 +64,6 @@
             this.MainTopPanel = new System.Windows.Forms.Panel();
             this.StatisticsPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.lblResponseTime = new System.Windows.Forms.Label();
             this.lblWriteCounter = new System.Windows.Forms.Label();
@@ -77,6 +76,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.propGridFc = new System.Windows.Forms.PropertyGrid();
             this.mainHeader = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblConnectionStatus = new System.Windows.Forms.Label();
+            this.panelConnectionIndicator = new System.Windows.Forms.Panel();
             this.leftPanel = new System.Windows.Forms.Panel();
             this.scrollPanel = new System.Windows.Forms.Panel();
             this.FCHeader = new System.Windows.Forms.Panel();
@@ -86,7 +88,6 @@
             this.contextMenuAddFC = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.multipleHoldingRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singleHoldingRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.dgvContext.SuspendLayout();
@@ -101,6 +102,8 @@
             this.StatisticsPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SettingsPanel.SuspendLayout();
+            this.mainHeader.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.leftPanel.SuspendLayout();
             this.scrollPanel.SuspendLayout();
             this.FCHeader.SuspendLayout();
@@ -481,8 +484,6 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Controls.Add(this.lblResponseTime);
             this.panel2.Controls.Add(this.lblWriteCounter);
@@ -496,16 +497,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(215, 222);
             this.panel2.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 146);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // richTextBox1
             // 
@@ -620,11 +611,42 @@
             // mainHeader
             // 
             this.mainHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(165)))), ((int)(((byte)(255)))));
+            this.mainHeader.Controls.Add(this.panel3);
             this.mainHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.mainHeader.Location = new System.Drawing.Point(0, 0);
             this.mainHeader.Name = "mainHeader";
             this.mainHeader.Size = new System.Drawing.Size(620, 30);
             this.mainHeader.TabIndex = 18;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblConnectionStatus);
+            this.panel3.Controls.Add(this.panelConnectionIndicator);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(381, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(239, 30);
+            this.panel3.TabIndex = 2;
+            // 
+            // lblConnectionStatus
+            // 
+            this.lblConnectionStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblConnectionStatus.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblConnectionStatus.Location = new System.Drawing.Point(30, 5);
+            this.lblConnectionStatus.Name = "lblConnectionStatus";
+            this.lblConnectionStatus.Size = new System.Drawing.Size(178, 20);
+            this.lblConnectionStatus.TabIndex = 0;
+            this.lblConnectionStatus.Text = "label11sss";
+            this.lblConnectionStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblConnectionStatus.Click += new System.EventHandler(this.lblConnectionStatus_Click);
+            // 
+            // panelConnectionIndicator
+            // 
+            this.panelConnectionIndicator.BackColor = System.Drawing.Color.LimeGreen;
+            this.panelConnectionIndicator.Location = new System.Drawing.Point(220, 10);
+            this.panelConnectionIndicator.Name = "panelConnectionIndicator";
+            this.panelConnectionIndicator.Size = new System.Drawing.Size(10, 10);
+            this.panelConnectionIndicator.TabIndex = 1;
             // 
             // leftPanel
             // 
@@ -716,16 +738,6 @@
             this.singleHoldingRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.singleHoldingRegisterToolStripMenuItem.Text = "Single Holding Register";
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(125, 150);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -756,6 +768,8 @@
             this.panel2.PerformLayout();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
+            this.mainHeader.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.leftPanel.ResumeLayout(false);
             this.scrollPanel.ResumeLayout(false);
             this.scrollPanel.PerformLayout();
@@ -823,7 +837,8 @@
         private TextBox txtSeparator;
         private CheckBox chkLogToFile;
         private CheckBox chkQuote;
-        private Button button1;
-        private Button button3;
+        private Panel panelConnectionIndicator;
+        private Label lblConnectionStatus;
+        private Panel panel3;
     }
 }

@@ -8,6 +8,7 @@ using System.IO.Ports;
 using System.Net;
 using System.Net.Sockets;
 using static BV_Modbus_Client.BusinessLayer.FormatConverter;
+using FluentModbus;
 
 namespace BV_Modbus_Client
 {
@@ -59,6 +60,7 @@ namespace BV_Modbus_Client
             //numPollInterval.Value = Convert.ToDecimal(bll.UserConfig.Timer_PollInterval);
             DisplayValFromConfig();
             //TestSerial();
+            UpdateConnectionStatus();
         }
         public static byte[] StringToByteArray(string hex)
         {
@@ -501,6 +503,7 @@ namespace BV_Modbus_Client
         {
             NetworkStatusForm fom = new NetworkStatusForm(bll);
             fom.ShowDialog();
+            UpdateConnectionStatus();
         }
 
         private void multipleHoldingRegistersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -587,6 +590,41 @@ namespace BV_Modbus_Client
             //    str += registers[i].ToString() + ", ";
             //}
             //MessageBox.Show(str);
+        }
+
+        void UpdateConnectionStatus()
+        {
+            //ModbusMaster d = new 
+            bool _isConnected = false;
+            string transport = "";
+            if (bll.mbCon.Master is ModbusTcpClient)
+            {
+                _isConnected = (bll.mbCon.Master as ModbusTcpClient).IsConnected;
+                transport = bll.mbCon.TCP_Hostname + ":" + bll.mbCon.TCP_Port;
+            }
+            else if (bll.mbCon.Master is ModbusRtuClient)
+            {
+                _isConnected = (bll.mbCon.Master as ModbusRtuClient).IsConnected;
+                transport = bll.mbCon.RTU_SerialPortName;
+            }
+
+            if (_isConnected)
+            {
+                panelConnectionIndicator.BackColor = Color.Green;
+                lblConnectionStatus.Text = "Connected to: " + transport;
+            }
+            else
+            {
+                panelConnectionIndicator.BackColor = Color.Red;
+                lblConnectionStatus.Text = "Disconnected";
+            }
+        }
+
+        private void lblConnectionStatus_Click(object sender, EventArgs e)
+        {
+            NetworkStatusForm fom = new NetworkStatusForm(bll);
+            fom.ShowDialog();
+            UpdateConnectionStatus();
         }
     }
 }

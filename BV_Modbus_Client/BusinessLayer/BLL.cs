@@ -3,7 +3,26 @@
 
 namespace BV_Modbus_Client.BusinessLayer
 {
+    //Modbus info
+//-ReadHoldingRegisters
+//-WriteMultipleRegisters
+    
+//-WriteSingleCoil
+//-Read Coils
 
+//-ReadDiscrete inputs
+
+//-ReadinputRegisters
+
+//-ReadWriteMultipleRegisters
+
+//-WriteSingleRegister
+
+
+//Holding are 16-bit(readWrite)
+//Coils are 1-bit registers(readWrite)
+//Input registers are 16-bit registers used for input, and may only be read
+//Discrete Inputs are 1-bit registers used as inputs, and may only be read
     internal class BLL
     {
         internal MbConnection mbCon;
@@ -144,26 +163,41 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         #endregion
         #region FcRelated
-        internal void AddMultiHR_FC()
-        {
+        //internal void AddMultiHR_FC()
+        //{
 
-            MultipleHoldingRegisters fcobj = new MultipleHoldingRegisters(mbCon);
-            //fcobj.Format = this.formatConverter;  // Set the format converter object
-            UserConfig.FcWrappers.Add(fcobj);
-            //protected virtual void FcObjectAdded
-            //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
+        //    MultipleHoldingRegisters fcobj = new MultipleHoldingRegisters(mbCon);
+        //    //fcobj.Format = this.formatConverter;  // Set the format converter object
+        //    UserConfig.FcWrappers.Add(fcobj);
+        //    //protected virtual void FcObjectAdded
+        //    //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
+        //    UpdateFCList();
+        //}
+        internal void AddFunctionCode(Type type)
+        {
+            FcWrapperBase fc;
+            if (type == typeof(MultipleCoils))
+            {
+                fc = new MultipleCoils(mbCon);
+                UserConfig.FcWrappers.Add(fc);
+            }
+            else if (type == typeof(MultipleHoldingRegisters))
+            {
+                fc = new MultipleHoldingRegisters(mbCon);
+                UserConfig.FcWrappers.Add(fc);
+            }
             UpdateFCList();
         }
 
-        internal void AddFc15()
-        {
-            FcWrapperFc15 fcobj = new FcWrapperFc15(mbCon);
-            //fcobj.Format = this.formatConverter;  // Set the format converter object
-            UserConfig.FcWrappers.Add(fcobj);
-            //protected virtual void FcObjectAdded
-            //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
-            UpdateFCList();
-        }
+        //internal void AddFc15()
+        //{
+        //    FcWrapperFc15 fcobj = new FcWrapperFc15(mbCon);
+        //    //fcobj.Format = this.formatConverter;  // Set the format converter object
+        //    UserConfig.FcWrappers.Add(fcobj);
+        //    //protected virtual void FcObjectAdded
+        //    //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
+        //    UpdateFCList();
+        //}
         internal void RemoveFC(FcWrapperBase fcCommand)
         {
             UserConfig.pollTimer.UpdatePollList(fcCommand, false); // Removing the item from the list.

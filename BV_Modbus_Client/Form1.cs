@@ -262,7 +262,8 @@ namespace BV_Modbus_Client
 
         private void addFcButton2_ButtonClicked(object sender, EventArgs e)
         {
-            bll.AddFc15();
+            //bll.AddFc15();
+            bll.AddFunctionCode(typeof(MultipleHoldingRegisters));
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -508,7 +509,8 @@ namespace BV_Modbus_Client
 
         private void multipleHoldingRegistersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bll.AddMultiHR_FC();
+            //bll.AddMultiHR_FC();
+            bll.AddFunctionCode(typeof(MultipleHoldingRegisters));
         }
 
         private void miPasteData_Click(object sender, EventArgs e)
@@ -581,7 +583,7 @@ namespace BV_Modbus_Client
 
             //ushort[] registers = bll.mbCon.Master.ReadHoldingRegisters(1, 1, 1);
             //ushort[] registers = bll.SelectedFcRequest.mbCon.Master.ReadHoldingRegisters(1, 1, 1);
-            bll.SelectedFcRequest.ExecuteRead(); // mbCon.Master.ReadHoldingRegisters(1, 1, 1);
+            //bll.SelectedFcRequest.ExecuteRead(); // mbCon.Master.ReadHoldingRegisters(1, 1, 1);
 
 
             //string str = "";
@@ -625,6 +627,11 @@ namespace BV_Modbus_Client
             NetworkStatusForm fom = new NetworkStatusForm(bll);
             fom.ShowDialog();
             UpdateConnectionStatus();
+        }
+
+        private void multipleCoilsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bll.AddFunctionCode(typeof(MultipleCoils));
         }
     }
 }

@@ -88,7 +88,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     // Databits
                 };
                 (master1 as ModbusRtuClient).Connect(RTU_SerialPortName);
-
+                //(master1 as ModbusRtuClient).WriteMultipleRegistersAsync
 
 
 

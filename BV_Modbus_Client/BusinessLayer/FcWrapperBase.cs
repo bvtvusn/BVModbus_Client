@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace BV_Modbus_Client.BusinessLayer
 {
     [DataContract]
-    [KnownType(typeof(FcWrapperFc3))] // Example: FcWrapperFc3
-    [KnownType(typeof(FcWrapperFc15))] // Example: FcWrapperFc3
-    [KnownType(typeof(MultipleHoldingRegisters))] // Example: FcWrapperFc3
+    //[KnownType(typeof(FcWrapperFc3))] // Example: FcWrapperFc3
+    [KnownType(typeof(MultipleCoils))] 
+    [KnownType(typeof(MultipleHoldingRegisters))] 
     internal abstract class FcWrapperBase :ICloneable
     {
         private string description;
@@ -182,8 +182,8 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
         //internal abstract void Execute();
-        internal abstract void ExecuteWrite();
-        internal abstract void ExecuteRead();
+        //internal abstract void ExecuteWrite();
+        //internal abstract void ExecuteRead();
         internal abstract Task ExecuteReadAsync();
         internal abstract Task ExecuteWriteAsync();
         //internal abstract void SetFcData(string[] strings);

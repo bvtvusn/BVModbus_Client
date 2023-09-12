@@ -29,10 +29,10 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
 
-        internal override void ExecuteRead()
-        {
-            throw new NotImplementedException();
-        }
+        //internal override void ExecuteRead()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         internal override async Task ExecuteReadAsync()
         {
@@ -69,10 +69,10 @@ namespace BV_Modbus_Client.BusinessLayer
             }
         }
 
-        internal override void ExecuteWrite()
-        {
-            throw new NotImplementedException();
-        }
+        //internal override void ExecuteWrite()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         internal override async Task ExecuteWriteAsync()
         {

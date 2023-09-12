@@ -573,6 +573,11 @@ namespace BV_Modbus_Client.BusinessLayer
             return dt;
         }
 
+        public static bool IsBitSet(byte b, int pos)
+        {
+            return (b & (1 << pos)) != 0;
+        }
+
         //public static DataTable ArrayToDatatableColumn((string[] mydata))
         //{
         //    int maxrows = 10;

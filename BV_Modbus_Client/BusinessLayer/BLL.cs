@@ -163,16 +163,16 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         #endregion
         #region FcRelated
-        internal void AddMultiHR_FC()
-        {
+        //internal void AddMultiHR_FC()
+        //{
 
-            MultipleHoldingRegisters fcobj = new MultipleHoldingRegisters(mbCon);
-            //fcobj.Format = this.formatConverter;  // Set the format converter object
-            UserConfig.FcWrappers.Add(fcobj);
-            //protected virtual void FcObjectAdded
-            //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
-            UpdateFCList();
-        }
+        //    MultipleHoldingRegisters fcobj = new MultipleHoldingRegisters(mbCon);
+        //    //fcobj.Format = this.formatConverter;  // Set the format converter object
+        //    UserConfig.FcWrappers.Add(fcobj);
+        //    //protected virtual void FcObjectAdded
+        //    //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
+        //    UpdateFCList();
+        //}
         internal void AddFunctionCode(Type type)
         {
             FcWrapperBase fc;
@@ -189,15 +189,15 @@ namespace BV_Modbus_Client.BusinessLayer
             UpdateFCList();
         }
 
-        internal void AddFc15()
-        {
-            FcWrapperFc15 fcobj = new FcWrapperFc15(mbCon);
-            //fcobj.Format = this.formatConverter;  // Set the format converter object
-            UserConfig.FcWrappers.Add(fcobj);
-            //protected virtual void FcObjectAdded
-            //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
-            UpdateFCList();
-        }
+        //internal void AddFc15()
+        //{
+        //    FcWrapperFc15 fcobj = new FcWrapperFc15(mbCon);
+        //    //fcobj.Format = this.formatConverter;  // Set the format converter object
+        //    UserConfig.FcWrappers.Add(fcobj);
+        //    //protected virtual void FcObjectAdded
+        //    //OnFcObjectAdded?.Invoke(fcobj, new EventArgs());
+        //    UpdateFCList();
+        //}
         internal void RemoveFC(FcWrapperBase fcCommand)
         {
             UserConfig.pollTimer.UpdatePollList(fcCommand, false); // Removing the item from the list.

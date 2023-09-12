@@ -58,21 +58,21 @@ namespace BV_Modbus_Client.BusinessLayer
 
         //}
 
-        internal override void ExecuteRead()
-        {
-            //base.mbCon.Master.ReadHoldingRegisters()
-            Span<ushort> spandata   = base.mbCon.Master.ReadHoldingRegisters<ushort>(base.SlaveAddress, startAddress, NumberOfRegisters);
-            ushort[] rawData = spandata.ToArray();
-            ReadCount++;
-            DataBuffer.Clear();
-            for (ushort i = 0; i < rawData.Length; i++)
-            {
-                ushort address = (ushort)(i + startAddress);
-                DataBuffer.Add(address, (rawData[i]));
+        //internal override void ExecuteRead()
+        //{
+        //    //base.mbCon.Master.ReadHoldingRegisters()
+        //    Span<ushort> spandata   = base.mbCon.Master.ReadHoldingRegisters<ushort>(base.SlaveAddress, startAddress, NumberOfRegisters);
+        //    ushort[] rawData = spandata.ToArray();
+        //    ReadCount++;
+        //    DataBuffer.Clear();
+        //    for (ushort i = 0; i < rawData.Length; i++)
+        //    {
+        //        ushort address = (ushort)(i + startAddress);
+        //        DataBuffer.Add(address, (rawData[i]));
 
-            }
-            base.ForceDataRefresh("");
-        }
+        //    }
+        //    base.ForceDataRefresh("");
+        //}
         internal override async Task ExecuteReadAsync()
         {
             try
@@ -133,12 +133,12 @@ namespace BV_Modbus_Client.BusinessLayer
 
             }
         }
-        internal override void ExecuteWrite()
-        {
-            ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
-            base.mbCon.Master.WriteMultipleRegisters(base.SlaveAddress, StartAddress, sendData);
-            WriteCount++;
-        }
+        //internal override void ExecuteWrite()
+        //{
+        //    ushort[] sendData = ReadFromBuffer(StartAddress, NumberOfRegisters);
+        //    base.mbCon.Master.WriteMultipleRegisters(base.SlaveAddress, StartAddress, sendData);
+        //    WriteCount++;
+        //}
 
         public override object Clone()
         {

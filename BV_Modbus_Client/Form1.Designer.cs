@@ -88,6 +88,7 @@
             this.contextMenuAddFC = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.multipleHoldingRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singleHoldingRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.multipleCoilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.dgvContext.SuspendLayout();
@@ -721,9 +722,10 @@
             this.contextMenuAddFC.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuAddFC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.multipleHoldingRegistersToolStripMenuItem,
-            this.singleHoldingRegisterToolStripMenuItem});
+            this.singleHoldingRegisterToolStripMenuItem,
+            this.multipleCoilsToolStripMenuItem});
             this.contextMenuAddFC.Name = "contextMenuStrip1";
-            this.contextMenuAddFC.Size = new System.Drawing.Size(215, 48);
+            this.contextMenuAddFC.Size = new System.Drawing.Size(215, 92);
             // 
             // multipleHoldingRegistersToolStripMenuItem
             // 
@@ -737,6 +739,13 @@
             this.singleHoldingRegisterToolStripMenuItem.Name = "singleHoldingRegisterToolStripMenuItem";
             this.singleHoldingRegisterToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.singleHoldingRegisterToolStripMenuItem.Text = "Single Holding Register";
+            // 
+            // multipleCoilsToolStripMenuItem
+            // 
+            this.multipleCoilsToolStripMenuItem.Name = "multipleCoilsToolStripMenuItem";
+            this.multipleCoilsToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.multipleCoilsToolStripMenuItem.Text = "Multiple Coils";
+            this.multipleCoilsToolStripMenuItem.Click += new System.EventHandler(this.multipleCoilsToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -840,5 +849,6 @@
         private Panel panelConnectionIndicator;
         private Label lblConnectionStatus;
         private Panel panel3;
+        private ToolStripMenuItem multipleCoilsToolStripMenuItem;
     }
 }

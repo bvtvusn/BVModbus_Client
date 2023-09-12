@@ -581,7 +581,7 @@ namespace BV_Modbus_Client
 
             //ushort[] registers = bll.mbCon.Master.ReadHoldingRegisters(1, 1, 1);
             //ushort[] registers = bll.SelectedFcRequest.mbCon.Master.ReadHoldingRegisters(1, 1, 1);
-            bll.SelectedFcRequest.ExecuteRead(); // mbCon.Master.ReadHoldingRegisters(1, 1, 1);
+            //bll.SelectedFcRequest.ExecuteRead(); // mbCon.Master.ReadHoldingRegisters(1, 1, 1);
 
 
             //string str = "";
@@ -625,6 +625,11 @@ namespace BV_Modbus_Client
             NetworkStatusForm fom = new NetworkStatusForm(bll);
             fom.ShowDialog();
             UpdateConnectionStatus();
+        }
+
+        private void multipleCoilsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bll.AddFunctionCode(typeof(MultipleCoils));
         }
     }
 }

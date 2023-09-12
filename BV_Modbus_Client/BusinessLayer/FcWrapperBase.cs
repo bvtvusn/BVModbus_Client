@@ -182,8 +182,8 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
         //internal abstract void Execute();
-        internal abstract void ExecuteWrite();
-        internal abstract void ExecuteRead();
+        //internal abstract void ExecuteWrite();
+        //internal abstract void ExecuteRead();
         internal abstract Task ExecuteReadAsync();
         internal abstract Task ExecuteWriteAsync();
         //internal abstract void SetFcData(string[] strings);

@@ -20,6 +20,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             base.mbCon = mbCon;
             Description = "Multiple Coils";
+            base.DisplayType = FormatConverter.FormatName.Boolean;
 
             //Testing
             //startAddress = 0;

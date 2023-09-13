@@ -19,7 +19,8 @@ namespace BV_Modbus_Client.BusinessLayer
             Uint32,
             Int32,
             Double,
-            Ascii
+            Ascii,
+            Boolean
         }
         public bool ByteSwap { get; set; }
         public FormatName CurrentFormat { get; set; } = FormatName.Uint16;
@@ -39,7 +40,7 @@ namespace BV_Modbus_Client.BusinessLayer
             }
 
 
-            if (format == FormatName.Uint16)
+            if (format == FormatName.Uint16 || format == FormatName.Boolean)
             {
                 return rawdata.Cast<ushort>().Select(x => x.ToString()).ToArray();
             }
@@ -158,7 +159,7 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 try
                 {
-                    if (format == FormatName.Uint16)
+                    if (format == FormatName.Uint16 || format == FormatName.Boolean)
                     {
                         result[i] = Convert.ToUInt16(rawString[i]);
                     }
@@ -485,19 +486,74 @@ namespace BV_Modbus_Client.BusinessLayer
         //    return binaryData;
         //}
 
-        public static DataTable ArrayToDatatableRow(string[] mydata)
+        public static DataTable ArrayToDatatableRow(string[] mydata, bool showBoolean)
         {
-            DataTable dt = new DataTable();
+            //Type CellType = typeof(string);
+            //if (showBoolean)
+            //{
+            //    CellType = typeof(bool);
+            //}
+            if (showBoolean)
+            {
+DataTable dt = new DataTable();
             for (int i = 0; i < mydata.Length; i++)
             {
-                dt.Columns.Add("Column" + (i + 1));
+                //if (showBoolean)
+                //{
+                    dt.Columns.Add("Column" + (i + 1), typeof(bool));
+
+                //}
+                //else
+                //{
+                //    dt.Columns.Add("Column" + (i + 1));
+                //}
             }
             DataRow dr = dt.NewRow();
-            dr.ItemArray = mydata;
+            if (showBoolean)
+            {
+                    //dt.Rows.Add(true, true, true, true);
+                    for (int i = 0; i < mydata.Length; i++)
+                    {
+                        dr.SetField(i, mydata[i] !="0" );
+                    }
+                    //dr.ItemArray = mydata.Select(i => (object)(i != "0")).ToArray();
+                    //dr.SetField(0, true); //.ItemArray[0] = true; // .Add(false, true,false,true);
+                    //dr.SetField(1, true);
+                    //dr.SetField(2, true);
+                    //dr.SetField(3, true);
+                    //dr.ItemArray[1] = true;
+                    //dr.ItemArray[2] = true;
+                    //dr.ItemArray[3] = true;
+                }
+            else
+            {
+                //dr.ItemArray = mydata;
+            }
             dt.Rows.Add(dr);
 
             //dataGridView1.DataSource = dt;
             return dt;
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                for (int i = 0; i < mydata.Length; i++)
+                {                    
+                    dt.Columns.Add("Column" + (i + 1),typeof(string));
+                }
+                DataRow dr = dt.NewRow();
+                if (showBoolean)
+                {
+                    for (int i = 0; i < mydata.Length; i++)
+                    {
+                        dr.SetField(i, mydata[i] );
+                    }
+                }
+                dt.Rows.Add(dr);
+                return dt;
+
+            }
+            
         }
 
         public static DataTable ArrayToDatatableColumn(string[] mydata)

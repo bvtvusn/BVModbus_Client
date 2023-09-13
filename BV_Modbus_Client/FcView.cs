@@ -296,7 +296,60 @@ namespace BV_Modbus_Client
                 data = ((string, string)[])data.Take(4).ToArray();
             }
             string[] viewData = data.Select(x => x.Item1).ToArray();
-            dataGridView2.DataSource = FormatConverter.ArrayToDatatableRow(viewData);
+
+            //DataTable testdt = new DataTable();
+            //testdt.Columns.Add("t1", typeof(bool));
+            //testdt.Columns.Add("t2", typeof(bool));
+            //testdt.Rows.Add(false, true);
+            //dataGridView2.DataSource = testdt;
+            //try
+            //{
+            ////dataGridView2.Columns[0].ValueType = typeof(bool);
+
+            //}
+            //catch (Exception)
+            //{
+
+            //}     
+            bool chk = fcCommand.DisplayType == FormatConverter.FormatName.Boolean;
+            // dataGridView2.DataSource = FormatConverter.ArrayToDatatableRow(viewData,false);
+            //dataGridView2.Columns[0].ValueType = typeof(DataGridViewCheckBoxColumn);
+            dataGridView2.Columns.Clear();
+
+            if (chk)
+            {
+                for (int i = 0; i < viewData.Length; i++)
+                {
+                    DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
+                    checkColumn.ReadOnly = false;
+                    dataGridView2.Columns.Add(checkColumn);
+                }
+                DataGridViewRow dr = new DataGridViewRow();
+                dr.CreateCells(dataGridView2);
+                for (int i = 0; i < viewData.Length; i++)
+                {
+                    dr.Cells[i].Value = viewData[i] != "0";
+
+                }
+                dataGridView2.Rows.Add(dr);
+            }
+            else
+            {
+                for (int i = 0; i < viewData.Length; i++)
+                {
+                    DataGridViewTextBoxColumn checkColumn = new DataGridViewTextBoxColumn();
+                    checkColumn.ReadOnly = false;
+                    dataGridView2.Columns.Add(checkColumn);
+                }
+                DataGridViewRow dr = new DataGridViewRow();
+                dr.CreateCells(dataGridView2);
+                for (int i = 0; i < viewData.Length; i++)
+                {
+                    dr.Cells[i].Value = viewData[i] ;
+                }
+                dataGridView2.Rows.Add(dr);
+            }
+
         }
         #endregion
 
@@ -331,7 +384,16 @@ namespace BV_Modbus_Client
                 for (int i = 0; i < columnCount; i++)
                 {
                     DataGridViewCell cell = firstRow.Cells[i];
-                    rowData[i] = cell.Value != null ? cell.Value.ToString() : string.Empty;
+                    if (cell is DataGridViewCheckBoxCell)
+                    {
+                        rowData[i] = cell.Value != null ? Convert.ToUInt16(cell.Value).ToString() : string.Empty;
+                    }
+                    else
+                    {
+                        rowData[i] = cell.Value != null ? cell.Value.ToString() : string.Empty;
+
+                    }
+
                 }
 
                 return rowData;

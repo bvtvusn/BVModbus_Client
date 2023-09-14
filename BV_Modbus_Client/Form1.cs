@@ -624,6 +624,7 @@ namespace BV_Modbus_Client
 
         private void lblConnectionStatus_Click(object sender, EventArgs e)
         {
+            UpdateConnectionStatus();
             NetworkStatusForm fom = new NetworkStatusForm(bll);
             fom.ShowDialog();
             UpdateConnectionStatus();
@@ -632,6 +633,11 @@ namespace BV_Modbus_Client
         private void multipleCoilsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bll.AddFunctionCode(typeof(MultipleCoils));
+        }
+
+        private void readInputRegistersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bll.AddFunctionCode(typeof(ReadInputRegisters));
         }
     }
 }

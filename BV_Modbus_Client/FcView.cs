@@ -48,6 +48,8 @@ namespace BV_Modbus_Client
             UpdateFcInfo();
             toolTip1.SetToolTip(btnExecuteRead, fcCommand.OperationReadDescription);
             toolTip1.SetToolTip(btnRunFc2, fcCommand.OperationWriteDescription);
+
+            btnRunFc2.Visible = fcCommand.OperationWriteDescription != "Write"; // Hide button if no description is supplied
             //dataGridView2.ReadOnly = !fcCommand.FcTypeWrite;
             //if (fcCommand.FcTypeWrite)
             //{
@@ -287,13 +289,17 @@ namespace BV_Modbus_Client
         }
         private void FillPreviewTable()
         {
-            
-
+            bool chk = fcCommand.DisplayType == FormatConverter.FormatName.Boolean;
+            int maxDisplayLength = 4;
+            if (chk)
+            {
+                maxDisplayLength = 8;
+            }
 
             (string, string)[] data = fcCommand.GetDataAsString();
-            if (data.Length > 4)
+            if (data.Length > maxDisplayLength)
             {
-                data = ((string, string)[])data.Take(4).ToArray();
+                data = ((string, string)[])data.Take(maxDisplayLength).ToArray();
             }
             string[] viewData = data.Select(x => x.Item1).ToArray();
 
@@ -311,7 +317,7 @@ namespace BV_Modbus_Client
             //{
 
             //}     
-            bool chk = fcCommand.DisplayType == FormatConverter.FormatName.Boolean;
+            
             // dataGridView2.DataSource = FormatConverter.ArrayToDatatableRow(viewData,false);
             //dataGridView2.Columns[0].ValueType = typeof(DataGridViewCheckBoxColumn);
             dataGridView2.Columns.Clear();

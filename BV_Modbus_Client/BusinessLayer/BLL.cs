@@ -186,6 +186,12 @@ namespace BV_Modbus_Client.BusinessLayer
                 fc = new MultipleHoldingRegisters(mbCon);
                 UserConfig.FcWrappers.Add(fc);
             }
+            else if (type == typeof(ReadInputRegisters))
+            {
+                fc = new ReadInputRegisters(mbCon);
+                UserConfig.FcWrappers.Add(fc);
+            }
+            //
             UpdateFCList();
         }
 

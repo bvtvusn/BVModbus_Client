@@ -639,5 +639,15 @@ namespace BV_Modbus_Client
         {
             bll.AddFunctionCode(typeof(ReadInputRegisters));
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void readToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bll.AddFunctionCode(typeof(ReadDiscreteInputs));
+        }
     }
 }

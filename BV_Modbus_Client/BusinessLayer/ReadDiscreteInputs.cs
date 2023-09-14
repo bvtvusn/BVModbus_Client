@@ -9,30 +9,27 @@ using System.Threading.Tasks;
 namespace BV_Modbus_Client.BusinessLayer
 {
     [DataContract]
-    internal class ReadInputRegisters : FcWrapperBase
+    internal class ReadDiscreteInputs: FcWrapperBase
     {
-        //private ushort[] data;
         private ushort numberOfRegisters;
 
-        public ReadInputRegisters(MbConnection mbCon) // Read multiple coils
+        public ReadDiscreteInputs(MbConnection mbCon) // Read multiple coils
         {
-            //base.Parent = parent;
 
             base.mbCon = mbCon;
-            Description = "Read Input Registers";
-            //base.DisplayType = FormatConverter.FormatName.Boolean;
-
-            
+            Description = "Read Discrete Inputs";
+            base.DisplayType = FormatConverter.FormatName.Boolean;
             NumberOfRegisters = 4;
+
             DataBuffer = new Dictionary<ushort, ushort>();
 
         }
-        public override string OperationReadDescription { get { return "FC4: Read Input Registers"; } }
-        //public override string OperationWriteDescription { get { return ""; } }
+        public override string OperationReadDescription { get { return "FC2: Read Discrete Inputs"; } }
+        //public override string OperationWriteDescription { get { return "FC5: Write SingleCoil (for each)"; } }
         [DataMember]
         public override ushort NumberOfRegisters { get { return numberOfRegisters; } set { numberOfRegisters = value; UpdateFcSettings(); } }
 
-       
+        
         internal override async Task ExecuteReadAsync()
         {
             try
@@ -43,20 +40,21 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
 
                 var stopwatch = Stopwatch.StartNew();
-                Memory<ushort> memData = await base.mbCon.Master.ReadInputRegistersAsync<ushort>(base.SlaveAddress, startAddress, NumberOfRegisters);
-                ushort[] rawData = memData.ToArray();
-
+                Memory<byte> _bitData = await base.mbCon.Master.ReadDiscreteInputsAsync(base.SlaveAddress, startAddress, NumberOfRegisters);
+                byte[] bitData = _bitData.ToArray();
                 stopwatch.Stop();
                 ResponseTimeMs = stopwatch.Elapsed.TotalMilliseconds;
-
-
-
                 ReadCount++;
+
+
                 DataBuffer.Clear();
-                for (ushort i = 0; i < rawData.Length; i++)
+                for (ushort i = 0; i < NumberOfRegisters; i++)
                 {
+                    int bytenum = i / 8;
+                    int bIndex = i % 8;
+                    bool coil = FormatConverter.IsBitSet(bitData[bytenum], bIndex);
                     ushort address = (ushort)(i + startAddress);
-                    DataBuffer.Add(address, (rawData[i]));
+                    DataBuffer.Add(address, (Convert.ToUInt16(coil)));
 
                 }
                 base.ForceFcActivatedEvent();
@@ -65,17 +63,21 @@ namespace BV_Modbus_Client.BusinessLayer
             catch (Exception e)
             {
                 base.ForceDataRefresh(e.Message);
+
             }
         }
         internal override async Task ExecuteWriteAsync()
         {
-            base.ForceDataRefresh("Can not write to Input registers");
+            
+                base.ForceDataRefresh("Can not write to discrete inputs");
+
+            
         }
 
 
         public override object Clone()
         {
-            ReadInputRegisters next = new ReadInputRegisters(mbCon);
+            ReadDiscreteInputs next = new ReadDiscreteInputs(mbCon);
 
             return this.CopyAllBaseProperties(next);
         }

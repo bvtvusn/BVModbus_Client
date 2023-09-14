@@ -567,6 +567,7 @@
             this.label4.Size = new System.Drawing.Size(97, 15);
             this.label4.TabIndex = 1;
             this.label4.Text = "Write operations:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -755,6 +756,7 @@
             this.readToolStripMenuItem.Name = "readToolStripMenuItem";
             this.readToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.readToolStripMenuItem.Text = "Read Discrete Inputs";
+            this.readToolStripMenuItem.Click += new System.EventHandler(this.readToolStripMenuItem_Click);
             // 
             // Form1
             // 

@@ -501,6 +501,31 @@ namespace BV_Modbus_Client
 
         }
 
+        private void copyDataToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            (string, string)[] data = fcCommand.GetDataAsString();
+            string[] viewData = data.Select(x => x.Item1).ToArray();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < viewData.Length; i++)
+            {
+                sb.AppendLine(viewData[i]);
+            }
+            Clipboard.SetText(sb.ToString());
+            //fcCommand.
+        }
+
+        private void pasteDataFromClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string[] lines = Clipboard.GetText().Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+             //int entries = Math.Min(lines.Length, fcCommand.NumberOfRegisters);
+
+            fcCommand.SetFcData(lines);
+            //for (int i = 0; i < entries; i++)
+            //{
+            //    fcCommand.
+            //}
+        }
+
         //static public void UIThread(this Control control, Action code)
         //{
         //    if (control.InvokeRequired)

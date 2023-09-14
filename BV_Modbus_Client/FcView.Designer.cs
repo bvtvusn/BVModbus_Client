@@ -35,6 +35,9 @@
             this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateFCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeFcTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyDataToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteDataFromClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExecuteRead = new System.Windows.Forms.Button();
             this.picError = new System.Windows.Forms.PictureBox();
             this.lblAddress = new System.Windows.Forms.Label();
@@ -45,7 +48,6 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.SelectedIndicatorPanel = new System.Windows.Forms.Panel();
             this.panelActionIndicator = new System.Windows.Forms.Panel();
-            this.changeFcTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -58,15 +60,17 @@
             this.aToolStripMenuItem,
             this.bToolStripMenuItem,
             this.duplicateFCToolStripMenuItem,
-            this.changeFcTypeToolStripMenuItem});
+            this.changeFcTypeToolStripMenuItem,
+            this.copyDataToClipboardToolStripMenuItem,
+            this.pasteDataFromClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 136);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // aToolStripMenuItem
             // 
             this.aToolStripMenuItem.Name = "aToolStripMenuItem";
-            this.aToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.aToolStripMenuItem.Text = "Remove";
             this.aToolStripMenuItem.Click += new System.EventHandler(this.aToolStripMenuItem_Click);
             // 
@@ -74,7 +78,7 @@
             // 
             this.bToolStripMenuItem.CheckOnClick = true;
             this.bToolStripMenuItem.Name = "bToolStripMenuItem";
-            this.bToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.bToolStripMenuItem.Text = "Polling";
             this.bToolStripMenuItem.CheckedChanged += new System.EventHandler(this.bToolStripMenuItem_CheckedChanged);
             this.bToolStripMenuItem.Click += new System.EventHandler(this.bToolStripMenuItem_Click);
@@ -82,9 +86,29 @@
             // duplicateFCToolStripMenuItem
             // 
             this.duplicateFCToolStripMenuItem.Name = "duplicateFCToolStripMenuItem";
-            this.duplicateFCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.duplicateFCToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.duplicateFCToolStripMenuItem.Text = "Duplicate";
             this.duplicateFCToolStripMenuItem.Click += new System.EventHandler(this.duplicateFCToolStripMenuItem_Click);
+            // 
+            // changeFcTypeToolStripMenuItem
+            // 
+            this.changeFcTypeToolStripMenuItem.Name = "changeFcTypeToolStripMenuItem";
+            this.changeFcTypeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.changeFcTypeToolStripMenuItem.Text = "changeFcType";
+            // 
+            // copyDataToClipboardToolStripMenuItem
+            // 
+            this.copyDataToClipboardToolStripMenuItem.Name = "copyDataToClipboardToolStripMenuItem";
+            this.copyDataToClipboardToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.copyDataToClipboardToolStripMenuItem.Text = "Copy data";
+            this.copyDataToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyDataToClipboardToolStripMenuItem_Click);
+            // 
+            // pasteDataFromClipboardToolStripMenuItem
+            // 
+            this.pasteDataFromClipboardToolStripMenuItem.Name = "pasteDataFromClipboardToolStripMenuItem";
+            this.pasteDataFromClipboardToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.pasteDataFromClipboardToolStripMenuItem.Text = "Paste data";
+            this.pasteDataFromClipboardToolStripMenuItem.Click += new System.EventHandler(this.pasteDataFromClipboardToolStripMenuItem_Click);
             // 
             // btnExecuteRead
             // 
@@ -217,12 +241,6 @@
             this.panelActionIndicator.TabIndex = 27;
             this.panelActionIndicator.Visible = false;
             // 
-            // changeFcTypeToolStripMenuItem
-            // 
-            this.changeFcTypeToolStripMenuItem.Name = "changeFcTypeToolStripMenuItem";
-            this.changeFcTypeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.changeFcTypeToolStripMenuItem.Text = "changeFcType";
-            // 
             // FcView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -269,5 +287,7 @@
         private Panel SelectedIndicatorPanel;
         private Panel panelActionIndicator;
         private ToolStripMenuItem changeFcTypeToolStripMenuItem;
+        private ToolStripMenuItem copyDataToClipboardToolStripMenuItem;
+        private ToolStripMenuItem pasteDataFromClipboardToolStripMenuItem;
     }
 }

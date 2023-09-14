@@ -48,6 +48,8 @@ namespace BV_Modbus_Client
             UpdateFcInfo();
             toolTip1.SetToolTip(btnExecuteRead, fcCommand.OperationReadDescription);
             toolTip1.SetToolTip(btnRunFc2, fcCommand.OperationWriteDescription);
+
+            btnRunFc2.Visible = fcCommand.OperationWriteDescription != "Write"; // Hide button if no description is supplied
             //dataGridView2.ReadOnly = !fcCommand.FcTypeWrite;
             //if (fcCommand.FcTypeWrite)
             //{
@@ -287,16 +289,73 @@ namespace BV_Modbus_Client
         }
         private void FillPreviewTable()
         {
-            
-
+            bool chk = fcCommand.DisplayType == FormatConverter.FormatName.Boolean;
+            int maxDisplayLength = 4;
+            if (chk)
+            {
+                maxDisplayLength = 8;
+            }
 
             (string, string)[] data = fcCommand.GetDataAsString();
-            if (data.Length > 4)
+            if (data.Length > maxDisplayLength)
             {
-                data = ((string, string)[])data.Take(4).ToArray();
+                data = ((string, string)[])data.Take(maxDisplayLength).ToArray();
             }
             string[] viewData = data.Select(x => x.Item1).ToArray();
-            dataGridView2.DataSource = FormatConverter.ArrayToDatatableRow(viewData);
+
+            //DataTable testdt = new DataTable();
+            //testdt.Columns.Add("t1", typeof(bool));
+            //testdt.Columns.Add("t2", typeof(bool));
+            //testdt.Rows.Add(false, true);
+            //dataGridView2.DataSource = testdt;
+            //try
+            //{
+            ////dataGridView2.Columns[0].ValueType = typeof(bool);
+
+            //}
+            //catch (Exception)
+            //{
+
+            //}     
+            
+            // dataGridView2.DataSource = FormatConverter.ArrayToDatatableRow(viewData,false);
+            //dataGridView2.Columns[0].ValueType = typeof(DataGridViewCheckBoxColumn);
+            dataGridView2.Columns.Clear();
+
+            if (chk)
+            {
+                for (int i = 0; i < viewData.Length; i++)
+                {
+                    DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
+                    checkColumn.ReadOnly = false;
+                    dataGridView2.Columns.Add(checkColumn);
+                }
+                DataGridViewRow dr = new DataGridViewRow();
+                dr.CreateCells(dataGridView2);
+                for (int i = 0; i < viewData.Length; i++)
+                {
+                    dr.Cells[i].Value = viewData[i] != "0";
+
+                }
+                dataGridView2.Rows.Add(dr);
+            }
+            else
+            {
+                for (int i = 0; i < viewData.Length; i++)
+                {
+                    DataGridViewTextBoxColumn checkColumn = new DataGridViewTextBoxColumn();
+                    checkColumn.ReadOnly = false;
+                    dataGridView2.Columns.Add(checkColumn);
+                }
+                DataGridViewRow dr = new DataGridViewRow();
+                dr.CreateCells(dataGridView2);
+                for (int i = 0; i < viewData.Length; i++)
+                {
+                    dr.Cells[i].Value = viewData[i] ;
+                }
+                dataGridView2.Rows.Add(dr);
+            }
+
         }
         #endregion
 
@@ -331,7 +390,16 @@ namespace BV_Modbus_Client
                 for (int i = 0; i < columnCount; i++)
                 {
                     DataGridViewCell cell = firstRow.Cells[i];
-                    rowData[i] = cell.Value != null ? cell.Value.ToString() : string.Empty;
+                    if (cell is DataGridViewCheckBoxCell)
+                    {
+                        rowData[i] = cell.Value != null ? Convert.ToUInt16(cell.Value).ToString() : string.Empty;
+                    }
+                    else
+                    {
+                        rowData[i] = cell.Value != null ? cell.Value.ToString() : string.Empty;
+
+                    }
+
                 }
 
                 return rowData;
@@ -431,6 +499,31 @@ namespace BV_Modbus_Client
         private void bToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void copyDataToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            (string, string)[] data = fcCommand.GetDataAsString();
+            string[] viewData = data.Select(x => x.Item1).ToArray();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < viewData.Length; i++)
+            {
+                sb.AppendLine(viewData[i]);
+            }
+            Clipboard.SetText(sb.ToString());
+            //fcCommand.
+        }
+
+        private void pasteDataFromClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string[] lines = Clipboard.GetText().Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+             //int entries = Math.Min(lines.Length, fcCommand.NumberOfRegisters);
+
+            fcCommand.SetFcData(lines);
+            //for (int i = 0; i < entries; i++)
+            //{
+            //    fcCommand.
+            //}
         }
 
         //static public void UIThread(this Control control, Action code)

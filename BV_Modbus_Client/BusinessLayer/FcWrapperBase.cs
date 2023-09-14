@@ -12,7 +12,9 @@ namespace BV_Modbus_Client.BusinessLayer
     [DataContract]
     //[KnownType(typeof(FcWrapperFc3))] // Example: FcWrapperFc3
     [KnownType(typeof(MultipleCoils))] 
-    [KnownType(typeof(MultipleHoldingRegisters))] 
+    [KnownType(typeof(MultipleHoldingRegisters))]
+    [KnownType(typeof(ReadDiscreteInputs))]
+    [KnownType(typeof(ReadInputRegisters))]
     internal abstract class FcWrapperBase :ICloneable
     {
         private string description;

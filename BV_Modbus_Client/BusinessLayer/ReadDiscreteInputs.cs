@@ -13,7 +13,7 @@ namespace BV_Modbus_Client.BusinessLayer
     {
         private ushort numberOfRegisters;
 
-        public ReadDiscreteInputs(MbConnection mbCon) // Read multiple coils
+        public ReadDiscreteInputs(MbConnection mbCon) : base()// Read multiple coils
         {
 
             base.mbCon = mbCon;

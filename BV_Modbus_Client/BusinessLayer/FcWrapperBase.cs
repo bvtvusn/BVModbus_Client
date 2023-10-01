@@ -95,11 +95,16 @@ namespace BV_Modbus_Client.BusinessLayer
         [Browsable(false)]
         [DataMember]
         public int SavedPollOrder { get; set; } = -1; // -1 means not polled. Only used for saving and restoring applionstate. Not kept up to date during program execution.
+        public FormatContainer formatContainer { get; set; } 
         //public string Type
         //{
         //    get { return this.GetType().Name; }
 
         //}
+        public FcWrapperBase()
+        {
+            formatContainer = new FormatContainer(this);
+        }
 
 
         public event Action<string> RefreshDataEvent;

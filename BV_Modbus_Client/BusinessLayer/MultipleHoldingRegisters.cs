@@ -15,7 +15,7 @@ namespace BV_Modbus_Client.BusinessLayer
         private ushort[] data;
         private ushort numberOfRegisters;
 
-        public MultipleHoldingRegisters(MbConnection mbCon) // Read multiple coils
+        public MultipleHoldingRegisters(MbConnection mbCon) :base() // Read multiple coils
         {
             //base.Parent = parent;
 

@@ -22,6 +22,19 @@ namespace BV_Modbus_Client.BusinessLayer
             Ascii,
             Boolean
         }
+        public static  Dictionary<FormatName,int> FormatLengths { get;  } 
+            = new Dictionary<FormatName, int>() {
+            { FormatName.Ascii,-1},
+            { FormatName.Binary,-1},
+            { FormatName.Boolean,1},
+            { FormatName.Double,2},
+            { FormatName.Float,1},
+            { FormatName.Hex,-1},
+            { FormatName.Int16,1},
+            { FormatName.Int32,2},
+            { FormatName.Uint16,1},
+            { FormatName.Uint32,2}
+        };
         public bool ByteSwap { get; set; }
         public FormatName CurrentFormat { get; set; } = FormatName.Uint16;
         internal static string[] GetStringRepresentation(ushort[] rawdata, FormatName format, bool swapBytes = false, bool swapRegisters = false)

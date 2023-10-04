@@ -49,7 +49,7 @@ namespace BV_Modbus_Client
 
             int nColumns = 2;
             List<ValueFormat> formats =  Bll.SelectedFcRequest.formatContainer.valueFormats;
-            
+            string[] convertedValues = Bll.SelectedFcRequest.GetStrings();
 
             for (int i = 0; i < nColumns; i++)
             {
@@ -58,6 +58,7 @@ namespace BV_Modbus_Client
                 dataGridView1.Columns.Add(checkColumn);
             }
 
+            int rowCounter = 0;
             for (int i = 0; i < formats.Count; i++)
             {
 
@@ -66,14 +67,16 @@ namespace BV_Modbus_Client
                 {
                     DataGridViewRow dr1 = new DataGridViewRow();
                     dr1.CreateCells(dataGridView1);
-                    dr1.Cells[1].Value =" ";
+                    dr1.Cells[0].Value ="";
                     dataGridView1.Rows.Add(dr1);
+                    rowCounter++;
                 }
                 for (int j = 0; j < formats[i].Length; j++)
                 {
                     DataGridViewRow dr = new DataGridViewRow();
                     dr.CreateCells(dataGridView1);
-                    dr.Cells[1].Value = formats[i].FormatType.ToString();
+                    dr.Cells[0].Value = formats[i].FormatType.ToString();
+                    dr.Cells[1].Value = convertedValues[rowCounter];
 
                     if (i % 2 == 0)
                     {
@@ -90,7 +93,7 @@ namespace BV_Modbus_Client
                         dr.Cells[0].Style = style;
                     }
                     dataGridView1.Rows.Add(dr);
-
+                    rowCounter++;
                 }
                 
             }
@@ -103,6 +106,15 @@ namespace BV_Modbus_Client
             //}
             //dataGridView1.Rows.Add(dr);
             
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            var  strLines = Bll.SelectedFcRequest.formatContainer.BinaryToString(Bll.SelectedFcRequest.ReadCompleteBufferAsArray(), false, false);
+            foreach (var item in strLines)
+            {
+                txtShow.AppendText(item + "\r\n");
+            }
         }
     }
 }

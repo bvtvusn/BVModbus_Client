@@ -34,6 +34,8 @@
             this.numRegIndex = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.txtShow = new System.Windows.Forms.TextBox();
+            this.btnTest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRegIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -98,11 +100,30 @@
             this.dataGridView1.Size = new System.Drawing.Size(240, 205);
             this.dataGridView1.TabIndex = 6;
             // 
+            // txtShow
+            // 
+            this.txtShow.Location = new System.Drawing.Point(104, 114);
+            this.txtShow.Name = "txtShow";
+            this.txtShow.Size = new System.Drawing.Size(100, 23);
+            this.txtShow.TabIndex = 7;
+            // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(23, 114);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.TabIndex = 8;
+            this.btnTest.Text = "button1";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // ValueFormatConfigurator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 217);
+            this.Controls.Add(this.btnTest);
+            this.Controls.Add(this.txtShow);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numRegIndex);
@@ -127,5 +148,7 @@
         private NumericUpDown numRegIndex;
         private Label label1;
         private DataGridView dataGridView1;
+        private TextBox txtShow;
+        private Button btnTest;
     }
 }

@@ -141,7 +141,9 @@ namespace BV_Modbus_Client.BusinessLayer
         public virtual (string, string)[] GetDataAsString(bool UseRegOnMissingDescription=false) // Gui uses this to display the data.
         {
             ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
-            string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
+
+            string[] strvalues =  GetStrings();
+            // string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
             // Function translates Databuffer into a string array
             (string, string)[] strData = new (string, string)[NumberOfRegisters];
             for (int i = 0; i < NumberOfRegisters; i++)
@@ -181,6 +183,10 @@ namespace BV_Modbus_Client.BusinessLayer
             return strData;
         }
 
+        internal string[] GetStrings()
+        {
+            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), SwapBytes, SwapRegisters);
+        }
         internal void ForceFcActivatedEvent()
         {
             FcActivatedEvent?.Invoke();
@@ -306,6 +312,10 @@ namespace BV_Modbus_Client.BusinessLayer
                 else datapoints[i] = 0; //Default value is 0 if nothing is stored.
             }
             return datapoints;
+        }
+        internal ushort[] ReadCompleteBufferAsArray()
+        {
+            return ReadFromBuffer(startAddress, NumberOfRegisters);
         }
 
         internal void TriggerPollChangedEvent(bool pollEnabled)

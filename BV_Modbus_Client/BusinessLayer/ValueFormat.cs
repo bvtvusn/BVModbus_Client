@@ -35,5 +35,10 @@ namespace BV_Modbus_Client.BusinessLayer
             this.FormatType = type;
             Length = length;
         }
+
+        internal string BinaryToString(ushort[] singlevalueData)
+        {
+            return FormatConverter.GetStringRepresentation(singlevalueData, FormatType);
+        }
     }
 }

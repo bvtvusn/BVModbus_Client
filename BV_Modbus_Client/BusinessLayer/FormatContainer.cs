@@ -32,5 +32,60 @@ namespace BV_Modbus_Client.BusinessLayer
             valueFormats =  valueFormats.OrderBy(x => x.Register).ToList();
 
         }
+
+        internal string[] BinaryToString(ushort[] rawData, bool SwapBytes, bool SwapRegisters)
+        {
+            string[] stringValues = new string[rawData.Length];
+
+            //int regCounter = 0;
+            //int dtIndex = 0; // datatypeConverterIndex //
+
+
+            foreach (ValueFormat item in valueFormats)
+            {
+                if (item.Register < rawData.Length)
+                {
+                    ushort[] singlevalueData = new ushort[item.Length];
+                    Array.Copy(rawData, item.Register, singlevalueData, 0, item.Length);
+                    if (SwapRegisters)
+                    {
+                        Array.Reverse(singlevalueData);
+                    }
+                    if (SwapBytes)
+                    {
+                        singlevalueData = FormatConverter.SwapBytesInArray(singlevalueData);
+                    }
+                    stringValues[item.Register] = item.BinaryToString(singlevalueData);
+                }
+               
+
+            }
+
+
+            //while (regCounter < rawData.Length)
+            //{
+            //    if(regCounter == valueFormats[dtIndex].Register)
+            //    {
+
+            //    }
+            //    int dtLen = valueFormats[dtIndex].Length;
+            //    ushort[] singlevalueData = new ushort[dtLen];
+            //    Array.Copy(rawData, regCounter, singlevalueData, 0, dtLen);
+            //    if (SwapRegisters)
+            //    {
+            //        Array.Reverse(singlevalueData);
+            //    }
+            //    if (SwapBytes)
+            //    {
+            //        singlevalueData = FormatConverter.SwapBytesInArray(singlevalueData);
+            //    }
+            //    stringValues[regCounter] = valueFormats[dtIndex].BinaryToString(singlevalueData);
+
+            //    int endReg = valueFormats[dtIndex].Length + dtIndex;
+            //    dtIndex++;
+            //    regCounter += dtLen;
+            //}
+            return stringValues;
+        }
     }
 }

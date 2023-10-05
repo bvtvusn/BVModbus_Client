@@ -47,23 +47,30 @@ namespace BV_Modbus_Client
         {
             dataGridView1.Columns.Clear();
 
-            int nColumns = 2;
             List<ValueFormat> formats =  Bll.SelectedFcRequest.formatContainer.valueFormats;
-            string[] convertedValues = Bll.SelectedFcRequest.GetStrings();
+            //string[] convertedValues = Bll.SelectedFcRequest.GetStrings();
+            var dataPoints = Bll.SelectedFcRequest.GetDataAsString(true);
 
+            int nColumns = 3;
             for (int i = 0; i < nColumns; i++)
             {
                 DataGridViewTextBoxColumn checkColumn = new DataGridViewTextBoxColumn();
                 checkColumn.ReadOnly = false;
+                checkColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+                
                 dataGridView1.Columns.Add(checkColumn);
             }
+            dataGridView1.Columns[0].HeaderText = "Datatype";
+            dataGridView1.Columns[1].HeaderText = "Value";
+            dataGridView1.Columns[2].HeaderText = "Description";
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             int rowCounter = 0;
             for (int i = 0; i < formats.Count; i++)
             {
 
             
-                while (dataGridView1.Rows.Count-1 < formats[i].Register)
+                while (dataGridView1.Rows.Count < formats[i].Register)
                 {
                     DataGridViewRow dr1 = new DataGridViewRow();
                     dr1.CreateCells(dataGridView1);
@@ -76,19 +83,27 @@ namespace BV_Modbus_Client
                     DataGridViewRow dr = new DataGridViewRow();
                     dr.CreateCells(dataGridView1);
                     dr.Cells[0].Value = formats[i].FormatType.ToString();
-                    dr.Cells[1].Value = convertedValues[rowCounter];
+                    //dr.Cells[1].Value = convertedValues[rowCounter];
+                    if (rowCounter < dataPoints.Length)
+                    {
+
+                        dr.Cells[1].Value = dataPoints[rowCounter].Item1;
+                        dr.Cells[2].Value = dataPoints[rowCounter].Item2;
+                    }
 
                     if (i % 2 == 0)
                     {
                         DataGridViewCellStyle style = new DataGridViewCellStyle();
-                        style.BackColor = Color.FromArgb(245,245,245);
+                        style.BackColor = Color.FromArgb(221,237,255);
+                       // style.BackColor = Color.FromArgb(86, 165, 255);
                         style.ForeColor = Color.Black;
                         dr.Cells[0].Style = style;
                     }
                     else
                     {
                         DataGridViewCellStyle style = new DataGridViewCellStyle();
-                        style.BackColor = Color.FromArgb(230, 230, 230);
+                        style.BackColor = Color.FromArgb(187,219,255);
+                        //style.BackColor = Color.FromArgb(0, 195, 255);
                         style.ForeColor = Color.Black;
                         dr.Cells[0].Style = style;
                     }

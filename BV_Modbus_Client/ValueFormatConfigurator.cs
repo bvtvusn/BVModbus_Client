@@ -17,6 +17,7 @@ namespace BV_Modbus_Client
         {
             InitializeComponent();
             this.Bll = bll;
+            
         }
 
         private BLL Bll { get; }

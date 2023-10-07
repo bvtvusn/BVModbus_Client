@@ -142,7 +142,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
 
-            string[] strvalues =  GetStrings();
+            string[] strvalues =  GetValueStrings();
             // string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
             // Function translates Databuffer into a string array
             (string, string)[] strData = new (string, string)[NumberOfRegisters];
@@ -183,7 +183,7 @@ namespace BV_Modbus_Client.BusinessLayer
             return strData;
         }
 
-        internal string[] GetStrings()
+        internal string[] GetValueStrings()
         {
             return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), SwapBytes, SwapRegisters);
         }

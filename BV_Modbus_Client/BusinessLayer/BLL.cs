@@ -155,7 +155,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     selectedFcRequest.FcActivatedEvent += SelectedFcActivatedEvent;
                     //SelectedFcRequest_FcActivatedEvent
 
-                    SelectedDataRecevivedEvent?.Invoke("");  //mAKING fAKE dete received event to opdate the new table.
+                    SelectedDataRecevivedEvent?.Invoke("");  //mAKING fAKE data received event to opdate the new table.
                 }
 
 

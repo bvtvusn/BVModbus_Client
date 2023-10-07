@@ -42,6 +42,8 @@ namespace BV_Modbus_Client
 
             bll = new BLL();
             InitializeComponent();
+            valueFormatPanel1.Bll = bll;
+
 
             //bll.OnFcObjectAdded += Bll_OnFcObjectAdded;
             bll.FcListChangedEvent += Bll_FcListChangedEvent;

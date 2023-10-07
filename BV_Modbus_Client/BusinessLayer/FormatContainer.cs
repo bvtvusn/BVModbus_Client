@@ -17,7 +17,7 @@ namespace BV_Modbus_Client.BusinessLayer
             valueFormats = new List<ValueFormat>();
         }
 
-        internal void SetFormat(int register, FormatConverter.FormatName type, int customLength)
+        internal int SetFormat(int register, FormatConverter.FormatName type, int customLength)
         {
             int DataLength = 0;
             FormatConverter.FormatLengths.TryGetValue(type, out DataLength);
@@ -30,6 +30,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             valueFormats.Add(new ValueFormat(this,register,type, DataLength));
             valueFormats =  valueFormats.OrderBy(x => x.Register).ToList();
+            return DataLength;
 
         }
 
@@ -46,6 +47,9 @@ namespace BV_Modbus_Client.BusinessLayer
                 if (item.Register < rawData.Length)
                 {
                     ushort[] singlevalueData = new ushort[item.Length];
+
+                    int missingLength = (item.Register + item.Length) - rawData.Length; // In the rare case where the source area is not long enough.
+                    if (missingLength > 0) Array.Resize(ref rawData, missingLength + rawData.Length); // Extend the array with zeros
                     Array.Copy(rawData, item.Register, singlevalueData, 0, item.Length);
                     if (SwapRegisters)
                     {

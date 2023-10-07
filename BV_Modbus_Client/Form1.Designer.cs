@@ -61,9 +61,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.numPollInterval = new System.Windows.Forms.NumericUpDown();
             this.btnTestPoll = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.MainTopPanel = new System.Windows.Forms.Panel();
             this.StatisticsPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.lblResponseTime = new System.Windows.Forms.Label();
             this.lblWriteCounter = new System.Windows.Forms.Label();
@@ -90,7 +92,7 @@
             this.multipleCoilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readInputRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.valueFormatPanel1 = new BV_Modbus_Client.ValueFormatPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.dgvContext.SuspendLayout();
@@ -101,6 +103,7 @@
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPollInterval)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.MainTopPanel.SuspendLayout();
             this.StatisticsPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -281,6 +284,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(30, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
@@ -462,6 +466,16 @@
             this.btnTestPoll.UseVisualStyleBackColor = true;
             this.btnTestPoll.Click += new System.EventHandler(this.btnTestPoll_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.valueFormatPanel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(552, 299);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Set Data types";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // MainTopPanel
             // 
             this.MainTopPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
@@ -501,6 +515,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(215, 222);
             this.panel2.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(50, 188);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_3);
             // 
             // richTextBox1
             // 
@@ -760,15 +784,13 @@
             this.readToolStripMenuItem.Text = "Read Discrete Inputs";
             this.readToolStripMenuItem.Click += new System.EventHandler(this.readToolStripMenuItem_Click);
             // 
-            // button1
+            // valueFormatPanel1
             // 
-            this.button1.Location = new System.Drawing.Point(50, 188);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_3);
+            this.valueFormatPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.valueFormatPanel1.Location = new System.Drawing.Point(0, 0);
+            this.valueFormatPanel1.Name = "valueFormatPanel1";
+            this.valueFormatPanel1.Size = new System.Drawing.Size(552, 299);
+            this.valueFormatPanel1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -794,6 +816,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPollInterval)).EndInit();
+            this.tabPage3.ResumeLayout(false);
             this.MainTopPanel.ResumeLayout(false);
             this.StatisticsPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -875,5 +898,7 @@
         private ToolStripMenuItem readInputRegistersToolStripMenuItem;
         private ToolStripMenuItem readToolStripMenuItem;
         private Button button1;
+        private TabPage tabPage3;
+        private ValueFormatPanel valueFormatPanel1;
     }
 }

@@ -89,7 +89,6 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -131,7 +130,7 @@
             this.groupBox1.Controls.Add(this.numHex);
             this.groupBox1.Location = new System.Drawing.Point(15, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 260);
+            this.groupBox1.Size = new System.Drawing.Size(200, 217);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Set Datatype Of Register";
@@ -139,7 +138,7 @@
             // 
             // btnASCII
             // 
-            this.btnASCII.Location = new System.Drawing.Point(14, 183);
+            this.btnASCII.Location = new System.Drawing.Point(16, 103);
             this.btnASCII.Name = "btnASCII";
             this.btnASCII.Size = new System.Drawing.Size(83, 23);
             this.btnASCII.TabIndex = 2;
@@ -150,7 +149,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(14, 160);
+            this.button8.Location = new System.Drawing.Point(16, 178);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(83, 23);
             this.button8.TabIndex = 0;
@@ -161,7 +160,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(14, 137);
+            this.button6.Location = new System.Drawing.Point(102, 77);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(83, 23);
             this.button6.TabIndex = 0;
@@ -172,7 +171,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(14, 91);
+            this.button7.Location = new System.Drawing.Point(102, 52);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(83, 23);
             this.button7.TabIndex = 0;
@@ -183,7 +182,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(14, 68);
+            this.button5.Location = new System.Drawing.Point(102, 27);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(83, 23);
             this.button5.TabIndex = 0;
@@ -194,7 +193,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(14, 206);
+            this.button4.Location = new System.Drawing.Point(16, 128);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(83, 23);
             this.button4.TabIndex = 0;
@@ -205,7 +204,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(14, 229);
+            this.button3.Location = new System.Drawing.Point(16, 153);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(83, 23);
             this.button3.TabIndex = 0;
@@ -216,7 +215,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(14, 114);
+            this.button2.Location = new System.Drawing.Point(16, 77);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(83, 23);
             this.button2.TabIndex = 0;
@@ -227,7 +226,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(14, 45);
+            this.button1.Location = new System.Drawing.Point(16, 52);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 23);
             this.button1.TabIndex = 0;
@@ -238,7 +237,7 @@
             // 
             // btnUint16
             // 
-            this.btnUint16.Location = new System.Drawing.Point(14, 22);
+            this.btnUint16.Location = new System.Drawing.Point(16, 27);
             this.btnUint16.Name = "btnUint16";
             this.btnUint16.Size = new System.Drawing.Size(83, 23);
             this.btnUint16.TabIndex = 0;
@@ -251,7 +250,7 @@
             // 
             this.numBinary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.numBinary.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numBinary.Location = new System.Drawing.Point(100, 209);
+            this.numBinary.Location = new System.Drawing.Point(102, 131);
             this.numBinary.Name = "numBinary";
             this.numBinary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.numBinary.Size = new System.Drawing.Size(60, 19);
@@ -267,7 +266,7 @@
             // 
             this.numAscii.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.numAscii.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numAscii.Location = new System.Drawing.Point(100, 186);
+            this.numAscii.Location = new System.Drawing.Point(102, 105);
             this.numAscii.Name = "numAscii";
             this.numAscii.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.numAscii.Size = new System.Drawing.Size(60, 19);
@@ -283,7 +282,7 @@
             // 
             this.numHex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.numHex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numHex.Location = new System.Drawing.Point(100, 232);
+            this.numHex.Location = new System.Drawing.Point(102, 156);
             this.numHex.Name = "numHex";
             this.numHex.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.numHex.Size = new System.Drawing.Size(60, 19);

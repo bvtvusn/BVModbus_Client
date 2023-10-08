@@ -1,4 +1,5 @@
 ﻿using BV_Modbus_Client.BusinessLayer;
+using BV_Modbus_Client.GUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace BV_Modbus_Client
     public partial class ValueFormatPanel : UserControl
     {
         private BLL bll;
+        private bool userEditActiveFlag;
+        private bool refreshActiveFlag;
 
         public BLL Bll
         {
@@ -26,12 +29,62 @@ namespace BV_Modbus_Client
         public ValueFormatPanel()
         {
             InitializeComponent();
-            
+            dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;
+        }
+
+        private void DataGridView1_CellValueChanged(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (bll.SelectedFcRequest != null)
+            {
+
+                userEditActiveFlag = true;
+                
+                if (refreshActiveFlag == false)
+                {
+                    string[] tableData = GetColumnData(dataGridView1, 1);
+                    string[] addressDescriptions = GetColumnData(dataGridView1, 2);
+
+                    bll.SelectedFcRequest.SetFcData(tableData);
+                    bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
+
+                }
+                userEditActiveFlag = false;
+            }
+        }
+
+        private string[] GetColumnData(DataGridView dgv, int columnIndex)
+        {
+            List<string> columnData = new List<string>();
+
+            // Check if the specified column exists
+            if (dgv.Columns.Count > columnIndex)
+            {
+                // Iterate through the rows and add the cell values from the specified column
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    if (row.Cells[columnIndex].Value != null)
+                    {
+                        columnData.Add(row.Cells[columnIndex].Value.ToString());
+                    }
+                }
+            }
+
+            return columnData.ToArray();
         }
 
         private void Bll_SelectedDataRecevivedEvent(string obj)
         {
-            RefreshDataGrid();
+            ControlExtensions.UIThreadInvoke(this, delegate {
+
+                if (userEditActiveFlag == false)
+                {
+                    refreshActiveFlag = true;
+
+                    RefreshDataGrid();
+
+                    refreshActiveFlag = false;
+                }
+            });
         }
 
         void RefreshDataGrid()
@@ -59,6 +112,7 @@ namespace BV_Modbus_Client
                 dataGridView1.Columns[1].HeaderText = "Value";
                 dataGridView1.Columns[2].HeaderText = "Description";
                 dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView1.Columns[0].ReadOnly = true;
             }
             foreach (DataGridViewRow item in dataGridView1.Rows)
             {

@@ -28,10 +28,10 @@ namespace BV_Modbus_Client.BusinessLayer
 
         [DataMember]
         public FormatConverter.FormatName DisplayType { get => displayType; set { displayType = value; ForceDataRefresh(""); } }
-        [DataMember]
-        public bool SwapBytes { get; set; }
-        [DataMember]
-        public bool SwapRegisters { get; set; }
+        //[DataMember]
+        //public bool SwapBytes { get; set; }
+        //[DataMember]
+        //public bool SwapRegisters { get; set; }
         [Browsable(false)]
         //public FormatConverter Format { get; set; }
 
@@ -185,7 +185,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         internal string[] GetValueStrings()
         {
-            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), SwapBytes, SwapRegisters);
+            return formatContainer.BinaryToString(ReadCompleteBufferAsArray());
         }
         internal void ForceFcActivatedEvent()
         {
@@ -333,8 +333,8 @@ namespace BV_Modbus_Client.BusinessLayer
             next.startAddress = startAddress;
             next.displayType = displayType;
             next.fcAddressDescription = fcAddressDescription;
-            next.SwapBytes = SwapBytes;
-            next.SwapRegisters = SwapRegisters;
+            //next.SwapBytes = SwapBytes;
+            //next.SwapRegisters = SwapRegisters;
             next.NumberOfRegisters = NumberOfRegisters;
             next.DataBuffer = DataBuffer;
             next.GlobFcData = GlobFcData;

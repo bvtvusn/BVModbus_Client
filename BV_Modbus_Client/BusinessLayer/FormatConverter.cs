@@ -238,6 +238,123 @@ namespace BV_Modbus_Client.BusinessLayer
             //}
             //return formatted;
         }
+
+        internal static ushort[] GetBinaryRepresentation(string rawString, FormatName format, int numRegisters, out string error)
+        {
+            error = ""; // new string[numRegisters];
+            ushort[] result = new ushort[numRegisters];
+            
+            try
+            {
+                if (format == FormatName.Uint16 || format == FormatName.Boolean)
+                {
+                    result[0] = Convert.ToUInt16(rawString);
+                }
+                else if (format == FormatName.Int16)
+                {
+                    result[0] = (ushort)Convert.ToInt16(rawString);
+                }
+                else if (format == FormatName.Float)
+                {
+                    result[0] = FormatConverter.FloatToHalf(Convert.ToSingle(rawString));
+                }
+                else if (format == FormatName.Hex)
+                {
+                    if (rawString.Length > numRegisters * 4)
+                    {
+                        throw new FormatException("To many characters");
+                    }
+                    result = Enumerable.Range(0, rawString.Length / 4) // Divide by 4 since each ushort is represented by 4 hexadecimal characters
+                    .Select(x => Convert.ToUInt16(rawString.Substring(x * 4, 4), 16))
+                    .ToArray();
+
+
+
+                    //var k = Enumerable.Range(0, rawString.Length)
+                    // .Where(x => x % 2 == 0)
+                    // .Select(x => Convert.ToByte(rawString.Substring(x, 2), 16))
+                    // .ToArray();
+
+                    //result[i] = Convert.ToUInt16(rawString[i], 16);
+                }
+                else if (format == FormatName.Binary)
+                {
+                    if (rawString.Length > numRegisters*16)
+                    {
+                        throw new FormatException("To many characters");
+                    }
+                    result = Enumerable.Range(0, rawString.Length / 16) // Divide by 16 since each ushort is represented by 16 binary digits
+                        .Select(x => Convert.ToUInt16(rawString.Substring(x * 16, 16), 2))
+                        .ToArray();
+
+                    //result[0] = Convert.ToUInt16(rawString, 2);
+                }
+
+
+                else if (format == FormatName.Uint32)
+                {
+                    UInt32 number = UInt32.Parse(rawString);
+                    result[0] = (UInt16)(number & 0xFFFF); // Store the lower 16 bits
+                    result[1] = (UInt16)((number >> 16) & 0xFFFF); // Store the upper 16 bits
+
+                    //if (i % 2 == 0)
+                    //{
+                    //    // Even, write first byte
+                    //    uint startval = Convert.ToUInt16(rawString[i]);
+                    //    ushort temp = (ushort)(startval >> 16);
+                    //    result[i] = temp;
+                    //}
+                    //else
+                    //{
+                    //    uint startval = Convert.ToUInt16(rawString[i - 1]);
+                    //    ushort temp = (ushort)(startval & 0x0000FFFF);
+                    //    result[i] = temp;
+                    //}
+                }
+                else if (format == FormatName.Int32)
+                {
+                    Int32 number = Int32.Parse(rawString);
+                    result[0] = (UInt16)(number & 0xFFFF); // Store the lower 16 bits
+                    result[1] = (UInt16)((number >> 16) & 0xFFFF); // Store the upper 16 bits
+
+                }
+                else if (format == FormatName.Double)
+                {
+                    float floatValue = float.Parse(rawString);
+                    int intValue = BitConverter.ToInt32(BitConverter.GetBytes(floatValue), 0);
+                    result[0] = (UInt16)(intValue & 0xFFFF);
+                    result[1] = (UInt16)((intValue >> 16) & 0xFFFF);
+                }
+                else if (format == FormatName.Ascii)
+                {
+                    byte[] byteArray = Encoding.ASCII.GetBytes(rawString);
+
+                    // Create a ushort array and initialize it by casting each byte to ushort
+                    //ushort[] ushortArray = new ushort[byteArray.Length/2];
+                    for (int i = 0; i < result.Length; i++)
+                    {
+                        if (i * 2 + 1 < byteArray.Length)
+                        {
+                            result[i] = (ushort)((byteArray[i * 2] << 8) | byteArray[i * 2 + 1]);
+                        }
+                    }
+
+                }
+                else
+                {
+                    result[0] = Convert.ToUInt16(rawString);
+                }
+            }
+            catch (Exception err)
+            {
+                result[0] = 0;
+                error = err.Message;
+            }
+                //ushort result;
+
+            return result;
+        }
+
         internal static ushort[] GetBinaryRepresentation(string[] rawString, FormatName format, out string[] errors, bool swapBytes = false, bool swapRegisters = false)
         {
             errors = new string[rawString.Length];
@@ -318,13 +435,13 @@ namespace BV_Modbus_Client.BusinessLayer
                             result[i] = temp;
                         }
                     }
-                    else if (format == FormatName.Ascii) 
+                    else if (format == FormatName.Ascii)
                     {
                         //for (int i = 0; i < rawString.Length; i++)
-                        
-                            byte[] b = System.Text.Encoding.ASCII.GetBytes(rawString[i]);
-                            result[i] = (ushort)BitConverter.ToInt16(b, 0);
-                        
+
+                        byte[] b = System.Text.Encoding.ASCII.GetBytes(rawString[i]);
+                        result[i] = (ushort)BitConverter.ToInt16(b, 0);
+
                         //result[i] = ConvertFromBinaryString(rawString[i]);
                     }
                     else
@@ -338,13 +455,13 @@ namespace BV_Modbus_Client.BusinessLayer
                     errors[i] = err.Message;
                 }
                 //ushort result;
-                
+
 
                 if (swapBytes)
                 {
                     result[i] = SwapBytes(result[i]);
                 }
-                
+
             }
 
             //if (format == FormatName.Uint16)
@@ -410,7 +527,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             return result;
         }
-        private static string GetStringRepresentation(ushort rawdata, FormatName format , bool swapBytes = false)
+        private static string GetStringRepresentation(ushort rawdata, FormatName format, bool swapBytes = false)
         {
             if (swapBytes)
             {

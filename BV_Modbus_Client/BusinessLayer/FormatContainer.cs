@@ -10,6 +10,8 @@ namespace BV_Modbus_Client.BusinessLayer
     {
         private FcWrapperBase fcWrapperBase;
         public List<ValueFormat> valueFormats;
+        bool swapBytes;
+        bool swapRegisters;
 
         public FormatContainer(FcWrapperBase fcWrapperBase)
         {
@@ -34,14 +36,12 @@ namespace BV_Modbus_Client.BusinessLayer
 
         }
 
-        internal string[] BinaryToString(ushort[] rawData, bool SwapBytes, bool SwapRegisters)
+        internal string[] BinaryToString(ushort[] rawData)
         {
             string[] stringValues = new string[rawData.Length];
 
             //int regCounter = 0;
             //int dtIndex = 0; // datatypeConverterIndex //
-
-
             foreach (ValueFormat item in valueFormats)
             {
                 if (item.Register < rawData.Length)
@@ -51,45 +51,50 @@ namespace BV_Modbus_Client.BusinessLayer
                     int missingLength = (item.Register + item.Length) - rawData.Length; // In the rare case where the source area is not long enough.
                     if (missingLength > 0) Array.Resize(ref rawData, missingLength + rawData.Length); // Extend the array with zeros
                     Array.Copy(rawData, item.Register, singlevalueData, 0, item.Length);
-                    if (SwapRegisters)
+                    if (swapRegisters)
                     {
                         Array.Reverse(singlevalueData);
                     }
-                    if (SwapBytes)
+                    if (swapBytes)
                     {
                         singlevalueData = FormatConverter.SwapBytesInArray(singlevalueData);
                     }
                     stringValues[item.Register] = item.BinaryToString(singlevalueData);
                 }
-               
-
             }
-
-
-            //while (regCounter < rawData.Length)
-            //{
-            //    if(regCounter == valueFormats[dtIndex].Register)
-            //    {
-
-            //    }
-            //    int dtLen = valueFormats[dtIndex].Length;
-            //    ushort[] singlevalueData = new ushort[dtLen];
-            //    Array.Copy(rawData, regCounter, singlevalueData, 0, dtLen);
-            //    if (SwapRegisters)
-            //    {
-            //        Array.Reverse(singlevalueData);
-            //    }
-            //    if (SwapBytes)
-            //    {
-            //        singlevalueData = FormatConverter.SwapBytesInArray(singlevalueData);
-            //    }
-            //    stringValues[regCounter] = valueFormats[dtIndex].BinaryToString(singlevalueData);
-
-            //    int endReg = valueFormats[dtIndex].Length + dtIndex;
-            //    dtIndex++;
-            //    regCounter += dtLen;
-            //}
             return stringValues;
         }
+
+
+        internal ushort[] StringToBinary(string[] stringValues, bool SwapBytes, bool SwapRegisters)
+        {
+            ushort[] rawData = new ushort[stringValues.Length];
+
+            for (int register = 0; register < stringValues.Length; register++)
+            {
+                if (stringValues[register] != null)
+                {
+                    ushort[] singleValueData = valueFormats[register].StringToBinary(stringValues[register]);
+
+                    if (SwapBytes)
+                    {
+                        singleValueData = FormatConverter.SwapBytesInArray(singleValueData);
+                    }
+
+                    if (SwapRegisters)
+                    {
+                        Array.Reverse(singleValueData);
+                    }
+
+                    int length = valueFormats[register].Length;
+
+                    // Copy the singleValueData into the rawData array, starting at the appropriate index.
+                    Array.Copy(singleValueData, 0, rawData, register, length);
+                }
+            }
+
+            return rawData;
+        }
+
     }
 }

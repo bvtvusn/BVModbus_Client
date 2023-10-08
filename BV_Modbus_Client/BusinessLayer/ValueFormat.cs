@@ -12,8 +12,10 @@ namespace BV_Modbus_Client.BusinessLayer
         //int registerNumber;
         private FormatContainer formatContainer;
         private int register;
-        //private FormatConverter.FormatName type;
+        private string strToBinError;
 
+        //private FormatConverter.FormatName type;
+        public string StrToBinError { get => strToBinError; set => strToBinError = value; }
         public int Length { get; set; }
         public FormatConverter.FormatName FormatType { get; set; } = FormatConverter.FormatName.Uint16;
         public int Register { get => register; set => register = value; }
@@ -39,6 +41,10 @@ namespace BV_Modbus_Client.BusinessLayer
         internal string BinaryToString(ushort[] singlevalueData)
         {
             return FormatConverter.GetStringRepresentation(singlevalueData, FormatType);
+        }
+        internal ushort[] StringToBinary(string strData)
+        {
+            return FormatConverter.GetBinaryRepresentation(strData, FormatType, Length, out strToBinError);
         }
     }
 }

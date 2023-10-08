@@ -33,17 +33,26 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnTest = new System.Windows.Forms.Button();
-            this.btnUint16 = new System.Windows.Forms.Button();
-            this.txtShow = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnASCII = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numRegIndex = new System.Windows.Forms.NumericUpDown();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnUint16 = new System.Windows.Forms.Button();
+            this.numBinary = new System.Windows.Forms.NumericUpDown();
+            this.numAscii = new System.Windows.Forms.NumericUpDown();
+            this.numHex = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRegIndex)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numBinary)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAscii)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHex)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -53,7 +62,7 @@
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -98,84 +107,193 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnTest);
-            this.panel1.Controls.Add(this.btnUint16);
-            this.panel1.Controls.Add(this.txtShow);
-            this.panel1.Controls.Add(this.btnASCII);
-            this.panel1.Controls.Add(this.numericUpDown1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.numRegIndex);
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(319, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(231, 397);
             this.panel1.TabIndex = 10;
             // 
-            // btnTest
+            // groupBox1
             // 
-            this.btnTest.Location = new System.Drawing.Point(17, 70);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 8;
-            this.btnTest.Text = "button1";
-            this.btnTest.UseVisualStyleBackColor = true;
-            // 
-            // btnUint16
-            // 
-            this.btnUint16.Location = new System.Drawing.Point(84, -4);
-            this.btnUint16.Name = "btnUint16";
-            this.btnUint16.Size = new System.Drawing.Size(114, 23);
-            this.btnUint16.TabIndex = 0;
-            this.btnUint16.Tag = "uint16";
-            this.btnUint16.Text = "Uint16";
-            this.btnUint16.UseVisualStyleBackColor = true;
-            this.btnUint16.Click += new System.EventHandler(this.btnSetDatatype_Click);
-            // 
-            // txtShow
-            // 
-            this.txtShow.Location = new System.Drawing.Point(98, 70);
-            this.txtShow.Name = "txtShow";
-            this.txtShow.Size = new System.Drawing.Size(100, 23);
-            this.txtShow.TabIndex = 7;
+            this.groupBox1.Controls.Add(this.btnASCII);
+            this.groupBox1.Controls.Add(this.button8);
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnUint16);
+            this.groupBox1.Controls.Add(this.numBinary);
+            this.groupBox1.Controls.Add(this.numAscii);
+            this.groupBox1.Controls.Add(this.numHex);
+            this.groupBox1.Location = new System.Drawing.Point(15, 13);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 260);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Set Datatype Of Register";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnASCII
             // 
-            this.btnASCII.Location = new System.Drawing.Point(84, 25);
+            this.btnASCII.Location = new System.Drawing.Point(14, 183);
             this.btnASCII.Name = "btnASCII";
-            this.btnASCII.Size = new System.Drawing.Size(114, 23);
+            this.btnASCII.Size = new System.Drawing.Size(83, 23);
             this.btnASCII.TabIndex = 2;
             this.btnASCII.Tag = "ascii";
             this.btnASCII.Text = "ASCII";
             this.btnASCII.UseVisualStyleBackColor = true;
             this.btnASCII.Click += new System.EventHandler(this.btnSetDatatype_Click);
             // 
-            // numericUpDown1
+            // button8
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(14, 25);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(64, 23);
-            this.numericUpDown1.TabIndex = 3;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.button8.Location = new System.Drawing.Point(14, 160);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(83, 23);
+            this.button8.TabIndex = 0;
+            this.button8.Tag = "boolean";
+            this.button8.Text = "Boolean";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(14, 137);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(83, 23);
+            this.button6.TabIndex = 0;
+            this.button6.Tag = "double";
+            this.button6.Text = "Double";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(14, 91);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(83, 23);
+            this.button7.TabIndex = 0;
+            this.button7.Tag = "int32";
+            this.button7.Text = "Int32";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(14, 68);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(83, 23);
+            this.button5.TabIndex = 0;
+            this.button5.Tag = "uint32";
+            this.button5.Text = "Uint32";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(14, 206);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(83, 23);
+            this.button4.TabIndex = 0;
+            this.button4.Tag = "binary";
+            this.button4.Text = "Binary";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(14, 229);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(83, 23);
+            this.button3.TabIndex = 0;
+            this.button3.Tag = "hex";
+            this.button3.Text = "Hex";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(14, 114);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(83, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Tag = "float";
+            this.button2.Text = "Float";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(14, 45);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(83, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Tag = "int16";
+            this.button1.Text = "Int16";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // btnUint16
+            // 
+            this.btnUint16.Location = new System.Drawing.Point(14, 22);
+            this.btnUint16.Name = "btnUint16";
+            this.btnUint16.Size = new System.Drawing.Size(83, 23);
+            this.btnUint16.TabIndex = 0;
+            this.btnUint16.Tag = "uint16";
+            this.btnUint16.Text = "Uint16";
+            this.btnUint16.UseVisualStyleBackColor = true;
+            this.btnUint16.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // numBinary
+            // 
+            this.numBinary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.numBinary.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numBinary.Location = new System.Drawing.Point(100, 209);
+            this.numBinary.Name = "numBinary";
+            this.numBinary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.numBinary.Size = new System.Drawing.Size(60, 19);
+            this.numBinary.TabIndex = 3;
+            this.numBinary.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numBinary.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // label1
+            // numAscii
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 136);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Register index";
+            this.numAscii.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.numAscii.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numAscii.Location = new System.Drawing.Point(100, 186);
+            this.numAscii.Name = "numAscii";
+            this.numAscii.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.numAscii.Size = new System.Drawing.Size(60, 19);
+            this.numAscii.TabIndex = 3;
+            this.numAscii.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numAscii.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // numRegIndex
+            // numHex
             // 
-            this.numRegIndex.Location = new System.Drawing.Point(116, 134);
-            this.numRegIndex.Name = "numRegIndex";
-            this.numRegIndex.Size = new System.Drawing.Size(120, 23);
-            this.numRegIndex.TabIndex = 4;
+            this.numHex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.numHex.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numHex.Location = new System.Drawing.Point(100, 232);
+            this.numHex.Name = "numHex";
+            this.numHex.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.numHex.Size = new System.Drawing.Size(60, 19);
+            this.numHex.TabIndex = 3;
+            this.numHex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numHex.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // ValueFormatPanel
             // 
@@ -187,9 +305,10 @@
             this.Size = new System.Drawing.Size(550, 397);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRegIndex)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numBinary)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAscii)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHex)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -198,12 +317,19 @@
 
         private DataGridView dataGridView1;
         private Panel panel1;
-        private Button btnTest;
         private Button btnUint16;
-        private TextBox txtShow;
         private Button btnASCII;
-        private NumericUpDown numericUpDown1;
-        private Label label1;
-        private NumericUpDown numRegIndex;
+        private NumericUpDown numHex;
+        private GroupBox groupBox1;
+        private Button button6;
+        private Button button5;
+        private Button button4;
+        private Button button3;
+        private Button button2;
+        private Button button1;
+        private NumericUpDown numBinary;
+        private NumericUpDown numAscii;
+        private Button button8;
+        private Button button7;
     }
 }

@@ -36,56 +36,93 @@ namespace BV_Modbus_Client
 
         void RefreshDataGrid()
         {
-            dataGridView1.Columns.Clear();
+            //dataGridView1.Columns.Clear();
 
             List<ValueFormat> formats = Bll.SelectedFcRequest.formatContainer.valueFormats;
-            //string[] convertedValues = Bll.SelectedFcRequest.GetStrings();
             var dataPoints = Bll.SelectedFcRequest.GetDataAsString(true);
+            //string[] convertedValues = Bll.SelectedFcRequest.GetStrings();
 
+            // CREATE COLUMNS IF NOT ALREADY CREATED
             int nColumns = 3;
-            for (int i = 0; i < nColumns; i++)
+            if (dataGridView1.Columns.Count < nColumns)
             {
-                DataGridViewTextBoxColumn checkColumn = new DataGridViewTextBoxColumn();
-                checkColumn.ReadOnly = false;
-                checkColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
 
-                dataGridView1.Columns.Add(checkColumn);
+                for (int i = 0; i < nColumns; i++)
+                {
+                    DataGridViewTextBoxColumn checkColumn = new DataGridViewTextBoxColumn();
+                    checkColumn.ReadOnly = false;
+                    checkColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+                    dataGridView1.Columns.Add(checkColumn);
+                }
+                dataGridView1.Columns[0].HeaderText = "Datatype";
+                dataGridView1.Columns[1].HeaderText = "Value";
+                dataGridView1.Columns[2].HeaderText = "Description";
+                dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-            dataGridView1.Columns[0].HeaderText = "Datatype";
-            dataGridView1.Columns[1].HeaderText = "Value";
-            dataGridView1.Columns[2].HeaderText = "Description";
-            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            foreach (DataGridViewRow item in dataGridView1.Rows)
+            {
+                item.Cells[0].Value = "";
+                item.Cells[1].Value = "";
+                item.Cells[2].Value = "";
+                item.Cells[0].Style = null; // style;
+            }
+            // Create correct number of rows in datagridview
+            int rowNumberToAdd = dataPoints.Length - dataGridView1.Rows.Count;
+            // Adding rows
+            for (int i = 0; i < rowNumberToAdd; i++)
+            {
+                DataGridViewRow dr1 = new DataGridViewRow();
+                dr1.CreateCells(dataGridView1);
+                dr1.Cells[0].Value = "";
+                dr1.Cells[1].Value = "";
+                dr1.Cells[2].Value = "";
+                dataGridView1.Rows.Add(dr1);
+            }
+            //Removing rows if necessary:
+            for (int i = rowNumberToAdd; i < 0; i++)
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.Rows.Count-1);
+            }
 
             int rowCounter = 0;
             for (int i = 0; i < formats.Count; i++)
             {
-                
-                
+
+
                 // ADD EMPTY CELLS BEFORE
-                while (dataGridView1.Rows.Count < formats[i].Register && dataGridView1.Rows.Count < dataPoints.Length)
+                //while (dataGridView1.Rows.Count < formats[i].Register && dataGridView1.Rows.Count < dataPoints.Length)
+                //{
+                //    DataGridViewRow dr1 = new DataGridViewRow();
+                //    dr1.CreateCells(dataGridView1);
+                //    dr1.Cells[0].Value = "";
+                //    dr1.Cells[1].Value = dataPoints[rowCounter].Item1;
+                //    dr1.Cells[2].Value = dataPoints[rowCounter].Item2;
+                //    dataGridView1.Rows.Add(dr1);
+                //    rowCounter++;
+                //}
+                //if (dataGridView1.Rows.Count < dataPoints.Length)
+                //{
+                for (int j = 0; j < formats[i].Length; j++)
                 {
-                    DataGridViewRow dr1 = new DataGridViewRow();
-                    dr1.CreateCells(dataGridView1);
-                    dr1.Cells[0].Value = "";
-                    dr1.Cells[1].Value = dataPoints[rowCounter].Item1;
-                    dr1.Cells[2].Value = dataPoints[rowCounter].Item2;
-                    dataGridView1.Rows.Add(dr1);
-                    rowCounter++;
-                }
-                if (dataGridView1.Rows.Count < dataPoints.Length)
-                {
-                    for (int j = 0; j < formats[i].Length; j++)
+
+                    //DataGridViewRow dr = new DataGridViewRow();
+                    //dr.CreateCells(dataGridView1);
+
+
+                    //dr.Cells[0].Value = formats[i].FormatType.ToString();
+
+                    int row = formats[i].Register + j;
+                    if (row < dataGridView1.Rows.Count)
                     {
-                        //if (rowCounter < dataPoints.Length) break;
-                        DataGridViewRow dr = new DataGridViewRow();
-                        dr.CreateCells(dataGridView1);
-                        dr.Cells[0].Value = formats[i].FormatType.ToString();
-                        //dr.Cells[1].Value = convertedValues[rowCounter];
+
                         if (rowCounter < dataPoints.Length)
                         {
-
-                            dr.Cells[1].Value = dataPoints[rowCounter].Item1;
-                            dr.Cells[2].Value = dataPoints[rowCounter].Item2;
+                            dataGridView1.Rows[row].Cells[0].Value = formats[i].FormatType.ToString();
+                            dataGridView1.Rows[row].Cells[1].Value = dataPoints[row].Item1;
+                            dataGridView1.Rows[row].Cells[2].Value = dataPoints[row].Item2;
+                            //dr.Cells[1].Value = dataPoints[rowCounter].Item1;
+                            //dr.Cells[2].Value = dataPoints[rowCounter].Item2;
                         }
 
                         if (i % 2 == 0)
@@ -94,7 +131,7 @@ namespace BV_Modbus_Client
                             style.BackColor = Color.FromArgb(221, 237, 255);
                             // style.BackColor = Color.FromArgb(86, 165, 255);
                             style.ForeColor = Color.Black;
-                            dr.Cells[0].Style = style;
+                            dataGridView1.Rows[row].Cells[0].Style = style;
                         }
                         else
                         {
@@ -102,27 +139,29 @@ namespace BV_Modbus_Client
                             style.BackColor = Color.FromArgb(187, 219, 255);
                             //style.BackColor = Color.FromArgb(0, 195, 255);
                             style.ForeColor = Color.Black;
-                            dr.Cells[0].Style = style;
+                            dataGridView1.Rows[row].Cells[0].Style = style;
                         }
-                        dataGridView1.Rows.Add(dr);
-                        rowCounter++;
                     }
-                }
+
+                } //dataGridView1.Rows.Add(dr);
+                  //rowCounter++;
+            }
+                
                 
 
-            }
+            
 
             // ADD EMPTY CELLS AFTER
-            while (dataGridView1.Rows.Count < dataPoints.Length)
-            {
-                DataGridViewRow dr1 = new DataGridViewRow();
-                dr1.CreateCells(dataGridView1);
-                dr1.Cells[0].Value = "";
-                dr1.Cells[1].Value = dataPoints[rowCounter].Item1;
-                dr1.Cells[2].Value = dataPoints[rowCounter].Item2;
-                dataGridView1.Rows.Add(dr1);
-                rowCounter++;
-            }
+            //while (dataGridView1.Rows.Count < dataPoints.Length)
+            //{
+            //    DataGridViewRow dr1 = new DataGridViewRow();
+            //    dr1.CreateCells(dataGridView1);
+            //    dr1.Cells[0].Value = "";
+            //    dr1.Cells[1].Value = dataPoints[rowCounter].Item1;
+            //    dr1.Cells[2].Value = dataPoints[rowCounter].Item2;
+            //    dataGridView1.Rows.Add(dr1);
+            //    rowCounter++;
+            //}
 
 
             //DataGridViewRow dr = new DataGridViewRow();
@@ -150,15 +189,55 @@ namespace BV_Modbus_Client
             int numberOfRegisters_returned = 0; // Initial
             if ((string)myButton.Tag == "ascii")
             {
-
+                length = (int)numAscii.Value;
                 FormatConverter.FormatName type = FormatConverter.FormatName.Ascii;
-
-
                 numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "uint16")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Uint16;
+                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "int16")
+            {
+                FormatConverter.FormatName type = FormatConverter.FormatName.Int16;
+                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "uint32")
+            {
+                FormatConverter.FormatName type = FormatConverter.FormatName.Uint32;
+                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "int32")
+            {
+                FormatConverter.FormatName type = FormatConverter.FormatName.Int32;
+                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "float")
+            {
+                FormatConverter.FormatName type = FormatConverter.FormatName.Float;
+                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "double")
+            {
+                FormatConverter.FormatName type = FormatConverter.FormatName.Double;
+                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "boolean")
+            {
+                FormatConverter.FormatName type = FormatConverter.FormatName.Boolean;
+                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "binary")
+            {
+                length = (int)numBinary.Value;
+                FormatConverter.FormatName type = FormatConverter.FormatName.Binary;
+                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "hex")
+            {
+                length = (int)numHex.Value;
+                FormatConverter.FormatName type = FormatConverter.FormatName.Hex;
                 numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
             }
 
@@ -171,6 +250,11 @@ namespace BV_Modbus_Client
                 dataGridView1.Rows[nextIndex].Cells[0].Selected = true;
             }
             
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

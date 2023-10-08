@@ -281,26 +281,30 @@ namespace BV_Modbus_Client
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            userEditActiveFlag = true;
-            //string[] frmDgv = (string[])(dataGridView1.DataSource as DataTable).Rows[0].ItemArray;
-            if (refreshActiveFlag == false)
+            if (bll.SelectedFcRequest != null)
             {
-                string[] tableData = ReadValuesFromDGV(dataGridView1);
 
-                // Remove empty start rows:
-                //int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
-                //int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
-                //string[] trimmedData = new string[tableData.Length-emptyStartRows];
-                //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
+                userEditActiveFlag = true;
+                //string[] frmDgv = (string[])(dataGridView1.DataSource as DataTable).Rows[0].ItemArray;
+                if (refreshActiveFlag == false)
+                {
+                    string[] tableData = ReadValuesFromDGV(dataGridView1);
+
+                    // Remove empty start rows:
+                    //int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
+                    //int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
+                    //string[] trimmedData = new string[tableData.Length-emptyStartRows];
+                    //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
 
 
-                bll.SelectedFcRequest.SetFcData(tableData);
+                    bll.SelectedFcRequest.SetFcData(tableData);
 
-                string[] addressDescriptions = ReadDescriptionsFromDGV(dataGridView1);
-                bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
+                    string[] addressDescriptions = ReadDescriptionsFromDGV(dataGridView1);
+                    bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
 
+                }
+                userEditActiveFlag = false;
             }
-            userEditActiveFlag = false;
         }
         #endregion
         #region ReadFromForm

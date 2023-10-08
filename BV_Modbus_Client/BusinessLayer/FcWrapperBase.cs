@@ -140,7 +140,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public virtual (string, string)[] GetDataAsString(bool UseRegOnMissingDescription=false) // Gui uses this to display the data.
         {
-            ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
+            //ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
 
             string[] strvalues =  GetValueStrings();
             // string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
@@ -203,13 +203,16 @@ namespace BV_Modbus_Client.BusinessLayer
         internal virtual void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer
         {
 
-            ushort[] setData; // = new ushort[strings.Length];
-            string[] errors;// = new string[strings.Length];
-            setData = FormatConverter.GetBinaryRepresentation(strings, DisplayType, out errors, SwapBytes, SwapRegisters);
+            ushort[] setData = formatContainer.StringToBinary(strings);
+            string[] errors = formatContainer.GetErrorList();
+                // = new string[strings.Length];
+
+             // = new ushort[strings.Length];
+            //setData = FormatConverter.GetBinaryRepresentation(strings, DisplayType, out errors, SwapBytes, SwapRegisters);
             // Store the valid numerical values.
             //string[] formatErrorMessages = new string[strings.Length];
             //bool formatValid = true;
-            for (int i = 0; i < strings.Length; i++)
+            for (int i = 0; i < setData.Length; i++)
             {
                 ushort address = (ushort)(startAddress + i);
                 //try

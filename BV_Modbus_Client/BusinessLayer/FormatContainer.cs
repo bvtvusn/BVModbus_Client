@@ -66,35 +66,48 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
 
-        internal ushort[] StringToBinary(string[] stringValues, bool SwapBytes, bool SwapRegisters)
+        internal ushort[] StringToBinary(string[] stringValues)
         {
-            ushort[] rawData = new ushort[stringValues.Length];
-
-            for (int register = 0; register < stringValues.Length; register++)
+            int maxlength = 0;
+            foreach (ValueFormat item in valueFormats)
             {
-                if (stringValues[register] != null)
+               int g =  item.Register + item.Length;
+                if (g > maxlength)
                 {
-                    ushort[] singleValueData = valueFormats[register].StringToBinary(stringValues[register]);
-
-                    if (SwapBytes)
-                    {
-                        singleValueData = FormatConverter.SwapBytesInArray(singleValueData);
-                    }
-
-                    if (SwapRegisters)
-                    {
-                        Array.Reverse(singleValueData);
-                    }
-
-                    int length = valueFormats[register].Length;
-
-                    // Copy the singleValueData into the rawData array, starting at the appropriate index.
-                    Array.Copy(singleValueData, 0, rawData, register, length);
+                    maxlength = g;
                 }
             }
+            ushort[] ushorts = new ushort[maxlength];
+                //string[] stringValues = new string[rawData.Length];
+                //List<ushort> stringValuesList = new List<ushort>();
+            //int regCounter = 0;
+            //int dtIndex = 0; // datatypeConverterIndex //
+            foreach (ValueFormat item in valueFormats)
+            {
+                if (item.Register < stringValues.Length)
+                {
+                    string stringValue = stringValues[item.Register];
+                    ushort[] valueData = item.StringToBinary(stringValue);
 
-            return rawData;
+                    if (swapRegisters)
+                    {
+                        Array.Reverse(valueData);
+                    }
+                    if (swapBytes)
+                    {
+                        valueData = FormatConverter.SwapBytesInArray(valueData);
+                    }
+                    Array.Copy(valueData,0, ushorts, item.Register, item.Length);
+
+                }
+
+            }
+            return ushorts;
         }
 
+        internal string[] GetErrorList()
+        {
+            return new string[10];
+        }
     }
 }

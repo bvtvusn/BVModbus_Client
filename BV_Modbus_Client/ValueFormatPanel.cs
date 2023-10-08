@@ -12,6 +12,11 @@ using System.Windows.Forms;
 
 namespace BV_Modbus_Client
 {
+
+    // Future work:
+    // Add show errors in grid using datagridview.errortext
+    // Fix byte order
+    // Allow change of Description from dgv
     public partial class ValueFormatPanel : UserControl
     {
         private BLL bll;
@@ -41,6 +46,7 @@ namespace BV_Modbus_Client
                 
                 if (refreshActiveFlag == false)
                 {
+
                     string[] tableData = GetColumnData(dataGridView1, 1);
                     string[] addressDescriptions = GetColumnData(dataGridView1, 2);
 
@@ -295,7 +301,9 @@ namespace BV_Modbus_Client
                 numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
             }
 
+            refreshActiveFlag = true;
             RefreshDataGrid();
+            refreshActiveFlag = false;
 
             int nextIndex = rowIndex + numberOfRegisters_returned;
             if (nextIndex < dataGridView1.Rows.Count)

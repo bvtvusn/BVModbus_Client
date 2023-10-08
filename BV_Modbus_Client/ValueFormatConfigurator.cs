@@ -126,11 +126,11 @@ namespace BV_Modbus_Client
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            var  strLines = Bll.SelectedFcRequest.formatContainer.BinaryToString(Bll.SelectedFcRequest.ReadCompleteBufferAsArray(), false, false);
-            foreach (var item in strLines)
-            {
-                txtShow.AppendText(item + "\r\n");
-            }
+            //var  strLines = Bll.SelectedFcRequest.formatContainer.BinaryToString(Bll.SelectedFcRequest.ReadCompleteBufferAsArray(), false, false);
+            //foreach (var item in strLines)
+            //{
+            //    txtShow.AppendText(item + "\r\n");
+            //}
         }
     }
 }

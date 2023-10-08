@@ -47,12 +47,16 @@
             this.numBinary = new System.Windows.Forms.NumericUpDown();
             this.numAscii = new System.Windows.Forms.NumericUpDown();
             this.numHex = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numBinary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAscii)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHex)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -106,6 +110,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(319, 0);
@@ -294,6 +299,37 @@
             0,
             0});
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.checkBox2);
+            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Location = new System.Drawing.Point(15, 236);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(13, 24);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(81, 19);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "swapBytes";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(13, 49);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(101, 19);
+            this.checkBox2.TabIndex = 0;
+            this.checkBox2.Text = "SwapRegisters";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // ValueFormatPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -308,6 +344,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numBinary)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAscii)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHex)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -330,5 +368,8 @@
         private NumericUpDown numAscii;
         private Button button8;
         private Button button7;
+        private GroupBox groupBox2;
+        private CheckBox checkBox2;
+        private CheckBox checkBox1;
     }
 }

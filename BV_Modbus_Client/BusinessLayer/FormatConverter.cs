@@ -264,9 +264,18 @@ namespace BV_Modbus_Client.BusinessLayer
                     {
                         throw new FormatException("To many characters");
                     }
-                    result = Enumerable.Range(0, rawString.Length / 4) // Divide by 4 since each ushort is represented by 4 hexadecimal characters
-                    .Select(x => Convert.ToUInt16(rawString.Substring(x * 4, 4), 16))
-                    .ToArray();
+                    string[] groupedArray = Enumerable.Range(0, (int)Math.Ceiling((double)rawString.Length / 4))
+            .Select(i => rawString.Substring(i * 4, Math.Min(4, rawString.Length - i * 4))).ToArray();
+
+                    result = groupedArray.Select(x => Convert.ToUInt16(x, 16)).ToArray();
+
+                    //groupedArray.Select(x => Convert.ToUInt16(rawString.Substring(x * 4, 4), 16)).ToArray();
+
+                    //System.Collections.IEnumerable tmp = Enumerable.Range(0, (rawString.Length-1 / 4)+1);
+                    //System.Collections.IEnumerable tmp2 = Enumerable.Range(0, rawString.Length / 4).Select(x => Convert.ToUInt16(rawString.Substring(x * 4, 4), 16));
+                    //result = Enumerable.Range(0, rawString.Length / 4) // Divide by 4 since each ushort is represented by 4 hexadecimal characters
+                    //.Select(x => Convert.ToUInt16(rawString.Substring(x * 4, 4), 16))
+                    //.ToArray();
 
 
 

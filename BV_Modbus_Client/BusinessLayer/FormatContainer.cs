@@ -105,9 +105,16 @@ namespace BV_Modbus_Client.BusinessLayer
             return ushorts;
         }
 
-        internal string[] GetErrorList()
+        internal string[] GetErrorList(int length)
         {
-            return new string[10];
+            string[] errors = new string[length];
+            for (int i = 0; i < valueFormats.Count; i++)
+            {
+                string errMsg = valueFormats[i].StrToBinError;
+                int index = valueFormats[i].Register;
+                errors[index] = errMsg;
+            }
+            return errors;
         }
     }
 }

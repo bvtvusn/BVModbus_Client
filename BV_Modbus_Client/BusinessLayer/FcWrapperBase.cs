@@ -158,21 +158,50 @@ namespace BV_Modbus_Client.BusinessLayer
                 strData[i].Item1 = strvalues[i];
                 //else strData[i].Item1 = "";
 
-                if (UseRegOnMissingDescription)
+
+
+                bool descriptionExists = false;
+                if (FcAddressDescription.Length > i)
                 {
-                    if (FcAddressDescription[i] == null)
+                    if (FcAddressDescription[i] != null)
                     {
-                        strData[i].Item2 = "Reg" + address;
-                    }
-                    else
-                    {
-                        strData[i].Item2 = FcAddressDescription[i];
+                        descriptionExists = FcAddressDescription[i].Length > 0;
                     }
                 }
-                else
+                if (descriptionExists)
                 {
                     strData[i].Item2 = FcAddressDescription[i];
                 }
+                else
+                {
+                    strData[i].Item2 = "Reg" + address;
+                }
+
+                //if (FcAddressDescription.Length > i)
+                //{
+                //}
+
+                //if (UseRegOnMissingDescription)
+                //    {
+                //        bool descriptionExists = false;
+                //        if (FcAddressDescription[i] != null)
+                //        {
+                //            descriptionExists = FcAddressDescription[i].Length > 0;
+                //        }
+                //        if (!descriptionExists)
+                //        {
+                //            strData[i].Item2 = "Reg" + address;
+                //        }
+                //        else
+                //        {
+                //            strData[i].Item2 = FcAddressDescription[i];
+                //        }
+                //    }
+                //    else
+                //    {
+                //        strData[i].Item2 = FcAddressDescription[i];
+                //    }
+                
                 
                 
                 //else strData[i].Item2 = "";
@@ -204,7 +233,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
 
             ushort[] setData = formatContainer.StringToBinary(strings);
-            string[] errors = formatContainer.GetErrorList();
+            string[] errors = formatContainer.GetErrorList(setData.Length);
                 // = new string[strings.Length];
 
              // = new ushort[strings.Length];
@@ -217,7 +246,12 @@ namespace BV_Modbus_Client.BusinessLayer
                 ushort address = (ushort)(startAddress + i);
                 //try
                 //{
-                bool shouldDelete = (errors[i] != null);
+                //bool shouldDelete = (errors[i] != null);
+                bool shouldDelete = false;
+                if (errors[i] != null)
+                {
+                    shouldDelete = errors[i].Length > 0;
+                }
                 //ushort datapoint = Format.GetBinaryRepresentation(strings[i]);
                 bool keyExist = DataBuffer.ContainsKey(address);
                 if (keyExist)

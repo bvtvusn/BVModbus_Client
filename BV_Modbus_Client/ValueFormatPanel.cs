@@ -12,11 +12,13 @@ using System.Windows.Forms;
 
 namespace BV_Modbus_Client
 {
+    //Done:
+    // Add show errors in grid using datagridview.errortext
+    // Allow change of Description from dgv
 
     // Future work:
-    // Add show errors in grid using datagridview.errortext
-    // Fix byte order
-    // Allow change of Description from dgv
+    // Fix byte order in conversion
+    // When FC is deleted, Hide the datagridview. and disable the buttons? (or hide everything)
     public partial class ValueFormatPanel : UserControl
     {
         private BLL bll;
@@ -29,8 +31,22 @@ namespace BV_Modbus_Client
             {
                 bll = value;
                 Bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
+                Bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
             }
         }
+
+        private void Bll_SelectedFormatValidStateEvent(string[] obj)
+        {
+            // Set error text of DGV
+
+
+            for (int i = 0; i < Math.Min(obj.Length,dataGridView1.Rows.Count); i++)
+            {
+                dataGridView1.Rows[i].Cells[1].ErrorText = obj[i];
+            }
+            
+        }
+
         public ValueFormatPanel()
         {
             InitializeComponent();
@@ -47,8 +63,8 @@ namespace BV_Modbus_Client
                 if (refreshActiveFlag == false)
                 {
 
-                    string[] tableData = GetColumnData(dataGridView1, 1);
-                    string[] addressDescriptions = GetColumnData(dataGridView1, 2);
+                    string[] tableData = GetDgvColumnData(dataGridView1, 1);
+                    string[] addressDescriptions = GetDgvColumnData(dataGridView1, 2);
 
                     bll.SelectedFcRequest.SetFcData(tableData);
                     bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
@@ -58,7 +74,7 @@ namespace BV_Modbus_Client
             }
         }
 
-        private string[] GetColumnData(DataGridView dgv, int columnIndex)
+        private string[] GetDgvColumnData(DataGridView dgv, int columnIndex)
         {
             List<string> columnData = new List<string>();
 

@@ -42,7 +42,8 @@ namespace BV_Modbus_Client
 
             bll = new BLL();
             InitializeComponent();
-            valueFormatPanel1.Bll = bll;
+            valueFormatPanel1.Visible = false;
+            //valueFormatPanel1.Bll = bll;
 
 
             //bll.OnFcObjectAdded += Bll_OnFcObjectAdded;
@@ -136,6 +137,8 @@ namespace BV_Modbus_Client
         private void Bll_FcSettingsChangedEvent()
         {
             propGridFc.SelectedObject = bll.SelectedFcRequest;
+            //MessageBox.Show("FcSettingsChangedEvent");
+            UpdateVisibilityOfDataArea();
         }
 
         private void PollTimer_PollFinishedEvent((string, string)[] data, bool PollItemsChanged)
@@ -162,6 +165,26 @@ namespace BV_Modbus_Client
         private void Bll_FcListChangedEvent(object? sender, EventArgs e) // Updates the list of FCs.
         {
             RefreshGUI();
+
+            //MessageBox.Show("FCLISTChangedEvent");
+            UpdateVisibilityOfDataArea();
+        }
+        private void UpdateVisibilityOfDataArea()
+        {
+            if (bll.SelectedFcRequest != valueFormatPanel1.Fc)
+            {
+                if (bll.SelectedFcRequest == null)
+                {
+                    valueFormatPanel1.Fc = null;
+                    valueFormatPanel1.Visible = false;
+                }
+                else
+                {
+                    valueFormatPanel1.Fc = bll.SelectedFcRequest;
+                    valueFormatPanel1.Visible = true;
+                }
+            }
+           
         }
         private void Bll_SelectedDataRecevivedEvent(string errorMsg)
         {

@@ -21,19 +21,43 @@ namespace BV_Modbus_Client
     // When FC is deleted, Hide the datagridview. and disable the buttons? (or hide everything)
     public partial class ValueFormatPanel : UserControl
     {
-        private BLL bll;
+        //private BLL bll;
         private bool userEditActiveFlag;
         private bool refreshActiveFlag;
+        private FcWrapperBase fc;
 
-        public BLL Bll
+        internal FcWrapperBase Fc
         {
-            get => bll; set
-            {
-                bll = value;
-                Bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
-                Bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
+            get { return fc; }
+            set {
+
+                //bool doRefresh = false;
+                if (Fc != null)
+                {
+                    fc.RefreshDataEvent -= Bll_SelectedDataRecevivedEvent;
+                    fc.FormatValidStateEvent -= Bll_SelectedFormatValidStateEvent;
+                }
+                    
+                fc = value;
+                if (value != null)
+                {
+                    //doRefresh = true;
+                    fc.RefreshDataEvent += Bll_SelectedDataRecevivedEvent;
+                    fc.FormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
+                    RefreshDataGrid();
+                }
             }
         }
+
+        //public BLL Bll
+        //{
+        //    get => bll; set
+        //    {
+        //        bll = value;
+        //        Bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
+        //        Bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
+        //    }
+        //}
 
         private void Bll_SelectedFormatValidStateEvent(string[] obj)
         {
@@ -55,7 +79,7 @@ namespace BV_Modbus_Client
 
         private void DataGridView1_CellValueChanged(object? sender, DataGridViewCellEventArgs e)
         {
-            if (bll.SelectedFcRequest != null)
+            if (Fc != null)
             {
 
                 userEditActiveFlag = true;
@@ -66,8 +90,8 @@ namespace BV_Modbus_Client
                     string[] tableData = GetDgvColumnData(dataGridView1, 1);
                     string[] addressDescriptions = GetDgvColumnData(dataGridView1, 2);
 
-                    bll.SelectedFcRequest.SetFcData(tableData);
-                    bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
+                    Fc.SetFcData(tableData);
+                    Fc.SetFcDescription(addressDescriptions);
 
                 }
                 userEditActiveFlag = false;
@@ -113,8 +137,8 @@ namespace BV_Modbus_Client
         {
             //dataGridView1.Columns.Clear();
 
-            List<ValueFormat> formats = Bll.SelectedFcRequest.formatContainer.valueFormats;
-            var dataPoints = Bll.SelectedFcRequest.GetDataAsString(true);
+            List<ValueFormat> formats = Fc.formatContainer.valueFormats;
+            var dataPoints = Fc.GetDataAsString(true);
             //string[] convertedValues = Bll.SelectedFcRequest.GetStrings();
 
             // CREATE COLUMNS IF NOT ALREADY CREATED
@@ -267,54 +291,54 @@ namespace BV_Modbus_Client
             {
                 length = (int)numAscii.Value;
                 FormatConverter.FormatName type = FormatConverter.FormatName.Ascii;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "uint16")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Uint16;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "int16")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Int16;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "uint32")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Uint32;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "int32")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Int32;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "float")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Float;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "double")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Double;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "boolean")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Boolean;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "binary")
             {
                 length = (int)numBinary.Value;
                 FormatConverter.FormatName type = FormatConverter.FormatName.Binary;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "hex")
             {
                 length = (int)numHex.Value;
                 FormatConverter.FormatName type = FormatConverter.FormatName.Hex;
-                numberOfRegisters_returned = Bll.SelectedFcRequest.formatContainer.SetFormat(rowIndex, type, length);
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
 
             refreshActiveFlag = true;

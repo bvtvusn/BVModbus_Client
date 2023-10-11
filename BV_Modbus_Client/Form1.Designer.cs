@@ -47,6 +47,7 @@
             this.mainBottomPanel = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.valueFormatPanel1 = new BV_Modbus_Client.ValueFormatPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkQuote = new System.Windows.Forms.CheckBox();
@@ -92,7 +93,6 @@
             this.multipleCoilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readInputRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.valueFormatPanel1 = new BV_Modbus_Client.ValueFormatPanel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.dgvContext.SuspendLayout();
@@ -220,7 +220,6 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -238,7 +237,7 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView1.Size = new System.Drawing.Size(552, 299);
+            this.dataGridView1.Size = new System.Drawing.Size(292, 232);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
@@ -274,10 +273,10 @@
             this.mainBottomPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
             this.mainBottomPanel.Controls.Add(this.tabControl1);
             this.mainBottomPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainBottomPanel.Location = new System.Drawing.Point(0, 297);
+            this.mainBottomPanel.Location = new System.Drawing.Point(0, 241);
             this.mainBottomPanel.Name = "mainBottomPanel";
             this.mainBottomPanel.Padding = new System.Windows.Forms.Padding(30, 0, 30, 30);
-            this.mainBottomPanel.Size = new System.Drawing.Size(620, 357);
+            this.mainBottomPanel.Size = new System.Drawing.Size(620, 413);
             this.mainBottomPanel.TabIndex = 19;
             // 
             // tabControl1
@@ -290,20 +289,28 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(560, 327);
+            this.tabControl1.Size = new System.Drawing.Size(560, 383);
             this.tabControl1.TabIndex = 17;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.valueFormatPanel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(552, 299);
+            this.tabPage1.Size = new System.Drawing.Size(552, 355);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "View Request Data";
+            // 
+            // valueFormatPanel1
+            // 
+            this.valueFormatPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.valueFormatPanel1.Location = new System.Drawing.Point(0, 0);
+            this.valueFormatPanel1.Name = "valueFormatPanel1";
+            this.valueFormatPanel1.Size = new System.Drawing.Size(552, 355);
+            this.valueFormatPanel1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -468,7 +475,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.valueFormatPanel1);
+            this.tabPage3.Controls.Add(this.dataGridView1);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(552, 299);
@@ -485,7 +492,7 @@
             this.MainTopPanel.Location = new System.Drawing.Point(0, 30);
             this.MainTopPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MainTopPanel.Name = "MainTopPanel";
-            this.MainTopPanel.Size = new System.Drawing.Size(620, 267);
+            this.MainTopPanel.Size = new System.Drawing.Size(620, 211);
             this.MainTopPanel.TabIndex = 10;
             // 
             // StatisticsPanel
@@ -495,7 +502,7 @@
             this.StatisticsPanel.Location = new System.Drawing.Point(0, 0);
             this.StatisticsPanel.Name = "StatisticsPanel";
             this.StatisticsPanel.Padding = new System.Windows.Forms.Padding(30, 30, 0, 15);
-            this.StatisticsPanel.Size = new System.Drawing.Size(245, 267);
+            this.StatisticsPanel.Size = new System.Drawing.Size(245, 211);
             this.StatisticsPanel.TabIndex = 3;
             // 
             // panel2
@@ -513,12 +520,12 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(30, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(215, 222);
+            this.panel2.Size = new System.Drawing.Size(215, 166);
             this.panel2.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(50, 188);
+            this.button1.Location = new System.Drawing.Point(119, 138);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -612,7 +619,7 @@
             this.SettingsPanel.Location = new System.Drawing.Point(245, 0);
             this.SettingsPanel.Name = "SettingsPanel";
             this.SettingsPanel.Padding = new System.Windows.Forms.Padding(30, 30, 30, 15);
-            this.SettingsPanel.Size = new System.Drawing.Size(375, 267);
+            this.SettingsPanel.Size = new System.Drawing.Size(375, 211);
             this.SettingsPanel.TabIndex = 2;
             // 
             // label2
@@ -633,7 +640,7 @@
             this.propGridFc.Location = new System.Drawing.Point(30, 30);
             this.propGridFc.Margin = new System.Windows.Forms.Padding(20);
             this.propGridFc.Name = "propGridFc";
-            this.propGridFc.Size = new System.Drawing.Size(315, 222);
+            this.propGridFc.Size = new System.Drawing.Size(315, 166);
             this.propGridFc.TabIndex = 0;
             this.propGridFc.Tag = "s";
             // 
@@ -783,14 +790,6 @@
             this.readToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.readToolStripMenuItem.Text = "Read Discrete Inputs";
             this.readToolStripMenuItem.Click += new System.EventHandler(this.readToolStripMenuItem_Click);
-            // 
-            // valueFormatPanel1
-            // 
-            this.valueFormatPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.valueFormatPanel1.Location = new System.Drawing.Point(0, 0);
-            this.valueFormatPanel1.Name = "valueFormatPanel1";
-            this.valueFormatPanel1.Size = new System.Drawing.Size(552, 299);
-            this.valueFormatPanel1.TabIndex = 0;
             // 
             // Form1
             // 

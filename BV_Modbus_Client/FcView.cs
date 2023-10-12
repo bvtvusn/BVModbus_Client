@@ -289,7 +289,7 @@ namespace BV_Modbus_Client
         }
         private void FillPreviewTable()
         {
-            bool chk = fcCommand.DisplayType == FormatConverter.FormatName.Boolean;
+            bool chk = fcCommand.formatContainer.DefaultFormat == FormatConverter.FormatName.Boolean;
             int maxDisplayLength = 4;
             if (chk)
             {

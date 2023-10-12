@@ -13,6 +13,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             Uint16,
             Int16,
+            Half,
             Float,
             Hex,
             Binary,
@@ -27,8 +28,9 @@ namespace BV_Modbus_Client.BusinessLayer
             { FormatName.Ascii,-1},
             { FormatName.Binary,-1},
             { FormatName.Boolean,1},
-            { FormatName.Double,2},
-            { FormatName.Float,1},
+            { FormatName.Double,4},
+            { FormatName.Float,2},
+            { FormatName.Half,1},
             { FormatName.Hex,-1},
             { FormatName.Int16,1},
             { FormatName.Int32,2},
@@ -173,7 +175,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 return ((short)rawdata[0]).ToString();
                 //return rawdata.Cast<short>().Select(x => x.ToString()).ToArray();
             }
-            else if (format == FormatName.Float)
+            else if (format == FormatName.Half)
             {
                 return FormatConverter.HalfToFloat(rawdata[0]).ToString();
                 //return rawdata.Select(x => FormatConverter.HalfToFloat(x).ToString()).ToArray();
@@ -200,11 +202,19 @@ namespace BV_Modbus_Client.BusinessLayer
 
                 
             }
-            else if (format == FormatName.Double)
+            else if (format == FormatName.Float)
             {
                 uint temp = ((uint)rawdata[0] << 16) | (uint)rawdata[1];
                 byte[] bytes = BitConverter.GetBytes(temp);
                 float dval = BitConverter.ToSingle(bytes, 0);
+                return dval.ToString();
+
+            }
+            else if (format == FormatName.Double)
+            {
+                ulong temp = ((ulong)rawdata[0] << 48) | ((ulong)rawdata[1] << 32) | ((ulong)rawdata[2] << 16) | (ulong)rawdata[3];
+                byte[] bytes = BitConverter.GetBytes(temp);
+                double dval = BitConverter.ToDouble(bytes, 0);
                 return dval.ToString();
 
             }
@@ -254,7 +264,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 {
                     result[0] = (ushort)Convert.ToInt16(rawString);
                 }
-                else if (format == FormatName.Float)
+                else if (format == FormatName.Half)
                 {
                     result[0] = FormatConverter.FloatToHalf(Convert.ToSingle(rawString));
                 }
@@ -288,7 +298,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
                 else if (format == FormatName.Binary)
                 {
-                    if (rawString.Length > numRegisters*16)
+                    if (rawString.Length > numRegisters * 16)
                     {
                         throw new FormatException("To many characters");
                     }
@@ -327,12 +337,30 @@ namespace BV_Modbus_Client.BusinessLayer
                     result[1] = (UInt16)((number >> 16) & 0xFFFF); // Store the upper 16 bits
 
                 }
-                else if (format == FormatName.Double)
+                else if (format == FormatName.Float)
                 {
-                    float floatValue = float.Parse(rawString);
-                    int intValue = BitConverter.ToInt32(BitConverter.GetBytes(floatValue), 0);
-                    result[0] = (UInt16)(intValue & 0xFFFF);
-                    result[1] = (UInt16)((intValue >> 16) & 0xFFFF);
+                    //float floatValue = float.Parse(rawString);
+                    //int intValue = BitConverter.ToInt32(BitConverter.GetBytes(floatValue), 0);
+                    //result[0] = (UInt16)(intValue & 0xFFFF);
+                    //result[1] = (UInt16)((intValue >> 16) & 0xFFFF);
+
+
+                    // Even, write first byte
+                    float fval = Convert.ToSingle(rawString);
+                    uint rawbits = BitConverter.SingleToUInt32Bits(fval);
+                    result[0] = (ushort)(rawbits >> 16);
+                    result[1] = (ushort)(rawbits & 0x0000FFFF);
+
+                }
+                else if (format == FormatName.Double)
+                { 
+                    double dval = Convert.ToDouble(rawString);
+                    ulong rawBits = BitConverter.DoubleToUInt64Bits(dval);
+                    result[0] = (ushort)((rawBits >> 16*3) & 0x000000000000FFFF);
+                    result[1] = (ushort)((rawBits >> 16 * 2) & 0x000000000000FFFF);
+                    result[2] = (ushort)((rawBits >> 16 * 1) & 0x000000000000FFFF);
+                    result[3] = (ushort)((rawBits ) & 0x000000000000FFFF);
+
                 }
                 else if (format == FormatName.Ascii)
                 {
@@ -380,7 +408,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     {
                         result[i] = (ushort)Convert.ToInt16(rawString[i]);
                     }
-                    else if (format == FormatName.Float)
+                    else if (format == FormatName.Half)
                     {
                         result[i] = FormatConverter.FloatToHalf(Convert.ToSingle(rawString[i]));
                     }
@@ -426,7 +454,7 @@ namespace BV_Modbus_Client.BusinessLayer
                             result[i] = temp;
                         }
                     }
-                    else if (format == FormatName.Double)
+                    else if (format == FormatName.Float)
                     {
                         if (i % 2 == 0)
                         {
@@ -551,7 +579,7 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 return ((short)rawdata).ToString();
             }
-            else if (format == FormatName.Float)
+            else if (format == FormatName.Half)
             {
                 return FormatConverter.HalfToFloat(rawdata).ToString();
             }
@@ -582,7 +610,7 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 result = (ushort)Convert.ToInt16(rawdata);
             }
-            else if (format == FormatName.Float)
+            else if (format == FormatName.Half)
             {
                 result = FormatConverter.FloatToHalf(Convert.ToSingle(rawdata));
             }

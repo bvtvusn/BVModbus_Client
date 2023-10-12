@@ -681,18 +681,7 @@ namespace BV_Modbus_Client
 
         private void button1_Click_3(object sender, EventArgs e)
         {
-            try
-            {
- Form form = new ValueFormatConfigurator(bll);
-            form.ShowDialog();
-            form.Close();
-            form.Dispose();
-            }
-            catch (Exception)
-            {
-
-                MessageBox.Show("");
-            }
+            
            
         }
     }

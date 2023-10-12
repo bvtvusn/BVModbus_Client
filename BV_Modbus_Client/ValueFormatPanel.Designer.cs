@@ -33,6 +33,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnASCII = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -47,16 +50,14 @@
             this.numBinary = new System.Windows.Forms.NumericUpDown();
             this.numAscii = new System.Windows.Forms.NumericUpDown();
             this.numHex = new System.Windows.Forms.NumericUpDown();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numBinary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAscii)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHex)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -66,7 +67,7 @@
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -118,10 +119,42 @@
             this.panel1.Size = new System.Drawing.Size(231, 397);
             this.panel1.TabIndex = 10;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.checkBox2);
+            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Location = new System.Drawing.Point(15, 236);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(13, 49);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(101, 19);
+            this.checkBox2.TabIndex = 0;
+            this.checkBox2.Text = "SwapRegisters";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(13, 24);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(81, 19);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "swapBytes";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnASCII);
             this.groupBox1.Controls.Add(this.button8);
+            this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.button5);
@@ -169,8 +202,8 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(83, 23);
             this.button6.TabIndex = 0;
-            this.button6.Tag = "double";
-            this.button6.Text = "Double";
+            this.button6.Tag = "float";
+            this.button6.Text = "Float";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.btnSetDatatype_Click);
             // 
@@ -224,8 +257,8 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(83, 23);
             this.button2.TabIndex = 0;
-            this.button2.Tag = "float";
-            this.button2.Text = "Float";
+            this.button2.Tag = "half";
+            this.button2.Text = "Half Float";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnSetDatatype_Click);
             // 
@@ -253,7 +286,7 @@
             // 
             // numBinary
             // 
-            this.numBinary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.numBinary.BackColor = System.Drawing.Color.White;
             this.numBinary.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numBinary.Location = new System.Drawing.Point(102, 131);
             this.numBinary.Name = "numBinary";
@@ -269,7 +302,7 @@
             // 
             // numAscii
             // 
-            this.numAscii.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.numAscii.BackColor = System.Drawing.Color.White;
             this.numAscii.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numAscii.Location = new System.Drawing.Point(102, 105);
             this.numAscii.Name = "numAscii";
@@ -285,7 +318,7 @@
             // 
             // numHex
             // 
-            this.numHex.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.numHex.BackColor = System.Drawing.Color.White;
             this.numHex.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numHex.Location = new System.Drawing.Point(102, 156);
             this.numHex.Name = "numHex";
@@ -299,36 +332,16 @@
             0,
             0});
             // 
-            // groupBox2
+            // button9
             // 
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Location = new System.Drawing.Point(15, 236);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(13, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(81, 19);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "swapBytes";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(13, 49);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(101, 19);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "SwapRegisters";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.button9.Location = new System.Drawing.Point(105, 178);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(83, 23);
+            this.button9.TabIndex = 0;
+            this.button9.Tag = "double";
+            this.button9.Text = "Double";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.btnSetDatatype_Click);
             // 
             // ValueFormatPanel
             // 
@@ -340,12 +353,12 @@
             this.Size = new System.Drawing.Size(550, 397);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numBinary)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAscii)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHex)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -371,5 +384,6 @@
         private GroupBox groupBox2;
         private CheckBox checkBox2;
         private CheckBox checkBox1;
+        private Button button9;
     }
 }

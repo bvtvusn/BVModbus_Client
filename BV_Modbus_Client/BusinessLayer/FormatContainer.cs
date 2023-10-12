@@ -19,6 +19,8 @@ namespace BV_Modbus_Client.BusinessLayer
             valueFormats = new List<ValueFormat>();
         }
 
+        public FormatConverter.FormatName DefaultFormat { get; internal set; }
+
         internal int SetFormat(int register, FormatConverter.FormatName type, int customLength)
         {
             int DataLength = 0;
@@ -115,6 +117,40 @@ namespace BV_Modbus_Client.BusinessLayer
                 errors[index] = errMsg;
             }
             return errors;
+        }
+
+        internal void UpdateRegisterCount(ushort numberOfRegisters)
+        {
+            List<int> removeIndexes = new List<int>();
+            bool[] registersOccupied = new bool[numberOfRegisters];
+            for (int i = 0; i < valueFormats.Count; i++)
+            {
+
+                if (valueFormats[i].Register + valueFormats[i].Length > numberOfRegisters || valueFormats[i].Register < 0)  // Removing the ones exceeding the max length
+                {
+                    removeIndexes.Add(i);
+                }
+            }
+            removeIndexes.Reverse();
+            removeIndexes.ForEach(i => valueFormats.RemoveAt(i));
+            //removeIndexes.Select(i => valueFormats.RemoveAt(i));
+
+            for (int i = 0; i < valueFormats.Count; i++)
+            {
+                for (int j = 0; j < valueFormats[i].Length; j++)
+                {
+                    registersOccupied[j + valueFormats[i].Register] = true;
+                }
+            }
+
+            for (int i = 0; i < registersOccupied.Length; i++)
+            {
+                if (!registersOccupied[i])
+                {
+                    valueFormats.Add(new ValueFormat(this, i, DefaultFormat, 1));
+                }
+            }
+
         }
     }
 }

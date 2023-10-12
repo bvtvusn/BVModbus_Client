@@ -66,7 +66,6 @@
             this.MainTopPanel = new System.Windows.Forms.Panel();
             this.StatisticsPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.lblResponseTime = new System.Windows.Forms.Label();
             this.lblWriteCounter = new System.Windows.Forms.Label();
@@ -323,7 +322,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(552, 299);
+            this.tabPage2.Size = new System.Drawing.Size(552, 355);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Polling settings";
             // 
@@ -478,7 +477,7 @@
             this.tabPage3.Controls.Add(this.dataGridView1);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(552, 299);
+            this.tabPage3.Size = new System.Drawing.Size(552, 355);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Set Data types";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -508,7 +507,6 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Controls.Add(this.lblResponseTime);
             this.panel2.Controls.Add(this.lblWriteCounter);
@@ -522,16 +520,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(215, 166);
             this.panel2.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(119, 138);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_3);
             // 
             // richTextBox1
             // 
@@ -896,7 +884,6 @@
         private ToolStripMenuItem multipleCoilsToolStripMenuItem;
         private ToolStripMenuItem readInputRegistersToolStripMenuItem;
         private ToolStripMenuItem readToolStripMenuItem;
-        private Button button1;
         private TabPage tabPage3;
         private ValueFormatPanel valueFormatPanel1;
     }

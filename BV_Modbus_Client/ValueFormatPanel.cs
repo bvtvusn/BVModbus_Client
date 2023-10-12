@@ -44,9 +44,20 @@ namespace BV_Modbus_Client
                     //doRefresh = true;
                     fc.RefreshDataEvent += Bll_SelectedDataRecevivedEvent;
                     fc.FormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
+                    fc.FcSettingsChangedEvent += Fc_FcSettingsChangedEvent;
                     RefreshDataGrid();
                 }
             }
+        }
+
+        private void Fc_FcSettingsChangedEvent()
+        {
+            ControlExtensions.UIThreadInvoke(this, delegate {
+                if (userEditActiveFlag == false)
+                {
+                    RefreshDataGrid();
+                }
+            });
         }
 
         //public BLL Bll
@@ -124,17 +135,18 @@ namespace BV_Modbus_Client
 
                 if (userEditActiveFlag == false)
                 {
-                    refreshActiveFlag = true;
+// refreshActiveFlag = true;
 
                     RefreshDataGrid();
 
-                    refreshActiveFlag = false;
+// refreshActiveFlag = false;
                 }
             });
         }
 
         void RefreshDataGrid()
         {
+            refreshActiveFlag = true;
             //dataGridView1.Columns.Clear();
 
             List<ValueFormat> formats = Fc.formatContainer.valueFormats;
@@ -246,10 +258,10 @@ namespace BV_Modbus_Client
                 } //dataGridView1.Rows.Add(dr);
                   //rowCounter++;
             }
-                
-                
 
-            
+
+
+
 
             // ADD EMPTY CELLS AFTER
             //while (dataGridView1.Rows.Count < dataPoints.Length)
@@ -272,7 +284,7 @@ namespace BV_Modbus_Client
 
             //}
             //dataGridView1.Rows.Add(dr);
-
+            refreshActiveFlag = false;
         }
 
         private void btnSetDatatype_Click(object sender, EventArgs e)
@@ -321,6 +333,11 @@ namespace BV_Modbus_Client
             else if ((string)myButton.Tag == "double")
             {
                 FormatConverter.FormatName type = FormatConverter.FormatName.Double;
+                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+            }
+            else if ((string)myButton.Tag == "half")
+            {
+                FormatConverter.FormatName type = FormatConverter.FormatName.Half;
                 numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
             else if ((string)myButton.Tag == "boolean")

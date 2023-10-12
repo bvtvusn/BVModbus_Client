@@ -18,7 +18,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             base.mbCon = mbCon;
             Description = "Read Discrete Inputs";
-            base.DisplayType = FormatConverter.FormatName.Boolean;
+            formatContainer.DefaultFormat = FormatConverter.FormatName.Boolean;
             NumberOfRegisters = 4;
 
             DataBuffer = new Dictionary<ushort, ushort>();

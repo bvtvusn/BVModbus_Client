@@ -26,8 +26,8 @@ namespace BV_Modbus_Client.BusinessLayer
         private FormatConverter.FormatName displayType;
         private string[] fcAddressDescription;
 
-        [DataMember]
-        public FormatConverter.FormatName DisplayType { get => displayType; set { displayType = value; ForceDataRefresh(""); } }
+        //[DataMember]
+        //public FormatConverter.FormatName DisplayType { get => displayType; set { displayType = value; ForceDataRefresh(""); } }
         //[DataMember]
         //public bool SwapBytes { get; set; }
         //[DataMember]
@@ -124,7 +124,7 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 Array.Resize<string>(ref fcAddressDescription, NumberOfRegisters);
             }
-
+            formatContainer.UpdateRegisterCount(NumberOfRegisters);
 
             FcSettingsChangedEvent?.Invoke();
         }

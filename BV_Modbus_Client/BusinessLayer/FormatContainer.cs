@@ -20,6 +20,8 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
         public FormatConverter.FormatName DefaultFormat { get; internal set; }
+        public bool SwapRegisters { get => swapRegisters; set => swapRegisters = value; }
+        public bool SwapBytes { get => swapBytes; set => swapBytes = value; }
 
         internal int SetFormat(int register, FormatConverter.FormatName type, int customLength)
         {

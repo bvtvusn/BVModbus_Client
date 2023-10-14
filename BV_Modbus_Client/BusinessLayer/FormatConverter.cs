@@ -221,6 +221,16 @@ namespace BV_Modbus_Client.BusinessLayer
             else if (format == FormatName.Ascii)
             {
                 byte[] bytesdd = rawdata.SelectMany(BitConverter.GetBytes).ToArray();
+                // byte[] bytesdd = rawdata.SelectMany(BitConverter.GetBytes).ToArray();
+
+
+                //string result = "";
+                //for (int i = 0; i < rawdata.Length; i++)
+                //{
+                //    result += $"{(byte)((rawdata[i] >> 8) & 0xFF):X2}{(byte)(rawdata[i] & 0xFF):X2}";
+
+                //}
+                //string[] bytesdd = rawdata.SelectMany(x => $"{(byte)((x >> 8) & 0xFF):X2}{(byte)(x & 0xFF):X2}").ToArray();
                 string data = System.Text.Encoding.ASCII.GetString(bytesdd);
                 return data;
             }
@@ -353,14 +363,22 @@ namespace BV_Modbus_Client.BusinessLayer
 
                 }
                 else if (format == FormatName.Double)
-                { 
+                {
                     double dval = Convert.ToDouble(rawString);
                     ulong rawBits = BitConverter.DoubleToUInt64Bits(dval);
-                    result[0] = (ushort)((rawBits >> 16*3) & 0x000000000000FFFF);
+                    result[0] = (ushort)((rawBits >> 16 * 3) & 0x000000000000FFFF);
                     result[1] = (ushort)((rawBits >> 16 * 2) & 0x000000000000FFFF);
                     result[2] = (ushort)((rawBits >> 16 * 1) & 0x000000000000FFFF);
-                    result[3] = (ushort)((rawBits ) & 0x000000000000FFFF);
+                    result[3] = (ushort)((rawBits) & 0x000000000000FFFF);
 
+
+
+                    //double dval = Convert.ToDouble(rawString);
+                    //ulong rawBits = BitConverter.DoubleToUInt64Bits(dval);
+                    //result[0] = (ushort)((rawBits) & 0x000000000000FFFF);
+                    //result[1] = (ushort)((rawBits >> 16 * 1) & 0x000000000000FFFF);
+                    //result[2] = (ushort)((rawBits >> 16 * 2) & 0x000000000000FFFF);
+                    //result[3] = (ushort)((rawBits >> 16 * 3) & 0x000000000000FFFF);
                 }
                 else if (format == FormatName.Ascii)
                 {
@@ -372,7 +390,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     {
                         if (i * 2 + 1 < byteArray.Length)
                         {
-                            result[i] = (ushort)((byteArray[i * 2] << 8) | byteArray[i * 2 + 1]);
+                            result[i] = (ushort)((byteArray[i * 2+1] << 8) | byteArray[i * 2 + 0]);
                         }
                     }
 

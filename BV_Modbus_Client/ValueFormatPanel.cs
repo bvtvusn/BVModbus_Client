@@ -46,6 +46,10 @@ namespace BV_Modbus_Client
                     fc.FormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
                     fc.FcSettingsChangedEvent += Fc_FcSettingsChangedEvent;
                     RefreshDataGrid();
+
+                    // Initialize values:
+                    chkSwapBytes.Checked = fc.formatContainer.SwapBytes;
+                    chkSwapRegisters.Checked = fc.formatContainer.SwapRegisters;
                 }
             }
         }
@@ -73,8 +77,6 @@ namespace BV_Modbus_Client
         private void Bll_SelectedFormatValidStateEvent(string[] obj)
         {
             // Set error text of DGV
-
-
             for (int i = 0; i < Math.Min(obj.Length,dataGridView1.Rows.Count); i++)
             {
                 dataGridView1.Rows[i].Cells[1].ErrorText = obj[i];
@@ -358,9 +360,9 @@ namespace BV_Modbus_Client
                 numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
             }
 
-            refreshActiveFlag = true;
+            //refreshActiveFlag = true;
             RefreshDataGrid();
-            refreshActiveFlag = false;
+            //refreshActiveFlag = false;
 
             int nextIndex = rowIndex + numberOfRegisters_returned;
             if (nextIndex < dataGridView1.Rows.Count)
@@ -373,6 +375,22 @@ namespace BV_Modbus_Client
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
+
+        }
+
+        private void ByteOrder_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chk = sender as CheckBox;
+            if ((string)chk.Tag == "byteOrder")
+            {
+                fc.formatContainer.SwapBytes = chk.Checked;
+            }
+            else if ((string)chk.Tag == "registerOrder")
+            {
+                fc.formatContainer.SwapRegisters = chk.Checked;
+            }
+
+            RefreshDataGrid();
 
         }
     }

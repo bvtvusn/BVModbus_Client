@@ -34,11 +34,12 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkSwapRegisters = new System.Windows.Forms.CheckBox();
+            this.chkSwapBytes = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnASCII = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@
             this.numBinary = new System.Windows.Forms.NumericUpDown();
             this.numAscii = new System.Windows.Forms.NumericUpDown();
             this.numHex = new System.Windows.Forms.NumericUpDown();
-            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -121,34 +121,38 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.chkSwapRegisters);
+            this.groupBox2.Controls.Add(this.chkSwapBytes);
             this.groupBox2.Location = new System.Drawing.Point(15, 236);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.Size = new System.Drawing.Size(200, 60);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Endian";
             // 
-            // checkBox2
+            // chkSwapRegisters
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(13, 49);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(101, 19);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "SwapRegisters";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkSwapRegisters.AutoSize = true;
+            this.chkSwapRegisters.Location = new System.Drawing.Point(13, 36);
+            this.chkSwapRegisters.Name = "chkSwapRegisters";
+            this.chkSwapRegisters.Size = new System.Drawing.Size(101, 19);
+            this.chkSwapRegisters.TabIndex = 0;
+            this.chkSwapRegisters.Tag = "registerOrder";
+            this.chkSwapRegisters.Text = "SwapRegisters";
+            this.chkSwapRegisters.UseVisualStyleBackColor = true;
+            this.chkSwapRegisters.CheckedChanged += new System.EventHandler(this.ByteOrder_CheckedChanged);
             // 
-            // checkBox1
+            // chkSwapBytes
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(13, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(81, 19);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "swapBytes";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkSwapBytes.AutoSize = true;
+            this.chkSwapBytes.Location = new System.Drawing.Point(13, 18);
+            this.chkSwapBytes.Name = "chkSwapBytes";
+            this.chkSwapBytes.Size = new System.Drawing.Size(81, 19);
+            this.chkSwapBytes.TabIndex = 0;
+            this.chkSwapBytes.Tag = "byteOrder";
+            this.chkSwapBytes.Text = "swapBytes";
+            this.chkSwapBytes.UseVisualStyleBackColor = true;
+            this.chkSwapBytes.CheckedChanged += new System.EventHandler(this.ByteOrder_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -195,6 +199,17 @@
             this.button8.Text = "Boolean";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.btnSetDatatype_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(105, 178);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(83, 23);
+            this.button9.TabIndex = 0;
+            this.button9.Tag = "double";
+            this.button9.Text = "Double";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.btnSetDatatype_Click);
             // 
             // button6
             // 
@@ -332,17 +347,6 @@
             0,
             0});
             // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(105, 178);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(83, 23);
-            this.button9.TabIndex = 0;
-            this.button9.Tag = "double";
-            this.button9.Text = "Double";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.btnSetDatatype_Click);
-            // 
             // ValueFormatPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -382,8 +386,8 @@
         private Button button8;
         private Button button7;
         private GroupBox groupBox2;
-        private CheckBox checkBox2;
-        private CheckBox checkBox1;
+        private CheckBox chkSwapRegisters;
+        private CheckBox chkSwapBytes;
         private Button button9;
     }
 }

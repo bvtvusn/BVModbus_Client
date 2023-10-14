@@ -382,6 +382,10 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
                 else if (format == FormatName.Ascii)
                 {
+                    if (rawString.Length > numRegisters*2)
+                    {
+                        throw new SyntaxErrorException("Too long string");
+                    }
                     byte[] byteArray = Encoding.ASCII.GetBytes(rawString);
 
                     // Create a ushort array and initialize it by casting each byte to ushort
@@ -402,7 +406,11 @@ namespace BV_Modbus_Client.BusinessLayer
             }
             catch (Exception err)
             {
-                result[0] = 0;
+                for (int i = 0; i < numRegisters; i++)
+                {
+                    result[i] = 0;
+
+                }
                 error = err.Message;
             }
                 //ushort result;

@@ -40,7 +40,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         }
 
-        internal string[] BinaryToString(ushort[] rawData)
+        internal string[] BinaryToString(ushort[] rawData, bool onlyOnestringPerValue = false)
         {
             string[] stringValues = new string[rawData.Length];
 
@@ -66,9 +66,33 @@ namespace BV_Modbus_Client.BusinessLayer
                     stringValues[item.Register] = item.BinaryToString(singlevalueData);
                 }
             }
+
+            if (onlyOnestringPerValue)
+            {
+                string[] tmp = new string[valueFormats.Count];
+                int indexCounter = 0;
+                for (int i = 0; i < valueFormats.Count; i++)
+                {
+                    tmp[i] = stringValues[indexCounter];
+
+                    indexCounter += valueFormats[i].Length;
+                }
+                stringValues = tmp;
+            }
             return stringValues;
         }
+        internal int[] GetValueIndexes()
+        {
+            int[] tmp = new int[valueFormats.Count];
+            int indexCounter = 0;
+            for (int i = 0; i < valueFormats.Count; i++)
+            {
+                tmp[i] = indexCounter;
 
+                indexCounter += valueFormats[i].Length;
+            }
+            return tmp;
+        }
 
         internal ushort[] StringToBinary(string[] stringValues)
         {
@@ -82,15 +106,16 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
             }
             ushort[] ushorts = new ushort[maxlength];
-                //string[] stringValues = new string[rawData.Length];
-                //List<ushort> stringValuesList = new List<ushort>();
+            //string[] stringValues = new string[rawData.Length];
+            //List<ushort> stringValuesList = new List<ushort>();
             //int regCounter = 0;
             //int dtIndex = 0; // datatypeConverterIndex //
+            int valueCounter = 0;
             foreach (ValueFormat item in valueFormats)
             {
-                if (item.Register < stringValues.Length)
+                if (valueCounter < stringValues.Length)
                 {
-                    string stringValue = stringValues[item.Register];
+                    string stringValue = stringValues[valueCounter];
                     ushort[] valueData = item.StringToBinary(stringValue);
 
                     if (swapRegisters)
@@ -104,6 +129,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     Array.Copy(valueData,0, ushorts, item.Register, item.Length);
 
                 }
+                valueCounter++;
 
             }
             return ushorts;

@@ -177,44 +177,14 @@ namespace BV_Modbus_Client.BusinessLayer
                     strData[i].Item2 = "Reg" + address;
                 }
 
-                //if (FcAddressDescription.Length > i)
-                //{
-                //}
-
-                //if (UseRegOnMissingDescription)
-                //    {
-                //        bool descriptionExists = false;
-                //        if (FcAddressDescription[i] != null)
-                //        {
-                //            descriptionExists = FcAddressDescription[i].Length > 0;
-                //        }
-                //        if (!descriptionExists)
-                //        {
-                //            strData[i].Item2 = "Reg" + address;
-                //        }
-                //        else
-                //        {
-                //            strData[i].Item2 = FcAddressDescription[i];
-                //        }
-                //    }
-                //    else
-                //    {
-                //        strData[i].Item2 = FcAddressDescription[i];
-                //    }
-                
-                
-                
-                //else strData[i].Item2 = "";
-
             }
-
 
             return strData;
         }
 
-        internal string[] GetValueStrings()
+        internal string[] GetValueStrings( bool onlyOneStringPerValue = false)
         {
-            return formatContainer.BinaryToString(ReadCompleteBufferAsArray());
+            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), onlyOneStringPerValue);
         }
         internal void ForceFcActivatedEvent()
         {
@@ -236,7 +206,7 @@ namespace BV_Modbus_Client.BusinessLayer
             string[] errors = formatContainer.GetErrorList(setData.Length);
                 // = new string[strings.Length];
 
-             // = new ushort[strings.Length];
+            // = new ushort[strings.Length];
             //setData = FormatConverter.GetBinaryRepresentation(strings, DisplayType, out errors, SwapBytes, SwapRegisters);
             // Store the valid numerical values.
             //string[] formatErrorMessages = new string[strings.Length];

@@ -19,6 +19,7 @@ namespace BV_Modbus_Client
     // Future work:
     // Fix byte order in conversion
     // When FC is deleted, Hide the datagridview. and disable the buttons? (or hide everything)
+    // String conversion: Only writing a single char does not work
     public partial class ValueFormatPanel : UserControl
     {
         //private BLL bll;

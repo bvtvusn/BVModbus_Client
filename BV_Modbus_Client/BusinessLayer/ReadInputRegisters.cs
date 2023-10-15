@@ -12,9 +12,10 @@ namespace BV_Modbus_Client.BusinessLayer
     internal class ReadInputRegisters : FcWrapperBase
     {
         //private ushort[] data;
+        [DataMember]
         private ushort numberOfRegisters;
 
-        public ReadInputRegisters(MbConnection mbCon) // Read multiple coils
+        public ReadInputRegisters(MbConnection mbCon) : base() // Read multiple coils
         {
             //base.Parent = parent;
 
@@ -29,7 +30,7 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         public override string OperationReadDescription { get { return "FC4: Read Input Registers"; } }
         //public override string OperationWriteDescription { get { return ""; } }
-        [DataMember]
+        
         public override ushort NumberOfRegisters { get { return numberOfRegisters; } set { numberOfRegisters = value; UpdateFcSettings(); } }
 
        

@@ -23,15 +23,15 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public ushort startAddress;
         private bool isSelected1;
-        private FormatConverter.FormatName displayType;
+        //private FormatConverter.FormatName displayType;
         private string[] fcAddressDescription;
 
-        [DataMember]
-        public FormatConverter.FormatName DisplayType { get => displayType; set { displayType = value; ForceDataRefresh(""); } }
-        [DataMember]
-        public bool SwapBytes { get; set; }
-        [DataMember]
-        public bool SwapRegisters { get; set; }
+        //[DataMember]
+        //public FormatConverter.FormatName DisplayType { get => displayType; set { displayType = value; ForceDataRefresh(""); } }
+        //[DataMember]
+        //public bool SwapBytes { get; set; }
+        //[DataMember]
+        //public bool SwapRegisters { get; set; }
         [Browsable(false)]
         //public FormatConverter Format { get; set; }
 
@@ -58,7 +58,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 FcSettingsChangedEvent?.Invoke();
             }
         }
-        [DataMember]
+        //[DataMember]
         //public bool FcTypeWrite { get; internal set; }
         //[DataMember]
         [Category("Modbus")]
@@ -95,11 +95,17 @@ namespace BV_Modbus_Client.BusinessLayer
         [Browsable(false)]
         [DataMember]
         public int SavedPollOrder { get; set; } = -1; // -1 means not polled. Only used for saving and restoring applionstate. Not kept up to date during program execution.
+        [DataMember]
+        public FormatContainer formatContainer { get; set; } 
         //public string Type
         //{
         //    get { return this.GetType().Name; }
 
         //}
+        public FcWrapperBase()
+        {
+            formatContainer = new FormatContainer(this);
+        }
 
 
         public event Action<string> RefreshDataEvent;
@@ -119,7 +125,7 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 Array.Resize<string>(ref fcAddressDescription, NumberOfRegisters);
             }
-
+            formatContainer.UpdateRegisterCount(NumberOfRegisters);
 
             FcSettingsChangedEvent?.Invoke();
         }
@@ -135,8 +141,10 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public virtual (string, string)[] GetDataAsString(bool UseRegOnMissingDescription=false) // Gui uses this to display the data.
         {
-            ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
-            string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
+            //ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
+
+            string[] strvalues =  GetValueStrings();
+            // string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
             // Function translates Databuffer into a string array
             (string, string)[] strData = new (string, string)[NumberOfRegisters];
             for (int i = 0; i < NumberOfRegisters; i++)
@@ -151,31 +159,34 @@ namespace BV_Modbus_Client.BusinessLayer
                 strData[i].Item1 = strvalues[i];
                 //else strData[i].Item1 = "";
 
-                if (UseRegOnMissingDescription)
+
+
+                bool descriptionExists = false;
+                if (FcAddressDescription.Length > i)
                 {
-                    if (FcAddressDescription[i] == null)
+                    if (FcAddressDescription[i] != null)
                     {
-                        strData[i].Item2 = "Reg" + address;
-                    }
-                    else
-                    {
-                        strData[i].Item2 = FcAddressDescription[i];
+                        descriptionExists = FcAddressDescription[i].Length > 0;
                     }
                 }
-                else
+                if (descriptionExists)
                 {
                     strData[i].Item2 = FcAddressDescription[i];
                 }
-                
-                
-                //else strData[i].Item2 = "";
+                else
+                {
+                    strData[i].Item2 = "Reg" + address;
+                }
 
             }
-
 
             return strData;
         }
 
+        internal string[] GetValueStrings( bool onlyOneStringPerValue = false)
+        {
+            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), onlyOneStringPerValue);
+        }
         internal void ForceFcActivatedEvent()
         {
             FcActivatedEvent?.Invoke();
@@ -192,18 +203,26 @@ namespace BV_Modbus_Client.BusinessLayer
         internal virtual void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer
         {
 
-            ushort[] setData; // = new ushort[strings.Length];
-            string[] errors;// = new string[strings.Length];
-            setData = FormatConverter.GetBinaryRepresentation(strings, DisplayType, out errors, SwapBytes, SwapRegisters);
+            ushort[] setData = formatContainer.StringToBinary(strings);
+            string[] errors = formatContainer.GetErrorList(setData.Length);
+                // = new string[strings.Length];
+
+            // = new ushort[strings.Length];
+            //setData = FormatConverter.GetBinaryRepresentation(strings, DisplayType, out errors, SwapBytes, SwapRegisters);
             // Store the valid numerical values.
             //string[] formatErrorMessages = new string[strings.Length];
             //bool formatValid = true;
-            for (int i = 0; i < strings.Length; i++)
+            for (int i = 0; i < setData.Length; i++)
             {
                 ushort address = (ushort)(startAddress + i);
                 //try
                 //{
-                bool shouldDelete = (errors[i] != null);
+                //bool shouldDelete = (errors[i] != null);
+                bool shouldDelete = false;
+                if (errors[i] != null)
+                {
+                    shouldDelete = errors[i].Length > 0;
+                }
                 //ushort datapoint = Format.GetBinaryRepresentation(strings[i]);
                 bool keyExist = DataBuffer.ContainsKey(address);
                 if (keyExist)
@@ -302,6 +321,10 @@ namespace BV_Modbus_Client.BusinessLayer
             }
             return datapoints;
         }
+        internal ushort[] ReadCompleteBufferAsArray()
+        {
+            return ReadFromBuffer(startAddress, NumberOfRegisters);
+        }
 
         internal void TriggerPollChangedEvent(bool pollEnabled)
         {
@@ -316,13 +339,20 @@ namespace BV_Modbus_Client.BusinessLayer
             next.description = description;
             next.slaveaddress = slaveaddress;
             next.startAddress = startAddress;
-            next.displayType = displayType;
-            next.fcAddressDescription = fcAddressDescription;
-            next.SwapBytes = SwapBytes;
-            next.SwapRegisters = SwapRegisters;
             next.NumberOfRegisters = NumberOfRegisters;
-            next.DataBuffer = DataBuffer;
             next.GlobFcData = GlobFcData;
+
+
+            //next.fcAddressDescription = fcAddressDescription.Select(a => (string)a.Clone()).ToArray();
+            next.fcAddressDescription = fcAddressDescription
+    .Select(a => a == null ? null : (string)a.Clone())
+    .ToArray();
+
+            next.DataBuffer = new Dictionary<ushort, ushort>(DataBuffer); //DataBuffer;
+            next.formatContainer = formatContainer.DeepClone();
+            //next.displayType = displayType;
+            //next.SwapBytes = SwapBytes;
+            //next.SwapRegisters = SwapRegisters;
             //next.isSelected = isSelected;
             //next.OperationReadDescription = OperationReadDescription;
             //next.OperationWriteDescription = OperationWriteDescription;

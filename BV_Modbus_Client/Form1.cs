@@ -42,6 +42,9 @@ namespace BV_Modbus_Client
 
             bll = new BLL();
             InitializeComponent();
+            valueFormatPanel1.Visible = false;
+            //valueFormatPanel1.Bll = bll;
+
 
             //bll.OnFcObjectAdded += Bll_OnFcObjectAdded;
             bll.FcListChangedEvent += Bll_FcListChangedEvent;
@@ -134,6 +137,8 @@ namespace BV_Modbus_Client
         private void Bll_FcSettingsChangedEvent()
         {
             propGridFc.SelectedObject = bll.SelectedFcRequest;
+            //MessageBox.Show("FcSettingsChangedEvent");
+            UpdateVisibilityOfDataArea();
         }
 
         private void PollTimer_PollFinishedEvent((string, string)[] data, bool PollItemsChanged)
@@ -160,6 +165,26 @@ namespace BV_Modbus_Client
         private void Bll_FcListChangedEvent(object? sender, EventArgs e) // Updates the list of FCs.
         {
             RefreshGUI();
+
+            //MessageBox.Show("FCLISTChangedEvent");
+            UpdateVisibilityOfDataArea();
+        }
+        private void UpdateVisibilityOfDataArea()
+        {
+            if (bll.SelectedFcRequest != valueFormatPanel1.Fc)
+            {
+                if (bll.SelectedFcRequest == null)
+                {
+                    valueFormatPanel1.Fc = null;
+                    valueFormatPanel1.Visible = false;
+                }
+                else
+                {
+                    valueFormatPanel1.Fc = bll.SelectedFcRequest;
+                    valueFormatPanel1.Visible = true;
+                }
+            }
+           
         }
         private void Bll_SelectedDataRecevivedEvent(string errorMsg)
         {
@@ -279,26 +304,30 @@ namespace BV_Modbus_Client
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            userEditActiveFlag = true;
-            //string[] frmDgv = (string[])(dataGridView1.DataSource as DataTable).Rows[0].ItemArray;
-            if (refreshActiveFlag == false)
+            if (bll.SelectedFcRequest != null)
             {
-                string[] tableData = ReadValuesFromDGV(dataGridView1);
 
-                // Remove empty start rows:
-                //int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
-                //int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
-                //string[] trimmedData = new string[tableData.Length-emptyStartRows];
-                //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
+                userEditActiveFlag = true;
+                //string[] frmDgv = (string[])(dataGridView1.DataSource as DataTable).Rows[0].ItemArray;
+                if (refreshActiveFlag == false)
+                {
+                    string[] tableData = ReadValuesFromDGV(dataGridView1);
+
+                    // Remove empty start rows:
+                    //int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
+                    //int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
+                    //string[] trimmedData = new string[tableData.Length-emptyStartRows];
+                    //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
 
 
-                bll.SelectedFcRequest.SetFcData(tableData);
+                    bll.SelectedFcRequest.SetFcData(tableData);
 
-                string[] addressDescriptions = ReadDescriptionsFromDGV(dataGridView1);
-                bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
+                    string[] addressDescriptions = ReadDescriptionsFromDGV(dataGridView1);
+                    bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
 
+                }
+                userEditActiveFlag = false;
             }
-            userEditActiveFlag = false;
         }
         #endregion
         #region ReadFromForm
@@ -648,6 +677,12 @@ namespace BV_Modbus_Client
         private void readToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bll.AddFunctionCode(typeof(ReadDiscreteInputs));
+        }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+            
+           
         }
     }
 }

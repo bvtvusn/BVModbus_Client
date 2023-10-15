@@ -11,16 +11,18 @@ namespace BV_Modbus_Client.BusinessLayer
     [DataContract]
     internal class MultipleCoils : FcWrapperBase
     {
-        ///*p*/rivate ushort[] data;
+        [DataMember]
+       
         private ushort numberOfRegisters;
 
-        public MultipleCoils(MbConnection mbCon) // Read multiple coils
+        public MultipleCoils(MbConnection mbCon) : base() // Read multiple coils
         {
             //base.Parent = parent;
 
             base.mbCon = mbCon;
             Description = "Multiple Coils";
-            base.DisplayType = FormatConverter.FormatName.Boolean;
+            //base.DisplayType = FormatConverter.FormatName.Boolean;
+            formatContainer.DefaultFormat = FormatConverter.FormatName.Boolean;
 
             //Testing
             //startAddress = 0;
@@ -33,7 +35,7 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         public override string OperationReadDescription { get { return "FC1: Read Coils"; } }
         public override string OperationWriteDescription { get { return "FC5: Write SingleCoil (for each)"; } }
-        [DataMember]
+        
         public override ushort NumberOfRegisters { get { return numberOfRegisters; } set { numberOfRegisters = value; UpdateFcSettings(); } }
        
         //internal override void ExecuteRead()

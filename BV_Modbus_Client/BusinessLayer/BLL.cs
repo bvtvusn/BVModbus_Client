@@ -23,7 +23,7 @@ namespace BV_Modbus_Client.BusinessLayer
 //Coils are 1-bit registers(readWrite)
 //Input registers are 16-bit registers used for input, and may only be read
 //Discrete Inputs are 1-bit registers used as inputs, and may only be read
-    internal class BLL
+    public class BLL
     {
         internal MbConnection mbCon;
         UserConfiguration userConfig;
@@ -134,7 +134,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         
 
-        public FcWrapperBase SelectedFcRequest
+        internal FcWrapperBase SelectedFcRequest
         {
             get => selectedFcRequest;
             private set
@@ -155,7 +155,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     selectedFcRequest.FcActivatedEvent += SelectedFcActivatedEvent;
                     //SelectedFcRequest_FcActivatedEvent
 
-                    SelectedDataRecevivedEvent?.Invoke("");  //mAKING fAKE dete received event to opdate the new table.
+                    SelectedDataRecevivedEvent?.Invoke("");  //mAKING fAKE data received event to opdate the new table.
                 }
 
 

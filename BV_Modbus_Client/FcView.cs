@@ -113,14 +113,17 @@ namespace BV_Modbus_Client
         #region Events
         private void FcCommand_FormatValidStateEvent(string[] errors)
         {
-            int length = Math.Min(4, errors.Length);
+            int[] valueIndexes = fcCommand.formatContainer.GetValueIndexes();
+
+            int length = Math.Min(4, valueIndexes.Length);
 
             for (int i = 0; i < length; i++)
             {
+                int sourceindex = valueIndexes[i];
                 bool isError = false;
-                if (errors[i] != null)
+                if (errors[sourceindex] != null)
                 {
-                    if (errors[i].Length > 0)
+                    if (errors[sourceindex].Length > 0)
                     {
                         isError = true;
                     }
@@ -289,19 +292,23 @@ namespace BV_Modbus_Client
         }
         private void FillPreviewTable()
         {
-            bool chk = fcCommand.DisplayType == FormatConverter.FormatName.Boolean;
+            bool chk = fcCommand.formatContainer.DefaultFormat == FormatConverter.FormatName.Boolean;
             int maxDisplayLength = 4;
             if (chk)
             {
                 maxDisplayLength = 8;
             }
+            string[] dataValues = fcCommand.GetValueStrings(true);
 
             (string, string)[] data = fcCommand.GetDataAsString();
             if (data.Length > maxDisplayLength)
             {
                 data = ((string, string)[])data.Take(maxDisplayLength).ToArray();
+                
+                dataValues = dataValues.Take(maxDisplayLength).ToArray();
             }
             string[] viewData = data.Select(x => x.Item1).ToArray();
+            viewData = dataValues;
 
             //DataTable testdt = new DataTable();
             //testdt.Columns.Add("t1", typeof(bool));
@@ -317,7 +324,7 @@ namespace BV_Modbus_Client
             //{
 
             //}     
-            
+
             // dataGridView2.DataSource = FormatConverter.ArrayToDatatableRow(viewData,false);
             //dataGridView2.Columns[0].ValueType = typeof(DataGridViewCheckBoxColumn);
             dataGridView2.Columns.Clear();

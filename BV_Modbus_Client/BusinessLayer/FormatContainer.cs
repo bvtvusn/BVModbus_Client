@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BV_Modbus_Client.BusinessLayer
 {
+    [DataContract]
     internal class FormatContainer
     {
+        [IgnoreDataMember]
         private FcWrapperBase fcWrapperBase;
+        [DataMember]
         public List<ValueFormat> valueFormats;
+        [DataMember]
         bool swapBytes;
+        [DataMember]
         bool swapRegisters;
 
         public FormatContainer(FcWrapperBase fcWrapperBase)
@@ -18,7 +25,7 @@ namespace BV_Modbus_Client.BusinessLayer
             this.fcWrapperBase = fcWrapperBase;
             valueFormats = new List<ValueFormat>();
         }
-
+        [DataMember]
         public FormatConverter.FormatName DefaultFormat { get; internal set; }
         public bool SwapRegisters { get => swapRegisters; set => swapRegisters = value; }
         public bool SwapBytes { get => swapBytes; set => swapBytes = value; }
@@ -179,6 +186,28 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
             }
 
+        }
+
+        //internal FormatContainer Clone()
+        //{
+        //    //FormatContainer clone = new FormatContainer(fcWrapperBase);
+        //    //clone.SwapBytes = SwapBytes;
+        //    //clone.SwapRegisters = SwapRegisters;
+        //    //clone.DefaultFormat = DefaultFormat;
+        //    //clone.valueFormats = valueFormats.
+
+            
+        //}
+
+        public FormatContainer DeepClone()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                IFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(memoryStream, this);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+                return (FormatContainer)formatter.Deserialize(memoryStream);
+            }
         }
     }
 }

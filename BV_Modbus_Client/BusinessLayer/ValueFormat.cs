@@ -1,23 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BV_Modbus_Client.BusinessLayer
 {
+    [DataContract]
     internal class ValueFormat
     {
-        FormatContainer container;
+
+        //FormatContainer container;
         //int registerNumber;
-        private FormatContainer formatContainer;
+        //[IgnoreDataMember]
+        //private FormatContainer formatContainer;
         private int register;
         private string strToBinError;
 
         //private FormatConverter.FormatName type;
+        
         public string StrToBinError { get => strToBinError; set => strToBinError = value; }
+        [DataMember]
         public int Length { get; set; }
+        [DataMember]
         public FormatConverter.FormatName FormatType { get; set; } = FormatConverter.FormatName.Uint16;
+        [DataMember]
         public int Register { get => register; set => register = value; }
 
         //public int RegisterNumber { get => registerNumber; set => registerNumber = value; }
@@ -32,7 +40,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public ValueFormat(FormatContainer formatContainer, int register, FormatConverter.FormatName type, int length)
         {
-            this.formatContainer = formatContainer;
+            //this.formatContainer = formatContainer;
             this.Register = register;
             this.FormatType = type;
             Length = length;

@@ -11,6 +11,7 @@ namespace BV_Modbus_Client.BusinessLayer
     [DataContract]
     internal class ReadDiscreteInputs: FcWrapperBase
     {
+        [DataMember]
         private ushort numberOfRegisters;
 
         public ReadDiscreteInputs(MbConnection mbCon) : base()// Read multiple coils
@@ -26,7 +27,7 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         public override string OperationReadDescription { get { return "FC2: Read Discrete Inputs"; } }
         //public override string OperationWriteDescription { get { return "FC5: Write SingleCoil (for each)"; } }
-        [DataMember]
+        
         public override ushort NumberOfRegisters { get { return numberOfRegisters; } set { numberOfRegisters = value; UpdateFcSettings(); } }
 
         

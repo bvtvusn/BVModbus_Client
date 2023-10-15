@@ -23,7 +23,7 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public ushort startAddress;
         private bool isSelected1;
-        private FormatConverter.FormatName displayType;
+        //private FormatConverter.FormatName displayType;
         private string[] fcAddressDescription;
 
         //[DataMember]
@@ -58,7 +58,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 FcSettingsChangedEvent?.Invoke();
             }
         }
-        [DataMember]
+        //[DataMember]
         //public bool FcTypeWrite { get; internal set; }
         //[DataMember]
         [Category("Modbus")]
@@ -95,6 +95,7 @@ namespace BV_Modbus_Client.BusinessLayer
         [Browsable(false)]
         [DataMember]
         public int SavedPollOrder { get; set; } = -1; // -1 means not polled. Only used for saving and restoring applionstate. Not kept up to date during program execution.
+        [DataMember]
         public FormatContainer formatContainer { get; set; } 
         //public string Type
         //{
@@ -338,13 +339,20 @@ namespace BV_Modbus_Client.BusinessLayer
             next.description = description;
             next.slaveaddress = slaveaddress;
             next.startAddress = startAddress;
-            next.displayType = displayType;
-            next.fcAddressDescription = fcAddressDescription;
+            next.NumberOfRegisters = NumberOfRegisters;
+            next.GlobFcData = GlobFcData;
+
+
+            //next.fcAddressDescription = fcAddressDescription.Select(a => (string)a.Clone()).ToArray();
+            next.fcAddressDescription = fcAddressDescription
+    .Select(a => a == null ? null : (string)a.Clone())
+    .ToArray();
+
+            next.DataBuffer = new Dictionary<ushort, ushort>(DataBuffer); //DataBuffer;
+            next.formatContainer = formatContainer.DeepClone();
+            //next.displayType = displayType;
             //next.SwapBytes = SwapBytes;
             //next.SwapRegisters = SwapRegisters;
-            next.NumberOfRegisters = NumberOfRegisters;
-            next.DataBuffer = DataBuffer;
-            next.GlobFcData = GlobFcData;
             //next.isSelected = isSelected;
             //next.OperationReadDescription = OperationReadDescription;
             //next.OperationWriteDescription = OperationWriteDescription;

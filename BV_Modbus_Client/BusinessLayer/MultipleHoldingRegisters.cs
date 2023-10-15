@@ -13,6 +13,7 @@ namespace BV_Modbus_Client.BusinessLayer
     {
 
         private ushort[] data;
+        [DataMember]
         private ushort numberOfRegisters;
 
         public MultipleHoldingRegisters(MbConnection mbCon) :base() // Read multiple coils
@@ -36,7 +37,8 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         public override string OperationReadDescription { get { return "FC3: Read Multiple Holding Registers"; } }
         public override string OperationWriteDescription { get { return "FC15: Write Multiple Holding Registers"; } }
-        [DataMember]
+        
+        
         public override ushort NumberOfRegisters { get {   return numberOfRegisters;  } set {  numberOfRegisters = value; UpdateFcSettings(); } } 
         //[DataMember]
         //public ushort StartAddress { get;  set; }

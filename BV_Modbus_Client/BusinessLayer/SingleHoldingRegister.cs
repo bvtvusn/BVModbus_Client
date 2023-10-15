@@ -10,7 +10,8 @@ namespace BV_Modbus_Client.BusinessLayer
     internal class SingleHoldingRegister : FcWrapperBase
     {
         private ushort[] data;
-        private ushort numberOfRegisters;
+       
+        //private ushort numberOfRegisters;
 
         public SingleHoldingRegister(MbConnection mbCon) // Read multiple coils
         {

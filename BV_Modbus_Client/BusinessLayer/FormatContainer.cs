@@ -199,14 +199,34 @@ namespace BV_Modbus_Client.BusinessLayer
             
         //}
 
+        //public FormatContainer DeepClone()
+        //{
+        //    using (MemoryStream memoryStream = new MemoryStream())
+        //    {
+        //        IFormatter formatter = new BinaryFormatter();
+        //        formatter.Serialize(memoryStream, this);
+        //        memoryStream.Seek(0, SeekOrigin.Begin);
+        //        return (FormatContainer)formatter.Deserialize(memoryStream);
+        //    }
+        //}
+        //public YourClass DeepClone()
+        //{
+        //    using (MemoryStream memoryStream = new MemoryStream())
+        //    {
+        //        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(YourClass));
+        //        serializer.WriteObject(memoryStream, this);
+        //        memoryStream.Position = 0;
+        //        return (YourClass)serializer.ReadObject(memoryStream);
+        //    }
+        //}
         public FormatContainer DeepClone()
         {
+            DataContractSerializer serializer = new DataContractSerializer(typeof(FormatContainer));
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                IFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(memoryStream, this);
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                return (FormatContainer)formatter.Deserialize(memoryStream);
+                serializer.WriteObject(memoryStream, this);
+                memoryStream.Position = 0;
+                return (FormatContainer)serializer.ReadObject(memoryStream);
             }
         }
     }

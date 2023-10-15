@@ -392,9 +392,14 @@ namespace BV_Modbus_Client.BusinessLayer
                     //ushort[] ushortArray = new ushort[byteArray.Length/2];
                     for (int i = 0; i < result.Length; i++)
                     {
+
                         if (i * 2 + 1 < byteArray.Length)
                         {
                             result[i] = (ushort)((byteArray[i * 2+1] << 8) | byteArray[i * 2 + 0]);
+                        }
+                        else if (i * 2 < byteArray.Length) // If only one byte left, only write one:
+                        {
+                            result[i] =  byteArray[i * 2 + 0];
                         }
                     }
 

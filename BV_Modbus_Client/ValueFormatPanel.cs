@@ -15,10 +15,10 @@ namespace BV_Modbus_Client
     //Done:
     // Add show errors in grid using datagridview.errortext
     // Allow change of Description from dgv
+    // When FC is deleted, Hide the datagridview. and disable the buttons? (or hide everything)
 
     // Future work:
     // Fix byte order in conversion
-    // When FC is deleted, Hide the datagridview. and disable the buttons? (or hide everything)
     // String conversion: Only writing a single char does not work
     public partial class ValueFormatPanel : UserControl
     {

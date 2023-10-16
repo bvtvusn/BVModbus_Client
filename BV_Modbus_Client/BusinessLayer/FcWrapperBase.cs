@@ -25,7 +25,7 @@ namespace BV_Modbus_Client.BusinessLayer
         private bool isSelected1;
         //private FormatConverter.FormatName displayType;
         private string[] fcAddressDescription;
-
+        EventBatcher refreshDataEventBatcher;
         //[DataMember]
         //public FormatConverter.FormatName DisplayType { get => displayType; set { displayType = value; ForceDataRefresh(""); } }
         //[DataMember]
@@ -105,8 +105,15 @@ namespace BV_Modbus_Client.BusinessLayer
         public FcWrapperBase()
         {
             formatContainer = new FormatContainer(this);
+            refreshDataEventBatcher = new EventBatcher(300);
+            refreshDataEventBatcher.BatchedEvent += RefreshDataEventBatcher_BatchedEvent;
         }
 
+        private void RefreshDataEventBatcher_BatchedEvent(object? sender, EventArgs e)
+        {
+            
+            RefreshDataEvent?.Invoke((string)refreshDataEventBatcher.Data);
+        }
 
         public event Action<string> RefreshDataEvent;
         public event Action<string[]> FormatValidStateEvent;
@@ -135,7 +142,8 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         public virtual void ForceDataRefresh(string errormsg)
         {
-            RefreshDataEvent?.Invoke(errormsg);
+            refreshDataEventBatcher.TriggerEvent(errormsg);
+            //RefreshDataEvent?.Invoke(errormsg);
         }
 
 

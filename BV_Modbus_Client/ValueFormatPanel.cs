@@ -18,11 +18,11 @@ namespace BV_Modbus_Client
     // When FC is deleted, Hide the datagridview. and disable the buttons? (or hide everything)
     // String conversion: Only writing a single char does not work
     // Fix byte order in conversion
+    // Why does changeInValue in FCview affect a different FC? (Only happens when duplicate FC is used)
 
     // Future work:
     // Confirm that datatype conversion is correct (consistent use of endianness?)
     // Funker polling riktig?
-    // Why does changeInValue in FCview affect a different FC? (Only happens when duplicate FC is used)
     public partial class ValueFormatPanel : UserControl
     {
         //private BLL bll;

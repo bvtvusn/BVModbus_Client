@@ -18,6 +18,7 @@ namespace BV_Modbus_Client
         private bool userEditActiveFlag;
         private bool refreshActiveFlag;
 
+        //private EventBatcher eb;
 
         // To do
         // Timer function to activate FCs
@@ -64,7 +65,23 @@ namespace BV_Modbus_Client
             DisplayValFromConfig();
             //TestSerial();
             UpdateConnectionStatus();
+
+
+            //eb = new EventBatcher(1000);
+            //eb.BatchedEvent += Eb_BatchedEvent;
         }
+
+        //private void Eb_BatchedEvent(object? sender, EventArgs e)
+        //{
+        //    lblResponseTime.Invoke(new Action(() =>
+        //    {
+        //        // This code runs on the UI thread
+        //        lblResponseTime.Text = lblResponseTime.Text + ".";
+        //    }));
+        //    //lblResponseTime.Invoke(delegate => {lblResponseTime.Text = lblResponseTime.Text + ".";});
+            
+        //}
+
         public static byte[] StringToByteArray(string hex)
         {
             return Enumerable.Range(0, hex.Length)
@@ -684,5 +701,10 @@ namespace BV_Modbus_Client
             
            
         }
+
+        //private void test_timer1_Tick(object sender, EventArgs e)
+        //{
+        //    eb.TriggerEvent();
+        //}
     }
 }

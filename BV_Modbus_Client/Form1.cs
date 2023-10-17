@@ -9,6 +9,8 @@ using System.Net;
 using System.Net.Sockets;
 using static BV_Modbus_Client.BusinessLayer.FormatConverter;
 using FluentModbus;
+using OxyPlot;
+using OxyPlot.Series;
 
 namespace BV_Modbus_Client
 {
@@ -69,7 +71,28 @@ namespace BV_Modbus_Client
 
             //eb = new EventBatcher(1000);
             //eb.BatchedEvent += Eb_BatchedEvent;
+            //TestOxyplot();
         }
+
+        //private void TestOxyplot()
+        //{
+        //    var plotModel = new PlotModel();
+        //    var lineSeries1 = new LineSeries { Title = "Series 1" };
+        //    var lineSeries2 = new LineSeries { Title = "Series 2" };
+
+        //    lineSeries1.Points.Add(new DataPoint(1, 10));
+        //    lineSeries1.Points.Add(new DataPoint(2, 20));
+        //    lineSeries1.Points.Add(new DataPoint(3, 30));
+
+        //    lineSeries2.Points.Add(new DataPoint(1, 5));
+        //    lineSeries2.Points.Add(new DataPoint(2, 15));
+        //    lineSeries2.Points.Add(new DataPoint(3, 25));
+
+        //    plotModel.Series.Add(lineSeries1);
+        //    plotModel.Series.Add(lineSeries2);
+
+        //    plotView1.Model = plotModel;
+        //}
 
         //private void Eb_BatchedEvent(object? sender, EventArgs e)
         //{
@@ -79,7 +102,7 @@ namespace BV_Modbus_Client
         //        lblResponseTime.Text = lblResponseTime.Text + ".";
         //    }));
         //    //lblResponseTime.Invoke(delegate => {lblResponseTime.Text = lblResponseTime.Text + ".";});
-            
+
         //}
 
         public static byte[] StringToByteArray(string hex)
@@ -192,11 +215,13 @@ namespace BV_Modbus_Client
             {
                 if (bll.SelectedFcRequest == null)
                 {
+                    trendlineControl1.Fc = null;
                     valueFormatPanel1.Fc = null;
                     valueFormatPanel1.Visible = false;
                 }
                 else
                 {
+                    trendlineControl1.Fc = bll.SelectedFcRequest;
                     valueFormatPanel1.Fc = bll.SelectedFcRequest;
                     valueFormatPanel1.Visible = true;
                 }

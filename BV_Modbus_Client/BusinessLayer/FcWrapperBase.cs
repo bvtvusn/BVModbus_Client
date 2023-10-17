@@ -193,7 +193,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         internal string[] GetValueStrings( bool onlyOneStringPerValue = false)
         {
-            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), onlyOneStringPerValue);
+            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), onlyOneStringPerValue, false);
         }
         internal void ForceFcActivatedEvent()
         {
@@ -211,7 +211,7 @@ namespace BV_Modbus_Client.BusinessLayer
         internal virtual void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer
         {
 
-            ushort[] setData = formatContainer.StringToBinary(strings);
+            ushort[] setData = formatContainer.StringToBinary(strings,true);
             string[] errors = formatContainer.GetErrorList(setData.Length);
                 // = new string[strings.Length];
 

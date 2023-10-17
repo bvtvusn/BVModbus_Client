@@ -47,7 +47,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         }
 
-        internal string[] BinaryToString(ushort[] rawData, bool onlyOnestringPerValue = false)
+        internal string[] BinaryToString(ushort[] rawData, bool onlyOnestringPerValue = false, bool logValue = true)
         {
             string[] stringValues = new string[rawData.Length];
 
@@ -70,7 +70,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     {
                         singlevalueData = FormatConverter.SwapBytesInArray(singlevalueData);
                     }
-                    stringValues[item.Register] = item.BinaryToString(singlevalueData);
+                    stringValues[item.Register] = item.BinaryToString(singlevalueData, logValue);
                 }
             }
 
@@ -101,7 +101,7 @@ namespace BV_Modbus_Client.BusinessLayer
             return tmp;
         }
 
-        internal ushort[] StringToBinary(string[] stringValues)
+        internal ushort[] StringToBinary(string[] stringValues, bool logValue = true )
         {
             int maxlength = 0;
             foreach (ValueFormat item in valueFormats)
@@ -123,7 +123,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 if (valueCounter < stringValues.Length)
                 {
                     string stringValue = stringValues[valueCounter];
-                    ushort[] valueData = item.StringToBinary(stringValue);
+                    ushort[] valueData = item.StringToBinary(stringValue, logValue);
 
                     if (swapRegisters)
                     {

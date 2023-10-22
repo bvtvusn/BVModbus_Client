@@ -133,7 +133,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 DataBuffer.Add(address, (rawData[i]));
 
             }
-            GetValueStrings(false, true);
+            GetValueStrings(false, true);  // Not actually used to read values, but instead to update the history.(Bad practrice)
             //SetFcData()
             //form
             //    atContainer.valueFormats[0].ToString

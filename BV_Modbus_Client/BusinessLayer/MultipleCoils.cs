@@ -71,16 +71,18 @@ namespace BV_Modbus_Client.BusinessLayer
                 ReadCount++;
 
 
-                DataBuffer.Clear();
+                //DataBuffer.Clear();
+                ushort[] rawdata = new ushort[NumberOfRegisters];
                 for (ushort i = 0; i < NumberOfRegisters; i++)
                 {
                     int bytenum = i / 8;
                     int bIndex = i % 8;
                     bool coil = FormatConverter.IsBitSet(bitData[bytenum], bIndex);
-                    ushort address = (ushort)(i + startAddress);
-                    DataBuffer.Add(address, (Convert.ToUInt16(coil)));
-
+                    //ushort address = (ushort)(i + startAddress);
+                    //DataBuffer.Add(address, (Convert.ToUInt16(coil)));
+                    rawdata[i] = (Convert.ToUInt16(coil));
                 }
+                SetDatabuffer(rawdata);
                 base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }

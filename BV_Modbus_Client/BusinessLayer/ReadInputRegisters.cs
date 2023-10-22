@@ -53,13 +53,14 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
                 ReadCount++;
-                DataBuffer.Clear();
-                for (ushort i = 0; i < rawData.Length; i++)
-                {
-                    ushort address = (ushort)(i + startAddress);
-                    DataBuffer.Add(address, (rawData[i]));
+                //DataBuffer.Clear();
+                //for (ushort i = 0; i < rawData.Length; i++)
+                //{
+                //    ushort address = (ushort)(i + startAddress);
+                //    DataBuffer.Add(address, (rawData[i]));
 
-                }
+                //}
+                SetDatabuffer(rawData);
                 base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }

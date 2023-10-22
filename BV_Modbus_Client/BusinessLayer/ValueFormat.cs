@@ -28,7 +28,7 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public int Register { get => register; set => register = value; }
 
-        public float[] valueHistory { get; internal set; }
+        public (DateTime, float)[] valueHistory { get; internal set; }
         public int historyIndex { get; internal set; }
 
         //public int RegisterNumber { get => registerNumber; set => registerNumber = value; }
@@ -48,7 +48,7 @@ namespace BV_Modbus_Client.BusinessLayer
             this.FormatType = type;
             Length = length;
 
-            valueHistory = new float[100];
+            valueHistory = new (DateTime, float)[100];
         }
 
         internal string BinaryToString(ushort[] singlevalueData, bool logValue = false)
@@ -89,7 +89,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public void HistoryAdd(float value)
         {
-            valueHistory[historyIndex] = value;
+            valueHistory[historyIndex] = (DateTime.Now, value);
             historyIndex = (historyIndex + 1)%valueHistory.Length;
             
         }

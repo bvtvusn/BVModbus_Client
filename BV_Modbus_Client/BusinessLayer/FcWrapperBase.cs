@@ -72,7 +72,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         [Browsable(false)]
         [DataMember]
-        public Dictionary<ushort, ushort> DataBuffer { get; set; } // Databuffer contains the address read, the value and a description.
+        public Dictionary<ushort, ushort> DataBuffer { get; internal set; } // Databuffer contains the address read, the value and a description.
         [Browsable(false)]
         [DataMember] 
         public string[] FcAddressDescription { get => fcAddressDescription; set => fcAddressDescription = value; }
@@ -104,9 +104,11 @@ namespace BV_Modbus_Client.BusinessLayer
         //}
         public FcWrapperBase()
         {
-            formatContainer = new FormatContainer(this);
-            refreshDataEventBatcher = new EventBatcher(300);
-            refreshDataEventBatcher.BatchedEvent += RefreshDataEventBatcher_BatchedEvent;
+            //formatContainer = new FormatContainer(this);
+            //refreshDataEventBatcher = new EventBatcher(300);
+            //refreshDataEventBatcher.BatchedEvent += RefreshDataEventBatcher_BatchedEvent;
+
+            InitializeObject();
         }
 
         private void RefreshDataEventBatcher_BatchedEvent(object? sender, EventArgs e)
@@ -121,6 +123,22 @@ namespace BV_Modbus_Client.BusinessLayer
         public event Action<FcWrapperBase, bool> SelectedChanged;
         public event Action FcActivatedEvent;
         public event Action<bool> ActivePollingChangedEvent;
+
+        public void SetDatabuffer(ushort[] rawData)
+        {
+            DataBuffer.Clear();
+            for (ushort i = 0; i < rawData.Length; i++)
+            {
+                ushort address = (ushort)(i + startAddress);
+                DataBuffer.Add(address, (rawData[i]));
+
+            }
+            GetValueStrings(false, true);
+            //SetFcData()
+            //form
+            //    atContainer.valueFormats[0].ToString
+
+        }
 
         public void UpdateFcSettings()
         {
@@ -191,9 +209,9 @@ namespace BV_Modbus_Client.BusinessLayer
             return strData;
         }
 
-        internal string[] GetValueStrings( bool onlyOneStringPerValue = false)
+        internal string[] GetValueStrings( bool onlyOneStringPerValue = false, bool logValue = false)
         {
-            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), onlyOneStringPerValue, false);
+            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), onlyOneStringPerValue, logValue);
         }
         internal void ForceFcActivatedEvent()
         {
@@ -261,6 +279,14 @@ namespace BV_Modbus_Client.BusinessLayer
             ForceDataRefresh("");
             UpdateFormatValidState(errors);
         }
+
+        internal void InitializeObject()
+        {
+            formatContainer = new FormatContainer(this);
+            refreshDataEventBatcher = new EventBatcher(300);
+            refreshDataEventBatcher.BatchedEvent += RefreshDataEventBatcher_BatchedEvent;
+        }
+
         //internal virtual string[] GetFcData(int numberOfRegisters, int startRegister)
         //{
         //    List<string> strings = new List<string>();

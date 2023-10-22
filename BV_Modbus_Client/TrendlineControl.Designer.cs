@@ -29,38 +29,41 @@
         private void InitializeComponent()
         {
             this.plotView1 = new OxyPlot.WindowsForms.PlotView();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.chkPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // plotView1
             // 
             this.plotView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotView1.Location = new System.Drawing.Point(220, 0);
+            this.plotView1.Location = new System.Drawing.Point(192, 0);
+            this.plotView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.plotView1.Name = "plotView1";
             this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plotView1.Size = new System.Drawing.Size(643, 352);
+            this.plotView1.Size = new System.Drawing.Size(563, 264);
             this.plotView1.TabIndex = 0;
             this.plotView1.Text = "plotView1";
             this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
             this.plotView1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.plotView1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
             // 
-            // panel1
+            // chkPanel
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(220, 352);
-            this.panel1.TabIndex = 1;
+            this.chkPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chkPanel.Location = new System.Drawing.Point(0, 0);
+            this.chkPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkPanel.Name = "chkPanel";
+            this.chkPanel.Size = new System.Drawing.Size(192, 264);
+            this.chkPanel.TabIndex = 1;
             // 
             // TrendlineControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.plotView1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.chkPanel);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "TrendlineControl";
-            this.Size = new System.Drawing.Size(863, 352);
+            this.Size = new System.Drawing.Size(755, 264);
             this.ResumeLayout(false);
 
         }
@@ -68,6 +71,6 @@
         #endregion
 
         private OxyPlot.WindowsForms.PlotView plotView1;
-        private Panel panel1;
+        private Panel chkPanel;
     }
 }

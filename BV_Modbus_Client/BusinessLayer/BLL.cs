@@ -275,6 +275,7 @@ namespace BV_Modbus_Client.BusinessLayer
             foreach (FcWrapperBase item in UserConfig.FcWrappers)
             {
                 item.mbCon = this.mbCon; // All share the same instance of the connection
+                item.InitializeObject();
             }
             UpdateFCList();
             UserConfigLoadedEvent?.Invoke();

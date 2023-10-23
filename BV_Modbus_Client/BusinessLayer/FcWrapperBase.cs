@@ -25,7 +25,7 @@ namespace BV_Modbus_Client.BusinessLayer
         private bool isSelected1;
         //private FormatConverter.FormatName displayType;
         private string[] fcAddressDescription;
-
+        EventBatcher refreshDataEventBatcher;
         //[DataMember]
         //public FormatConverter.FormatName DisplayType { get => displayType; set { displayType = value; ForceDataRefresh(""); } }
         //[DataMember]
@@ -72,7 +72,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         [Browsable(false)]
         [DataMember]
-        public Dictionary<ushort, ushort> DataBuffer { get; set; } // Databuffer contains the address read, the value and a description.
+        public Dictionary<ushort, ushort> DataBuffer { get; internal set; } // Databuffer contains the address read, the value and a description.
         [Browsable(false)]
         [DataMember] 
         public string[] FcAddressDescription { get => fcAddressDescription; set => fcAddressDescription = value; }
@@ -104,9 +104,18 @@ namespace BV_Modbus_Client.BusinessLayer
         //}
         public FcWrapperBase()
         {
-            formatContainer = new FormatContainer(this);
+            //formatContainer = new FormatContainer(this);
+            //refreshDataEventBatcher = new EventBatcher(300);
+            //refreshDataEventBatcher.BatchedEvent += RefreshDataEventBatcher_BatchedEvent;
+
+            InitializeObject();
         }
 
+        private void RefreshDataEventBatcher_BatchedEvent(object? sender, EventArgs e)
+        {
+            
+            RefreshDataEvent?.Invoke((string)refreshDataEventBatcher.Data);
+        }
 
         public event Action<string> RefreshDataEvent;
         public event Action<string[]> FormatValidStateEvent;
@@ -114,6 +123,22 @@ namespace BV_Modbus_Client.BusinessLayer
         public event Action<FcWrapperBase, bool> SelectedChanged;
         public event Action FcActivatedEvent;
         public event Action<bool> ActivePollingChangedEvent;
+
+        public void SetDatabuffer(ushort[] rawData)
+        {
+            DataBuffer.Clear();
+            for (ushort i = 0; i < rawData.Length; i++)
+            {
+                ushort address = (ushort)(i + startAddress);
+                DataBuffer.Add(address, (rawData[i]));
+
+            }
+            GetValueStrings(false, true);  // Not actually used to read values, but instead to update the history.(Bad practice)
+            //SetFcData()
+            //form
+            //    atContainer.valueFormats[0].ToString
+
+        }
 
         public void UpdateFcSettings()
         {
@@ -135,29 +160,79 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         public virtual void ForceDataRefresh(string errormsg)
         {
-            RefreshDataEvent?.Invoke(errormsg);
+            refreshDataEventBatcher.TriggerEvent(errormsg);
+            //RefreshDataEvent?.Invoke(errormsg);
         }
 
 
-        public virtual (string, string)[] GetDataAsString(bool UseRegOnMissingDescription=false) // Gui uses this to display the data.
+        public virtual (string, string)[] GetDataAsString(bool UseRegOnMissingDescription=false, bool onlyDefinedValues = false) // Gui uses this to display the data.
         {
             //ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
 
             string[] strvalues =  GetValueStrings();
+            string[] descriptions = GetRegDescriptions();
             // string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
             // Function translates Databuffer into a string array
-            (string, string)[] strData = new (string, string)[NumberOfRegisters];
+            (string, string)[] strData = new (string, string)[Math.Min(strvalues.Length, descriptions.Length)];
+            for (int i = 0; i < strData.Length; i++)
+            {
+                strData[i].Item1 = strvalues[i];
+                strData[i].Item2 = descriptions[i];
+            }
+
+            if (onlyDefinedValues)
+            {
+                int[] indexOfDefinedVaues = formatContainer.GetValueIndexes();
+
+                strData = indexOfDefinedVaues.Select(index => strData[index]).ToArray(); //Picking only the defined indexes
+                //int[] selectedValues = indexesToPick.Select(index => sourceArray[index]).ToArray();
+
+            }
+            //for (int i = 0; i < NumberOfRegisters; i++)
+            //{
+            //    ushort address = (ushort)(i + startAddress);
+            //    //ushort datavalue;
+            //    string dataDescription;
+            //    //bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
+            //    //bool dscrFound = GlobFcData.AddressDescription.TryGetValue(address, out dataDescription); // Description
+
+            //    /*if (valueFound) */
+            //    strData[i].Item1 = strvalues[i];
+            //    //else strData[i].Item1 = "";
+
+
+
+            //    bool descriptionExists = false;
+            //    if (FcAddressDescription.Length > i)
+            //    {
+            //        if (FcAddressDescription[i] != null)
+            //        {
+            //            descriptionExists = FcAddressDescription[i].Length > 0;
+            //        }
+            //    }
+            //    if (descriptionExists)
+            //    {
+            //        strData[i].Item2 = FcAddressDescription[i];
+            //    }
+            //    else
+            //    {
+            //        strData[i].Item2 = "Reg" + address;
+            //    }
+
+            //}
+
+            return strData;
+        }
+
+        public string[] GetRegDescriptions(bool useDefaultName = false)
+        {
+            string[] strData = new string[NumberOfRegisters];
             for (int i = 0; i < NumberOfRegisters; i++)
             {
                 ushort address = (ushort)(i + startAddress);
                 //ushort datavalue;
-                string dataDescription;
-                //bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
-                //bool dscrFound = GlobFcData.AddressDescription.TryGetValue(address, out dataDescription); // Description
-
-                /*if (valueFound) */
-                strData[i].Item1 = strvalues[i];
-                //else strData[i].Item1 = "";
+                //string dataDescription;
+               
 
 
 
@@ -171,11 +246,13 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
                 if (descriptionExists)
                 {
-                    strData[i].Item2 = FcAddressDescription[i];
+                    strData[i] = FcAddressDescription[i];
                 }
                 else
                 {
-                    strData[i].Item2 = "Reg" + address;
+                    if (useDefaultName)   strData[i] = "Reg" + address;
+                    
+                    else strData[i] = "";
                 }
 
             }
@@ -183,9 +260,9 @@ namespace BV_Modbus_Client.BusinessLayer
             return strData;
         }
 
-        internal string[] GetValueStrings( bool onlyOneStringPerValue = false)
+        internal string[] GetValueStrings( bool onlyOneStringPerValue = false, bool logValue = false)
         {
-            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), onlyOneStringPerValue);
+            return formatContainer.BinaryToString(ReadCompleteBufferAsArray(), onlyOneStringPerValue, logValue);
         }
         internal void ForceFcActivatedEvent()
         {
@@ -203,7 +280,7 @@ namespace BV_Modbus_Client.BusinessLayer
         internal virtual void SetFcData(string[] strings)  // Called when table is changed by the user. This function stores the data in AddressDescription and DataBuffer
         {
 
-            ushort[] setData = formatContainer.StringToBinary(strings);
+            ushort[] setData = formatContainer.StringToBinary(strings,true);
             string[] errors = formatContainer.GetErrorList(setData.Length);
                 // = new string[strings.Length];
 
@@ -253,6 +330,14 @@ namespace BV_Modbus_Client.BusinessLayer
             ForceDataRefresh("");
             UpdateFormatValidState(errors);
         }
+
+        internal void InitializeObject()
+        {
+            formatContainer = new FormatContainer(this);
+            refreshDataEventBatcher = new EventBatcher(300);
+            refreshDataEventBatcher.BatchedEvent += RefreshDataEventBatcher_BatchedEvent;
+        }
+
         //internal virtual string[] GetFcData(int numberOfRegisters, int startRegister)
         //{
         //    List<string> strings = new List<string>();

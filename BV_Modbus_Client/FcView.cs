@@ -354,13 +354,17 @@ namespace BV_Modbus_Client
                     checkColumn.ReadOnly = false;
                     dataGridView2.Columns.Add(checkColumn);
                 }
-                DataGridViewRow dr = new DataGridViewRow();
-                dr.CreateCells(dataGridView2);
-                for (int i = 0; i < viewData.Length; i++)
+                if (dataGridView2.Columns.Count > 0)
                 {
-                    dr.Cells[i].Value = viewData[i] ;
+                    DataGridViewRow dr = new DataGridViewRow();
+                    dr.CreateCells(dataGridView2);
+                    for (int i = 0; i < viewData.Length; i++)
+                    {
+                        dr.Cells[i].Value = viewData[i] ;
+                    }
+                    dataGridView2.Rows.Add(dr);
+
                 }
-                dataGridView2.Rows.Add(dr);
             }
 
         }

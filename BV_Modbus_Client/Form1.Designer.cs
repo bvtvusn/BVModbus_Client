@@ -63,6 +63,8 @@
             this.numPollInterval = new System.Windows.Forms.NumericUpDown();
             this.btnTestPoll = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.trendlineControl1 = new BV_Modbus_Client.TrendlineControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.MainTopPanel = new System.Windows.Forms.Panel();
             this.StatisticsPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -103,6 +105,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPollInterval)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.MainTopPanel.SuspendLayout();
             this.StatisticsPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -236,13 +239,14 @@
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView1.Size = new System.Drawing.Size(292, 232);
+            this.dataGridView1.Size = new System.Drawing.Size(212, 136);
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
             // dgvContext
             // 
+            this.dgvContext.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.dgvContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miPasteData});
             this.dgvContext.Name = "dgvContext";
@@ -283,6 +287,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(30, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
@@ -307,6 +312,7 @@
             // 
             this.valueFormatPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valueFormatPanel1.Location = new System.Drawing.Point(0, 0);
+            this.valueFormatPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.valueFormatPanel1.Name = "valueFormatPanel1";
             this.valueFormatPanel1.Size = new System.Drawing.Size(552, 355);
             this.valueFormatPanel1.TabIndex = 0;
@@ -474,13 +480,33 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.dataGridView1);
+            this.tabPage3.Controls.Add(this.trendlineControl1);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(552, 355);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Set Data types";
+            this.tabPage3.Text = "Trend line";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // trendlineControl1
+            // 
+            this.trendlineControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trendlineControl1.Location = new System.Drawing.Point(0, 0);
+            this.trendlineControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.trendlineControl1.Name = "trendlineControl1";
+            this.trendlineControl1.Size = new System.Drawing.Size(552, 355);
+            this.trendlineControl1.TabIndex = 15;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.dataGridView1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(552, 355);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "test";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // MainTopPanel
             // 
@@ -804,6 +830,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPollInterval)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.MainTopPanel.ResumeLayout(false);
             this.StatisticsPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -886,5 +913,7 @@
         private ToolStripMenuItem readToolStripMenuItem;
         private TabPage tabPage3;
         private ValueFormatPanel valueFormatPanel1;
+        private TrendlineControl trendlineControl1;
+        private TabPage tabPage4;
     }
 }

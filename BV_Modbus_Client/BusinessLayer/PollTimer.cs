@@ -63,7 +63,7 @@ namespace BV_Modbus_Client.BusinessLayer
             foreach (FcWrapperBase item in FcPollOrder)
             {
                 // REad out the data
-                (string, string)[] data = item.GetDataAsString(true);
+                (string, string)[] data = item.GetDataAsString(true,true);
                
                 //string[] viewData = data.Select(x => x.Item1).ToArray();
                strdata.AddRange(data);

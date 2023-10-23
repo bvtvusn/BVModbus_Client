@@ -28,6 +28,10 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public int Register { get => register; set => register = value; }
 
+        public (DateTime, float)[] valueHistory { get; internal set; }
+        public int historyIndex { get; internal set; }
+        public bool isVisibleInPlot { get; set; }
+
         //public int RegisterNumber { get => registerNumber; set => registerNumber = value; }
         //internal FormatConverter.FormatName Type { get => type; set => type = value; }
 
@@ -44,15 +48,51 @@ namespace BV_Modbus_Client.BusinessLayer
             this.Register = register;
             this.FormatType = type;
             Length = length;
+
+            valueHistory = new (DateTime, float)[100];
         }
 
-        internal string BinaryToString(ushort[] singlevalueData)
+        internal string BinaryToString(ushort[] singlevalueData, bool logValue = false)
         {
-            return FormatConverter.GetStringRepresentation(singlevalueData, FormatType);
+            string value = FormatConverter.GetStringRepresentation(singlevalueData, FormatType);
+            if (logValue)
+            {
+                
+                try
+                {
+                    HistoryAdd(Convert.ToSingle(value));
+                }
+                catch (Exception)
+                {
+
+
+                }
+            }
+            return value;
         }
-        internal ushort[] StringToBinary(string strData)
+        internal ushort[] StringToBinary(string strData, bool logValue = false)
         {
+            if (logValue)
+            {
+                try
+                {
+                    HistoryAdd(Convert.ToSingle(strData));
+                }
+                catch (Exception)
+                {
+
+                    
+                }
+                
+            }
             return FormatConverter.GetBinaryRepresentation(strData, FormatType, Length, out strToBinError);
+        }
+
+        public void HistoryAdd(float value)
+        {
+            valueHistory[historyIndex] = (DateTime.Now, value);
+            historyIndex = (historyIndex + 1)%valueHistory.Length;
+            
         }
     }
 }

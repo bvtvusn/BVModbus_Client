@@ -66,21 +66,55 @@ namespace BV_Modbus_Client
         private void DrawCheckboxes()
         {
             chkPanel.Controls.Clear();
-            // Simulate a Boolean array
-            bool[] boolArray = new bool[Fc.formatContainer.valueFormats.Count];
-
-            // Create checkboxes based on the array length
-            for (int i = 0; i < boolArray.Length; i++)
+            string[] descriptions = fc.GetRegDescriptions(true);
+            int regsFromStart = 0;
+            for (int i = 0; i < Fc.formatContainer.valueFormats.Count; i++)
             {
+                
                 CheckBox checkBox = new CheckBox();
-                checkBox.Text = "Checkbox " + (i + 1);
-                checkBox.Checked = boolArray[i];
-                checkBox.Top = i * 25; // Adjust the position based on your layout
-                checkBox.Left = 10;    // Adjust the position based on your layout
+                checkBox.Text = ShortenString(descriptions[regsFromStart],14,true);
+                checkBox.Checked = Fc.formatContainer.valueFormats[i].isVisibleInPlot;
+                checkBox.Width = 120;
+                checkBox.Top = i * 25; 
+                checkBox.Left = 4;    
+                checkBox.Tag = Fc.formatContainer.valueFormats[i];
+
+                checkBox.CheckedChanged += (sender, e) =>
+                {
+                    CheckBox box = (sender as CheckBox);
+                    (box.Tag as ValueFormat).isVisibleInPlot = box.Checked;
+                };
 
                 chkPanel.Controls.Add(checkBox); // Add the checkbox to the panel
+                regsFromStart += Fc.formatContainer.valueFormats[i].Length;
+            }            
+        }
+
+        public static string ShortenString(string input, int maxLength = 20, bool addEllipsis = true)
+        {
+            if (string.IsNullOrEmpty(input) || maxLength <= 0)
+            {
+                return string.Empty;
+            }
+
+            if (input.Length <= maxLength)
+            {
+                return input;
+            }
+            else
+            {
+                string shortenedString = input.Substring(0, maxLength);
+
+                if (addEllipsis)
+                {
+                    shortenedString += "...";
+                }
+
+                return shortenedString;
             }
         }
+
+
         private void RefreshPlotGrid()
         {
             
@@ -90,26 +124,30 @@ namespace BV_Modbus_Client
                 //int test = DateTime.Compare(DateTime.Now, zeroDatetime);
 
                 //(DateTime,float)[] k = item.valueHistory.Where(a => 1 == DateTime.Compare(a.Item1, zeroDatetime)).ToArray();
-                
+
                 //if (k.Length > 0)
                 //{
                 //    lowestTime = k.Min(a=>a.Item1);
                 //}
-                var lineSeriesx = new LineSeries();
-                for (int i = 0; i < item.valueHistory.Length; i++)
+                if (item.isVisibleInPlot)
                 {
-                    (DateTime, float) xyPointTuple = item.valueHistory.ElementAt((i + item.historyIndex) % item.valueHistory.Length);
-
-                    if (1 == DateTime.Compare( xyPointTuple.Item1, zeroDatetime))
+                    var lineSeriesx = new LineSeries();
+                    for (int i = 0; i < item.valueHistory.Length; i++)
                     {
-                        
-                        lineSeriesx.Points.Add(new DataPoint((xyPointTuple.Item1 - lowestTime).TotalSeconds, xyPointTuple.Item2));
+                        (DateTime, float) xyPointTuple = item.valueHistory.ElementAt((i + item.historyIndex) % item.valueHistory.Length);
 
+                        if (1 == DateTime.Compare( xyPointTuple.Item1, zeroDatetime))
+                        {
+                        
+                            lineSeriesx.Points.Add(new DataPoint((xyPointTuple.Item1 - lowestTime).TotalSeconds, xyPointTuple.Item2));
+
+                        }
+                        //lineSeriesx.Points.Add(new DataPoint(i, item.valueHistory.ElementAt((i+item.historyIndex)%item.valueHistory.Length)));
+                        //lineSeriesx.Points.AddRange(item.valueHistory);
                     }
-                    //lineSeriesx.Points.Add(new DataPoint(i, item.valueHistory.ElementAt((i+item.historyIndex)%item.valueHistory.Length)));
-                    //lineSeriesx.Points.AddRange(item.valueHistory);
+                    plotModel.Series.Add(lineSeriesx);
+
                 }
-                plotModel.Series.Add(lineSeriesx);
             }
                 
 

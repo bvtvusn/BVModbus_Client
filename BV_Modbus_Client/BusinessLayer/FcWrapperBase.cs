@@ -133,7 +133,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 DataBuffer.Add(address, (rawData[i]));
 
             }
-            GetValueStrings(false, true);  // Not actually used to read values, but instead to update the history.(Bad practrice)
+            GetValueStrings(false, true);  // Not actually used to read values, but instead to update the history.(Bad practice)
             //SetFcData()
             //form
             //    atContainer.valueFormats[0].ToString
@@ -165,25 +165,74 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
 
-        public virtual (string, string)[] GetDataAsString(bool UseRegOnMissingDescription=false) // Gui uses this to display the data.
+        public virtual (string, string)[] GetDataAsString(bool UseRegOnMissingDescription=false, bool onlyDefinedValues = false) // Gui uses this to display the data.
         {
             //ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
 
             string[] strvalues =  GetValueStrings();
+            string[] descriptions = GetRegDescriptions();
             // string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
             // Function translates Databuffer into a string array
-            (string, string)[] strData = new (string, string)[NumberOfRegisters];
+            (string, string)[] strData = new (string, string)[Math.Min(strvalues.Length, descriptions.Length)];
+            for (int i = 0; i < strData.Length; i++)
+            {
+                strData[i].Item1 = strvalues[i];
+                strData[i].Item2 = descriptions[i];
+            }
+
+            if (onlyDefinedValues)
+            {
+                int[] indexOfDefinedVaues = formatContainer.GetValueIndexes();
+
+                strData = indexOfDefinedVaues.Select(index => strData[index]).ToArray(); //Picking only the defined indexes
+                //int[] selectedValues = indexesToPick.Select(index => sourceArray[index]).ToArray();
+
+            }
+            //for (int i = 0; i < NumberOfRegisters; i++)
+            //{
+            //    ushort address = (ushort)(i + startAddress);
+            //    //ushort datavalue;
+            //    string dataDescription;
+            //    //bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
+            //    //bool dscrFound = GlobFcData.AddressDescription.TryGetValue(address, out dataDescription); // Description
+
+            //    /*if (valueFound) */
+            //    strData[i].Item1 = strvalues[i];
+            //    //else strData[i].Item1 = "";
+
+
+
+            //    bool descriptionExists = false;
+            //    if (FcAddressDescription.Length > i)
+            //    {
+            //        if (FcAddressDescription[i] != null)
+            //        {
+            //            descriptionExists = FcAddressDescription[i].Length > 0;
+            //        }
+            //    }
+            //    if (descriptionExists)
+            //    {
+            //        strData[i].Item2 = FcAddressDescription[i];
+            //    }
+            //    else
+            //    {
+            //        strData[i].Item2 = "Reg" + address;
+            //    }
+
+            //}
+
+            return strData;
+        }
+
+        public string[] GetRegDescriptions(bool useDefaultName = false)
+        {
+            string[] strData = new string[NumberOfRegisters];
             for (int i = 0; i < NumberOfRegisters; i++)
             {
                 ushort address = (ushort)(i + startAddress);
                 //ushort datavalue;
-                string dataDescription;
-                //bool valueFound = DataBuffer.TryGetValue(address, out datavalue);
-                //bool dscrFound = GlobFcData.AddressDescription.TryGetValue(address, out dataDescription); // Description
-
-                /*if (valueFound) */
-                strData[i].Item1 = strvalues[i];
-                //else strData[i].Item1 = "";
+                //string dataDescription;
+               
 
 
 
@@ -197,11 +246,13 @@ namespace BV_Modbus_Client.BusinessLayer
                 }
                 if (descriptionExists)
                 {
-                    strData[i].Item2 = FcAddressDescription[i];
+                    strData[i] = FcAddressDescription[i];
                 }
                 else
                 {
-                    strData[i].Item2 = "Reg" + address;
+                    if (useDefaultName)   strData[i] = "Reg" + address;
+                    
+                    else strData[i] = "";
                 }
 
             }

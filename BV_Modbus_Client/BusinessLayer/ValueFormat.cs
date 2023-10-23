@@ -30,6 +30,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public (DateTime, float)[] valueHistory { get; internal set; }
         public int historyIndex { get; internal set; }
+        public bool isVisibleInPlot { get; set; }
 
         //public int RegisterNumber { get => registerNumber; set => registerNumber = value; }
         //internal FormatConverter.FormatName Type { get => type; set => type = value; }

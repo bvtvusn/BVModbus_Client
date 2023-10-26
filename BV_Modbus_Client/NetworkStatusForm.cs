@@ -27,14 +27,14 @@ namespace BV_Modbus_Client
         internal NetworkStatusForm(BLL bll)
         {
             InitializeComponent();
-            if (bll.mbCon.IsTcp)
+            if (bll.mbCon.conData.IsTcp)
             {
                 cmbConType.SelectedIndex = 0;
             }
             else cmbConType.SelectedIndex = 1;
 
             cmbSerialPorts.DataSource = SerialPort.GetPortNames();
-            int baudindex = cmbSerialPorts.Items.IndexOf(bll.mbCon.RTU_SerialPortName);
+            int baudindex = cmbSerialPorts.Items.IndexOf(bll.mbCon.conData.RTU_SerialPortName);
             if (baudindex == -1 && cmbSerialPorts.Items.Count > 0)
             {
                 baudindex = 0;
@@ -43,14 +43,14 @@ namespace BV_Modbus_Client
 
             //cmbDataBits.DataSource = Enum.GetValues(typeof( Parity));
             cmbStopBits.DataSource = Enum.GetValues(typeof(StopBits));
-            cmbStopBits.SelectedItem = bll.mbCon.RTU_StopBits;
+            cmbStopBits.SelectedItem = bll.mbCon.conData.RTU_StopBits;
 
             cmbParity.DataSource = Enum.GetValues(typeof(Parity));
-            cmbParity.SelectedItem = bll.mbCon.RTU_Parity;
+            cmbParity.SelectedItem = bll.mbCon.conData.RTU_Parity;
 
-            cmbBaud.SelectedIndex = cmbBaud.Items.IndexOf(bll.mbCon.RTU_BaudRate.ToString());
+            cmbBaud.SelectedIndex = cmbBaud.Items.IndexOf(bll.mbCon.conData.RTU_BaudRate.ToString());
 
-            numDataBits.Value = bll.mbCon.RTU_DataBits;
+            numDataBits.Value = bll.mbCon.conData.RTU_DataBits;
 
 
 
@@ -79,9 +79,9 @@ namespace BV_Modbus_Client
             switch (cmbConType.SelectedItem.ToString())
             {
                 case "Modbus TCP":
-                    bll.mbCon.TCP_Hostname = bll.UserConfig.Network_RemoteHostname;
-                    bll.mbCon.TCP_Port = bll.UserConfig.Network_RemotePort;
-                    bll.mbCon.IsTcp = true;
+                    bll.mbCon.conData.TCP_Hostname = bll.UserConfig.Network_RemoteHostname;
+                    bll.mbCon.conData.TCP_Port = bll.UserConfig.Network_RemotePort;
+                    bll.mbCon.conData.IsTcp = true;
                     try
                     {
                         bll.mbCon.ConnectToSlave();
@@ -98,12 +98,12 @@ namespace BV_Modbus_Client
                     
                     try
                     {
-                        bll.mbCon.IsTcp = false;
-                        bll.mbCon.RTU_SerialPortName = cmbSerialPorts.SelectedItem.ToString();
-                        bll.mbCon.RTU_BaudRate = Convert.ToInt32(cmbBaud.SelectedItem);
-                        bll.mbCon.RTU_Parity = (Parity)cmbParity.SelectedItem;
-                        bll.mbCon.RTU_StopBits = (StopBits)cmbStopBits.SelectedItem;
-                        bll.mbCon.RTU_DataBits = Convert.ToInt32(numDataBits.Value);
+                        bll.mbCon.conData.IsTcp = false;
+                        bll.mbCon. conData.RTU_SerialPortName = cmbSerialPorts.SelectedItem.ToString();
+                        bll.mbCon. conData.RTU_BaudRate = Convert.ToInt32(cmbBaud.SelectedItem);
+                        bll.mbCon. conData.RTU_Parity = (Parity)cmbParity.SelectedItem;
+                        bll.mbCon. conData.RTU_StopBits = (StopBits)cmbStopBits.SelectedItem;
+                        bll.mbCon.conData.RTU_DataBits = Convert.ToInt32(numDataBits.Value);
 
                         bll.mbCon.ConnectToSlave();
                     }

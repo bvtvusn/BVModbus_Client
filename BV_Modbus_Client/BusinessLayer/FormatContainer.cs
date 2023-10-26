@@ -20,6 +20,8 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         bool swapRegisters;
 
+        public event Action datatypesChangedEvent;
+
         public FormatContainer(FcWrapperBase fcWrapperBase)
         {
             this.fcWrapperBase = fcWrapperBase;
@@ -43,8 +45,9 @@ namespace BV_Modbus_Client.BusinessLayer
 
             valueFormats.Add(new ValueFormat(this,register,type, DataLength));
             valueFormats =  valueFormats.OrderBy(x => x.Register).ToList();
-            return DataLength;
 
+            datatypesChangedEvent?.Invoke();
+            return DataLength;
         }
 
         internal string[] BinaryToString(ushort[] rawData, bool onlyOnestringPerValue = false, bool logValue = true)

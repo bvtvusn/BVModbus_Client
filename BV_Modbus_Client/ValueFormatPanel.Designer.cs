@@ -106,7 +106,7 @@
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(319, 397);
+            this.dataGridView1.Size = new System.Drawing.Size(319, 312);
             this.dataGridView1.TabIndex = 7;
             // 
             // panel1
@@ -116,7 +116,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(319, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(231, 397);
+            this.panel1.Size = new System.Drawing.Size(231, 312);
             this.panel1.TabIndex = 10;
             // 
             // groupBox2
@@ -133,7 +133,7 @@
             // chkSwapRegisters
             // 
             this.chkSwapRegisters.AutoSize = true;
-            this.chkSwapRegisters.Location = new System.Drawing.Point(13, 36);
+            this.chkSwapRegisters.Location = new System.Drawing.Point(19, 36);
             this.chkSwapRegisters.Name = "chkSwapRegisters";
             this.chkSwapRegisters.Size = new System.Drawing.Size(101, 19);
             this.chkSwapRegisters.TabIndex = 0;
@@ -145,7 +145,7 @@
             // chkSwapBytes
             // 
             this.chkSwapBytes.AutoSize = true;
-            this.chkSwapBytes.Location = new System.Drawing.Point(13, 18);
+            this.chkSwapBytes.Location = new System.Drawing.Point(19, 18);
             this.chkSwapBytes.Name = "chkSwapBytes";
             this.chkSwapBytes.Size = new System.Drawing.Size(81, 19);
             this.chkSwapBytes.TabIndex = 0;
@@ -354,7 +354,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Name = "ValueFormatPanel";
-            this.Size = new System.Drawing.Size(550, 397);
+            this.Size = new System.Drawing.Size(550, 312);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

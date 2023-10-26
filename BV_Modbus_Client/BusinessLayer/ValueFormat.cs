@@ -50,6 +50,7 @@ namespace BV_Modbus_Client.BusinessLayer
             Length = length;
 
             valueHistory = new (DateTime, float)[100];
+            isVisibleInPlot = true;
         }
 
         internal string BinaryToString(ushort[] singlevalueData, bool logValue = false)

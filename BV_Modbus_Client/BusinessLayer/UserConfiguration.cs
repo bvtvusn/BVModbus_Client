@@ -22,8 +22,9 @@ namespace BV_Modbus_Client.BusinessLayer
             pollLoggerSettings = new PollLogger();
             //pollTimer.PollFinishedEvent += pollLogger.PollTimer_PollFinishedEvent;
         }
+        [DataMember]
+        public ConnectionData conData { get; internal set; }
 
-        
 
         [DataMember]
         public List<FcWrapperBase> FcWrappers { get; set; }

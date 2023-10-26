@@ -16,23 +16,23 @@ namespace BV_Modbus_Client.BusinessLayer
     {
         //public SerialPort port;
         //TcpClient cli;
-        private int TCP_port;
-        private bool isFake;
+        //private int TCP_port;
+        //private bool isFake;
 
-        //private IModbusMaster master1;
+        ////private IModbusMaster master1;
         private ModbusClient master1;
 
-        private bool isTCP = false;
-        public string RTU_SerialPortName { get; set; }
-        public Parity RTU_Parity { get; set; } = Parity.None;
-        public StopBits RTU_StopBits { get; set; } = StopBits.One;
-        public int RTU_DataBits { get; set; } = 8;
-        public int RTU_BaudRate { get; set; } = 115200;
-        public bool IsTcp
-        {
-            get { return isTCP; }
-            set { isTCP = value; }
-        }
+        //private bool isTCP = false;
+        //public string RTU_SerialPortName { get; set; }
+        //public Parity RTU_Parity { get; set; } = Parity.None;
+        //public StopBits RTU_StopBits { get; set; } = StopBits.One;
+        //public int RTU_DataBits { get; set; } = 8;
+        //public int RTU_BaudRate { get; set; } = 115200;
+        //public bool IsTcp
+        //{
+        //    get { return isTCP; }
+        //    set { isTCP = value; }
+        //}
 
         public ModbusClient Master
         {
@@ -40,19 +40,20 @@ namespace BV_Modbus_Client.BusinessLayer
         }
 
 
-        public int TCP_Port
-        {
-            get { return TCP_port; }
-            set { TCP_port = value; }
-        }
+        //public int TCP_Port
+        //{
+        //    get { return TCP_port; }
+        //    set { TCP_port = value; }
+        //}
 
-        private string TCP_hostname;
+        //private string TCP_hostname;
 
-        public string TCP_Hostname
-        {
-            get { return TCP_hostname; }
-            set { TCP_hostname = value; }
-        }
+        //public string TCP_Hostname
+        //{
+        //    get { return TCP_hostname; }
+        //    set { TCP_hostname = value; }
+        //}
+        public  ConnectionData conData;
 
         public MbConnection()
         {
@@ -60,18 +61,20 @@ namespace BV_Modbus_Client.BusinessLayer
         }
         public MbConnection(bool fakeConnection)
         {
-            isFake = fakeConnection;
+            conData = new ConnectionData();
+            conData.isFake = fakeConnection;
+
         }
         public void ConnectToSlave()
         {
-            if (isFake)
+            if (conData.isFake)
             {
                 //master1 = new DummyModbus();
             }
-            else if (IsTcp)
+            else if (conData.IsTcp)
             {
                 master1 = new ModbusTcpClient();
-                (master1 as ModbusTcpClient).Connect(TCP_Hostname + ":" + TCP_port);
+                (master1 as ModbusTcpClient).Connect(conData.TCP_Hostname + ":" + conData.TCP_Port);
                 //cli = new TcpClient(TCP_Hostname, TCP_port);
                 //var factory = new ModbusFactory();
                 ////factory.CreateMaster()
@@ -82,12 +85,12 @@ namespace BV_Modbus_Client.BusinessLayer
                 // RTU
                 master1 = new ModbusRtuClient()
                 {
-                    BaudRate = RTU_BaudRate,
-                    Parity = RTU_Parity,
-                    StopBits = RTU_StopBits
+                    BaudRate = conData.RTU_BaudRate,
+                    Parity = conData.RTU_Parity,
+                    StopBits = conData.RTU_StopBits
                     // Databits
                 };
-                (master1 as ModbusRtuClient).Connect(RTU_SerialPortName);
+                (master1 as ModbusRtuClient).Connect(conData.RTU_SerialPortName);
                 //(master1 as ModbusRtuClient).WriteMultipleRegistersAsync
 
 
@@ -158,11 +161,11 @@ namespace BV_Modbus_Client.BusinessLayer
 
         public string GetConnectionStatus()
         {
-            if (isFake)
+            if (conData.isFake)
             {
                 return "Dummy connection";
             }
-            else if (IsTcp)
+            else if (conData.IsTcp)
             {
                 return GetStatusTcp();
             }

@@ -54,14 +54,37 @@ namespace BV_Modbus_Client
                     {
                         //doRefresh = true;
                         fc.RefreshDataEvent += Bll_SelectedDataRecevivedEvent;
+                        fc.FcSettingsChangedEvent += Fc_FcSettingsChangedEvent;
+                        fc.formatContainer.datatypesChangedEvent += FormatContainer_datatypesChangedEvent;
+                        fc.DeleteMeEvent += Fc_DeleteMeEvent;
                         RefreshPlotGrid();
-                    DrawCheckboxes();
+                        DrawCheckboxes();
+                        plotView1.Visible = true;
+                        chkPanel.Visible = true;
 
-
+                    }
+                    else
+                    {
+                        plotView1.Visible = false;
+                        chkPanel.Visible = false;
                     }
                 }
             }
 
+        private void Fc_DeleteMeEvent()
+        {
+            fc = null;
+        }
+
+        private void FormatContainer_datatypesChangedEvent()
+        {
+            DrawCheckboxes();
+        }
+
+        private void Fc_FcSettingsChangedEvent()
+        {
+            DrawCheckboxes();
+        }
 
         private void DrawCheckboxes()
         {

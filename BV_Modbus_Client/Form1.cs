@@ -51,9 +51,9 @@ namespace BV_Modbus_Client
 
             //bll.OnFcObjectAdded += Bll_OnFcObjectAdded;
             bll.FcListChangedEvent += Bll_FcListChangedEvent;
-            bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
-            bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
-            bll.SelectedFcSettingsChangedEvent += Bll_SelectedFcSettingsChangedEvent;
+            //bll.SelectedDataRecevivedEvent += Bll_SelectedDataRecevivedEvent;
+            //bll.SelectedFormatValidStateEvent += Bll_SelectedFormatValidStateEvent;
+            //bll.SelectedFcSettingsChangedEvent += Bll_SelectedFcSettingsChangedEvent;
             //bll.UserConfig.pollTimer.PollFinishedEvent += PollTimer_PollFinishedEvent;
             bll.FcSettingsChangedEvent += Bll_FcSettingsChangedEvent;
 
@@ -168,11 +168,11 @@ namespace BV_Modbus_Client
 
         }
 
-        private void Bll_SelectedFcSettingsChangedEvent()
-        {
-            // Update the register tables after for example change of start address.
-            Bll_SelectedDataRecevivedEvent("");
-        }
+        //private void Bll_SelectedFcSettingsChangedEvent()
+        //{
+        //    // Update the register tables after for example change of start address.
+        //    Bll_SelectedDataRecevivedEvent("");
+        //}
 
         private void Bll_FcSettingsChangedEvent()
         {
@@ -183,23 +183,16 @@ namespace BV_Modbus_Client
 
         private void PollTimer_PollFinishedEvent((string, string)[] data, bool PollItemsChanged)
         {
-            string[] viewData = data.Select(x => x.Item1).ToArray();
-            string line = bll.UserConfig.pollLoggerSettings.GenerateDataLine(viewData,false);
+            if (bll.UserConfig != null)
+            {
+                string[] viewData = data.Select(x => x.Item1).ToArray();
+                string line = bll.UserConfig.pollLoggerSettings.GenerateDataLine(viewData,false);
 
+                txtPolledData.Invoke(delegate { 
+                    txtPolledData.Text = line;  
+                });
 
-            //string view = "";
-            //foreach (string item in data)
-            //{
-            //    view += item + ", ";
-
-            //}
-            //view = view.Remove(Math.Max(0,view.Length - 2));
-
-            txtPolledData.Invoke(delegate { 
-                txtPolledData.Text = line;  
-            });
-           
-            //throw new NotImplementedException();
+            }
         }
         #region EventsFromApplication
         private void Bll_FcListChangedEvent(object? sender, EventArgs e) // Updates the list of FCs.
@@ -228,81 +221,81 @@ namespace BV_Modbus_Client
             }
            
         }
-        private void Bll_SelectedDataRecevivedEvent(string errorMsg)
-        {
-            ControlExtensions.UIThreadInvoke(this, delegate {
+        //private void Bll_SelectedDataRecevivedEvent(string errorMsg)
+        //{
+        //    ControlExtensions.UIThreadInvoke(this, delegate {
                 
 
-            if (userEditActiveFlag == false)
-            {
-                refreshActiveFlag = true;
+        //    if (userEditActiveFlag == false)
+        //    {
+        //        refreshActiveFlag = true;
 
-                    (string, string)[] receiveddata = bll.SelectedFcRequest.GetDataAsString();
-                    int maxtableRows = bll.UserConfig.GlobFcData.MaxTableRows;
+        //            (string, string)[] receiveddata = bll.SelectedFcRequest.GetDataAsString();
+        //            int maxtableRows = bll.UserConfig.GlobFcData.MaxTableRows;
 
-                    int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
-                    int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
+        //            int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
+        //            int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
 
 
 
-                    (string, string)[] empty = new (string, string)[emptyStartRows];
-                    (string, string)[] dispdata = empty.Concat(receiveddata).ToArray();
+        //            (string, string)[] empty = new (string, string)[emptyStartRows];
+        //            (string, string)[] dispdata = empty.Concat(receiveddata).ToArray();
 
-                    dataGridView1.DataSource = FormatConverter.ArrayToDatatableColumn(dispdata, maxtableRows);
+        //            dataGridView1.DataSource = FormatConverter.ArrayToDatatableColumn(dispdata, maxtableRows);
                     
                     
-                    // Add numbers to each row:
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                    {
-                        dataGridView1.Rows[i].HeaderCell.Value = i.ToString();
-                    }
+        //            // Add numbers to each row:
+        //            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+        //            {
+        //                dataGridView1.Rows[i].HeaderCell.Value = i.ToString();
+        //            }
 
-                    // Change text on column headers
-                    for (int i = 0; i < dataGridView1.Columns.Count; i+=2)
-                    {
-                        dataGridView1.Columns[i].HeaderText = "Notes";
-                    }
-                    // Change text on column headers
-                    for (int i = 1; i < dataGridView1.Columns.Count; i += 2)
-                    {
-                        dataGridView1.Columns[i].HeaderText = (StartdisplayingRegister + maxtableRows * (i-1)/2).ToString();
-                    }
+        //            // Change text on column headers
+        //            for (int i = 0; i < dataGridView1.Columns.Count; i+=2)
+        //            {
+        //                dataGridView1.Columns[i].HeaderText = "Notes";
+        //            }
+        //            // Change text on column headers
+        //            for (int i = 1; i < dataGridView1.Columns.Count; i += 2)
+        //            {
+        //                dataGridView1.Columns[i].HeaderText = (StartdisplayingRegister + maxtableRows * (i-1)/2).ToString();
+        //            }
 
 
-                    refreshActiveFlag = false;
-            }
-            });
+        //            refreshActiveFlag = false;
+        //    }
+        //    });
 
-        }
-        private void Bll_SelectedFormatValidStateEvent(string[] errors)
-        {
-            int nrows = dataGridView1.RowCount;
-            int ncols = dataGridView1.ColumnCount / 2;
+        //}
+        //private void Bll_SelectedFormatValidStateEvent(string[] errors)
+        //{
+        //    int nrows = dataGridView1.RowCount;
+        //    int ncols = dataGridView1.ColumnCount / 2;
 
-            for (int i = 0; i < errors.Length; i++)
-            {
-                int colindex = i / nrows;
-                int rowindex = i % nrows;
-                bool isError = false;
-                if (errors[i] != null)
-                {
-                    if (errors[i].Length > 0)
-                    {
-                        isError = true;
-                    }
-                }
+        //    for (int i = 0; i < errors.Length; i++)
+        //    {
+        //        int colindex = i / nrows;
+        //        int rowindex = i % nrows;
+        //        bool isError = false;
+        //        if (errors[i] != null)
+        //        {
+        //            if (errors[i].Length > 0)
+        //            {
+        //                isError = true;
+        //            }
+        //        }
 
-                if (isError)
-                {
-                    dataGridView1.Rows[rowindex].Cells[1 + colindex * 2].Style.BackColor = Color.Red;
+        //        if (isError)
+        //        {
+        //            dataGridView1.Rows[rowindex].Cells[1 + colindex * 2].Style.BackColor = Color.Red;
 
-                }
-                else
-                {
-                    dataGridView1.Rows[rowindex].Cells[1 + colindex * 2].Style.BackColor = Color.White;
-                }
-            }
-        }
+        //        }
+        //        else
+        //        {
+        //            dataGridView1.Rows[rowindex].Cells[1 + colindex * 2].Style.BackColor = Color.White;
+        //        }
+        //    }
+        //}
         #endregion
         #region UserActions
         private void saveConfigToolStripMenuItem_Click(object sender, EventArgs e)
@@ -344,33 +337,33 @@ namespace BV_Modbus_Client
             //bll.formatConverter.CurrentFormat = (FormatName)comboBox1.SelectedItem;
         }
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (bll.SelectedFcRequest != null)
-            {
+        //private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (bll.SelectedFcRequest != null)
+        //    {
 
-                userEditActiveFlag = true;
-                //string[] frmDgv = (string[])(dataGridView1.DataSource as DataTable).Rows[0].ItemArray;
-                if (refreshActiveFlag == false)
-                {
-                    string[] tableData = ReadValuesFromDGV(dataGridView1);
+        //        userEditActiveFlag = true;
+        //        //string[] frmDgv = (string[])(dataGridView1.DataSource as DataTable).Rows[0].ItemArray;
+        //        if (refreshActiveFlag == false)
+        //        {
+        //            string[] tableData = ReadValuesFromDGV(dataGridView1);
 
-                    // Remove empty start rows:
-                    //int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
-                    //int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
-                    //string[] trimmedData = new string[tableData.Length-emptyStartRows];
-                    //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
+        //            // Remove empty start rows:
+        //            //int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
+        //            //int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
+        //            //string[] trimmedData = new string[tableData.Length-emptyStartRows];
+        //            //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
 
 
-                    bll.SelectedFcRequest.SetFcData(tableData);
+        //            bll.SelectedFcRequest.SetFcData(tableData);
 
-                    string[] addressDescriptions = ReadDescriptionsFromDGV(dataGridView1);
-                    bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
+        //            string[] addressDescriptions = ReadDescriptionsFromDGV(dataGridView1);
+        //            bll.SelectedFcRequest.SetFcDescription(addressDescriptions);
 
-                }
-                userEditActiveFlag = false;
-            }
-        }
+        //        }
+        //        userEditActiveFlag = false;
+        //    }
+        //}
         #endregion
         #region ReadFromForm
 
@@ -391,30 +384,30 @@ namespace BV_Modbus_Client
             return values;
         }
 
-        private string[] ReadValuesFromDGV(DataGridView dataGridView)
-        {
-            // Remove empty start rows:
-            int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
-            int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
-            //string[] trimmedData = new string[tableData.Length-emptyStartRows];
-            //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
+        //private string[] ReadValuesFromDGV(DataGridView dataGridView)
+        //{
+        //    // Remove empty start rows:
+        //    int StartdisplayingRegister = (bll.SelectedFcRequest.StartAddress / 10) * 10;
+        //    int emptyStartRows = bll.SelectedFcRequest.StartAddress - StartdisplayingRegister;
+        //    //string[] trimmedData = new string[tableData.Length-emptyStartRows];
+        //    //Array.Copy(tableData,emptyStartRows, trimmedData, 0, trimmedData.Length);
 
 
 
-            string[] values = new string[bll.SelectedFcRequest.NumberOfRegisters];
-            int nrows = dataGridView1.RowCount;
-            int ncols = dataGridView1.ColumnCount / 2;
+        //    string[] values = new string[bll.SelectedFcRequest.NumberOfRegisters];
+        //    int nrows = dataGridView1.RowCount;
+        //    int ncols = dataGridView1.ColumnCount / 2;
 
-            for (int i = 0; i < bll.SelectedFcRequest.NumberOfRegisters; i++)
-            {
-                int colindex = (i+ emptyStartRows) / nrows;
-                int rowindex = (i + emptyStartRows) % nrows;
+        //    for (int i = 0; i < bll.SelectedFcRequest.NumberOfRegisters; i++)
+        //    {
+        //        int colindex = (i+ emptyStartRows) / nrows;
+        //        int rowindex = (i + emptyStartRows) % nrows;
 
-                values[i] = dataGridView1.Rows[rowindex].Cells[1 + colindex * 2].Value.ToString();
-            }
-            return values;
+        //        values[i] = dataGridView1.Rows[rowindex].Cells[1 + colindex * 2].Value.ToString();
+        //    }
+        //    return values;
 
-        }
+        //}
 
         #endregion
 
@@ -584,10 +577,10 @@ namespace BV_Modbus_Client
             bll.AddFunctionCode(typeof(MultipleHoldingRegisters));
         }
 
-        private void miPasteData_Click(object sender, EventArgs e)
-        {
-            PasteExcelDataToDataGridView(dataGridView1);
-        }
+        //private void miPasteData_Click(object sender, EventArgs e)
+        //{
+        //    PasteExcelDataToDataGridView(dataGridView1);
+        //}
 
         private void numPollInterval_ValueChanged(object sender, EventArgs e)
         {
@@ -673,12 +666,12 @@ namespace BV_Modbus_Client
             if (bll.mbCon.Master is ModbusTcpClient)
             {
                 _isConnected = (bll.mbCon.Master as ModbusTcpClient).IsConnected;
-                transport = bll.mbCon.TCP_Hostname + ":" + bll.mbCon.TCP_Port;
+                transport = bll.mbCon.conData.TCP_Hostname + ":" + bll.mbCon.conData.TCP_Port;
             }
             else if (bll.mbCon.Master is ModbusRtuClient)
             {
                 _isConnected = (bll.mbCon.Master as ModbusRtuClient).IsConnected;
-                transport = bll.mbCon.RTU_SerialPortName;
+                transport = bll.mbCon.conData.RTU_SerialPortName;
             }
 
             if (_isConnected)

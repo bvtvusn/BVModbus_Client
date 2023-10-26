@@ -34,6 +34,7 @@
             // 
             // plotView1
             // 
+            this.plotView1.BackColor = System.Drawing.Color.White;
             this.plotView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plotView1.Location = new System.Drawing.Point(140, 0);
             this.plotView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -48,6 +49,7 @@
             // 
             // chkPanel
             // 
+            this.chkPanel.BackColor = System.Drawing.Color.White;
             this.chkPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.chkPanel.Location = new System.Drawing.Point(0, 0);
             this.chkPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

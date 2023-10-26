@@ -123,6 +123,7 @@ namespace BV_Modbus_Client.BusinessLayer
         public event Action<FcWrapperBase, bool> SelectedChanged;
         public event Action FcActivatedEvent;
         public event Action<bool> ActivePollingChangedEvent;
+        public event Action DeleteMeEvent;
 
         public void SetDatabuffer(ushort[] rawData)
         {
@@ -222,6 +223,11 @@ namespace BV_Modbus_Client.BusinessLayer
             //}
 
             return strData;
+        }
+
+        internal void OnDeleteMe()
+        {
+            DeleteMeEvent?.Invoke();
         }
 
         public string[] GetRegDescriptions(bool useDefaultName = false)
@@ -333,7 +339,14 @@ namespace BV_Modbus_Client.BusinessLayer
 
         internal void InitializeObject()
         {
-            formatContainer = new FormatContainer(this);
+            if (formatContainer == null)
+            {
+                formatContainer = new FormatContainer(this);
+            }
+            else
+            {
+                formatContainer.valueFormats.ForEach(x => x.valueHistory = new (DateTime, float)[100]);
+            }
             refreshDataEventBatcher = new EventBatcher(300);
             refreshDataEventBatcher.BatchedEvent += RefreshDataEventBatcher_BatchedEvent;
         }

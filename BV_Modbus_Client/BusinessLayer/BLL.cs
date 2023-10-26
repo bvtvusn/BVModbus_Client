@@ -43,6 +43,7 @@ namespace BV_Modbus_Client.BusinessLayer
             UserConfig = new UserConfiguration();
             dal = new Dal();
             mbCon = new MbConnection(false);
+            UserConfig.conData = mbCon.conData;
 
             UserConfig.GlobFcData.ActivePollingChangedEvent += GlobFcData_ActivePollingChangedEvent;
             //formatConverter = new FormatConverter();
@@ -215,6 +216,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             if (Object.ReferenceEquals(fcCommand, SelectedFcRequest)) // If removing the selected, also reomove the object from "Selected object"
             {
+                selectedFcRequest.OnDeleteMe();
                 selectedFcRequest.RefreshDataEvent -= SelectedFcRequest_ResponseReceived;
                 selectedFcRequest.FormatValidStateEvent -= SelectedFcRequest_FormatValidStateEvent;
                 this.SelectedFcRequest = null;
@@ -270,7 +272,8 @@ namespace BV_Modbus_Client.BusinessLayer
             UserConfig = dal.LoadFromFile();
 
             UserConfig.GlobFcData.ActivePollingChangedEvent += GlobFcData_ActivePollingChangedEvent; // used for starting and stopping polling
-            
+
+            mbCon.conData = UserConfig.conData; // Loading the connection details into the mbConObject
             //UserConfig.FcWrappers[0].m
             foreach (FcWrapperBase item in UserConfig.FcWrappers)
             {

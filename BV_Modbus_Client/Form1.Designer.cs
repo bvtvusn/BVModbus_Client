@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +37,6 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dgvContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miPasteData = new System.Windows.Forms.ToolStripMenuItem();
             this.TopContainer = new System.Windows.Forms.Panel();
@@ -64,7 +60,6 @@
             this.btnTestPoll = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.trendlineControl1 = new BV_Modbus_Client.TrendlineControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.MainTopPanel = new System.Windows.Forms.Panel();
             this.StatisticsPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -95,7 +90,6 @@
             this.readInputRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.dgvContext.SuspendLayout();
             this.TopContainer.SuspendLayout();
             this.mainBottomPanel.SuspendLayout();
@@ -105,7 +99,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPollInterval)).BeginInit();
             this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.MainTopPanel.SuspendLayout();
             this.StatisticsPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -192,58 +185,6 @@
             this.configureConnectionToolStripMenuItem.Text = "Configure Connection";
             this.configureConnectionToolStripMenuItem.Click += new System.EventHandler(this.configureConnectionToolStripMenuItem_Click);
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(165)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(165)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.ContextMenuStrip = this.dgvContext;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLight;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView1.Size = new System.Drawing.Size(212, 136);
-            this.dataGridView1.TabIndex = 14;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
-            // 
             // dgvContext
             // 
             this.dgvContext.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -257,7 +198,6 @@
             this.miPasteData.Name = "miPasteData";
             this.miPasteData.Size = new System.Drawing.Size(128, 22);
             this.miPasteData.Text = "Paste data";
-            this.miPasteData.Click += new System.EventHandler(this.miPasteData_Click);
             // 
             // TopContainer
             // 
@@ -268,7 +208,7 @@
             this.TopContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TopContainer.Location = new System.Drawing.Point(357, 0);
             this.TopContainer.Name = "TopContainer";
-            this.TopContainer.Size = new System.Drawing.Size(620, 654);
+            this.TopContainer.Size = new System.Drawing.Size(620, 607);
             this.TopContainer.TabIndex = 12;
             // 
             // mainBottomPanel
@@ -279,7 +219,7 @@
             this.mainBottomPanel.Location = new System.Drawing.Point(0, 241);
             this.mainBottomPanel.Name = "mainBottomPanel";
             this.mainBottomPanel.Padding = new System.Windows.Forms.Padding(30, 0, 30, 30);
-            this.mainBottomPanel.Size = new System.Drawing.Size(620, 413);
+            this.mainBottomPanel.Size = new System.Drawing.Size(620, 366);
             this.mainBottomPanel.TabIndex = 19;
             // 
             // tabControl1
@@ -287,13 +227,12 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(30, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(560, 383);
+            this.tabControl1.Size = new System.Drawing.Size(560, 336);
             this.tabControl1.TabIndex = 17;
             // 
             // tabPage1
@@ -304,7 +243,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(552, 355);
+            this.tabPage1.Size = new System.Drawing.Size(552, 308);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "View Request Data";
             // 
@@ -314,7 +253,7 @@
             this.valueFormatPanel1.Location = new System.Drawing.Point(0, 0);
             this.valueFormatPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.valueFormatPanel1.Name = "valueFormatPanel1";
-            this.valueFormatPanel1.Size = new System.Drawing.Size(552, 355);
+            this.valueFormatPanel1.Size = new System.Drawing.Size(552, 308);
             this.valueFormatPanel1.TabIndex = 0;
             // 
             // tabPage2
@@ -447,6 +386,11 @@
             // numPollInterval
             // 
             this.numPollInterval.DecimalPlaces = 3;
+            this.numPollInterval.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numPollInterval.Location = new System.Drawing.Point(187, 15);
             this.numPollInterval.Maximum = new decimal(new int[] {
             10000000,
@@ -496,17 +440,6 @@
             this.trendlineControl1.Name = "trendlineControl1";
             this.trendlineControl1.Size = new System.Drawing.Size(552, 355);
             this.trendlineControl1.TabIndex = 15;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.dataGridView1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 24);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(552, 355);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "test";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // MainTopPanel
             // 
@@ -707,7 +640,7 @@
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 0);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(357, 654);
+            this.leftPanel.Size = new System.Drawing.Size(357, 607);
             this.leftPanel.TabIndex = 13;
             // 
             // scrollPanel
@@ -718,7 +651,7 @@
             this.scrollPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scrollPanel.Location = new System.Drawing.Point(0, 59);
             this.scrollPanel.Name = "scrollPanel";
-            this.scrollPanel.Size = new System.Drawing.Size(357, 595);
+            this.scrollPanel.Size = new System.Drawing.Size(357, 548);
             this.scrollPanel.TabIndex = 10;
             // 
             // FCHeader
@@ -810,7 +743,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(148)))), ((int)(((byte)(153)))));
-            this.ClientSize = new System.Drawing.Size(977, 654);
+            this.ClientSize = new System.Drawing.Size(977, 607);
             this.Controls.Add(this.TopContainer);
             this.Controls.Add(this.leftPanel);
             this.MainMenuStrip = this.menuStrip1;
@@ -818,7 +751,6 @@
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.dgvContext.ResumeLayout(false);
             this.TopContainer.ResumeLayout(false);
             this.mainBottomPanel.ResumeLayout(false);
@@ -830,7 +762,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPollInterval)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
             this.MainTopPanel.ResumeLayout(false);
             this.StatisticsPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -859,7 +790,6 @@
         private ToolStripMenuItem saveConfigToolStripMenuItem;
         private ToolStripMenuItem loadConfigToolStripMenuItem;
         private Panel TopContainer;
-        private DataGridView dataGridView1;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem saveConfigAsToolStripMenuItem;
         private Button btnTestPoll;
@@ -914,6 +844,5 @@
         private TabPage tabPage3;
         private ValueFormatPanel valueFormatPanel1;
         private TrendlineControl trendlineControl1;
-        private TabPage tabPage4;
     }
 }

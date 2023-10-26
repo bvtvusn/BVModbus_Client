@@ -54,6 +54,7 @@ namespace BV_Modbus_Client
                     {
                         //doRefresh = true;
                         fc.RefreshDataEvent += Bll_SelectedDataRecevivedEvent;
+                    fc.FcSettingsChangedEvent += Fc_FcSettingsChangedEvent;
                         RefreshPlotGrid();
                     DrawCheckboxes();
 
@@ -62,6 +63,10 @@ namespace BV_Modbus_Client
                 }
             }
 
+        private void Fc_FcSettingsChangedEvent()
+        {
+            DrawCheckboxes();
+        }
 
         private void DrawCheckboxes()
         {

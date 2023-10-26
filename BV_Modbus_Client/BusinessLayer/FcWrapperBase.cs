@@ -75,7 +75,7 @@ namespace BV_Modbus_Client.BusinessLayer
         public Dictionary<ushort, ushort> DataBuffer { get; internal set; } // Databuffer contains the address read, the value and a description.
         [Browsable(false)]
         [DataMember] 
-        public string[] FcAddressDescription { get => fcAddressDescription; set => fcAddressDescription = value; }
+        public string[] FcAddressDescription { get => fcAddressDescription; set { fcAddressDescription = value; FcSettingsChangedEvent?.Invoke(); } }
         //[Browsable(false)]
         //[DataMember]
         //public Dictionary<ushort, string> AddressDescription { get; set; } // Databuffer contains the address read, the value and a description.

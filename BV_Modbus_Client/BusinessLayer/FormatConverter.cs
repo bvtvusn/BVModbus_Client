@@ -287,8 +287,8 @@ namespace BV_Modbus_Client.BusinessLayer
                     string[] groupedArray = Enumerable.Range(0, (int)Math.Ceiling((double)rawString.Length / 4))
             .Select(i => rawString.Substring(i * 4, Math.Min(4, rawString.Length - i * 4))).ToArray();
 
-                    result = groupedArray.Select(x => Convert.ToUInt16(x, 16)).ToArray();
-
+                    var tempresult = groupedArray.Select(x => Convert.ToUInt16(x, 16)).ToArray();
+                    Array.Copy(tempresult,0,result,result.Length - tempresult.Length,tempresult.Length);
                     //groupedArray.Select(x => Convert.ToUInt16(rawString.Substring(x * 4, 4), 16)).ToArray();
 
                     //System.Collections.IEnumerable tmp = Enumerable.Range(0, (rawString.Length-1 / 4)+1);

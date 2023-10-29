@@ -224,6 +224,7 @@ namespace BV_Modbus_Client
             else
             {
                 MessageBox.Show("Please connect to a Modbus slave");
+                
             }
 
         }

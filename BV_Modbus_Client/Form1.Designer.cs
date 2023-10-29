@@ -636,10 +636,11 @@
             // panelConnectionIndicator
             // 
             this.panelConnectionIndicator.BackColor = System.Drawing.Color.LimeGreen;
-            this.panelConnectionIndicator.Location = new System.Drawing.Point(220, 10);
+            this.panelConnectionIndicator.Location = new System.Drawing.Point(217, 12);
             this.panelConnectionIndicator.Name = "panelConnectionIndicator";
             this.panelConnectionIndicator.Size = new System.Drawing.Size(10, 10);
             this.panelConnectionIndicator.TabIndex = 1;
+            this.panelConnectionIndicator.Click += new System.EventHandler(this.lblConnectionStatus_Click);
             // 
             // leftPanel
             // 

@@ -207,28 +207,9 @@ namespace BV_Modbus_Client
             for (int i = 0; i < formats.Count; i++)
             {
 
-
-                // ADD EMPTY CELLS BEFORE
-                //while (dataGridView1.Rows.Count < formats[i].Register && dataGridView1.Rows.Count < dataPoints.Length)
-                //{
-                //    DataGridViewRow dr1 = new DataGridViewRow();
-                //    dr1.CreateCells(dataGridView1);
-                //    dr1.Cells[0].Value = "";
-                //    dr1.Cells[1].Value = dataPoints[rowCounter].Item1;
-                //    dr1.Cells[2].Value = dataPoints[rowCounter].Item2;
-                //    dataGridView1.Rows.Add(dr1);
-                //    rowCounter++;
-                //}
-                //if (dataGridView1.Rows.Count < dataPoints.Length)
-                //{
                 for (int j = 0; j < formats[i].Length; j++)
                 {
 
-                    //DataGridViewRow dr = new DataGridViewRow();
-                    //dr.CreateCells(dataGridView1);
-
-
-                    //dr.Cells[0].Value = formats[i].FormatType.ToString();
 
                     int row = formats[i].Register + j;
                     if (row < dataGridView1.Rows.Count)
@@ -239,9 +220,21 @@ namespace BV_Modbus_Client
                             dataGridView1.Rows[row].Cells[0].Value = formats[i].FormatType.ToString();
                             dataGridView1.Rows[row].Cells[1].Value = dataPoints[row].Item1;
                             dataGridView1.Rows[row].Cells[2].Value = dataPoints[row].Item2;
-                            //dr.Cells[1].Value = dataPoints[rowCounter].Item1;
-                            //dr.Cells[2].Value = dataPoints[rowCounter].Item2;
+                            if (dataPoints[row].Item1 == null)
+                            {
+                                dataGridView1.Rows[row].Cells[1].Value = "-";
+                            }
+                            
                         }
+
+                        DataGridViewCellStyle valueStyle = new DataGridViewCellStyle();
+                        valueStyle.BackColor = Color.FromArgb(246, 247, 251);
+                        if (j==0) //first element of dataformat should be white
+                        {
+                            valueStyle.BackColor = Color.FromArgb(255, 255, 255);
+                        }
+                        valueStyle.ForeColor = Color.Black;
+                        dataGridView1.Rows[row].Cells[1].Style = valueStyle;
 
                         if (i % 2 == 0)
                         {

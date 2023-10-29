@@ -720,6 +720,12 @@ namespace BV_Modbus_Client
            
         }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form form = new AboutWindow();
+            form.ShowDialog();
+        }
+
         //private void test_timer1_Tick(object sender, EventArgs e)
         //{
         //    eb.TriggerEvent();

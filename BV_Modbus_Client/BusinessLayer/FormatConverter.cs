@@ -287,7 +287,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     string[] groupedArray = Enumerable.Range(0, (int)Math.Ceiling((double)rawString.Length / 4))
             .Select(i => rawString.Substring(i * 4, Math.Min(4, rawString.Length - i * 4))).ToArray();
 
-                    var tempresult = groupedArray.Select(x => Convert.ToUInt16(x, 16)).ToArray();
+                    ushort[] tempresult = groupedArray.Select(x => Convert.ToUInt16(x, 16)).ToArray();
                     Array.Copy(tempresult,0,result,result.Length - tempresult.Length,tempresult.Length);
                     //groupedArray.Select(x => Convert.ToUInt16(rawString.Substring(x * 4, 4), 16)).ToArray();
 
@@ -312,10 +312,14 @@ namespace BV_Modbus_Client.BusinessLayer
                     {
                         throw new FormatException("To many characters");
                     }
-                    result = Enumerable.Range(0, rawString.Length / 16) // Divide by 16 since each ushort is represented by 16 binary digits
-                        .Select(x => Convert.ToUInt16(rawString.Substring(x * 16, 16), 2))
-                        .ToArray();
+                    string[] groupedArray = Enumerable.Range(0, (int)Math.Ceiling((double)rawString.Length / 16))
+            .Select(i => rawString.Substring(i * 16, Math.Min(16, rawString.Length - i * 16))).ToArray();
+                    ushort[] tempresult = groupedArray.Select(x => Convert.ToUInt16(x, 2)).ToArray();
 
+                    //ushort[] tempresult = Enumerable.Range(0, rawString.Length / 16) // Divide by 16 since each ushort is represented by 16 binary digits
+                    //    .Select(x => Convert.ToUInt16(rawString.Substring(x * 16, 16), 2))
+                    //    .ToArray();
+                    Array.Copy(tempresult, 0, result, result.Length - tempresult.Length, tempresult.Length);
                     //result[0] = Convert.ToUInt16(rawString, 2);
                 }
 
@@ -323,8 +327,8 @@ namespace BV_Modbus_Client.BusinessLayer
                 else if (format == FormatName.Uint32)
                 {
                     UInt32 number = UInt32.Parse(rawString);
-                    result[0] = (UInt16)(number & 0xFFFF); // Store the lower 16 bits
-                    result[1] = (UInt16)((number >> 16) & 0xFFFF); // Store the upper 16 bits
+                    result[1] = (UInt16)(number & 0xFFFF); // Store the lower 16 bits
+                    result[0] = (UInt16)((number >> 16) & 0xFFFF); // Store the upper 16 bits
 
                     //if (i % 2 == 0)
                     //{
@@ -343,8 +347,8 @@ namespace BV_Modbus_Client.BusinessLayer
                 else if (format == FormatName.Int32)
                 {
                     Int32 number = Int32.Parse(rawString);
-                    result[0] = (UInt16)(number & 0xFFFF); // Store the lower 16 bits
-                    result[1] = (UInt16)((number >> 16) & 0xFFFF); // Store the upper 16 bits
+                    result[1] = (UInt16)(number & 0xFFFF); // Store the lower 16 bits
+                    result[0] = (UInt16)((number >> 16) & 0xFFFF); // Store the upper 16 bits
 
                 }
                 else if (format == FormatName.Float)

@@ -125,7 +125,7 @@ namespace BV_Modbus_Client.BusinessLayer
             {
                 if (valueCounter < stringValues.Length)
                 {
-                    string stringValue = stringValues[valueCounter];
+                    string stringValue = stringValues[item.Register];
                     ushort[] valueData = item.StringToBinary(stringValue, logValue);
 
                     if (swapRegisters)
@@ -139,7 +139,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     Array.Copy(valueData,0, ushorts, item.Register, item.Length);
 
                 }
-                valueCounter++;
+                valueCounter+=item.Length;
 
             }
             return ushorts;

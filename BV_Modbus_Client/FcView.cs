@@ -301,7 +301,7 @@ namespace BV_Modbus_Client
             }
             string[] dataValues = fcCommand.GetValueStrings(true);
 
-            (string, string)[] data = fcCommand.GetDataAsString();
+            (string, string)[] data = fcCommand.GetDataAsString(true);
             if (data.Length > maxDisplayLength)
             {
                 data = ((string, string)[])data.Take(maxDisplayLength).ToArray();

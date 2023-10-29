@@ -103,6 +103,7 @@ namespace BV_Modbus_Client
                 
                 if (refreshActiveFlag == false)
                 {
+                    //numericUpDown1.Value += 1;
 
                     string[] tableData = GetDgvColumnData(dataGridView1, 1);
                     string[] addressDescriptions = GetDgvColumnData(dataGridView1, 2);
@@ -175,6 +176,7 @@ namespace BV_Modbus_Client
                 dataGridView1.Columns[0].HeaderText = "Datatype";
                 dataGridView1.Columns[1].HeaderText = "Value";
                 dataGridView1.Columns[2].HeaderText = "Description";
+                dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGridView1.Columns[0].ReadOnly = true;
             }
@@ -288,86 +290,95 @@ namespace BV_Modbus_Client
 
         private void btnSetDatatype_Click(object sender, EventArgs e)
         {
-            int rowIndex = 0;
-            if (dataGridView1.CurrentCell != null)
-            {
-                rowIndex = dataGridView1.CurrentCell.RowIndex;
-            }
-            
-            Button? myButton = sender as Button;
-            //int register = Convert.ToInt32(numRegIndex.Value);
-            int length = 2;
-            int numberOfRegisters_returned = 0; // Initial
-            if ((string)myButton.Tag == "ascii")
-            {
-                length = (int)numAscii.Value;
-                FormatConverter.FormatName type = FormatConverter.FormatName.Ascii;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "uint16")
-            {
-                FormatConverter.FormatName type = FormatConverter.FormatName.Uint16;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "int16")
-            {
-                FormatConverter.FormatName type = FormatConverter.FormatName.Int16;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "uint32")
-            {
-                FormatConverter.FormatName type = FormatConverter.FormatName.Uint32;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "int32")
-            {
-                FormatConverter.FormatName type = FormatConverter.FormatName.Int32;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "float")
-            {
-                FormatConverter.FormatName type = FormatConverter.FormatName.Float;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "double")
-            {
-                FormatConverter.FormatName type = FormatConverter.FormatName.Double;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "half")
-            {
-                FormatConverter.FormatName type = FormatConverter.FormatName.Half;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "boolean")
-            {
-                FormatConverter.FormatName type = FormatConverter.FormatName.Boolean;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "binary")
-            {
-                length = (int)numBinary.Value;
-                FormatConverter.FormatName type = FormatConverter.FormatName.Binary;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-            else if ((string)myButton.Tag == "hex")
-            {
-                length = (int)numHex.Value;
-                FormatConverter.FormatName type = FormatConverter.FormatName.Hex;
-                numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
-            }
-
             //refreshActiveFlag = true;
-            RefreshDataGrid();
-            //refreshActiveFlag = false;
 
-            int nextIndex = rowIndex + numberOfRegisters_returned;
-            if (nextIndex < dataGridView1.Rows.Count)
-            {
-                //dataGridView1.Rows[nextIndex].Selected = true;
-                dataGridView1.Rows[nextIndex].Cells[0].Selected = true;
-            }
+            //if (userEditActiveFlag == false)
+            //{
+                
             
+
+                int rowIndex = 0;
+                if (dataGridView1.CurrentCell != null)
+                {
+                    rowIndex = dataGridView1.CurrentCell.RowIndex;
+                }
+            
+                Button? myButton = sender as Button;
+                //int register = Convert.ToInt32(numRegIndex.Value);
+                int length = 2;
+                int numberOfRegisters_returned = 0; // Initial
+                if ((string)myButton.Tag == "ascii")
+                {
+                    length = (int)numAscii.Value;
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Ascii;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "uint16")
+                {
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Uint16;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "int16")
+                {
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Int16;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "uint32")
+                {
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Uint32;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "int32")
+                {
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Int32;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "float")
+                {
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Float;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "double")
+                {
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Double;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "half")
+                {
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Half;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "boolean")
+                {
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Boolean;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "binary")
+                {
+                    length = (int)numBinary.Value;
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Binary;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+                else if ((string)myButton.Tag == "hex")
+                {
+                    length = (int)numHex.Value;
+                    FormatConverter.FormatName type = FormatConverter.FormatName.Hex;
+                    numberOfRegisters_returned = Fc.formatContainer.SetFormat(rowIndex, type, length);
+                }
+
+                //refreshActiveFlag = true;
+                RefreshDataGrid();
+                //refreshActiveFlag = false;
+                //refreshActiveFlag = true;
+
+                int nextIndex = rowIndex + numberOfRegisters_returned;
+                if (nextIndex < dataGridView1.Rows.Count)
+                {
+                    //dataGridView1.Rows[nextIndex].Selected = true;
+                    dataGridView1.Rows[nextIndex].Cells[0].Selected = true;
+                }
+            //}
+            //refreshActiveFlag = false;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)

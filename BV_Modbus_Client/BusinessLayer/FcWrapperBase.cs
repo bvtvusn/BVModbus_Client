@@ -171,7 +171,7 @@ namespace BV_Modbus_Client.BusinessLayer
             //ushort[] databuffer = ReadFromBuffer(startAddress, NumberOfRegisters);
 
             string[] strvalues =  GetValueStrings();
-            string[] descriptions = GetRegDescriptions();
+            string[] descriptions = GetRegDescriptions(UseRegOnMissingDescription);
             // string[] strvalues = FormatConverter.GetStringRepresentation(databuffer, DisplayType, SwapBytes, SwapRegisters);
             // Function translates Databuffer into a string array
             (string, string)[] strData = new (string, string)[Math.Min(strvalues.Length, descriptions.Length)];

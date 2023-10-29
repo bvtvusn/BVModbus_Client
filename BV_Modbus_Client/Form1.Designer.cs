@@ -37,6 +37,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miPasteData = new System.Windows.Forms.ToolStripMenuItem();
             this.TopContainer = new System.Windows.Forms.Panel();
@@ -128,7 +129,8 @@
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -184,6 +186,14 @@
             this.configureConnectionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.configureConnectionToolStripMenuItem.Text = "Configure Connection";
             this.configureConnectionToolStripMenuItem.Click += new System.EventHandler(this.configureConnectionToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 28);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // dgvContext
             // 
@@ -267,7 +277,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(552, 355);
+            this.tabPage2.Size = new System.Drawing.Size(552, 308);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Polling settings";
             // 
@@ -427,7 +437,7 @@
             this.tabPage3.Controls.Add(this.trendlineControl1);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(552, 355);
+            this.tabPage3.Size = new System.Drawing.Size(552, 308);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Trend line";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -438,7 +448,7 @@
             this.trendlineControl1.Location = new System.Drawing.Point(0, 0);
             this.trendlineControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trendlineControl1.Name = "trendlineControl1";
-            this.trendlineControl1.Size = new System.Drawing.Size(552, 355);
+            this.trendlineControl1.Size = new System.Drawing.Size(552, 308);
             this.trendlineControl1.TabIndex = 15;
             // 
             // MainTopPanel
@@ -626,10 +636,11 @@
             // panelConnectionIndicator
             // 
             this.panelConnectionIndicator.BackColor = System.Drawing.Color.LimeGreen;
-            this.panelConnectionIndicator.Location = new System.Drawing.Point(220, 10);
+            this.panelConnectionIndicator.Location = new System.Drawing.Point(217, 12);
             this.panelConnectionIndicator.Name = "panelConnectionIndicator";
             this.panelConnectionIndicator.Size = new System.Drawing.Size(10, 10);
             this.panelConnectionIndicator.TabIndex = 1;
+            this.panelConnectionIndicator.Click += new System.EventHandler(this.lblConnectionStatus_Click);
             // 
             // leftPanel
             // 
@@ -844,5 +855,6 @@
         private TabPage tabPage3;
         private ValueFormatPanel valueFormatPanel1;
         private TrendlineControl trendlineControl1;
+        private ToolStripMenuItem aboutToolStripMenuItem;
     }
 }

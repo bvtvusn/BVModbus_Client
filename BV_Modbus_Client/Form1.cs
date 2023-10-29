@@ -714,10 +714,12 @@ namespace BV_Modbus_Client
             bll.AddFunctionCode(typeof(ReadDiscreteInputs));
         }
 
-        private void button1_Click_3(object sender, EventArgs e)
+        
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-           
+            Form form = new AboutWindow();
+            form.ShowDialog();
         }
 
         //private void test_timer1_Tick(object sender, EventArgs e)

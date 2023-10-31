@@ -90,6 +90,7 @@
             this.multipleCoilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readInputRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblErrorCount = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.dgvContext.SuspendLayout();
             this.TopContainer.SuspendLayout();
@@ -477,6 +478,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.richTextBox1);
+            this.panel2.Controls.Add(this.lblErrorCount);
             this.panel2.Controls.Add(this.lblResponseTime);
             this.panel2.Controls.Add(this.lblWriteCounter);
             this.panel2.Controls.Add(this.lblReadCounter);
@@ -749,6 +751,15 @@
             this.readToolStripMenuItem.Text = "Read Discrete Inputs";
             this.readToolStripMenuItem.Click += new System.EventHandler(this.readToolStripMenuItem_Click);
             // 
+            // lblErrorCount
+            // 
+            this.lblErrorCount.AutoSize = true;
+            this.lblErrorCount.Location = new System.Drawing.Point(119, 128);
+            this.lblErrorCount.Name = "lblErrorCount";
+            this.lblErrorCount.Size = new System.Drawing.Size(13, 15);
+            this.lblErrorCount.TabIndex = 2;
+            this.lblErrorCount.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -856,5 +867,6 @@
         private ValueFormatPanel valueFormatPanel1;
         private TrendlineControl trendlineControl1;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private Label lblErrorCount;
     }
 }

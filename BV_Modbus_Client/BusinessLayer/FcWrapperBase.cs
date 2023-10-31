@@ -90,6 +90,8 @@ namespace BV_Modbus_Client.BusinessLayer
         [Browsable(false)]
         public int WriteCount { get; set; }
         [Browsable(false)]
+        public int ErrorCount { get; set; }
+        [Browsable(false)]
         public double ResponseTimeMs { get; set; }
 
         [Browsable(false)]

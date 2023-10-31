@@ -102,14 +102,15 @@ namespace BV_Modbus_Client.BusinessLayer
 
                 //}
                 SetDatabuffer(rawData);
-                base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
                 
             }
+            base.ForceFcActivatedEvent();
         }
         internal override async Task ExecuteWriteAsync()
         {
@@ -127,14 +128,15 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
                 WriteCount++;
-                base.ForceFcActivatedEvent();                
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
 
             }
+                base.ForceFcActivatedEvent();                
         }
         //internal override void ExecuteWrite()
         //{

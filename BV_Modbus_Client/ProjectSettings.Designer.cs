@@ -31,6 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rdoAddressingZeroBased = new System.Windows.Forms.RadioButton();
             this.rdoAddressingOneBased = new System.Windows.Forms.RadioButton();
+            this.cboFloatFormat = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,11 +70,21 @@
             this.rdoAddressingOneBased.UseVisualStyleBackColor = true;
             this.rdoAddressingOneBased.Click += new System.EventHandler(this.rdoAddressingZeroBased_CheckedChanged);
             // 
+            // cboFloatFormat
+            // 
+            this.cboFloatFormat.FormattingEnabled = true;
+            this.cboFloatFormat.Location = new System.Drawing.Point(161, 39);
+            this.cboFloatFormat.Name = "cboFloatFormat";
+            this.cboFloatFormat.Size = new System.Drawing.Size(121, 23);
+            this.cboFloatFormat.TabIndex = 1;
+            this.cboFloatFormat.Text = "0.0";
+            // 
             // ProjectSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 113);
+            this.Controls.Add(this.cboFloatFormat);
             this.Controls.Add(this.groupBox1);
             this.Name = "ProjectSettings";
             this.Text = "ProjectSettings";
@@ -88,5 +99,6 @@
         private GroupBox groupBox1;
         private RadioButton rdoAddressingZeroBased;
         private RadioButton rdoAddressingOneBased;
+        private ComboBox cboFloatFormat;
     }
 }

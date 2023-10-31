@@ -21,9 +21,10 @@ namespace BV_Modbus_Client.BusinessLayer
 
             base.mbCon = mbCon;
             Description = "Read Input Registers";
+            FcType = Description;
             //base.DisplayType = FormatConverter.FormatName.Boolean;
 
-            
+
             NumberOfRegisters = 4;
             DataBuffer = new Dictionary<ushort, ushort>();
 

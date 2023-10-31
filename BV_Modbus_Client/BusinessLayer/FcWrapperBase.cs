@@ -76,6 +76,7 @@ namespace BV_Modbus_Client.BusinessLayer
         [Browsable(false)]
         [DataMember] 
         public string[] FcAddressDescription { get => fcAddressDescription; set { fcAddressDescription = value; FcSettingsChangedEvent?.Invoke(); } }
+        public string FcType { get; internal set; } 
         //[Browsable(false)]
         //[DataMember]
         //public Dictionary<ushort, string> AddressDescription { get; set; } // Databuffer contains the address read, the value and a description.
@@ -98,6 +99,7 @@ namespace BV_Modbus_Client.BusinessLayer
         [DataMember]
         public int SavedPollOrder { get; set; } = -1; // -1 means not polled. Only used for saving and restoring applionstate. Not kept up to date during program execution.
         [DataMember]
+        [Browsable(false)]
         public FormatContainer formatContainer { get; set; } 
         //public string Type
         //{
@@ -111,6 +113,7 @@ namespace BV_Modbus_Client.BusinessLayer
             //refreshDataEventBatcher.BatchedEvent += RefreshDataEventBatcher_BatchedEvent;
 
             InitializeObject();
+            
         }
 
         private void RefreshDataEventBatcher_BatchedEvent(object? sender, EventArgs e)
@@ -237,7 +240,7 @@ namespace BV_Modbus_Client.BusinessLayer
             string[] strData = new string[NumberOfRegisters];
             for (int i = 0; i < NumberOfRegisters; i++)
             {
-                ushort address = (ushort)(i + startAddress);
+                ushort address = (ushort)(i + StartAddress);
                 //ushort datavalue;
                 //string dataDescription;
                

@@ -150,7 +150,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
            
         //}
-        internal static string GetStringRepresentation(ushort[] rawdata, FormatName format, bool swapBytes = false, bool swapRegisters = false)
+        internal static string GetStringRepresentation(ushort[] rawdata, FormatName format,string floatFormat, bool swapBytes = false, bool swapRegisters = false)
         {
             if (swapRegisters)
             {
@@ -177,7 +177,10 @@ namespace BV_Modbus_Client.BusinessLayer
             }
             else if (format == FormatName.Half)
             {
-                return FormatConverter.HalfToFloat(rawdata[0]).ToString();
+                float half = FormatConverter.HalfToFloat(rawdata[0]);
+                
+                return half.ToString(floatFormat);
+                
                 //return rawdata.Select(x => FormatConverter.HalfToFloat(x).ToString()).ToArray();
             }
             else if (format == FormatName.Hex)
@@ -207,7 +210,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 uint temp = ((uint)rawdata[0] << 16) | (uint)rawdata[1];
                 byte[] bytes = BitConverter.GetBytes(temp);
                 float dval = BitConverter.ToSingle(bytes, 0);
-                return dval.ToString();
+                return dval.ToString(floatFormat);
 
             }
             else if (format == FormatName.Double)
@@ -215,7 +218,7 @@ namespace BV_Modbus_Client.BusinessLayer
                 ulong temp = ((ulong)rawdata[0] << 48) | ((ulong)rawdata[1] << 32) | ((ulong)rawdata[2] << 16) | (ulong)rawdata[3];
                 byte[] bytes = BitConverter.GetBytes(temp);
                 double dval = BitConverter.ToDouble(bytes, 0);
-                return dval.ToString();
+                return dval.ToString(floatFormat);
 
             }
             else if (format == FormatName.Ascii)

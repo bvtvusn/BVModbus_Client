@@ -65,6 +65,7 @@
             this.StatisticsPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.lblErrorCount = new System.Windows.Forms.Label();
             this.lblResponseTime = new System.Windows.Forms.Label();
             this.lblWriteCounter = new System.Windows.Forms.Label();
             this.lblReadCounter = new System.Windows.Forms.Label();
@@ -90,7 +91,6 @@
             this.multipleCoilsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readInputRegistersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblErrorCount = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.dgvContext.SuspendLayout();
             this.TopContainer.SuspendLayout();
@@ -219,7 +219,7 @@
             this.TopContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TopContainer.Location = new System.Drawing.Point(357, 0);
             this.TopContainer.Name = "TopContainer";
-            this.TopContainer.Size = new System.Drawing.Size(620, 607);
+            this.TopContainer.Size = new System.Drawing.Size(620, 645);
             this.TopContainer.TabIndex = 12;
             // 
             // mainBottomPanel
@@ -230,7 +230,7 @@
             this.mainBottomPanel.Location = new System.Drawing.Point(0, 241);
             this.mainBottomPanel.Name = "mainBottomPanel";
             this.mainBottomPanel.Padding = new System.Windows.Forms.Padding(30, 0, 30, 30);
-            this.mainBottomPanel.Size = new System.Drawing.Size(620, 366);
+            this.mainBottomPanel.Size = new System.Drawing.Size(620, 404);
             this.mainBottomPanel.TabIndex = 19;
             // 
             // tabControl1
@@ -243,7 +243,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(560, 336);
+            this.tabControl1.Size = new System.Drawing.Size(560, 374);
             this.tabControl1.TabIndex = 17;
             // 
             // tabPage1
@@ -254,7 +254,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(552, 308);
+            this.tabPage1.Size = new System.Drawing.Size(552, 346);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "View Request Data";
             // 
@@ -264,7 +264,7 @@
             this.valueFormatPanel1.Location = new System.Drawing.Point(0, 0);
             this.valueFormatPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.valueFormatPanel1.Name = "valueFormatPanel1";
-            this.valueFormatPanel1.Size = new System.Drawing.Size(552, 308);
+            this.valueFormatPanel1.Size = new System.Drawing.Size(552, 346);
             this.valueFormatPanel1.TabIndex = 0;
             // 
             // tabPage2
@@ -506,6 +506,15 @@
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "Statistics:\t\t\t";
             // 
+            // lblErrorCount
+            // 
+            this.lblErrorCount.AutoSize = true;
+            this.lblErrorCount.Location = new System.Drawing.Point(119, 128);
+            this.lblErrorCount.Name = "lblErrorCount";
+            this.lblErrorCount.Size = new System.Drawing.Size(13, 15);
+            this.lblErrorCount.TabIndex = 2;
+            this.lblErrorCount.Text = "0";
+            // 
             // lblResponseTime
             // 
             this.lblResponseTime.AutoSize = true;
@@ -653,7 +662,7 @@
             this.leftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftPanel.Location = new System.Drawing.Point(0, 0);
             this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(357, 607);
+            this.leftPanel.Size = new System.Drawing.Size(357, 645);
             this.leftPanel.TabIndex = 13;
             // 
             // scrollPanel
@@ -664,7 +673,7 @@
             this.scrollPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.scrollPanel.Location = new System.Drawing.Point(0, 59);
             this.scrollPanel.Name = "scrollPanel";
-            this.scrollPanel.Size = new System.Drawing.Size(357, 548);
+            this.scrollPanel.Size = new System.Drawing.Size(357, 586);
             this.scrollPanel.TabIndex = 10;
             // 
             // FCHeader
@@ -751,21 +760,12 @@
             this.readToolStripMenuItem.Text = "Read Discrete Inputs";
             this.readToolStripMenuItem.Click += new System.EventHandler(this.readToolStripMenuItem_Click);
             // 
-            // lblErrorCount
-            // 
-            this.lblErrorCount.AutoSize = true;
-            this.lblErrorCount.Location = new System.Drawing.Point(119, 128);
-            this.lblErrorCount.Name = "lblErrorCount";
-            this.lblErrorCount.Size = new System.Drawing.Size(13, 15);
-            this.lblErrorCount.TabIndex = 2;
-            this.lblErrorCount.Text = "0";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(148)))), ((int)(((byte)(153)))));
-            this.ClientSize = new System.Drawing.Size(977, 607);
+            this.ClientSize = new System.Drawing.Size(977, 645);
             this.Controls.Add(this.TopContainer);
             this.Controls.Add(this.leftPanel);
             this.MainMenuStrip = this.menuStrip1;

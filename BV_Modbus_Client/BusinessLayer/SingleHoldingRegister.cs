@@ -17,6 +17,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             base.mbCon = mbCon;
             Description = "Single Holding Register";
+            FcType = Description;
             NumberOfRegisters = 1;
             DataBuffer = new Dictionary<ushort, ushort>();
         }

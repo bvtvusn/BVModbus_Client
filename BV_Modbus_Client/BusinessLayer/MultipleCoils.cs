@@ -21,6 +21,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             base.mbCon = mbCon;
             Description = "Multiple Coils";
+            FcType = Description;
             //base.DisplayType = FormatConverter.FormatName.Boolean;
             formatContainer.DefaultFormat = FormatConverter.FormatName.Boolean;
 

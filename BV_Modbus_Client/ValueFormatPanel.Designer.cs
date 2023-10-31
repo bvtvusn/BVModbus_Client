@@ -33,6 +33,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnApplyFloatFormatting = new System.Windows.Forms.Button();
+            this.cboFloatFormat = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkSwapRegisters = new System.Windows.Forms.CheckBox();
             this.chkSwapBytes = new System.Windows.Forms.CheckBox();
@@ -53,6 +56,7 @@
             this.numHex = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numBinary)).BeginInit();
@@ -106,24 +110,70 @@
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(319, 312);
+            this.dataGridView1.Size = new System.Drawing.Size(319, 366);
             this.dataGridView1.TabIndex = 7;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(319, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(231, 312);
+            this.panel1.Size = new System.Drawing.Size(231, 366);
             this.panel1.TabIndex = 10;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnApplyFloatFormatting);
+            this.groupBox3.Controls.Add(this.cboFloatFormat);
+            this.groupBox3.Location = new System.Drawing.Point(15, 289);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 47);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Floating point formatting";
+            // 
+            // btnApplyFloatFormatting
+            // 
+            this.btnApplyFloatFormatting.BackgroundImage = global::BV_Modbus_Client.Properties.Resources.RefreshIconTransparent;
+            this.btnApplyFloatFormatting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnApplyFloatFormatting.FlatAppearance.BorderSize = 0;
+            this.btnApplyFloatFormatting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApplyFloatFormatting.Location = new System.Drawing.Point(167, 18);
+            this.btnApplyFloatFormatting.Name = "btnApplyFloatFormatting";
+            this.btnApplyFloatFormatting.Size = new System.Drawing.Size(20, 20);
+            this.btnApplyFloatFormatting.TabIndex = 20;
+            this.btnApplyFloatFormatting.UseVisualStyleBackColor = true;
+            this.btnApplyFloatFormatting.Click += new System.EventHandler(this.btnApplyFloatFormatting_Click);
+            // 
+            // cboFloatFormat
+            // 
+            this.cboFloatFormat.FormattingEnabled = true;
+            this.cboFloatFormat.Items.AddRange(new object[] {
+            "G",
+            "E",
+            "N2",
+            "F2",
+            "0.###",
+            "0.0",
+            "0.00",
+            "0.000",
+            "0.0E+0",
+            "0.00 \'m/s^2\'"});
+            this.cboFloatFormat.Location = new System.Drawing.Point(17, 17);
+            this.cboFloatFormat.Name = "cboFloatFormat";
+            this.cboFloatFormat.Size = new System.Drawing.Size(147, 23);
+            this.cboFloatFormat.TabIndex = 6;
+            this.cboFloatFormat.Text = "0.0";
+            this.cboFloatFormat.TextUpdate += new System.EventHandler(this.cboFloatFormat_TextUpdate);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.chkSwapRegisters);
             this.groupBox2.Controls.Add(this.chkSwapBytes);
-            this.groupBox2.Location = new System.Drawing.Point(15, 236);
+            this.groupBox2.Location = new System.Drawing.Point(15, 223);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 60);
             this.groupBox2.TabIndex = 5;
@@ -172,7 +222,7 @@
             this.groupBox1.Controls.Add(this.numHex);
             this.groupBox1.Location = new System.Drawing.Point(15, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 217);
+            this.groupBox1.Size = new System.Drawing.Size(200, 207);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Set Datatype Of Register";
@@ -180,7 +230,7 @@
             // 
             // btnASCII
             // 
-            this.btnASCII.Location = new System.Drawing.Point(16, 103);
+            this.btnASCII.Location = new System.Drawing.Point(16, 98);
             this.btnASCII.Name = "btnASCII";
             this.btnASCII.Size = new System.Drawing.Size(83, 23);
             this.btnASCII.TabIndex = 2;
@@ -191,7 +241,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(16, 178);
+            this.button8.Location = new System.Drawing.Point(16, 173);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(83, 23);
             this.button8.TabIndex = 0;
@@ -202,9 +252,9 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(105, 178);
+            this.button9.Location = new System.Drawing.Point(130, 72);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(83, 23);
+            this.button9.Size = new System.Drawing.Size(55, 23);
             this.button9.TabIndex = 0;
             this.button9.Tag = "double";
             this.button9.Text = "Double";
@@ -213,9 +263,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(102, 77);
+            this.button6.Location = new System.Drawing.Point(73, 72);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(83, 23);
+            this.button6.Size = new System.Drawing.Size(55, 23);
             this.button6.TabIndex = 0;
             this.button6.Tag = "float";
             this.button6.Text = "Float";
@@ -224,7 +274,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(102, 52);
+            this.button7.Location = new System.Drawing.Point(102, 47);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(83, 23);
             this.button7.TabIndex = 0;
@@ -235,7 +285,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(102, 27);
+            this.button5.Location = new System.Drawing.Point(102, 22);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(83, 23);
             this.button5.TabIndex = 0;
@@ -246,7 +296,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(16, 128);
+            this.button4.Location = new System.Drawing.Point(16, 123);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(83, 23);
             this.button4.TabIndex = 0;
@@ -257,7 +307,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(16, 153);
+            this.button3.Location = new System.Drawing.Point(16, 148);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(83, 23);
             this.button3.TabIndex = 0;
@@ -268,9 +318,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(16, 77);
+            this.button2.Location = new System.Drawing.Point(16, 72);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(83, 23);
+            this.button2.Size = new System.Drawing.Size(55, 23);
             this.button2.TabIndex = 0;
             this.button2.Tag = "half";
             this.button2.Text = "Half Float";
@@ -279,7 +329,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 52);
+            this.button1.Location = new System.Drawing.Point(16, 47);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 23);
             this.button1.TabIndex = 0;
@@ -290,7 +340,7 @@
             // 
             // btnUint16
             // 
-            this.btnUint16.Location = new System.Drawing.Point(16, 27);
+            this.btnUint16.Location = new System.Drawing.Point(16, 22);
             this.btnUint16.Name = "btnUint16";
             this.btnUint16.Size = new System.Drawing.Size(83, 23);
             this.btnUint16.TabIndex = 0;
@@ -303,7 +353,7 @@
             // 
             this.numBinary.BackColor = System.Drawing.Color.White;
             this.numBinary.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numBinary.Location = new System.Drawing.Point(102, 131);
+            this.numBinary.Location = new System.Drawing.Point(102, 126);
             this.numBinary.Name = "numBinary";
             this.numBinary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.numBinary.Size = new System.Drawing.Size(60, 19);
@@ -319,7 +369,7 @@
             // 
             this.numAscii.BackColor = System.Drawing.Color.White;
             this.numAscii.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numAscii.Location = new System.Drawing.Point(102, 105);
+            this.numAscii.Location = new System.Drawing.Point(102, 100);
             this.numAscii.Name = "numAscii";
             this.numAscii.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.numAscii.Size = new System.Drawing.Size(60, 19);
@@ -335,7 +385,7 @@
             // 
             this.numHex.BackColor = System.Drawing.Color.White;
             this.numHex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numHex.Location = new System.Drawing.Point(102, 156);
+            this.numHex.Location = new System.Drawing.Point(102, 151);
             this.numHex.Name = "numHex";
             this.numHex.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.numHex.Size = new System.Drawing.Size(60, 19);
@@ -354,9 +404,10 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Name = "ValueFormatPanel";
-            this.Size = new System.Drawing.Size(550, 312);
+            this.Size = new System.Drawing.Size(550, 366);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -389,5 +440,8 @@
         private CheckBox chkSwapRegisters;
         private CheckBox chkSwapBytes;
         private Button button9;
+        private ComboBox cboFloatFormat;
+        private GroupBox groupBox3;
+        private Button btnApplyFloatFormatting;
     }
 }

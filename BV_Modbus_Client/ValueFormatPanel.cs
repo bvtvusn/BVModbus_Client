@@ -54,6 +54,7 @@ namespace BV_Modbus_Client
                     // Initialize values:
                     chkSwapBytes.Checked = fc.formatContainer.SwapBytes;
                     chkSwapRegisters.Checked = fc.formatContainer.SwapRegisters;
+                    cboFloatFormat.Text = fc.formatContainer.FloatFormatting;
                 }
             }
         }
@@ -92,6 +93,11 @@ namespace BV_Modbus_Client
         {
             InitializeComponent();
             dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;
+
+
+
+           
+
         }
 
         private void DataGridView1_CellValueChanged(object? sender, DataGridViewCellEventArgs e)
@@ -400,6 +406,23 @@ namespace BV_Modbus_Client
 
             RefreshDataGrid();
 
+        }
+
+       
+
+        private void cboFloatFormat_TextUpdate(object sender, EventArgs e)
+        
+        {
+            //string d = cboFloatFormat.SelectedText; 
+            //string f = cboFloatFormat.SelectedValue.ToString();
+            //fc.formatContainer.FloatFormatting = cboFloatFormat.Text;
+
+        }
+
+        private void btnApplyFloatFormatting_Click(object sender, EventArgs e)
+        {
+            fc.formatContainer.FloatFormatting = cboFloatFormat.Text;
+            RefreshDataGrid();
         }
     }
 }

@@ -31,6 +31,7 @@ namespace BV_Modbus_Client.BusinessLayer
         public FormatConverter.FormatName DefaultFormat { get; internal set; }
         public bool SwapRegisters { get => swapRegisters; set => swapRegisters = value; }
         public bool SwapBytes { get => swapBytes; set => swapBytes = value; }
+        public string FloatFormatting { get; set; } = "0.0";
 
         internal int SetFormat(int register, FormatConverter.FormatName type, int customLength)
         {
@@ -73,7 +74,7 @@ namespace BV_Modbus_Client.BusinessLayer
                     {
                         singlevalueData = FormatConverter.SwapBytesInArray(singlevalueData);
                     }
-                    stringValues[item.Register] = item.BinaryToString(singlevalueData, logValue);
+                    stringValues[item.Register] = item.BinaryToString(singlevalueData, logValue,FloatFormatting);
                 }
             }
 

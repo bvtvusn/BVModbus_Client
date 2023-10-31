@@ -19,6 +19,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             base.mbCon = mbCon;
             Description = "Read Discrete Inputs";
+            FcType = Description;
             formatContainer.DefaultFormat = FormatConverter.FormatName.Boolean;
             NumberOfRegisters = 4;
 

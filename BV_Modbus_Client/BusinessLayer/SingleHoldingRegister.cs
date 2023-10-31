@@ -17,6 +17,7 @@ namespace BV_Modbus_Client.BusinessLayer
         {
             base.mbCon = mbCon;
             Description = "Single Holding Register";
+            FcType = Description;
             NumberOfRegisters = 1;
             DataBuffer = new Dictionary<ushort, ushort>();
         }
@@ -61,14 +62,15 @@ namespace BV_Modbus_Client.BusinessLayer
 
                 //}
                 SetDatabuffer(rawData);
-                base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
 
             }
+                base.ForceFcActivatedEvent();
         }
 
         //internal override void ExecuteWrite()
@@ -92,14 +94,15 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
                 WriteCount++;
-                base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
 
             }
+                base.ForceFcActivatedEvent();
         }
     }
 }

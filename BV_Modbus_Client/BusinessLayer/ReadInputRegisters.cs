@@ -21,9 +21,10 @@ namespace BV_Modbus_Client.BusinessLayer
 
             base.mbCon = mbCon;
             Description = "Read Input Registers";
+            FcType = Description;
             //base.DisplayType = FormatConverter.FormatName.Boolean;
 
-            
+
             NumberOfRegisters = 4;
             DataBuffer = new Dictionary<ushort, ushort>();
 
@@ -61,13 +62,14 @@ namespace BV_Modbus_Client.BusinessLayer
 
                 //}
                 SetDatabuffer(rawData);
-                base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
             }
+                base.ForceFcActivatedEvent();
         }
         internal override async Task ExecuteWriteAsync()
         {

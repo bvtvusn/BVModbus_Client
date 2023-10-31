@@ -53,9 +53,9 @@ namespace BV_Modbus_Client.BusinessLayer
             isVisibleInPlot = true;
         }
 
-        internal string BinaryToString(ushort[] singlevalueData, bool logValue = false)
+        internal string BinaryToString(ushort[] singlevalueData, bool logValue = false, string floatFormat = "")
         {
-            string value = FormatConverter.GetStringRepresentation(singlevalueData, FormatType);
+            string value = FormatConverter.GetStringRepresentation(singlevalueData, FormatType, floatFormat);
             if (logValue)
             {
                 

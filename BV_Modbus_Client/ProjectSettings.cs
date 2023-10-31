@@ -27,6 +27,8 @@ namespace BV_Modbus_Client
 
             rdoAddressingOneBased.Checked = !bll.UserConfig.GlobFcData.ZeroBasedAdresses;
             rdoAddressingZeroBased.Checked = bll.UserConfig.GlobFcData.ZeroBasedAdresses;
+
+            //cboFloatFormat.Text = bll.UserConfig.
         }
 
         private void rdoAddressingZeroBased_CheckedChanged(object sender, EventArgs e)

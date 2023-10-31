@@ -18,7 +18,7 @@ namespace BV_Modbus_Client
             InitializeComponent();
             //Assembly ass = Assembly.GetExecutingAssembly();
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            string softwareVersion = version.ToString();
+            string softwareVersion = "v.1.2.2"; //version.ToString();
             lblVersion.Text = $"{softwareVersion}";
             //lblVersion.Text =  ass.GetName().Version.ToString();
             lblAuthor.Text = "Bjørn Vegard Tveraaen";

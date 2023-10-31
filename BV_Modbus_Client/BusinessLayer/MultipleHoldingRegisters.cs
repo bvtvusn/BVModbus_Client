@@ -22,7 +22,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             base.mbCon = mbCon;
             Description = "Multiple Holding Registers";
-
+            FcType = Description;
             //Testing
             //startAddress = 0;
             //base.SlaveAddress = 1;
@@ -102,14 +102,15 @@ namespace BV_Modbus_Client.BusinessLayer
 
                 //}
                 SetDatabuffer(rawData);
-                base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
                 
             }
+            base.ForceFcActivatedEvent();
         }
         internal override async Task ExecuteWriteAsync()
         {
@@ -127,14 +128,15 @@ namespace BV_Modbus_Client.BusinessLayer
 
 
                 WriteCount++;
-                base.ForceFcActivatedEvent();                
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
 
             }
+                base.ForceFcActivatedEvent();                
         }
         //internal override void ExecuteWrite()
         //{

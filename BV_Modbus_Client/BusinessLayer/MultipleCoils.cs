@@ -21,6 +21,7 @@ namespace BV_Modbus_Client.BusinessLayer
 
             base.mbCon = mbCon;
             Description = "Multiple Coils";
+            FcType = Description;
             //base.DisplayType = FormatConverter.FormatName.Boolean;
             formatContainer.DefaultFormat = FormatConverter.FormatName.Boolean;
 
@@ -83,14 +84,15 @@ namespace BV_Modbus_Client.BusinessLayer
                     rawdata[i] = (Convert.ToUInt16(coil));
                 }
                 SetDatabuffer(rawdata);
-                base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
 
             }
+                base.ForceFcActivatedEvent();
         }
         internal override async Task ExecuteWriteAsync()
         {
@@ -111,14 +113,15 @@ namespace BV_Modbus_Client.BusinessLayer
                 ResponseTimeMs = stopwatch.Elapsed.TotalMilliseconds;
 
                 WriteCount++;
-                base.ForceFcActivatedEvent();
                 base.ForceDataRefresh("");
             }
             catch (Exception e)
             {
+                ErrorCount++;
                 base.ForceDataRefresh(e.Message);
 
             }
+                base.ForceFcActivatedEvent();
         }
         
 

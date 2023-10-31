@@ -162,6 +162,9 @@ namespace BV_Modbus_Client
             lblReadCounter.Invoke(delegate {
                 lblReadCounter.Text = bll.SelectedFcRequest.ReadCount.ToString();
             });
+            lblErrorCount.Invoke(delegate {
+                lblErrorCount.Text = bll.SelectedFcRequest.ErrorCount.ToString();
+            });
             lblResponseTime.Invoke(delegate {
                 lblResponseTime.Text = bll.SelectedFcRequest.ResponseTimeMs.ToString("0.0") +" ms";
             });

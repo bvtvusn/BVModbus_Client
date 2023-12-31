@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnApplyFloatFormatting = new System.Windows.Forms.Button();
@@ -55,6 +59,7 @@
             this.numAscii = new System.Windows.Forms.NumericUpDown();
             this.numHex = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -84,6 +89,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -112,6 +118,28 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(319, 366);
             this.dataGridView1.TabIndex = 7;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyValuesToolStripMenuItem,
+            this.pasteValuesToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(139, 48);
+            // 
+            // copyValuesToolStripMenuItem
+            // 
+            this.copyValuesToolStripMenuItem.Name = "copyValuesToolStripMenuItem";
+            this.copyValuesToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.copyValuesToolStripMenuItem.Text = "Copy values";
+            this.copyValuesToolStripMenuItem.Click += new System.EventHandler(this.copyValuesToolStripMenuItem_Click);
+            // 
+            // pasteValuesToolStripMenuItem
+            // 
+            this.pasteValuesToolStripMenuItem.Name = "pasteValuesToolStripMenuItem";
+            this.pasteValuesToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.pasteValuesToolStripMenuItem.Text = "Paste values";
+            this.pasteValuesToolStripMenuItem.Click += new System.EventHandler(this.pasteValuesToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -406,6 +434,7 @@
             this.Name = "ValueFormatPanel";
             this.Size = new System.Drawing.Size(550, 366);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -443,5 +472,8 @@
         private ComboBox cboFloatFormat;
         private GroupBox groupBox3;
         private Button btnApplyFloatFormatting;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem copyValuesToolStripMenuItem;
+        private ToolStripMenuItem pasteValuesToolStripMenuItem;
     }
 }

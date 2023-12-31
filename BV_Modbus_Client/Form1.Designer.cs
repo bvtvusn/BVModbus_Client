@@ -278,7 +278,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(552, 308);
+            this.tabPage2.Size = new System.Drawing.Size(552, 346);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Polling settings";
             // 
@@ -303,7 +303,7 @@
             // chkQuote
             // 
             this.chkQuote.AutoSize = true;
-            this.chkQuote.Location = new System.Drawing.Point(219, 18);
+            this.chkQuote.Location = new System.Drawing.Point(208, 18);
             this.chkQuote.Name = "chkQuote";
             this.chkQuote.Size = new System.Drawing.Size(95, 19);
             this.chkQuote.TabIndex = 12;
@@ -340,17 +340,17 @@
             // 
             // txtLogPath
             // 
-            this.txtLogPath.Location = new System.Drawing.Point(91, 92);
+            this.txtLogPath.Location = new System.Drawing.Point(105, 92);
             this.txtLogPath.Name = "txtLogPath";
             this.txtLogPath.ReadOnly = true;
-            this.txtLogPath.Size = new System.Drawing.Size(371, 23);
+            this.txtLogPath.Size = new System.Drawing.Size(355, 23);
             this.txtLogPath.TabIndex = 7;
             this.txtLogPath.TextChanged += new System.EventHandler(this.txtLogPath_TextChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(347, 19);
+            this.label9.Location = new System.Drawing.Point(335, 19);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(112, 15);
             this.label9.TabIndex = 10;
@@ -402,7 +402,7 @@
             0,
             0,
             65536});
-            this.numPollInterval.Location = new System.Drawing.Point(187, 15);
+            this.numPollInterval.Location = new System.Drawing.Point(193, 15);
             this.numPollInterval.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -425,7 +425,7 @@
             // 
             // btnTestPoll
             // 
-            this.btnTestPoll.Location = new System.Drawing.Point(290, 15);
+            this.btnTestPoll.Location = new System.Drawing.Point(302, 15);
             this.btnTestPoll.Name = "btnTestPoll";
             this.btnTestPoll.Size = new System.Drawing.Size(100, 23);
             this.btnTestPoll.TabIndex = 0;
@@ -438,7 +438,7 @@
             this.tabPage3.Controls.Add(this.trendlineControl1);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(552, 308);
+            this.tabPage3.Size = new System.Drawing.Size(552, 346);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Trend line";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -449,7 +449,7 @@
             this.trendlineControl1.Location = new System.Drawing.Point(0, 0);
             this.trendlineControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.trendlineControl1.Name = "trendlineControl1";
-            this.trendlineControl1.Size = new System.Drawing.Size(552, 308);
+            this.trendlineControl1.Size = new System.Drawing.Size(552, 346);
             this.trendlineControl1.TabIndex = 15;
             // 
             // MainTopPanel

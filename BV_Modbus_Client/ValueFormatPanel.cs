@@ -424,5 +424,26 @@ namespace BV_Modbus_Client
             fc.formatContainer.FloatFormatting = cboFloatFormat.Text;
             RefreshDataGrid();
         }
+
+        private void copyValuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Copy values to clipboard
+            (string, string)[] data  = fc.GetDataAsString(false,true);
+            string[] valueArray = data.Select(x => x.Item1).ToArray();
+            string clipBoardString = string.Join("; ", valueArray);
+            Clipboard.SetText(clipBoardString);
+        }
+
+        private void pasteValuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string clipboardText = Clipboard.GetText();
+            if (clipboardText != null)
+            {
+                string[] strings = clipboardText.Split(";");
+                strings = strings.Select(x=>x.Trim()).ToArray();
+                fc.SetFcData(strings);
+
+            }
+        }
     }
 }

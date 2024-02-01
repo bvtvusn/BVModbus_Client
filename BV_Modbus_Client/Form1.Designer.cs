@@ -770,7 +770,7 @@
             this.Controls.Add(this.leftPanel);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "BV Modbus";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.dgvContext.ResumeLayout(false);
